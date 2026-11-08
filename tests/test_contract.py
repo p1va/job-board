@@ -46,9 +46,41 @@ def test_counts_must_match_raw_rows():
     assert m.problems(raw([row("ashby:acme", "j1"), row("ashby:acme", "j2")])) == []
     assert m.problems(raw([row("ashby:acme", "j1")])) == ["ashby:acme: manifest says 2 jobs, raw has 1"]
     assert "raw rows for unlisted scope ashby:other" in m.problems(raw([row("ashby:acme", "j1"), row("ashby:acme", "j2"), row("ashby:other", "x")]))
-    assert any("other runs" in p for p in m.problems(raw([row("ashby:acme", "j1"), row("ashby:acme", "j2", run_id="9-1")])))
+    assert any("raw run_id" in p for p in m.problems(raw([row("ashby:acme", "j1"), row("ashby:acme", "j2", run_id="9-1")])))
 
 
 def test_naive_timestamps_rejected():
     naive = datetime(2026, 11, 9, 6, 0)
     assert "timestamps must be UTC-aware" in Manifest("ashby", "0", "r", "s", naive, naive, []).problems()
+
+
+def test_failed_response_cannot_pose_as_resolved():
+    disguised = [Scope("ashby:a", Kind.BOARD, Status.EMPTY, 503, 0, 0),            # 503 presented as empty
+                 Scope("ashby:b", Kind.BOARD, Status.COMPLETE, 429, 0, 1),         # 429 presented as complete
+                 Scope("ashby:c", Kind.BOARD, Status.EMPTY, 200, 0, 0),            # no page fetched
+                 Scope("ashby:d", Kind.BOARD, Status.EMPTY, 200, 1, 0, "timeout"),
+                 Scope("ashby:e", Kind.BOARD, Status.COMPLETE, 200, -1, 2)]
+    for s in disguised:
+        assert s.problems(), s
+    assert Scope("ashby:real-empty", Kind.BOARD, Status.EMPTY, 200, 1, 0).problems() == []
+
+
+def test_raw_identity_and_required_values_are_checked():
+    m = Manifest("ashby", "0", "123-1", "s", T, T, [Scope("ashby:acme", Kind.BOARD, Status.COMPLETE, 200, 1, 1)])
+    good = row("ashby:acme", "j1")
+    assert m.problems(raw([good])) == []
+    for change, expected in [({"source": "greenhouse"}, "raw source"),
+                             ({"schema_version": 99}, "raw schema_version"),
+                             ({"native_id": None}, "native_id: 1 missing"),
+                             ({"native_id": ""}, "native_id: 1 missing"),
+                             ({"board": "other-co"}, "rows from another board")]:
+        problems = m.problems(raw([{**good, **change}]))
+        assert any(expected in p for p in problems), (change, problems)
+
+
+def test_query_scope_may_span_boards_but_not_repeat_a_job():
+    q = "workable:search:country=GB"
+    hit = lambda board, n: {**row("x:y", n), "source": "workable", "scope_id": q, "board": board}
+    m = Manifest("workable", "0", "123-1", "s", T, T, [Scope(q, Kind.QUERY, Status.COMPLETE, 200, 2, 2)])
+    assert m.problems(raw([hit("u1", "a"), hit("u2", "b")])) == []
+    assert any("listed twice" in p for p in m.problems(raw([hit("u1", "a"), hit("u1", "a")])))

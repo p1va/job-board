@@ -49,7 +49,11 @@ fetched_at, and the provider's JSON for the job, unchanged) and `manifest.json`:
 | `board` | `ashby:acme`, `greenhouse:stripe` | authoritative: the job closed |
 | `query` | `workable:search:country=GB` | only absent from that selection |
 
-`Manifest.problems(raw)` checks the rules above and that each scope's `jobs` equals its raw rows.
+`Manifest.problems(raw)` checks the rules above, that resolved scopes were fully successful fetches
+(HTTP 200, at least one page, no error), that raw rows carry the manifest's source, run and schema
+version with every required value, that board scopes hold only their own board's jobs, and that each
+scope's `jobs` equals its raw rows. **A shard with problems counts as missing:** all its scopes stay
+unresolved, so it can't close anything.
 `run_id` is `<GitHub run id>-<attempt>` (local runs: a UTC timestamp).
 
 ## State and history in `data/`

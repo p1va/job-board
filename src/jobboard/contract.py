@@ -56,6 +56,16 @@ class Scope:
 
     def problems(self) -> list[str]:
         p = []
+        if self.pages < 0 or self.jobs < 0:
+            p.append("negative pages or jobs")
+        if self.status in RESOLVED:
+            # A resolved scope can close jobs, so it must be a fully successful fetch.
+            if self.http_status != 200:
+                p.append(f"{self.status} needs HTTP 200, got {self.http_status}")
+            if self.pages < 1:
+                p.append(f"{self.status} without a fetched page")
+            if self.error:
+                p.append(f"{self.status} with an error: use partial or failed")
         if self.status == Status.COMPLETE and self.jobs == 0:
             p.append("complete with zero jobs: use empty")
         if self.status == Status.EMPTY and self.jobs != 0:
@@ -88,17 +98,34 @@ class Manifest:
         dupes = [k for k, n in Counter(s.scope_id for s in self.scopes).items() if n > 1]
         p += [f"duplicate scope {k}" for k in dupes]
         if raw is not None:
-            if not raw.schema.equals(RAW_SCHEMA):
-                p.append("raw rows don't match RAW_SCHEMA")
-            else:
-                rows = Counter(raw.column("scope_id").to_pylist())
-                for s in self.scopes:
-                    if rows.get(s.scope_id, 0) != s.jobs:
-                        p.append(f"{s.scope_id}: manifest says {s.jobs} jobs, raw has {rows.get(s.scope_id, 0)}")
-                p += [f"raw rows for unlisted scope {k}" for k in set(rows) - {s.scope_id for s in self.scopes}]
-                runs = set(raw.column("run_id").to_pylist())
-                if runs - {self.run_id}:
-                    p.append(f"raw rows from other runs: {sorted(runs - {self.run_id})}")
+            p += self.raw_problems(raw)
+        return p
+
+    def raw_problems(self, raw: pa.Table) -> list[str]:
+        """The shard's rows: shape, required values, identity, and counts per scope."""
+        if not raw.schema.equals(RAW_SCHEMA):
+            return ["raw rows don't match RAW_SCHEMA"]
+        p = []
+        for f in RAW_SCHEMA:          # an in-memory table can hold nulls in non-nullable columns
+            nulls = raw.column(f.name).null_count
+            empty = sum(1 for v in raw.column(f.name).to_pylist() if v == "") if pa.types.is_string(f.type) else 0
+            if not f.nullable and (nulls or empty):
+                p.append(f"{f.name}: {nulls + empty} missing values")
+        for col, expected in (("schema_version", SCHEMA_VERSION), ("source", self.source), ("run_id", self.run_id)):
+            other = sorted({v for v in raw.column(col).to_pylist() if v is not None} - {expected}, key=str)
+            if other:
+                p.append(f"raw {col} {other} != manifest {expected}")
+        rows = raw.select(["scope_id", "board", "native_id"]).to_pylist()
+        counts = Counter(r["scope_id"] for r in rows)
+        for s in self.scopes:
+            if counts.get(s.scope_id, 0) != s.jobs:
+                p.append(f"{s.scope_id}: manifest says {s.jobs} jobs, raw has {counts.get(s.scope_id, 0)}")
+        p += [f"raw rows for unlisted scope {k}" for k in sorted(set(counts) - {s.scope_id for s in self.scopes})]
+        boards = {s.scope_id: s.scope_id.split(":", 1)[1] for s in self.scopes if s.kind == Kind.BOARD}
+        wrong = sorted({r["scope_id"] for r in rows if r["scope_id"] in boards and r["board"] != boards[r["scope_id"]]})
+        p += [f"{k}: rows from another board" for k in wrong]   # query scopes may span boards
+        seen = Counter((r["scope_id"], r["board"], r["native_id"]) for r in rows)
+        p += [f"{k}: job {b}/{n} listed twice" for (k, b, n), c in sorted(seen.items(), key=str) if c > 1]
         return p
 
     def to_json(self) -> str:
