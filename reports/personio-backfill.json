@@ -1,0 +1,63 @@
+{
+ "source_sha256": "625001ec68a9cf14163de801a51506950637f8bb0329bf1546cc8e9689ce77bb",
+ "candidates": 3153,
+ "outcomes": {
+  "not_found": 920,
+  "live": 1977,
+  "empty": 255,
+  "partial": 1
+ },
+ "boards_added": 2233,
+ "valid_positions": 19359,
+ "invalid_positions": 2,
+ "base_descriptions": 17127,
+ "base_missing_descriptions": 2232,
+ "salary_periods": {
+  "yearly": 1281,
+  "hourly": 248,
+  "monthly": 590
+ },
+ "kept_by_current_rules": {
+  "software_engineering": 877,
+  "product_management": 155,
+  "engineering_management": 35,
+  "data_ml_engineering": 153,
+  "data_science": 40,
+  "research": 12
+ },
+ "normalization_errors": [],
+ "kept_boards": 511,
+ "kept_missing_base_description": 273,
+ "most_missing_base_descriptions": {
+  "sungrow-emea": 142,
+  "demorecruiting": 119,
+  "certify360": 60,
+  "herbrand-gruppe": 59,
+  "desotec": 39,
+  "matrix42": 33,
+  "ercsystem": 32,
+  "altagramgroup": 25,
+  "arethia": 25,
+  "eerstelijnszorg-zoetermeer": 25
+ },
+ "cached_feeds_replayed": 2233,
+ "parser_commit": "60b2a0e4cd221f4c40f52c55bdeffb1599c5bda2",
+ "evidence": ".notes/personio-backfill-20261108/validation.jsonl",
+ "partial_boards": [
+  {
+   "key": "adragos-pharma",
+   "jobs": 20,
+   "invalid_positions": 2
+  }
+ ],
+ "unresolved": [],
+ "note": "Base-feed validation only. Daily retrieval optionally fills English descriptions. No country is inferred from the provider or host.",
+ "validation_seconds": 3316.53,
+ "http": {
+  "requests": 3155,
+  "http_error_404": 920,
+  "http_200": 2235,
+  "wire_bytes": 113939353,
+  "retries": 2
+ }
+}
