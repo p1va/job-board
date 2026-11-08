@@ -38,15 +38,23 @@ COUNTRIES: dict[str, tuple[str, ...]] = {
     "IL": ("israel",), "AE": ("united arab emirates", "uae"), "SA": ("saudi arabia",), "EG": ("egypt",),
     "ZA": ("south africa",), "NG": ("nigeria",), "KE": ("kenya",), "PH": ("philippines",),
     "TH": ("thailand",), "VN": ("vietnam", "viet nam"), "ID": ("indonesia",), "MY": ("malaysia",),
-    "PK": ("pakistan",), "BD": ("bangladesh",), "CR": ("costa rica",),
+    "PK": ("pakistan",), "BD": ("bangladesh",), "CR": ("costa rica",), "SJ": ("svalbard",),
+    "VE": ("venezuela",), "HN": ("honduras",), "EC": ("ecuador",), "GT": ("guatemala",), "SV": ("el salvador",),
+    "NI": ("nicaragua",), "PA": ("panama", "panamá"), "DO": ("dominican republic",), "PR": ("puerto rico",),
+    "BO": ("bolivia",), "PY": ("paraguay",), "JM": ("jamaica",), "MA": ("morocco", "maroc"), "TN": ("tunisia",),
+    "DZ": ("algeria",), "GH": ("ghana",), "ET": ("ethiopia",), "UG": ("uganda",), "RW": ("rwanda",),
+    "TZ": ("tanzania",), "SN": ("senegal",), "CI": ("ivory coast", "côte d'ivoire"), "CM": ("cameroon",),
+    "JO": ("jordan",), "LB": ("lebanon",), "QA": ("qatar",), "KW": ("kuwait",), "BH": ("bahrain",), "OM": ("oman",),
+    "LK": ("sri lanka",), "NP": ("nepal",), "KH": ("cambodia",), "MM": ("myanmar",), "MN": ("mongolia",),
+    "UZ": ("uzbekistan",), "KG": ("kyrgyzstan",), "TJ": ("tajikistan",), "TM": ("turkmenistan",),
 }
 
 EU = {"AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GR", "HR", "HU", "IE", "IT", "LT",
       "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"}
-# Europe for this board: EU, EEA, UK, Switzerland, the Balkans, Ukraine, Moldova and microstates.
-# Russia, Belarus, Turkey and the Caucasus/Central Asia are searched but not kept as Europe.
-EUROPE = EU | {"AD", "AL", "BA", "CH", "FO", "GB", "GG", "GI", "IM", "IS", "JE", "LI", "MC", "MD", "ME", "MK",
-               "NO", "RS", "SM", "UA", "VA", "XK"}
+# Europe as searched by the Workable retriever (retrievers.EUROPE): the agreed broad cohort, including
+# transcontinental countries. The board's default view (Germany, UK, Italy, remote) narrows what is shown.
+EUROPE = EU | {"AD", "AL", "AM", "AZ", "BA", "BY", "CH", "FO", "GB", "GE", "GG", "GI", "IM", "IS", "JE", "KZ",
+               "LI", "MC", "MD", "ME", "MK", "NO", "RS", "RU", "SJ", "SM", "TR", "UA", "VA", "XK"}
 
 # Cities that name a country on their own (lowercase). Ambiguous names (e.g. Cambridge, Birmingham,
 # Valencia) are only listed for the country where a job board most often means them.
@@ -86,6 +94,9 @@ CITIES: dict[str, str] = {
     **{c: "UA" for c in ("kyiv", "kiev", "lviv", "kharkiv")}, **{c: "MT" for c in ("valletta",)},
     **{c: "CY" for c in ("limassol", "nicosia")}, **{c: "IS" for c in ("reykjavik", "reykjavík")},
     **{c: "TR" for c in ("istanbul", "ankara", "izmir")},
+    **{c: "RU" for c in ("moscow", "saint petersburg", "st. petersburg")}, **{c: "BY" for c in ("minsk",)},
+    **{c: "GE" for c in ("tbilisi",)}, **{c: "AM" for c in ("yerevan",)}, **{c: "AZ" for c in ("baku",)},
+    **{c: "KZ" for c in ("almaty", "astana")},
     # common non-European job cities
     **{c: "US" for c in ("san francisco", "south san francisco", "new york", "new york city", "nyc", "seattle",
                          "austin", "boston", "chicago", "los angeles", "denver", "atlanta", "miami", "san jose",
@@ -106,11 +117,19 @@ CITIES: dict[str, str] = {
 
 US_STATES = ("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY "
              "NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY DC").split()
-US_STATE_NAMES = ("alabama alaska arizona arkansas california colorado connecticut delaware florida hawaii idaho "
-                  "illinois indiana iowa kansas kentucky louisiana maine maryland massachusetts michigan minnesota "
-                  "mississippi missouri montana nebraska nevada ohio oklahoma oregon pennsylvania tennessee texas "
-                  "utah vermont virginia wisconsin wyoming").split() + ["new jersey", "new hampshire", "new mexico",
-                  "north carolina", "south carolina", "north dakota", "south dakota", "west virginia", "rhode island"]
+# Subdivisions are explicit country evidence and are matched (and masked) before country and city names,
+# so "New Jersey" isn't Jersey and "London, Ontario" isn't London.
+SUBDIVISIONS = {
+    **{s: "US" for s in ("alabama alaska arizona arkansas california colorado connecticut delaware florida "
+                         "hawaii idaho illinois indiana iowa kansas kentucky louisiana maine maryland "
+                         "massachusetts michigan minnesota mississippi missouri montana nebraska nevada ohio "
+                         "oklahoma oregon pennsylvania tennessee texas utah vermont virginia wisconsin wyoming").split()},
+    **{s: "US" for s in ("new jersey", "new hampshire", "new mexico", "north carolina", "south carolina",
+                         "north dakota", "south dakota", "west virginia", "rhode island", "district of columbia")},
+    **{s: "CA" for s in ("ontario", "quebec", "québec", "british columbia", "alberta", "nova scotia", "manitoba",
+                         "saskatchewan", "new brunswick", "newfoundland")},
+    **{s: "AU" for s in ("new south wales", "queensland")},
+}
 
 REGIONS = {  # region words -> codes
     "worldwide": "worldwide", "anywhere": "worldwide", "global": "worldwide", "globally": "worldwide",
@@ -129,26 +148,28 @@ REMOTE = re.compile(r"\b(remote|remotely|anywhere|work from home|wfh|telecommute
 HYBRID = re.compile(r"\bhybrid\b", re.I)
 # Separators between different places in one location string. Within a part, "Remote - UK" stays together.
 SEGMENT = re.compile(r"\s*(?:;|\||•|·|/|\n|\bor\b|\band\b|&(?!i\b))\s*", re.I)
+# What a bare scope label may contain besides remote and region words ("Remote - Global", "100% remote")
+FILLER = re.compile(r"[\s\-–—,.:()\[\]%!]+|\b(fully|only|100|based|position|role|work|from|in|the|world|"
+                    r"possible|option|first|friendly|ok)\b", re.I)
 
 
-def _word(term: str) -> re.Pattern:
-    return re.compile(r"(?<![\w.])" + re.escape(term) + r"(?![\w])", re.I)
+def _alternation(names) -> re.Pattern:
+    return re.compile(r"(?<![\w.])(" + "|".join(re.escape(a) for a in sorted(names, key=len, reverse=True))
+                      + r")(?![\w])", re.I)
 
 
-# One alternation per kind (longest first), so a lookup is one regex pass instead of hundreds.
-_ALIASES = {a: c for c, names in COUNTRIES.items() for a in names if a not in ("us", "uk")} | CITIES
-_ANY = re.compile(r"(?<![\w.])(" + "|".join(re.escape(a) for a in sorted(_ALIASES, key=len, reverse=True))
-                  + r")(?![\w])", re.I)
-_REGION_ANY = re.compile(r"(?<![\w.])(" + "|".join(re.escape(a) for a in sorted(REGIONS, key=len, reverse=True))
-                         + r")(?![\w])", re.I)
+_COUNTRY_NAMES = {a: c for c, names in COUNTRIES.items() for a in names if a not in ("us", "uk")}
+_COUNTRY_ANY = _alternation(_COUNTRY_NAMES)
+_CITY_ANY = _alternation(CITIES)
+_SUBDIV_ANY = _alternation(SUBDIVISIONS)
+_REGION_ANY = _alternation(REGIONS)
 # Uppercase tokens only, so "us" in "join us" or "it" never count
 _UPPER = [(re.compile(r"(?<![\w.])US(?![\w])"), "US"), (re.compile(r"(?<![\w.])UK(?![\w])"), "GB")]
-# A trailing European ISO code ("Remote - GB"); codes that are also US states (DE, AL, ME, MD, MT, VA) need a
-# city or country name instead, so "Wilmington, DE" stays Delaware.
-STATE_CLASH = {"DE", "AL", "ME", "MD", "MT", "VA"}
+# A trailing European ISO code ("Remote - GB"); codes that are also US states (DE, AL, ME, MD, MT, VA, GA, IN)
+# need a city or country name instead, so "Wilmington, DE" stays Delaware.
+STATE_CLASH = {"DE", "AL", "ME", "MD", "MT", "VA", "GA", "IN"}
 _ISO_EUROPE = re.compile(r"(?:,|\s-|^)\s*(" + "|".join(sorted(EUROPE - STATE_CLASH)) + r")\s*$")
 _STATE = re.compile(r",\s*(" + "|".join(US_STATES) + r")\b(?!\w)")
-_STATE_NAME = re.compile(r"\b(" + "|".join(US_STATE_NAMES) + r")\b", re.I)
 
 
 @dataclass(frozen=True)
@@ -159,17 +180,27 @@ class Place:
     areas: tuple[str, ...]              # regions named without saying remote (e.g. a location "EMEA")
     remote: bool                        # some location says remote
     hybrid: bool
+    unparsed: bool = False              # some location or country field named a place we couldn't read
 
 
 def countries_in(text: str) -> set[str]:
-    """Country codes named in one place description."""
-    found = {_ALIASES[m.group(1).lower()] for m in _ANY.finditer(text)}
-    found |= {code for pattern, code in _UPPER if pattern.search(text)}
-    if m := _ISO_EUROPE.search(text.strip()):
-        found.add(m.group(1))
-    elif not found & EUROPE and (_STATE.search(text) or _STATE_NAME.search(text)):
-        found.add("US")       # ", DE" stays Germany: state codes count only without a European match
-    return found
+    """Country codes named in one place description. Explicit names (countries, states, provinces, ISO
+    codes) win over city names, which only count when nothing explicit is said."""
+    explicit = {SUBDIVISIONS[m.group(1).lower()] for m in _SUBDIV_ANY.finditer(text)}
+    masked = _SUBDIV_ANY.sub(" ", text)
+    explicit |= {_COUNTRY_NAMES[m.group(1).lower()] for m in _COUNTRY_ANY.finditer(masked)}
+    explicit |= {code for pattern, code in _UPPER if pattern.search(masked)}
+    if m := _ISO_EUROPE.search(masked.strip()):
+        explicit.add(m.group(1))
+    state = _STATE.search(masked)
+    if state and state.group(1) not in STATE_CLASH:
+        explicit.add("US")                    # ", NH", ", CA": only US states
+    if explicit:
+        return explicit
+    cities = {CITIES[m.group(1).lower()] for m in _CITY_ANY.finditer(masked)}
+    if state and not cities & EUROPE:
+        return cities | {"US"}                # ", DE" without a European city: Delaware
+    return cities                             # "Berlin, DE", "Valletta, MT": the city decides
 
 
 def regions_in(text: str) -> set[str]:
@@ -180,29 +211,45 @@ def regions_in(text: str) -> set[str]:
     return found
 
 
+def _bare(part: str) -> bool:
+    """Only remote/region words and filler: a scope label rather than a place name."""
+    return not FILLER.sub("", _REGION_ANY.sub("", REMOTE.sub("", part))).strip()
+
+
 def parse(locations: list[str], structured_countries: tuple[str, ...] | list[str] = ()) -> Place:
     """Combine providers' location strings and country fields into one Place."""
     countries: set[str] = set()
     remote_regions: set[str] = set()
     areas: set[str] = set()
-    remote = hybrid = False
+    remote = hybrid = unparsed = False
     for raw in locations:
         if not raw or not raw.strip():
             continue
         hybrid |= bool(HYBRID.search(raw))
         for part in (p for p in SEGMENT.split(raw) if p and p.strip()):
             named, regions = countries_in(part), regions_in(part)
+            # Worldwide only as an explicit scope label, and never beside a narrower scope:
+            # "Remote - Anywhere in the United States" is US, "Bonifacio Global City" is a place.
+            if "worldwide" in regions and (named or regions - {"worldwide"} or not _bare(part)):
+                regions.discard("worldwide")
             countries |= named
             if REMOTE.search(part) or "worldwide" in regions:
                 remote = True
                 remote_regions |= named | regions
             else:
                 areas |= regions
+            if not named and not regions and not _bare(part) and not HYBRID.fullmatch(part.strip()):
+                unparsed = True
     for name in structured_countries:
-        code = country_code(name) if name else None
+        if not name:
+            continue
+        code = country_code(name)
         if code:
             countries.add(code)
-    return Place(tuple(sorted(countries)), tuple(sorted(remote_regions)), tuple(sorted(areas)), remote, hybrid)
+        else:
+            unparsed = True
+    return Place(tuple(sorted(countries)), tuple(sorted(remote_regions)), tuple(sorted(areas)), remote, hybrid,
+                 unparsed)
 
 
 def country_code(name: str) -> str | None:

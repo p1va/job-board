@@ -53,4 +53,46 @@ def test_kept_needs_a_family_and_europe():
 
 
 def test_html_text_keeps_paragraphs_and_bullets():
-    assert html_text("<p>Hello <b>you</b></p><ul><li>One</li><li>Two</li></ul>") == "Hello you\n• One\n• Two"
+    assert html_text("<p>Hello <b>you</b></p><ul><li>One</li><li>Two</li></ul>") == "Hello you\n\n• One\n• Two"
+
+
+def ashby(**changes):
+    return first("ashby") | {"title": "Senior Backend Engineer", "location": "Berlin", "secondaryLocations": [],
+                             "address": None, "workplaceType": None, "isRemote": None} | changes
+
+
+def test_unlisted_ashby_jobs_are_not_kept_and_change_the_version():
+    listed, unlisted = norm("ashby", ashby(isListed=True)), norm("ashby", ashby(isListed=False))
+    assert listed["kept"] and not unlisted["kept"] and listed["payload_hash"] != unlisted["payload_hash"]
+
+
+def test_derived_fields_are_part_of_the_version():
+    row = norm("ashby", ashby())
+    assert payload_hash(row | {"stack": row["stack"] + ["rust"]}) != row["payload_hash"]
+    assert payload_hash(row | {"role_family": "research"}) != row["payload_hash"]
+
+
+def test_unreadable_place_is_not_kept_as_unstated_remote():
+    remote = norm("ashby", ashby(location="Remote", workplaceType="Remote"))
+    honduras = norm("workable", first("workable") | {"title": "Senior Data Engineer", "workplace": "remote",
+                                                     "location": {"countryName": "Atlantis"}, "locations": []})
+    assert remote["kept"] and not honduras["kept"]
+
+
+def test_style_from_location_when_the_provider_is_silent():
+    assert norm("ashby", ashby(location="Berlin (Hybrid)"))["workplace"] == "hybrid"
+
+
+def test_direct_ashby_address_country_counts():
+    row = norm("ashby", ashby(location="Remote", workplaceType="Remote", address={"addressCountry": "DE"}))
+    assert row["countries"] == ["DE"]
+
+
+def test_greenhouse_updated_at_is_not_a_publication_date():
+    job = first("greenhouse") | {"first_published": None, "updated_at": "2026-11-08T10:00:00Z"}
+    assert norm("greenhouse", job)["published_at"] is None
+
+
+def test_ashby_plain_text_blank_runs_collapse():
+    row = norm("ashby", ashby(descriptionPlain="Intro\n\n\n\n\nMore   text\n\n\n- point"))
+    assert row["description_text"] == "Intro\n\nMore text\n\n- point"

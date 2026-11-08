@@ -39,9 +39,9 @@ class Shards:
 
 
 def read_shards(raw: Path) -> Shards:
-    """Every raw/<source>/<shard>/ with a valid manifest; the rest are reported and ignored."""
+    """Every shard folder under raw/ with a valid manifest; the rest are reported and ignored."""
     out = Shards()
-    for manifest_path in sorted(raw.glob("*/*/manifest.json")):
+    for manifest_path in sorted(raw.glob("**/manifest.json")):     # any layout, e.g. one folder per artifact
         where = str(manifest_path.parent.relative_to(raw))
         try:
             manifest = Manifest.from_json(manifest_path.read_text(encoding="utf-8"))

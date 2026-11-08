@@ -19,7 +19,8 @@ WORKPLACE = {"onsite": "onsite", "on_site": "onsite", "hybrid": "hybrid", "remot
 # Every field that changes what the board shows or selects; a change makes a new version.
 HASHED = ("title", "company_name", "department", "employment", "workplace", "location_raw", "locations",
           "countries", "remote_regions", "published_at", "salary_raw", "salary_min", "salary_max",
-          "salary_currency", "salary_period", "url", "description_sha")
+          "salary_currency", "salary_period", "url", "description_sha", "listed",
+          "role_family", "seniority", "stack")     # derived too: a rule change must produce a new version
 
 
 class _Text(HTMLParser):
@@ -34,7 +35,7 @@ class _Text(HTMLParser):
             self.parts.append("• ")
 
     def handle_endtag(self, tag):
-        if tag in BLOCK:
+        if tag in BLOCK and tag != "li":
             self.parts.append("\n")
 
     def handle_data(self, data):
@@ -47,8 +48,13 @@ def html_text(markup: str | None) -> str:
         return ""
     parser = _Text()
     parser.feed(markup)
-    lines = [" ".join(line.split()) for line in "".join(parser.parts).splitlines()]
-    text = "\n".join(line for line in lines if line and line != "•")
+    return tidy("".join(parser.parts))
+
+
+def tidy(text: str) -> str:
+    """Single spaces within lines, at most one blank line between paragraphs, no empty bullets."""
+    lines = [" ".join(line.split()) for line in text.splitlines()]
+    text = "\n".join(line for line in lines if line != "•")
     return re.sub(r"\n{3,}", "\n\n", text).strip()
 
 
@@ -65,9 +71,9 @@ def _time(value) -> datetime | None:
 def _ashby(job: dict) -> dict:
     locs = [job.get("location") or ""] + [s.get("location") or "" for s in job.get("secondaryLocations") or []]
     addresses = [job.get("address")] + [s.get("address") for s in job.get("secondaryLocations") or []]
-    structured = [((a or {}).get("postalAddress") or {}).get("addressCountry") or "" for a in addresses]
+    structured = [((a or {}).get("postalAddress") or a or {}).get("addressCountry") or "" for a in addresses]
     kind = (job.get("workplaceType") or "").lower()
-    workplace = WORKPLACE.get(kind) or ("remote" if job.get("isRemote") else "unknown")
+    workplace = WORKPLACE.get(kind) or ("remote" if job.get("isRemote") else None)
     comp = job.get("compensation") or {}
     salary = next((c for c in comp.get("summaryComponents") or [] if c.get("compensationType") == "Salary"), {})
     return dict(title=job.get("title"), department=job.get("department") or job.get("team"),
@@ -76,8 +82,8 @@ def _ashby(job: dict) -> dict:
                 salary_raw=comp.get("compensationTierSummary") or comp.get("scrapeableCompensationSalarySummary"),
                 salary_min=salary.get("minValue"), salary_max=salary.get("maxValue"),
                 salary_currency=salary.get("currencyCode"), salary_period=INTERVAL.get(salary.get("interval") or ""),
-                description_text=(job.get("descriptionPlain") or "").strip() or html_text(job.get("descriptionHtml")),
-                company_name=None)
+                description_text=tidy(job.get("descriptionPlain") or "") or html_text(job.get("descriptionHtml")),
+                company_name=None, listed=job.get("isListed") is not False)
 
 
 def _greenhouse(job: dict) -> dict:
@@ -87,10 +93,10 @@ def _greenhouse(job: dict) -> dict:
     return dict(title=job.get("title"), department=", ".join(d.get("name", "") for d in job.get("departments") or []) or None,
                 employment=None, workplace=None, locations=[loc] if loc else [],
                 structured=countries if isinstance(countries, list) else [countries],
-                published_at=_time(job.get("first_published") or job.get("updated_at")), url=job.get("absolute_url"),
+                published_at=_time(job.get("first_published")), url=job.get("absolute_url"),
                 salary_raw=None, salary_min=None, salary_max=None, salary_currency=None, salary_period=None,
                 description_text=html_text(html.unescape(job.get("content") or "")),
-                company_name=job.get("company_name"))
+                company_name=job.get("company_name"), listed=True)
 
 
 def _workable(job: dict) -> dict:
@@ -103,7 +109,8 @@ def _workable(job: dict) -> dict:
                 locations=[primary] + [l for l in others if l != primary] if primary else others,
                 structured=[loc.get("countryName") or ""], published_at=_time(job.get("created")), url=job.get("url"),
                 salary_raw=None, salary_min=None, salary_max=None, salary_currency=None, salary_period=None,
-                description_text=body, company_name=(job.get("company") or {}).get("title"))
+                description_text=body, company_name=(job.get("company") or {}).get("title"),
+                listed=(job.get("state") or "published") == "published")
 
 
 SOURCES = {"ashby": _ashby, "greenhouse": _greenhouse, "workable": _workable}
@@ -121,13 +128,13 @@ def normalize(source: str, board: str, native_id: str, payload: str, run_id: str
     """A VERSION row with classification. `kept` says whether it passes the board's filter."""
     f = SOURCES[source](json.loads(payload))
     place = places.parse(f["locations"], f.pop("structured"))
-    workplace = f["workplace"] or ("remote" if place.remote else "hybrid" if place.hybrid else "unknown")
-    if workplace == "unknown" and place.remote:
-        workplace = "remote"
-    text = re.sub(r"\n{3,}", "\n\n", re.sub(r"[ \t]+\n", "\n", f.pop("description_text") or "")).strip()
+    workplace = f["workplace"] if f["workplace"] not in (None, "unknown") else (
+        "remote" if place.remote else "hybrid" if place.hybrid else "unknown")
+    text = tidy(f.pop("description_text") or "")
     title = (f["title"] or "").strip()
     row = dict(source=source, board=board, native_id=native_id, run_id=run_id, seen_at=seen_at,
                company_id=company_id or f"{source}:{board}", company_name=f["company_name"], url=f["url"],
+               listed=f["listed"],
                title=title, department=f["department"], employment=f["employment"], workplace=workplace,
                location_raw=" | ".join(f["locations"]) or None, locations=f["locations"],
                countries=list(place.countries), remote_regions=list(place.remote_regions),
@@ -139,6 +146,8 @@ def normalize(source: str, board: str, native_id: str, payload: str, run_id: str
                role_family=classify.role_family(title), seniority=classify.seniority(title))
     row["stack"] = classify.stack(f"{title}\n{text}") if row["role_family"] else []
     row["payload_hash"] = payload_hash(row)
-    row["kept"] = bool(row["role_family"]) and (places.in_europe(place) or (workplace == "remote" and not place.remote_regions
-                                                                             and not place.countries))
+    # Kept: listed publicly, a role family, and in or open to Europe; or remote with nothing stated at all
+    # (a place we couldn't read is not "nothing stated").
+    unstated = workplace == "remote" and not place.countries and not place.remote_regions and not place.unparsed
+    row["kept"] = bool(row["role_family"]) and row["listed"] and (places.in_europe(place) or unstated)
     return row

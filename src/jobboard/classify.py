@@ -11,10 +11,14 @@ FAMILIES = ("engineering_management", "product_management", "research", "data_ml
             "data_science", "software_engineering")
 
 _I = re.IGNORECASE
-# Customer-facing and non-engineering roles: never kept.
+# Customer-facing and non-engineering roles: never kept. Role phrases, not product domains, so
+# "Software Engineer, Customer Identity" or "Software Engineer - Finance" stay.
 EXCLUDE = re.compile(
-    r"\b(sales|solutions?|pre-?sales|customer|support|forward[- ]deployed|implementation|professional services|"
-    r"business develop\w*|recruit(er|ing)|talent|marketing|account|legal|finance|hr|people partner|"
+    r"\b(sales|pre-?sales|solutions? (engineer|architect|consultant|specialist|lead|manager)|"
+    r"customer (success|support|service|experience|engineer)|support engineer|technical support|"
+    r"forward[- ]deployed|implementation (engineer|consultant|specialist|manager|lead)|professional services|"
+    r"business develop\w*|recruit(er|ing)|talent acquisition|account (executive|manager|director)|"
+    r"marketing (manager|specialist|lead|director|executive)|legal counsel|people partner|hr (business )?partner|"
     r"developer (relations|advocate)|devrel|evangelist|technical writer)\b", _I)
 # Other engineering disciplines: excluded unless the title also says software.
 DISCIPLINE = re.compile(
@@ -28,9 +32,12 @@ SOFTWARE_WORD = re.compile(
     r"\b(software|backend|back[- ]end|frontend|front[- ]end|full[- ]?stack|web|mobile|ios|android|platform|"
     r"infrastructure|cloud|devops|devsecops|site reliability|reliability|sre|security|appsec|application|"
     r"embedded|firmware|game|gameplay|graphics|compiler|kernel|blockchain|smart contracts?|qa|test automation|"
-    r"automation|api|systems?|python|java|golang|go|rust|react|node(\.js)?|ruby|rails|php|\.net|c\+\+|c#|"
-    r"typescript|javascript|scala|kotlin|swift|unity|unreal|distributed|product|growth|performance|devex|"
-    r"developer experience|tooling|build|release|observability|ai|llm|founding)\b", _I)
+    r"api|systems?|python|java|golang|go|rust|react|node(\.js)?|ruby|rails|php|"
+    r"typescript|javascript|scala|kotlin|swift|unity|unreal|distributed|devex|developer experience|"
+    r"observability|ai|llm|founding)\b"
+    # generic words count only right before the noun: "Product Engineer", not "Product Cost Engineer"
+    r"|\b(product|growth|performance|tooling|build|release|integrations?) (engineer|developer)s?\b"
+    r"|(?<![\w+#.])(c\+\+|c#|\.net)(?![\w+#])", _I)
 BARE = re.compile(r"^\W*((senior|sr\.?|staff|principal|lead|junior|jr\.?|mid[- ]level|associate)\s+)*"
                   r"(engineer|developer)\b", _I)
 
@@ -39,7 +46,7 @@ RULES: list[tuple[str, re.Pattern]] = [
         r"\b(engineering manager|manager,? (software )?engineering|head of (software )?engineering|"
         r"(vp|vice president|director|svp),? (of )?(software )?engineering|cto|chief technology officer|"
         r"head of (platform|infrastructure|data engineering|ml|ai|machine learning)|engineering lead|"
-        r"(software|platform|data|ml|infrastructure) engineering (manager|lead|director)|"
+        r"(software|platform|data|ml|infrastructure) engineering (team )?(manager|lead|director)|"
         r"(director|head|vp|vice president)\b[^|]{0,40}\bengineering)\b", _I)),
     ("data_science", re.compile(r"\b(quantitative|quant) (researcher|analyst|developer)\b", _I)),
     ("product_management", re.compile(
@@ -57,7 +64,7 @@ RULES: list[tuple[str, re.Pattern]] = [
         r"\b(data scientist|data science|decision scientist|quantitative (analyst|researcher)|"
         r"(product|data|business intelligence|bi) analyst|statistician|analytics (lead|manager))\b", _I)),
 ]
-SOFTWARE_ONLY = re.compile(r"\b(sre|devops)\b", _I)
+SOFTWARE_ONLY = re.compile(r"\b(sre|devops|software engineering|software development)\b", _I)
 
 SENIORITY: list[tuple[str, re.Pattern]] = [
     ("intern", re.compile(r"\b(intern|internship|praktikum|praktikant|working student|werkstudent|trainee|apprentice)\b", _I)),

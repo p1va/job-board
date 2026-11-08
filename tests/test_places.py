@@ -22,6 +22,20 @@ CASES = [
     (["Latin America"], (), (), False, False),
     (["Remoto - Italia"], ("IT",), ("IT",), True, True),
     (["Join us in Milan"], ("IT",), (), False, True),            # lowercase "us" isn't the US
+    # review round 1 (phase 3a): worldwide only as an explicit, unrestricted scope label
+    (["Remote - Anywhere in the United States"], ("US",), ("US",), True, False),
+    (["Remote, Global (APAC)"], (), ("apac",), True, False),
+    (["Bonifacio Global City, Philippines"], ("PH",), (), False, False),
+    (["Remote - Global"], (), ("worldwide",), True, True),
+    (["Work from anywhere in Europe"], (), ("europe",), True, True),
+    # explicit country/state/province evidence beats city aliases
+    (["London, Ontario, Canada"], ("CA",), (), False, False),
+    (["Berlin, New Hampshire, United States"], ("US",), (), False, False),
+    (["Mahwah, New Jersey"], ("US",), (), False, False),
+    (["Berlin, NH"], ("US",), (), False, False),
+    (["Valletta, MT"], ("MT",), (), False, True),
+    (["Venezuela, Remote"], ("VE",), ("VE",), True, False),
+    (["Istanbul"], ("TR",), (), False, True),                    # the agreed broad Europe
 ]
 
 
@@ -43,3 +57,9 @@ def test_named_regions_without_remote_are_areas():
 
 def test_dach_expands_to_countries():
     assert parse(["Remote (DACH)"]).remote_regions == ("AT", "CH", "DE")
+
+
+def test_unreadable_places_are_not_unstated():
+    assert parse(["Multiple Locations"]).unparsed and not parse(["Remote"]).unparsed
+    assert parse(["Remote"], ["Narnia"]).unparsed
+    assert not parse(["Berlin (Hybrid)"]).unparsed and parse(["Berlin (Hybrid)"]).hybrid

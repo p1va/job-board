@@ -107,3 +107,12 @@ def test_replay_after_commit_is_a_no_op_but_retry_before_commit_replaces(tmp_pat
     before = path.read_bytes()
     replay = run(tmp_path, "1-1", {"ashby:acme": ("complete", 200, [JOB | {"title": "Changed"}])}, T0)
     assert replay["replay"] is True and path.read_bytes() == before
+
+
+def test_reclassification_with_unchanged_source_writes_a_version(tmp_path, monkeypatch):
+    run(tmp_path, "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    import jobboard.normalize as normalize_module
+    original = normalize_module.classify.stack
+    monkeypatch.setattr(normalize_module.classify, "stack", lambda text: original(text) + ["new-term"])
+    report = run(tmp_path, "2-1", {"ashby:acme": ("complete", 200, [JOB])}, T0 + DAY)
+    assert report["versions"] == 1

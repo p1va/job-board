@@ -21,6 +21,7 @@ VERSION = pa.schema(KEY + [
     pa.field("payload_hash", pa.string(), nullable=False),   # over every display/selection field below
     pa.field("company_id", pa.string(), nullable=False),
     pa.field("company_name", pa.string()),            # when the provider sends it
+    pa.field("listed", pa.bool_(), nullable=False),     # false: direct-link only (e.g. Ashby isListed)
     pa.field("url", pa.string()),
     pa.field("title", pa.string(), nullable=False),
     pa.field("department", pa.string()),

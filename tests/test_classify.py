@@ -22,6 +22,16 @@ FAMILIES = [
     ("Analytics Engineer", "data_ml_engineering"),
     ("Data Scientist", "data_science"),
     ("Quantitative Researcher", "data_science"),
+    # review round 1 (phase 3a)
+    ("C++ Engineer", "software_engineering"), ("C# Developer", "software_engineering"),
+    (".NET Developer", "software_engineering"), ("Software Engineering Intern", "software_engineering"),
+    ("Werkstudent Software Engineering", "software_engineering"),
+    ("Software Engineering Team Lead", "engineering_management"),
+    ("Senior Software Engineer, Customer Identity", "software_engineering"),
+    ("Software Engineer - Finance", "software_engineering"),
+    ("Customer Success Engineer", None), ("Technical Support Engineer", None),
+    ("Product Engineer", "software_engineering"), ("Product Cost & Sourcing Engineer", None),
+    ("Growth Engineer", "software_engineering"), ("Release Engineer", "software_engineering"),
     # never kept
     ("Sales Engineer", None), ("Solutions Engineer", None), ("Forward Deployed Engineer", None),
     ("Senior Mechanical Engineer", None), ("Controls Engineer II", None), ("Electrical Engineer Intern", None),
