@@ -121,6 +121,9 @@ jobs:
             echo "superseded=true" >> "$GITHUB_OUTPUT"
             echo "::warning::A newer run's data is already committed; this run publishes nothing."
           fi
+      - name: Fetch missing company names and logos
+        if: steps.join.outputs.superseded != 'true'
+        run: uv run python -m jobboard.profiles --data data --profiles companies/profiles.json --limit 300
       - name: Render and validate the board
         if: steps.join.outputs.superseded != 'true'
         run: |
@@ -133,7 +136,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data
+          git add data companies/profiles.json
           if git diff --cached --quiet; then echo 'No data changes.'; exit 0; fi
           git commit -qm "data: run $RUN_ID [skip ci]"
           for attempt in 1 2 3; do
