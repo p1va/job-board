@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 import pytest
 
 from jobboard.join import join
-from jobboard.render import regions, render, salary
+from jobboard.render import render, salary, where_pairs
 from test_join import JOB, T0, inputs, shard
 
 
@@ -37,15 +37,18 @@ def test_open_job_without_a_version_refuses_to_render(tmp_path):
         render(tmp_path / "data", tmp_path / "site", T0)
 
 
-@pytest.mark.parametrize("countries,remote,workplace,expected", [
-    (["DE", "FR"], [], "onsite", ["Germany", "Rest of Europe"]),
-    (["US"], ["worldwide"], "remote", ["Remote: worldwide"]),
-    (["GB"], ["GB"], "remote", ["United Kingdom"]),
-    ([], [], "remote", ["Remote: region not stated"]),
-    (["US"], ["US"], "remote", []),
+@pytest.mark.parametrize("where,expected", [
+    (["DE|onsite", "FR|onsite"], [["Germany", "Office"], ["Rest of Europe", "Office"]]),
+    (["US|remote", "worldwide|remote"], [["Remote: worldwide", "Remote"]]),
+    (["GB|remote"], [["United Kingdom", "Remote"]]),
+    (["unstated|remote"], [["Remote: region not stated", "Remote"]]),
+    (["US|remote"], []),
+    (["europe|remote"], [["Remote: Europe", "Remote"]]),
+    # London is an office (style unknown), only the US location is remote: no "United Kingdom + Remote" pair
+    (["GB|unknown", "US|remote"], [["United Kingdom", "Not stated"]]),
 ])
-def test_regions(countries, remote, workplace, expected):
-    assert regions(dict(countries=countries, remote_regions=remote, workplace=workplace)) == expected
+def test_where_pairs(where, expected):
+    assert where_pairs(dict(where=where)) == expected
 
 
 def test_salary_text():
@@ -53,3 +56,9 @@ def test_salary_text():
     assert salary(base) == "€80K – €100K"
     assert salary(base | {"salary_raw": "€80K – €100K + equity"}) == "€80K – €100K + equity"
     assert salary(base | {"salary_min": None, "salary_max": None}) is None
+
+
+def test_explicit_remote_with_a_named_region_reaches_the_default_view(tmp_path):
+    report = built(tmp_path, [JOB | {"id": "j3", "title": "Data Scientist", "location": "Europe", "workplaceType": "Remote"}])
+    data = json.loads((tmp_path / "site" / report["data_file"]).read_text())
+    assert data["jobs"][0]["where"] == [["Remote: Europe", "Remote"]]

@@ -27,20 +27,37 @@ NAMED = {"DE": "Germany", "GB": "United Kingdom", "IT": "Italy"}
 SYMBOL = {"EUR": "€", "GBP": "£", "USD": "$", "CHF": "CHF "}
 
 
+MODE = {"remote": "Remote", "hybrid": "Hybrid", "onsite": "Office", "unknown": "Not stated"}
+
+
+def place_label(place: str, mode: str) -> str | None:
+    """A where-filter label for one place: the three default countries, the rest of Europe, remote scopes."""
+    if place in NAMED:
+        return NAMED[place]
+    if place in EUROPE:
+        return "Rest of Europe"
+    if place == "worldwide" and mode == "remote":
+        return "Remote: worldwide"
+    if place in ("europe", "eu", "emea"):
+        return "Remote: Europe" if mode == "remote" else "Rest of Europe"
+    if place == "unstated":
+        return "Remote: region not stated"
+    return None                                         # outside Europe and not open to it
+
+
+def where_pairs(v: dict) -> list[list[str]]:
+    """[label, style] for each place the job names, so filters can combine place and work style."""
+    pairs = []
+    for item in v["where"] or []:
+        place, mode = item.split("|", 1)
+        label = place_label(place, mode)
+        if label and [label, MODE.get(mode, "Not stated")] not in pairs:
+            pairs.append([label, MODE.get(mode, "Not stated")])
+    return pairs
+
+
 def regions(v: dict) -> list[str]:
-    """Where-filter values: the three default countries, the rest of Europe, and remote scopes."""
-    out = []
-    countries, remote = set(v["countries"] or []), set(v["remote_regions"] or [])
-    out += [NAMED[c] for c in ("DE", "GB", "IT") if c in countries]
-    if (countries & EUROPE) - NAMED.keys():
-        out.append("Rest of Europe")
-    if "worldwide" in remote:
-        out.append("Remote: worldwide")
-    if remote & {"europe", "eu", "emea"}:
-        out.append("Remote: Europe")
-    if v["workplace"] == "remote" and not countries and not remote:
-        out.append("Remote: region not stated")
-    return out
+    return list(dict.fromkeys(label for label, _ in where_pairs(v)))
 
 
 def salary(v: dict) -> str | None:
@@ -99,6 +116,7 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
             employment=v["employment"], department=v["department"], salary=salary(v),
             published=v["published_at"].isoformat() if v["published_at"] else None,
             family=v["role_family"], level=v["seniority"], stack=v["stack"] or [], regions=regions(v),
+            where=where_pairs(v),
             lists=lists.get(v["company_id"], [])))
     if out.exists():
         shutil.rmtree(out)

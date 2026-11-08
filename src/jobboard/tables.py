@@ -31,6 +31,7 @@ VERSION = pa.schema(KEY + [
     pa.field("locations", pa.list_(pa.string())),
     pa.field("countries", pa.list_(pa.string())),             # ISO 3166-1 alpha-2
     pa.field("remote_regions", pa.list_(pa.string())),        # worldwide | europe | eu | emea | ISO-2
+    pa.field("where", pa.list_(pa.string())),                 # "<place>|<mode>", see places.Place.where
     pa.field("published_at", UTC),
     pa.field("salary_raw", pa.string()),
     pa.field("salary_min", pa.float64()),

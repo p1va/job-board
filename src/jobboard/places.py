@@ -178,14 +178,17 @@ class Place:
     remote_regions: tuple[str, ...]     # where remote work is offered from: worldwide | europe | eu | emea |
                                         # americas | latam | apac | mena | ISO-2; empty = remote, region unsaid
     areas: tuple[str, ...]              # regions named without saying remote (e.g. a location "EMEA")
-    remote: bool                        # some location says remote
+    remote: bool                        # some location is remote
     hybrid: bool
     unparsed: bool = False              # some location or country field named a place we couldn't read
+    where: tuple[str, ...] = ()         # "<place>|<mode>": which place has which work style, e.g. "GB|unknown",
+                                        # "US|remote", "unstated|remote"; mode is onsite | hybrid | remote | unknown
 
 
-def countries_in(text: str) -> set[str]:
-    """Country codes named in one place description. Explicit names (countries, states, provinces, ISO
-    codes) win over city names, which only count when nothing explicit is said."""
+def _countries(text: str) -> tuple[set[str], bool]:
+    """Country codes named in one place description, and whether any came from an explicit name.
+    Explicit names (countries, states, provinces, ISO codes) win over city names, which only count when
+    nothing explicit is said."""
     explicit = {SUBDIVISIONS[m.group(1).lower()] for m in _SUBDIV_ANY.finditer(text)}
     masked = _SUBDIV_ANY.sub(" ", text)
     explicit |= {_COUNTRY_NAMES[m.group(1).lower()] for m in _COUNTRY_ANY.finditer(masked)}
@@ -196,11 +199,15 @@ def countries_in(text: str) -> set[str]:
     if state and state.group(1) not in STATE_CLASH:
         explicit.add("US")                    # ", NH", ", CA": only US states
     if explicit:
-        return explicit
+        return explicit, True
     cities = {CITIES[m.group(1).lower()] for m in _CITY_ANY.finditer(masked)}
     if state and not cities & EUROPE:
-        return cities | {"US"}                # ", DE" without a European city: Delaware
-    return cities                             # "Berlin, DE", "Valletta, MT": the city decides
+        return cities | {"US"}, True          # ", DE" without a European city: Delaware
+    return cities, False                      # "Berlin, DE", "Valletta, MT": the city decides
+
+
+def countries_in(text: str) -> set[str]:
+    return _countries(text)[0]
 
 
 def regions_in(text: str) -> set[str]:
@@ -216,40 +223,75 @@ def _bare(part: str) -> bool:
     return not FILLER.sub("", _REGION_ANY.sub("", REMOTE.sub("", part))).strip()
 
 
-def parse(locations: list[str], structured_countries: tuple[str, ...] | list[str] = ()) -> Place:
-    """Combine providers' location strings and country fields into one Place."""
-    countries: set[str] = set()
-    remote_regions: set[str] = set()
-    areas: set[str] = set()
-    remote = hybrid = unparsed = False
-    for raw in locations:
-        if not raw or not raw.strip():
-            continue
-        hybrid |= bool(HYBRID.search(raw))
-        for part in (p for p in SEGMENT.split(raw) if p and p.strip()):
-            named, regions = countries_in(part), regions_in(part)
+MODES = ("onsite", "hybrid", "remote", "unknown")
+
+
+def parse(locations, structured_countries=(), workplace: str | None = None) -> Place:
+    """Read where a job is and how it's worked there.
+
+    `locations` is a list of strings, or of (string, structured country or None) pairs when the provider
+    attaches a country to each location (Ashby addresses, Workable's primary location): the attached
+    country beats a bare city alias ("London" with Canada is Canada). `structured_countries` are
+    job-wide country fields. `workplace` is the provider's own declaration (onsite/hybrid/remote); an
+    explicit remote job is remote from every place it names ("Europe" + Remote is remote from Europe).
+    """
+    entries = [l if isinstance(l, tuple) else (l, None) for l in locations]
+    declared = workplace if workplace in ("onsite", "hybrid", "remote") else None
+    where: set[tuple[str, str]] = set()
+    unparsed = False
+    for raw, attached in entries:
+        code = country_code(attached) if attached else None
+        if attached and not code:
+            unparsed = True
+        parts = [p for p in SEGMENT.split(raw or "") if p and p.strip()]
+        if not parts and code:
+            where.add((code, declared or "unknown"))
+        for part in parts:
+            named, explicit = _countries(part)
+            regions = regions_in(part)
+            if code and (not named or not explicit):
+                named = {code}                # the provider's country for this location beats a city alias
             # Worldwide only as an explicit scope label, and never beside a narrower scope:
             # "Remote - Anywhere in the United States" is US, "Bonifacio Global City" is a place.
             if "worldwide" in regions and (named or regions - {"worldwide"} or not _bare(part)):
                 regions.discard("worldwide")
-            countries |= named
             if REMOTE.search(part) or "worldwide" in regions:
-                remote = True
-                remote_regions |= named | regions
+                mode = "remote"
+            elif declared:
+                mode = declared
+            elif HYBRID.search(part):
+                mode = "hybrid"
             else:
-                areas |= regions
-            if not named and not regions and not _bare(part) and not HYBRID.fullmatch(part.strip()):
+                mode = "unknown"
+            places_named = named | regions
+            if places_named:
+                where |= {(pl, mode) for pl in places_named}
+            elif mode == "remote" and _bare(part):
+                where.add(("unstated", "remote"))
+            elif not _bare(part) and not HYBRID.fullmatch(part.strip()):
                 unparsed = True
+            elif declared == "remote":
+                where.add(("unstated", "remote"))
     for name in structured_countries:
         if not name:
             continue
         code = country_code(name)
-        if code:
-            countries.add(code)
-        else:
+        if not code:
             unparsed = True
-    return Place(tuple(sorted(countries)), tuple(sorted(remote_regions)), tuple(sorted(areas)), remote, hybrid,
-                 unparsed)
+        elif not any(pl == code for pl, _ in where):
+            where.add((code, declared or "unknown"))
+    if declared == "remote" and not where and not unparsed:
+        where.add(("unstated", "remote"))
+    regions_all = {pl for pl, _ in where if pl in REGION_CODES}
+    countries = {pl for pl, _ in where if pl not in REGION_CODES and pl != "unstated"}
+    remote_regions = {pl for pl, m in where if m == "remote" and pl != "unstated"}
+    areas = {pl for pl, m in where if m != "remote" and pl in REGION_CODES}
+    return Place(tuple(sorted(countries)), tuple(sorted(remote_regions)), tuple(sorted(areas)),
+                 any(m == "remote" for _, m in where), any(m == "hybrid" for _, m in where), unparsed,
+                 tuple(sorted(f"{pl}|{m}" for pl, m in where)))
+
+
+REGION_CODES = {"worldwide", "europe", "eu", "emea", "americas", "latam", "apac", "mena"}
 
 
 def country_code(name: str) -> str | None:

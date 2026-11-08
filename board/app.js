@@ -136,7 +136,7 @@ function setUpFilters() {
   const ordered = (map, order) => order.filter(value => map.has(value)).map(value => [value, map.get(value)]);
   const families = counts(state.jobs.map(job => job.family));
   const regions = counts(state.jobs.flatMap(job => job.regions));
-  const styles = counts(state.jobs.map(job => job.style));
+  const styles = counts(state.jobs.flatMap(job => [...new Set(job.where.map(([, style]) => style))]));
   const levels = counts(state.jobs.map(job => job.level || "unknown"));
   const stacks = counts(state.jobs.flatMap(job => job.stack));
   const lists = counts(state.jobs.flatMap(job => job.lists));
@@ -159,8 +159,10 @@ function setUpFilters() {
 
 function matches(job, tokens, cutoff) {
   if (state.families.size && !state.families.has(job.family)) return false;
-  if (state.regions.size && !job.regions.some(region => state.regions.has(region))) return false;
-  if (state.styles.size && !state.styles.has(job.style)) return false;
+  // Place and work style are matched on the same pair: "United Kingdom + Remote" means remote from the UK,
+  // not an office in London plus remote somewhere else.
+  if ((state.regions.size || state.styles.size) && !job.where.some(([region, style]) =>
+    (!state.regions.size || state.regions.has(region)) && (!state.styles.size || state.styles.has(style)))) return false;
   if (state.levels.size && !state.levels.has(job.level || "unknown")) return false;
   if (state.stacks.size && !job.stack.some(tag => state.stacks.has(tag))) return false;
   if (state.lists.size && !job.lists.some(list => state.lists.has(list))) return false;

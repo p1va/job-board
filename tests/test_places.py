@@ -63,3 +63,18 @@ def test_unreadable_places_are_not_unstated():
     assert parse(["Multiple Locations"]).unparsed and not parse(["Remote"]).unparsed
     assert parse(["Remote"], ["Narnia"]).unparsed
     assert not parse(["Berlin (Hybrid)"]).unparsed and parse(["Berlin (Hybrid)"]).hybrid
+
+
+def test_attached_country_beats_a_bare_city():
+    assert parse([("London", "Canada")]).countries == ("CA",)
+    assert parse([("Berlin", "US")]).countries == ("US",)
+    assert parse([("Berlin", "Germany"), ("New York", "United States")]).countries == ("DE", "US")   # separate offices
+
+
+def test_declared_remote_inherits_named_regions():
+    p = parse([("Europe", None)], workplace="remote")
+    assert p.remote_regions == ("europe",) and p.where == ("europe|remote",) and in_europe(p)
+
+
+def test_where_keeps_place_and_mode_together():
+    assert parse(["London, UK; Remote - United States"]).where == ("GB|unknown", "US|remote")

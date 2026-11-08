@@ -96,3 +96,12 @@ def test_greenhouse_updated_at_is_not_a_publication_date():
 def test_ashby_plain_text_blank_runs_collapse():
     row = norm("ashby", ashby(descriptionPlain="Intro\n\n\n\n\nMore   text\n\n\n- point"))
     assert row["description_text"] == "Intro\n\nMore text\n\n- point"
+
+
+def test_ashby_address_country_decides_a_bare_city():
+    london_ontario = norm("ashby", ashby(location="London", address={"postalAddress": {"addressCountry": "Canada"}}))
+    assert london_ontario["countries"] == ["CA"] and not london_ontario["kept"]
+
+
+def test_indented_html_lists_stay_compact():
+    assert html_text("<ul>\n  <li>One</li>\n  <li>Two</li>\n</ul>") == "• One\n• Two"
