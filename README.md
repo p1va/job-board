@@ -35,3 +35,8 @@ Try a small collection (read-only public APIs):
 ```sh
 uv run python -m jobboard.collect --source ashby --limit-scopes 3 --out raw/ashby/smoke
 ```
+
+## Credits
+
+Town and city names in `src/jobboard/cities.tsv` come from [GeoNames](https://www.geonames.org/)
+(cities5000), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

@@ -83,3 +83,51 @@ def test_where_keeps_place_and_mode_together():
 def test_unicode_case_forms_never_crash_and_still_match():
     assert parse(["İstanbul"]).countries == ("TR",)            # Turkish dotted capital I
     assert parse(["MÜNCHEN"]).countries == ("DE",) and parse(["Zürich"]).countries == ("CH",)
+
+
+# Town names via the GeoNames table, European states and regions, and work styles given as their own piece
+@pytest.mark.parametrize("location,where", [
+    ("Münster", ("DE|unknown",)),
+    ("Münster, DE", ("DE|unknown",)),                     # a town names Germany; no Delaware
+    ("Darmstadt, DE", ("DE|unknown",)),
+    ("St. Wendel", ("DE|unknown",)),                      # Sankt Wendel
+    ("Halle (Saale)", ("DE|unknown",)),
+    ("Bielefeld - Cherusker", ("DE|unknown",)),
+    ("BK, Bayern", ("DE|unknown",)),
+    ("Remote (Sachsen)", ("DE|remote",)),
+    ("Remote: Hessen", ("DE|remote",)),
+    ("Barcelona, Catalonia, Spain", ("ES|unknown",)),
+    ("Latur", ("IN|unknown",)),
+    ("Darmstadt // Hybrid", ("DE|hybrid",)),
+    ("Germany (Remote/Hybrid/On-site)", ("DE|hybrid", "DE|onsite", "DE|remote")),
+    ("Germany (On-site/Remote/Hybrid)", ("DE|hybrid", "DE|onsite", "DE|remote")),   # order doesn't matter
+    ("Tokyo (Remote/Hybrid)", ("JP|hybrid", "JP|remote")),
+    ("Remote (Canada / US)", ("CA|remote", "US|remote")),        # no split inside parentheses
+    ("Hybrid / Berlin", ("DE|hybrid",)),
+    ("London, UK; Hybrid; Remote - United States", ("GB|hybrid", "US|remote")),   # only the nearest place
+    ("London, UK; Remote - United States / Hybrid", ("GB|unknown", "US|remote")),  # never across clauses
+    ("Germany (Hybrid/On-site/Remote)", ("DE|hybrid", "DE|onsite", "DE|remote")),
+    ("Munich Onsite (NavVis GmbH)", ("DE|onsite",)),
+    ("Berlin / Remote", ("DE|unknown", "unstated|remote")),   # a bare Remote piece stays region-unstated
+    ("Wilmington, DE", ("US|unknown",)),
+])
+def test_towns_regions_and_styles(location, where):
+    p = parse([location])
+    assert p.where == where and not p.unparsed
+
+
+def test_ambiguous_or_unknown_towns_stay_unparsed():
+    assert parse(["Cambridge"]).unparsed            # UK and Massachusetts are both large
+    assert parse(["Club Hüfingen"]).unparsed
+    assert not parse(["In-Office"]).unparsed and parse(["In-Office"]).where == ()
+    assert parse(["PERM - N/A"]).where == ()        # short capitals are codes: not Perm, Russia
+    assert parse(["Remote (US/CAN)"]).where == ("US|remote",)   # nor Çan, Turkey
+
+
+@pytest.mark.parametrize("location,countries", [
+    # European regions are weak evidence, like cities: an explicit country or US state wins
+    ("Normandy, MO", ("US",)), ("Hessen, Kansas", ("US",)), ("Schwyz, United States", ("US",)),
+    ("Bayern, DE", ("DE",)), ("Munich, Bavaria, Germany", ("DE",)), ("Toscana", ("IT",)),
+])
+def test_european_regions_yield_to_explicit_countries(location, countries):
+    assert parse([location]).countries == countries
