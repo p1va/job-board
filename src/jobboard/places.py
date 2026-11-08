@@ -6,6 +6,7 @@ without a region stays an empty `remote_regions` list: "Remote" alone doesn't sa
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass
 
 # ISO-2 -> names and aliases (lowercase), English plus common native spellings.
@@ -153,6 +154,15 @@ FILLER = re.compile(r"[\s\-–—,.:()\[\]%!]+|\b(fully|only|100|based|position|
                     r"possible|option|first|friendly|ok)\b", re.I)
 
 
+def _key(text: str) -> str:
+    """A lookup key that survives case and accents: 'İstanbul', 'ISTANBUL' and 'istanbul' are one key."""
+    return "".join(c for c in unicodedata.normalize("NFKD", text.casefold()) if not unicodedata.combining(c))
+
+
+def _lookup(table: dict[str, str]) -> dict[str, str]:
+    return {_key(name): value for name, value in table.items()}
+
+
 def _alternation(names) -> re.Pattern:
     return re.compile(r"(?<![\w.])(" + "|".join(re.escape(a) for a in sorted(names, key=len, reverse=True))
                       + r")(?![\w])", re.I)
@@ -160,9 +170,11 @@ def _alternation(names) -> re.Pattern:
 
 _COUNTRY_NAMES = {a: c for c, names in COUNTRIES.items() for a in names if a not in ("us", "uk")}
 _COUNTRY_ANY = _alternation(_COUNTRY_NAMES)
+_COUNTRY_KEYS, _CITY_KEYS = _lookup(_COUNTRY_NAMES), _lookup(CITIES)
 _CITY_ANY = _alternation(CITIES)
 _SUBDIV_ANY = _alternation(SUBDIVISIONS)
 _REGION_ANY = _alternation(REGIONS)
+_SUBDIV_KEYS, _REGION_KEYS = _lookup(SUBDIVISIONS), _lookup(REGIONS)
 # Uppercase tokens only, so "us" in "join us" or "it" never count
 _UPPER = [(re.compile(r"(?<![\w.])US(?![\w])"), "US"), (re.compile(r"(?<![\w.])UK(?![\w])"), "GB")]
 # A trailing European ISO code ("Remote - GB"); codes that are also US states (DE, AL, ME, MD, MT, VA, GA, IN)
@@ -189,9 +201,10 @@ def _countries(text: str) -> tuple[set[str], bool]:
     """Country codes named in one place description, and whether any came from an explicit name.
     Explicit names (countries, states, provinces, ISO codes) win over city names, which only count when
     nothing explicit is said."""
-    explicit = {SUBDIVISIONS[m.group(1).lower()] for m in _SUBDIV_ANY.finditer(text)}
+    # .get: a regex match whose key we can't map (an odd Unicode case form) is skipped, never a crash
+    explicit = {c for m in _SUBDIV_ANY.finditer(text) if (c := _SUBDIV_KEYS.get(_key(m.group(1))))}
     masked = _SUBDIV_ANY.sub(" ", text)
-    explicit |= {_COUNTRY_NAMES[m.group(1).lower()] for m in _COUNTRY_ANY.finditer(masked)}
+    explicit |= {c for m in _COUNTRY_ANY.finditer(masked) if (c := _COUNTRY_KEYS.get(_key(m.group(1))))}
     explicit |= {code for pattern, code in _UPPER if pattern.search(masked)}
     if m := _ISO_EUROPE.search(masked.strip()):
         explicit.add(m.group(1))
@@ -200,7 +213,7 @@ def _countries(text: str) -> tuple[set[str], bool]:
         explicit.add("US")                    # ", NH", ", CA": only US states
     if explicit:
         return explicit, True
-    cities = {CITIES[m.group(1).lower()] for m in _CITY_ANY.finditer(masked)}
+    cities = {c for m in _CITY_ANY.finditer(masked) if (c := _CITY_KEYS.get(_key(m.group(1))))}
     if state and not cities & EUROPE:
         return cities | {"US"}, True          # ", DE" without a European city: Delaware
     return cities, False                      # "Berlin, DE", "Valletta, MT": the city decides
@@ -213,7 +226,9 @@ def countries_in(text: str) -> set[str]:
 def regions_in(text: str) -> set[str]:
     found: set[str] = set()
     for m in _REGION_ANY.finditer(text):
-        region = REGIONS[m.group(1).lower()]
+        region = _REGION_KEYS.get(_key(m.group(1)))
+        if region is None:
+            continue
         found.update(GROUPS.get(region, (region,)))
     return found
 
