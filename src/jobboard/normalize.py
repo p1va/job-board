@@ -124,7 +124,7 @@ def normalize(source: str, board: str, native_id: str, payload: str, run_id: str
     workplace = f["workplace"] or ("remote" if place.remote else "hybrid" if place.hybrid else "unknown")
     if workplace == "unknown" and place.remote:
         workplace = "remote"
-    text = f.pop("description_text") or ""
+    text = re.sub(r"\n{3,}", "\n\n", re.sub(r"[ \t]+\n", "\n", f.pop("description_text") or "")).strip()
     title = (f["title"] or "").strip()
     row = dict(source=source, board=board, native_id=native_id, run_id=run_id, seen_at=seen_at,
                company_id=company_id or f"{source}:{board}", company_name=f["company_name"], url=f["url"],
