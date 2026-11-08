@@ -87,5 +87,10 @@ here is a test in `tests/test_lifecycle.py`, including Workable searches that ov
 
 ## Normalised fields
 
+`normalize.py` maps each provider's JSON to the `VERSION` fields; `places.py` reads countries,
+remote regions and workplace from location text; `classify.py` sets role family, seniority and stack.
+A job is **kept** when it has a role family and is in Europe or open to Europe (worldwide, Europe,
+EU, EMEA, a European country), or is remote with no region stated (shown under its own filter).
+
 Typed, nullable, UTC. Unknown stays unknown: `workplace=unknown` is not onsite; worldwide, Europe,
 EU, EMEA and single-country remote stay distinct (the UK is in Europe and EMEA, not the EU).

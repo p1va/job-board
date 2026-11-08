@@ -20,6 +20,7 @@ VERSION = pa.schema(KEY + [
     pa.field("seen_at", UTC, nullable=False),
     pa.field("payload_hash", pa.string(), nullable=False),   # over every display/selection field below
     pa.field("company_id", pa.string(), nullable=False),
+    pa.field("company_name", pa.string()),            # when the provider sends it
     pa.field("url", pa.string()),
     pa.field("title", pa.string(), nullable=False),
     pa.field("department", pa.string()),
