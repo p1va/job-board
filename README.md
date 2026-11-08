@@ -10,13 +10,14 @@ browse them.
 - **Sources:** company job boards on Ashby, Greenhouse and Workable to start, seeded from
   [Bet's radar](https://github.com/betklab/ashby-job-radar).
 
-Status: phase 1, the data contract and company inputs. Retrievers, the join and the board follow.
+Status: raw retrievers and manual collection workflow. The join and board follow.
 
 ## Layout
 
 | Path | What |
 |---|---|
 | [`docs/contract.md`](docs/contract.md) | how retrievers hand jobs to the join, and how jobs' history is kept |
+| [`docs/retrievers.md`](docs/retrievers.md) | collect full raw jobs, inspect failures and control Workable's scope |
 | `src/jobboard/` | contract, table schemas, lifecycle rules, company inputs |
 | `companies/` | company boards to scan, with where each came from |
 | `lists/` | curated company lists (AI labs, global remote, …) |
@@ -27,4 +28,10 @@ Status: phase 1, the data contract and company inputs. Retrievers, the join and 
 ```sh
 uv sync
 uv run pytest
+```
+
+Try a small collection (read-only public APIs):
+
+```sh
+uv run python -m jobboard.collect --source ashby --limit-scopes 3 --out raw/ashby/smoke
 ```
