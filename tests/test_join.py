@@ -189,3 +189,34 @@ def test_confirmation_time_is_when_the_job_was_fetched(tmp_path):
     join(raw, tmp_path / "data", inputs(tmp_path, "acme"), "3-2", T0, verify_inputs=False)
     state = load_state(tmp_path / "data" / "state.parquet")
     assert next(iter(state.values())).last_confirmed_seen == fetched
+
+
+def test_an_older_run_cannot_roll_back_or_close_newer_data(tmp_path):
+    from jobboard.render import render
+    repo(tmp_path)
+    old_raw = tmp_path / "raw-101"
+    shard(old_raw, "101-1", {"ashby:acme": ("empty", 200, [])}, T0)
+    join(old_raw, tmp_path / "data", inputs(tmp_path, "acme", "gone-co"), "101-1", T0, verify_inputs=False)
+    commit(tmp_path, "run 101")
+    run(tmp_path, "102-1", {"ashby:acme": ("complete", 200, [JOB])}, T0 + DAY)                 # a new job appears
+    commit(tmp_path, "run 102")
+    rerun = join(old_raw, tmp_path / "data", inputs(tmp_path, "acme", "gone-co"), "101-2", T0 + 2 * DAY, verify_inputs=False)
+    assert rerun["superseded_by"] == "102-1"
+    assert next(iter(load_state(tmp_path / "data" / "state.parquet").values())).status == "open"   # not closed
+    site = render(tmp_path / "data", tmp_path / "site", T0 + 2 * DAY)
+    assert json.loads((tmp_path / "site" / site["data_file"]).read_text())["jobs"][0]["title"] == "Senior Backend Engineer"
+
+
+def test_limited_and_custom_collections_are_checked_with_their_own_options(tmp_path):
+    from jobboard.collect import collect, plan
+    seed = inputs(tmp_path, "acme", "zeta-co")
+    selected = plan("ashby", seed, limit=1)                                    # a scope_limit=1 smoke run
+    assert [s.scope_id for s in selected] == ["ashby:acme"]
+    out = tmp_path / "raw-limited" / "ashby" / "0-of-1"
+    collect("ashby", selected, lambda url: {"jobs": [JOB], "apiVersion": "1"}, "11-1", "0-of-1", out)
+    without = join(tmp_path / "raw-limited", tmp_path / "data-a", seed, "11-1", T0)
+    assert without["shards_invalid"] and without["tracked"] == 0                # full selection expected
+    limited = join(tmp_path / "raw-limited", tmp_path / "data-b", seed, "11-1", T0, options=dict(limit=1))
+    assert not limited["shards_invalid"] and limited["tracked"] == 1            # zeta-co stays unresolved
+    wk = plan("workable", seed, countries="DE,GB", remote="exclude")
+    assert [s.scope_id for s in wk] == ["workable:search:country=DE", "workable:search:country=GB"]

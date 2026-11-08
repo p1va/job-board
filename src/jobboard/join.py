@@ -44,17 +44,17 @@ def run_family(run_id: str) -> tuple[str, int | None]:
     return (base, int(attempt)) if sep and attempt.isdigit() else (run_id, None)
 
 
-def expected_input(manifest: Manifest, inputs: Path) -> str:
-    """The input_sha a full collection of this shard from companies/ would have."""
-    from dataclasses import asdict
-    import hashlib
-    from .collect import selections, shard_selections
+def expected_input(manifest: Manifest, inputs: Path, options: dict | None = None) -> str:
+    """The input_sha this shard should have if collected from companies/ with the run's options
+    (scope limit, Workable countries and remote), exactly as the collector plans it."""
+    from .collect import plan, selection_sha
     index, _, count = manifest.shard.partition("-of-")
-    selected = shard_selections(manifest.source, selections(manifest.source, inputs), int(index), int(count))
-    return hashlib.sha256(json.dumps([asdict(s) for s in selected], sort_keys=True).encode()).hexdigest()
+    o = options or {}
+    return selection_sha(plan(manifest.source, inputs, int(index), int(count), o.get("limit") or 0,
+                              o.get("countries") or None, o.get("remote") or "include"))
 
 
-def read_shards(raw: Path, run_id: str | None = None, inputs: Path | None = None) -> Shards:
+def read_shards(raw: Path, run_id: str | None = None, inputs: Path | None = None, options: dict | None = None) -> Shards:
     """Every shard folder under raw/ with a valid manifest from this run (or an earlier attempt of it),
     collected from the current companies/ inputs. The rest are reported and ignored: an old or
     unrelated artifact must never become authoritative absence."""
@@ -70,8 +70,8 @@ def read_shards(raw: Path, run_id: str | None = None, inputs: Path | None = None
                 theirs, their_attempt = run_family(manifest.run_id)
                 if theirs != family or (attempt is not None and (their_attempt or 0) > attempt):
                     problems.append(f"from run {manifest.run_id}, not {run_id} or an earlier attempt of it")
-            if inputs is not None and manifest.input_sha != expected_input(manifest, inputs):
-                problems.append("collected from other inputs than companies/ (a limited or older selection)")
+            if inputs is not None and manifest.input_sha != expected_input(manifest, inputs, options):
+                problems.append("collected from other inputs than companies/ with this run's options")
         except Exception as exc:              # unreadable shard: missing, never resolving
             problems = [f"{type(exc).__name__}: {exc}"]
         if problems:
@@ -195,17 +195,43 @@ def write_atomic(table: pa.Table, path: Path) -> None:
     os.replace(tmp, path)
 
 
-def join(raw: Path, data: Path, inputs: Path, run_id: str, now: datetime, verify_inputs: bool = True) -> dict:
+def last_generation(data: Path) -> dict | None:
+    """The committed data/generation.json: which run produced the current data."""
+    path = data / "generation.json"
+    if not path.parent.exists():
+        return None
+    inside = _git(path.parent, "rev-parse", "--is-inside-work-tree")
+    if inside is None or inside.returncode != 0:
+        return json.loads(path.read_text()) if path.exists() else None
+    shown = _git(path.parent, "show", f"HEAD:./{path.name}")
+    return json.loads(shown.stdout) if shown is not None and shown.returncode == 0 else None
+
+
+def older(run_id: str, than: str) -> bool:
+    """A run of an earlier workflow run (GitHub run ids grow); attempts of one run aren't older."""
+    mine, theirs = run_family(run_id)[0], run_family(than)[0]
+    if mine.isdigit() and theirs.isdigit():
+        return int(mine) < int(theirs)
+    return mine < theirs if mine.isdigit() == theirs.isdigit() else False
+
+
+def join(raw: Path, data: Path, inputs: Path, run_id: str, now: datetime, verify_inputs: bool = True,
+         options: dict | None = None) -> dict:
     versions_path = data / "versions" / f"{now:%Y/%m/%d}" / f"{run_id}.parquet"
     replayed = [p for p in data.glob(f"versions/*/*/*/{run_id}.parquet") if committed(p)]
     if replayed:
         return dict(run_id=run_id, replay=True, versions_file=str(replayed[0]), note="run already committed: no-op")
+    current = last_generation(data)
+    if current and older(run_id, current["run_id"]):
+        # an old run's saved collection must never overwrite or close what a newer run observed
+        return dict(run_id=run_id, replay=False, superseded_by=current["run_id"],
+                    note="a newer run's data is already committed: no-op")
     # Version files an interrupted attempt left uncommitted are not history: remove them, so they can't
     # be rendered or committed as part of this generation.
     leftovers = [p for p in data.glob("versions/*/*/*/*.parquet") if not committed(p)]
     for p in leftovers:
         p.unlink()
-    shards = read_shards(raw, run_id, inputs if verify_inputs else None)
+    shards = read_shards(raw, run_id, inputs if verify_inputs else None, options)
     previous = load_state(data / "state.parquet")
     seen, rows = sightings(shards, set(previous), run_id, now)
     state, changed = step(previous, shards.outcomes, seen, now)
@@ -215,6 +241,7 @@ def join(raw: Path, data: Path, inputs: Path, run_id: str, now: datetime, verify
     write_atomic(versions, versions_path)      # always, even empty: the run's immutable replay marker
     write_atomic(state_table(state), data / "state.parquet")
     write_atomic(boards_table(inputs, data / "boards.parquet", shards.outcomes, now), data / "boards.parquet")
+    (data / "generation.json").write_text(json.dumps(dict(run_id=run_id, joined_at=now.isoformat()), indent=1) + "\n")
     return dict(run_id=run_id, replay=False, now=now.isoformat(), shards_valid=len(shards.tables),
                 shards_invalid=shards.invalid, scopes=dict(Counter(s.status.value for s in shards.outcomes.values())),
                 jobs_seen=len(seen), tracked=len(state), versions=versions.num_rows,
@@ -229,11 +256,15 @@ def main(argv=None) -> int:
     ap.add_argument("--inputs", type=Path, default=Path("companies"))
     ap.add_argument("--run-id", required=True)
     ap.add_argument("--now", help="UTC ISO time of the run (default: now)")
+    ap.add_argument("--limit-scopes", type=int, default=0, help="the collection's scope limit (0 = all)")
+    ap.add_argument("--countries", default="", help="the collection's Workable countries (blank = all Europe)")
+    ap.add_argument("--remote", default="include", choices=("include", "exclude", "only"))
     args = ap.parse_args(argv)
     now = datetime.fromisoformat(args.now) if args.now else datetime.now(timezone.utc)
     if now.tzinfo is None:
         ap.error("--now must include a UTC offset")
-    report = join(args.raw, args.data, args.inputs, args.run_id, now.astimezone(timezone.utc))
+    options = dict(limit=args.limit_scopes, countries=args.countries or None, remote=args.remote)
+    report = join(args.raw, args.data, args.inputs, args.run_id, now.astimezone(timezone.utc), options=options)
     print(json.dumps(report, indent=1, default=str))
     return 0
 

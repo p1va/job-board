@@ -86,6 +86,8 @@ jobs:
       contents: write
     outputs:
       artifact: ${{ steps.name.outputs.artifact }}
+      run_id: ${{ steps.join.outputs.run_id }}
+      superseded: ${{ steps.join.outputs.superseded }}
     steps:
       # the latest committed data, not the commit this run started from
       - uses: actions/checkout@v7
@@ -98,16 +100,29 @@ jobs:
           pattern: raw-*
           path: raw
       - name: Join shards into data/
+        id: join
         env:
           RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
+          SCOPE_LIMIT: '${{ inputs.scope_limit }}'
+          WORKABLE_COUNTRIES: '${{ inputs.workable_countries }}'
+          WORKABLE_REMOTE: '${{ inputs.workable_remote }}'
         run: |
-          uv run python -m jobboard.join --raw raw --data data --inputs companies --run-id "$RUN_ID" | tee join.json
+          # the collection's own options, so the join can check each shard's inputs exactly
+          uv run python -m jobboard.join --raw raw --data data --inputs companies --run-id "$RUN_ID" \
+            --limit-scopes "$SCOPE_LIMIT" --countries "$WORKABLE_COUNTRIES" --remote "$WORKABLE_REMOTE" | tee join.json
           { echo '### Join'; echo '```json'; cat join.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          if python3 -c 'import json,sys; sys.exit(0 if json.load(open("join.json")).get("superseded_by") else 1)'; then
+            echo "superseded=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::A newer run's data is already committed; this run publishes nothing."
+          fi
       - name: Render and validate the board
+        if: steps.join.outputs.superseded != 'true'
         run: |
           uv run python -m jobboard.render --data data --out site | tee render.json
           { echo '### Board'; echo '```json'; cat render.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Commit data/
+        if: steps.join.outputs.superseded != 'true'
         env:
           RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
         run: |
@@ -124,15 +139,17 @@ jobs:
       # A name per attempt: a re-run of publish can't collide with the first upload, and a re-run of only
       # the deploy job still reads this attempt's name from the outputs.
       - id: name
+        if: steps.join.outputs.superseded != 'true'
         run: echo "artifact=github-pages-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v5
+        if: steps.join.outputs.superseded != 'true'
         with:
           path: site
           name: ${{ steps.name.outputs.artifact }}
 
   deploy:
     needs: publish
-    if: ${{ !cancelled() && needs.publish.result == 'success' }}
+    if: ${{ !cancelled() && needs.publish.result == 'success' && needs.publish.outputs.superseded != 'true' }}
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -141,6 +158,22 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Deploy only the generation that is still the latest committed data: re-running an old deploy
+      # job after a newer publication must not roll the site back.
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: data/generation.json
+          sparse-checkout-cone-mode: false
+      - name: Check this is the current generation
+        env:
+          RUN_ID: ${{ needs.publish.outputs.run_id }}
+        run: |
+          current=$(python3 -c 'import json; print(json.load(open("data/generation.json"))["run_id"])')
+          if [ "$current" != "$RUN_ID" ]; then
+            echo "::error::Generation $RUN_ID was superseded by $current; not deploying it."
+            exit 1
+          fi
       - id: deployment
         uses: actions/deploy-pages@v5
         with:
