@@ -45,13 +45,34 @@ def candidates(results: Path) -> list[dict]:
     return rows
 
 
-def discover(rows: list[dict], known: set[tuple[str, str]], get) -> tuple[list[dict], dict]:
+def valid_board(ats: str, data) -> bool:
+    """A real board response, not an error object: a jobs list of objects with ids (and Greenhouse's total)."""
+    jobs = data.get("jobs") if isinstance(data, dict) else None
+    if not isinstance(jobs, list) or not all(isinstance(j, dict) and j.get("id") for j in jobs):
+        return False
+    if ats == "greenhouse":
+        total = (data.get("meta") or {}).get("total")
+        return isinstance(total, int) and total == len(jobs)
+    return True
+
+
+def read_csv(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    with path.open(newline="", encoding="utf-8") as stream:
+        return list(csv.DictReader(stream))
+
+
+def discover(rows: list[dict], known: set[tuple[str, str]], get, skip: set[tuple[str, str]] = frozenset()) -> tuple[list[dict], dict]:
     found, new, live, failed = Counter(), Counter(), Counter(), Counter()
-    out = []
+    out, jobs = [], {}
     for r in sorted(rows, key=lambda r: (r["ats"], -int(r.get("captures") or 0), r["board_key"])):
         ats, key = r["ats"], r["board_key"].strip()
         found[ats] += 1
         if not key or (ats, key.lower()) in known:
+            continue
+        if (ats, key.lower()) in skip:
+            failed[f"{ats} skipped (reposts another board)"] += 1
             continue
         new[ats] += 1
         if ats not in CHECK:
@@ -64,12 +85,15 @@ def discover(rows: list[dict], known: set[tuple[str, str]], get) -> tuple[list[d
         except Exception as exc:                          # network trouble: not proof the board is dead
             failed[f"{ats} {type(exc).__name__}"] += 1
             continue
+        if not valid_board(ats, data):
+            failed[f"{ats} invalid response"] += 1
+            continue
         live[ats] += 1
         known.add((ats, key.lower()))
-        out.append({c: "" for c in COLUMNS} | {"provider": ats, "key": key, "origins": "athena",
-                                               "bet_checked": f"jobs={len(data.get('jobs') or [])}"})
+        out.append({c: "" for c in COLUMNS} | {"provider": ats, "key": key, "origins": "athena"})
+        jobs[f"{ats}:{key}"] = len(data.get("jobs") or [])
     report = dict(found=dict(found), new=dict(new), live_added=dict(live), not_added=dict(failed),
-                  next_providers={a: n for a, n in new.most_common() if a not in CHECK})
+                  next_providers={a: n for a, n in new.most_common() if a not in CHECK}, jobs_on_added=jobs)
     return out, report
 
 
@@ -79,14 +103,19 @@ def main(argv=None) -> int:
     ap.add_argument("--inputs", type=Path, default=Path("companies"))
     ap.add_argument("--out", type=Path, default=Path("companies/athena.csv"))
     ap.add_argument("--report", type=Path, default=Path("reports/athena.json"))
+    ap.add_argument("--skip", type=Path, default=Path("discovery/skip.csv"), help="provider,key,reason to leave out")
     ap.add_argument("--interval", type=float, default=0.5)
     args = ap.parse_args(argv)
-    rows, report = discover(candidates(args.results), known_boards(args.inputs, args.out),
-                            Client(interval=args.interval).get)
+    skip = {(r["provider"], r["key"].lower()) for r in read_csv(args.skip)}
+    previous = read_csv(args.out)                    # earlier discoveries stay, even if a check now fails
+    known = known_boards(args.inputs, args.out) | {(r["provider"], r["key"].lower()) for r in previous}
+    rows, report = discover(candidates(args.results), known, Client(interval=args.interval).get, skip)
+    merged = {(r["provider"], r["key"].lower()): r for r in previous + rows}
+    report["kept_from_before"] = len(previous)
     with args.out.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=COLUMNS, lineterminator="\n")
         writer.writeheader()
-        writer.writerows(rows)
+        writer.writerows(merged[k] for k in sorted(merged))
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
     print(json.dumps(report, indent=1), file=sys.stderr)
