@@ -26,20 +26,38 @@ DISCIPLINE = re.compile(
     r"facilit(y|ies)|maintenance|construction|biomedical|clinical|controls?|inspection|automotive|fuel|"
     r"commissioning|design release|power|energy|propulsion|aerospace|avionics|mining|petroleum|"
     r"hardware|electronics|rf|analog|pcb|asic|fpga|optical|photonics|validation|test technician|"
-    r"network|telecom|production|plant|site(?! reliability)|environmental|geotechnical)\b", _I)
-ENGINEER = re.compile(r"\b(engineer|developer|programmer|swe|sdet|architect)s?\b", _I)
+    r"network|telecom|production|plant|site(?! reliability)|environmental|geotechnical|hse|"
+    r"(?<!ai )(?<!trust )(?<!trust & )(?<!trust and )safety (engineer|system|manager)|"
+    r"(systems?|functional|product|flight|vehicle|battery|process|fire|occupational|machine) safety|"
+    r"netzwerk|elektronik|elektrotechnik|mechanik|mechatronik|maschinenbau|konstruktion|fertigung|produktion|"
+    r"verfahrenstechnik|versorgungstechnik|automatisierungstechnik|bau)\b", _I)
+# German, Italian, French, Spanish and Dutch nouns too; gender endings (Entwickler*in, EntwicklerIn,
+# Développeur·se, Desarrollador/a) leave the stem matched.
+NOUNS = (r"engineers?|developers?|programmers?|swe|sdet|architects?|entwickler(in|innen)?|programmierer(in)?|"
+         r"architekt(in)?|sviluppat(ore|rice|ori)|programmat(ore|rice)|d[ée]veloppeu(r|se)s?|programmeu(r|se)s?|"
+         r"desarrollador(a|es)?|programador(a|es)?|ontwikkelaars?")
+ENGINEER = re.compile(rf"\b({NOUNS})\b", _I)
 SOFTWARE_WORD = re.compile(
     r"\b(software|backend|back[- ]end|frontend|front[- ]end|full[- ]?stack|web|mobile|ios|android|platform|"
     r"infrastructure|cloud|devops|devsecops|site reliability|reliability|sre|security|appsec|application|"
     r"embedded|firmware|game|gameplay|graphics|compiler|kernel|blockchain|smart contracts?|qa|test automation|"
-    r"api|systems?|python|java|golang|go|rust|react|node(\.js)?|ruby|rails|php|"
+    r"api|python|java|golang|go|rust|react|node(\.js)?|ruby|rails|php|sap|abap|typo3|flutter|logiciel|hpc|"
     r"typescript|javascript|scala|kotlin|swift|unity|unreal|distributed|devex|developer experience|"
     r"observability|ai|llm|founding)\b"
     # generic words count only right before the noun: "Product Engineer", not "Product Cost Engineer"
-    r"|\b(product|growth|performance|tooling|build|release|integrations?) (engineer|developer)s?\b"
+    r"|\b(product|growth|performance|tooling|build|release|integrations?) (engineer|developer)s?\b|\bsystems? (engineer|developer|architect)s?\b"
     r"|(?<![\w+#.])(c\+\+|c#|\.net)(?![\w+#])", _I)
+# The noun alone, with seniority words, then the end or a separator: "Senior Engineer", "Engineer - Payments",
+# "Entwickler (m/w/d)"; not "Engineer Fitting", where engineer qualifies another word.
 BARE = re.compile(r"^\W*((senior|sr\.?|staff|principal|lead|junior|jr\.?|mid[- ]level|associate)\s+)*"
-                  r"(engineer|developer)\b", _I)
+                  r"(engineer|developer|entwickler(in)?|sviluppatore|d[ée]veloppeur|desarrollador|ontwikkelaar)"
+                  r"(s|\*in|:in|/in|_in|/a|\(in\)|·se|\(se\)|\.euse)?(\s+([ivx]{1,3}|\d))?"
+                  r"\s*($|[,(\-–—|:/]|[mfwdhx]/[mfwdhx]\b)", _I)
+# One-word German compounds: Softwareentwickler, Fullstack-Entwickler:in, Software-Architekt, Softwareentwicklung
+COMPOUND = re.compile(
+    r"\b(software|backend|back-end|frontend|front-end|full-?stack|web|app|apps|anwendungs|applikations|mobile|"
+    r"ios|android|java|python|php|spiele|game|datenbank|embedded|cloud|sap|abap|typo3|ki|devops|plattform|"
+    r"platform|net)-?(entwickler|architekt|ingenieur)|\b(software|anwendungs)-?entwicklung\b", _I)
 
 RULES: list[tuple[str, re.Pattern]] = [
     ("engineering_management", re.compile(
@@ -47,7 +65,12 @@ RULES: list[tuple[str, re.Pattern]] = [
         r"(vp|vice president|director|svp),? (of )?(software )?engineering|cto|chief technology officer|"
         r"head of (platform|infrastructure|data engineering|ml|ai|machine learning)|engineering lead|"
         r"(software|platform|data|ml|infrastructure) engineering (team )?(manager|lead|director)|"
-        r"(director|head|vp|vice president)\b[^|]{0,40}\bengineering)\b", _I)),
+        r"(director|head|vp|vice president)\b[^|]{0,40}\bengineering|"
+        r"(head|director|vp|team ?lead|manager),? (of )?(software development|development(?=\s*($|[,(\-–—|:])))|"
+        r"(development|developer|dev) team (lead|manager)|"
+        r"(team ?leiter(in)?|team ?leitung|leiter(in)?|leitung|abteilungsleiter(in)?|bereichsleiter(in)?|head of)"
+        r"\b[^|]{0,30}(software-?entwicklung|anwendungsentwicklung|(software|mobile|web|app|backend|frontend) "
+        r"development|it-entwicklung))\b", _I)),
     ("data_science", re.compile(r"\b(quantitative|quant) (researcher|analyst|developer)\b", _I)),
     ("product_management", re.compile(
         r"\b(product manager|product owner|head of product|(vp|vice president|director|svp),? (of )?product|"
@@ -65,9 +88,12 @@ RULES: list[tuple[str, re.Pattern]] = [
         r"(product|data|business intelligence|bi) analyst|statistician|analytics (lead|manager))\b", _I)),
 ]
 SOFTWARE_ONLY = re.compile(r"\b(sre|devops|software engineering|software development)\b", _I)
+SOFTWARE_DE = re.compile(r"\bsoftware\b|software-?(entwickl|architekt|ingenieur)", _I)
 
 SENIORITY: list[tuple[str, re.Pattern]] = [
-    ("intern", re.compile(r"\b(intern|internship|praktikum|praktikant|working student|werkstudent|trainee|apprentice)\b", _I)),
+    ("intern", re.compile(r"\b(intern|internship|praktikum|praktikant(in)?|working student|werkstudent(in)?|trainee|"
+                         r"apprentice(ship)?|ausbildung|auszubildende[rn]?|azubi|stage|stagiaire|tirocinio|"
+                         r"becario|pr[áa]cticas|stagiair)\b", _I)),
     ("executive", re.compile(r"\b(cto|cpo|chief|vp|vice president|svp|head of|director)\b", _I)),
     ("manager", re.compile(r"\b(manager|management)\b", _I)),
     ("principal", re.compile(r"\b(principal|staff|distinguished|fellow|architect)\b", _I)),
@@ -84,13 +110,14 @@ GUARDED = {"engineering_management"}   # generic enough that other disciplines c
 def role_family(title: str) -> str | None:
     if not title or EXCLUDE.search(title):
         return None
-    other_discipline = bool(DISCIPLINE.search(title)) and not re.search(r"\bsoftware\b", title, _I)
+    other_discipline = bool(DISCIPLINE.search(title)) and not SOFTWARE_DE.search(title)
     for family, pattern in RULES:
         if pattern.search(title):
             return None if family in GUARDED and other_discipline else family
     if other_discipline:
         return None
-    if SOFTWARE_ONLY.search(title) or (ENGINEER.search(title) and (SOFTWARE_WORD.search(title) or BARE.search(title))):
+    if SOFTWARE_ONLY.search(title) or COMPOUND.search(title) or \
+            (ENGINEER.search(title) and (SOFTWARE_WORD.search(title) or BARE.search(title))):
         return "software_engineering"
     return None
 
