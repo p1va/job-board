@@ -26,6 +26,8 @@ from .classify import role_family
 from .contract import RESOLVED, Manifest, Scope, Status
 from .lifecycle import JobState, Key, Sighting, step
 from .normalize import normalize
+from .retrievers import job_title
+from .personio import board_slug
 from .tables import BOARD, STATE, VERSION
 
 DEAD_AFTER = 3           # consecutive HTTP 404s before a board is marked dead
@@ -105,7 +107,7 @@ def sightings(shards: Shards, tracked: set[Key], run_id: str, now: datetime,
     rows: dict[Key, dict] = {}
     for key, (fetched_at, t, i) in latest.items():
         r = dict(source=key[0], board=key[1], native_id=key[2], fetched_at=fetched_at, payload=payloads[t][i].as_py())
-        if key not in tracked and role_family(json.loads(r["payload"]).get("title") or "") is None:
+        if key not in tracked and role_family(job_title(r["source"], json.loads(r["payload"]))) is None:
             # never kept without a role family: skip the full normalisation (most jobs)
             seen[key] = Sighting(key, f"{key[0]}:{key[1]}", "", frozenset(scopes[key]), False, r["fetched_at"])
             continue
@@ -174,6 +176,8 @@ def boards_table(inputs: Path, previous: Path, outcomes: dict[str, Scope], now: 
     for path in sorted(inputs.glob("*.csv")):
         with path.open(newline="", encoding="utf-8") as stream:
             for row in csv.DictReader(stream):
+                if row["provider"] == "personio":
+                    row["key"] = board_slug(row["key"])
                 board_id = f"{row['provider']}:{row['key']}"
                 b = boards.setdefault(board_id, prior.get(board_id) or dict(
                     board_id=board_id, provider=row["provider"], key=row["key"], company_id=board_id,

@@ -9,6 +9,7 @@ from urllib.parse import quote, urlencode
 
 from .contract import SCHEMA_VERSION, Kind, Scope, Status
 from .http import DeadlineExceeded
+from .personio import feed_url, has_description, parse_feed
 
 # Geographic Europe, including transcontinental countries and dependencies.
 # These are discovery selections, not evidence of a job's actual work eligibility.
@@ -52,13 +53,18 @@ def workable_selections(countries=None, remote: str = "include") -> list[Selecti
     return selections
 
 
+def job_title(source: str, job: dict) -> str:
+    return job.get("name" if source == "personio" else "title") or ""
+
+
 def _identity(job: dict, source: str, board: str) -> tuple[str, str]:
     if not isinstance(job, dict):
         raise ValueError("job must be an object")
     native_id = job.get("id")
     if type(native_id) not in (str, int) or not str(native_id).strip():
         raise ValueError("job has no native ID")
-    if not isinstance(job.get("title"), str) or not job["title"].strip():
+    title = job_title(source, job)
+    if not isinstance(title, str) or not title.strip():
         raise ValueError("job has no title")
     if source == "workable":
         company = job.get("company")
@@ -68,6 +74,32 @@ def _identity(job: dict, source: str, board: str) -> tuple[str, str]:
     if source == "greenhouse" and not isinstance(job.get("content"), str):
         raise ValueError("Greenhouse job missing content from full board request")
     return board, str(native_id)
+
+
+def _personio_descriptions(jobs: list[dict], get, url: str, scope: Scope, deadline, clock) -> tuple[list[dict], dict]:
+    """One optional English fetch fills only missing descriptions, never changes base membership."""
+    missing = sum(not has_description(job) for job in jobs)
+    totals = dict(descriptions_missing_initial=missing, descriptions_filled=0, descriptions_missing=missing)
+    if not missing:
+        return jobs, totals
+    try:
+        if deadline is not None and clock() >= deadline:
+            raise DeadlineExceeded("no time left for optional English descriptions")
+        other = get(url + "?language=en", parse=parse_feed, accept="application/xml")
+        scope.pages += 1
+        translated = {str(job["id"]): job for job in other["jobs"]}
+        merged = []
+        for job in jobs:
+            english = translated.get(str(job["id"]))
+            if not has_description(job) and english and has_description(english):
+                job = job | {"jobDescriptions": english["jobDescriptions"]}
+                totals["descriptions_filled"] += 1
+            merged.append(job)
+        jobs = merged
+        totals["descriptions_missing"] = missing - totals["descriptions_filled"]
+    except Exception as exc:
+        totals["description_error"] = f"{type(exc).__name__}: {exc}"[:200]
+    return jobs, totals
 
 
 def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: int = 5000,
@@ -88,14 +120,20 @@ def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: 
             elif source == "workable":
                 params = selection.query | ({"pageToken": cursor} if cursor else {})
                 url = "https://jobs.workable.com/api/v1/jobs?" + urlencode(params)
+            elif source == "personio":
+                url = feed_url(selection.board)
             else:
                 raise ValueError(f"unsupported source: {source}")
-            data = get(url)
+            data = get(url, parse=parse_feed, accept="application/xml") if source == "personio" else get(url)
             scope.http_status = 200
             scope.pages += 1
             jobs = data.get("jobs")
             if not isinstance(jobs, list):
                 raise ValueError("response has no jobs list")
+            if source == "personio":
+                for job in jobs:
+                    _identity(job, source, selection.board)
+                jobs, totals = _personio_descriptions(jobs, get, url, scope, deadline, clock)
             total = data.get("totalSize") if source == "workable" else (data.get("meta") or {}).get("total")
             if source == "workable" and type(total) is not int:
                 raise ValueError("Workable response missing integer totalSize")

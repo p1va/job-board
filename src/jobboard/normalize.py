@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from html.parser import HTMLParser
 
 from . import classify, places
+from .personio import board_slug
 
 BLOCK = {"p", "div", "br", "li", "ul", "ol", "h1", "h2", "h3", "h4", "h5", "h6", "tr", "section", "article"}
 INTERVAL = {"1 YEAR": "year", "1 MONTH": "month", "1 WEEK": "week", "1 DAY": "day", "1 HOUR": "hour"}
@@ -121,6 +122,27 @@ def _workable(job: dict) -> dict:
                 listed=(job.get("state") or "published") == "published")
 
 
+def _personio(job: dict, board: str) -> dict:
+    locations = list(dict.fromkeys(l for l in [job.get("office")] + (job.get("additionalOffices") or []) if l))
+    salary = job.get("salaryInformation") or {}
+    sections = []
+    for section in job.get("jobDescriptions") or []:
+        body = html_text(section.get("value"))
+        if body:
+            sections.append("\n".join(filter(None, (html_text(section.get("name")), body))))
+    employment = {"intern": "Intern", "trainee": "Trainee", "working_student": "Working student",
+                  "freelance": "Contract", "temporary": "Temporary", "fixed_term": "Fixed term"}.get(job.get("employmentType"))
+    employment = employment or {"full-time": "FullTime", "part-time": "PartTime",
+                                 "full-or-part-time": "Full or part time"}.get(job.get("schedule")) or job.get("employmentType")
+    return dict(title=job.get("name"), department=job.get("department") or job.get("occupationCategory") or None,
+                employment=employment, workplace=None, locations=locations, pairs=locations, structured=[],
+                published_at=_time(job.get("createdAt")), url=f"https://{board_slug(board)}.jobs.personio.de/job/{job['id']}",
+                salary_raw=None, salary_min=salary.get("min") or None, salary_max=salary.get("max") or None,
+                salary_currency=salary.get("currencyCode") or None,
+                salary_period={"yearly": "year", "monthly": "month", "hourly": "hour"}.get(salary.get("type")),
+                description_text="\n\n".join(sections), company_name=job.get("subcompany") or None, listed=True)
+
+
 SOURCES = {"ashby": _ashby, "greenhouse": _greenhouse, "workable": _workable}
 
 
@@ -134,7 +156,8 @@ def payload_hash(row: dict) -> str:
 def normalize(source: str, board: str, native_id: str, payload: str, run_id: str, seen_at: datetime,
               company_id: str | None = None) -> dict:
     """A VERSION row with classification. `kept` says whether it passes the board's filter."""
-    f = SOURCES[source](json.loads(payload))
+    job = json.loads(payload)
+    f = _personio(job, board) if source == "personio" else SOURCES[source](job)
     declared = f["workplace"] if f["workplace"] not in (None, "unknown") else None
     place = places.parse(f.pop("pairs"), f.pop("structured"), declared)
     modes = {w.split("|")[1] for w in place.where}

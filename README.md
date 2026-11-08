@@ -7,10 +7,11 @@ browse them.
   engineering, data science.
 - **Places:** all of Europe, on-site or hybrid, plus remote (worldwide, Europe, or one country). The
   board opens on Germany, the UK, Italy and remote.
-- **Sources:** company job boards on Ashby, Greenhouse and Workable to start, seeded from
-  [Bet's radar](https://github.com/betklab/ashby-job-radar).
+- **Sources:** Ashby, Greenhouse, Workable and Personio, seeded from
+  [Bet's radar](https://github.com/betklab/ashby-job-radar), curated lists and validated Common Crawl discoveries.
 
-Status: raw retrievers and manual collection workflow. The join and board follow.
+Browse the [job board](https://p1va.github.io/job-board/). GitHub Actions collects and publishes daily
+at 05:17 UTC; manual runs can limit the collection or publish on demand. No email is sent.
 
 ## Layout
 

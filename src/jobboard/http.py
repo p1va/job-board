@@ -1,4 +1,4 @@
-"""Small, paced JSON client for public job APIs. No credentials are needed."""
+"""Small, paced client for public job APIs. No credentials are needed."""
 from __future__ import annotations
 
 import gzip
@@ -34,7 +34,7 @@ class Client:
     """Share one client across a shard's workers so pacing includes retries.
 
     A Retry-After above a minute is deferred to a future run. Invalid/truncated
-    JSON responses get the same bounded retries as interrupted downloads.
+    responses get the same bounded retries as interrupted downloads.
     """
 
     def __init__(self, *, interval: float = 0.5, timeout: float = 30, tries: int = 3,
@@ -68,12 +68,12 @@ class Client:
                     return
             self.sleep(wait)
 
-    def get(self, url: str) -> dict:
+    def get(self, url: str, *, parse=json.loads, accept: str = "application/json") -> dict:
         for attempt in range(self.tries):
             self._pace(url)
             pause = 2 ** (attempt + 1)
             try:
-                req = Request(url, headers={"Accept-Encoding": "gzip", "Accept": "application/json",
+                req = Request(url, headers={"Accept-Encoding": "gzip", "Accept": accept,
                               "User-Agent": "p1va-job-board/0.1 (+https://github.com/p1va/job-board)"})
                 with self._lock:
                     self.metrics["requests"] += 1
@@ -92,9 +92,9 @@ class Client:
                         raise http.client.IncompleteRead(body)
                     if response.headers.get("Content-Encoding", "").lower() == "gzip":
                         body = gzip.decompress(body)
-                    data = json.loads(body)
+                    data = parse(body)
                     if not isinstance(data, dict):
-                        raise ValueError("API response must be a JSON object")
+                        raise ValueError("API parser must return an object")
                     return data
             except HTTPError as exc:
                 with self._lock:
