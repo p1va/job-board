@@ -1,0 +1,38 @@
+{
+ "finished_at": "2026-11-09T06:02:00+00:00",
+ "input_sha": "70f32f1aa0a1e9a1",
+ "run_id": "19034567890-1",
+ "schema_version": 1,
+ "scopes": [
+  {
+   "error": null,
+   "http_status": 200,
+   "jobs": 2,
+   "kind": "board",
+   "pages": 1,
+   "scope_id": "ashby:acme",
+   "status": "complete"
+  },
+  {
+   "error": null,
+   "http_status": 200,
+   "jobs": 0,
+   "kind": "board",
+   "pages": 1,
+   "scope_id": "ashby:quiet-co",
+   "status": "empty"
+  },
+  {
+   "error": "HTTP 503 after 3 tries",
+   "http_status": 503,
+   "jobs": 0,
+   "kind": "board",
+   "pages": 0,
+   "scope_id": "ashby:flaky-co",
+   "status": "failed"
+  }
+ ],
+ "shard": "0-of-1",
+ "source": "ashby",
+ "started_at": "2026-11-09T06:00:00+00:00"
+}
