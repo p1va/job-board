@@ -6,7 +6,7 @@ const PARAM = { families: "family", regions: "region", styles: "style", levels: 
 const DEFAULT_REGIONS = ["Germany", "United Kingdom", "Italy", "Remote: worldwide", "Remote: Europe"];
 const state = { jobs: [], companies: {}, filtered: [], visible: 10, view: "company", query: "", company: "", days: "", salary: false, sort: "newest", descriptions: "", loaded: {} };
 FACETS.forEach(facet => { state[facet] = new Set(); });
-const atsNames = { ashby: "Ashby", greenhouse: "Greenhouse", workable: "Workable" };
+const atsNames = { ashby: "Ashby", greenhouse: "Greenhouse", workable: "Workable", personio: "Personio" };
 const familyNames = { software_engineering: "Software engineering", engineering_management: "Engineering management", product_management: "Product management", research: "Research", data_ml_engineering: "Data & ML engineering", data_science: "Data science" };
 const levelNames = { intern: "Intern or student", junior: "Junior", mid: "Mid", senior: "Senior", lead: "Lead", principal: "Staff or principal", manager: "Manager", executive: "Head, director or VP", unknown: "Not stated" };
 const regionOrder = ["Germany", "United Kingdom", "Italy", "Rest of Europe", "Remote: worldwide", "Remote: Europe", "Remote: region not stated"];

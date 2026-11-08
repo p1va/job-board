@@ -29,7 +29,7 @@ def test_error_bodies_and_skipped_boards_are_not_added():
     assert valid_board("greenhouse", {"jobs": [], "meta": {"total": 0}})                  # real empty board
     rows = [dict(ats="greenhouse", board_key="repost-co", captures="2"), dict(ats="ashby", board_key="err-co", captures="1")]
     out, report = discover(rows, set(), lambda url: {"error": "nope"}, {("greenhouse", "repost-co")})
-    assert out == [] and report["not_added"] == {"greenhouse skipped (reposts another board)": 1, "ashby invalid response": 1}
+    assert out == [] and report["not_added"] == {"greenhouse excluded by skip list": 1, "ashby invalid response": 1}
 
 
 def test_reimport_keeps_earlier_discoveries(tmp_path, monkeypatch):

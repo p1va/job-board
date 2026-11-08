@@ -1,0 +1,70 @@
+{
+ "source_sha256": "625001ec68a9cf14163de801a51506950637f8bb0329bf1546cc8e9689ce77bb",
+ "candidates": 3153,
+ "outcomes": {
+  "not_found": 920,
+  "live": 1977,
+  "empty": 255,
+  "partial": 1
+ },
+ "boards_added": 2232,
+ "valid_positions": 19203,
+ "excluded_boards": [
+  {
+   "key": "demorecruiting",
+   "reason": "Demo Recruiting test feed with placeholder and repeated job titles; excluded from the catalog",
+   "valid_positions": 156
+  }
+ ],
+ "invalid_positions": 2,
+ "base_descriptions": 17090,
+ "base_missing_descriptions": 2113,
+ "salary_periods": {
+  "yearly": 1265,
+  "hourly": 247,
+  "monthly": 588
+ },
+ "kept_by_current_rules": {
+  "software_engineering": 874,
+  "product_management": 154,
+  "engineering_management": 34,
+  "data_ml_engineering": 153,
+  "data_science": 40,
+  "research": 12
+ },
+ "normalization_errors": [],
+ "kept_boards": 510,
+ "kept_missing_base_description": 269,
+ "most_missing_base_descriptions": {
+  "sungrow-emea": 142,
+  "certify360": 60,
+  "herbrand-gruppe": 59,
+  "desotec": 39,
+  "matrix42": 33,
+  "ercsystem": 32,
+  "altagramgroup": 25,
+  "arethia": 25,
+  "eerstelijnszorg-zoetermeer": 25,
+  "avega": 24
+ },
+ "cached_feeds_replayed": 2233,
+ "parser_commit": "7df13b0829e27ef1b731dcaafe23fe3f625b9cf9",
+ "evidence": ".notes/personio-backfill-20261108/validation.jsonl",
+ "partial_boards": [
+  {
+   "key": "adragos-pharma",
+   "jobs": 20,
+   "invalid_positions": 2
+  }
+ ],
+ "unresolved": [],
+ "note": "Base-feed validation only. Daily retrieval optionally fills English descriptions. No country is inferred from the provider or host.",
+ "validation_seconds": 3316.53,
+ "http": {
+  "requests": 3155,
+  "http_error_404": 920,
+  "http_200": 2235,
+  "wire_bytes": 113939353,
+  "retries": 2
+ }
+}

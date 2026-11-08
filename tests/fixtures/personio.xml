@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workzag-jobs>
+  <position>
+    <id>101</id><name>Senior Software Engineer</name><subcompany>Example GmbH</subcompany>
+    <office>Berlin</office><additionalOffices><office>London</office><office>Remote - Europe</office></additionalOffices>
+    <department>Engineering</department><recruitingCategory>Experienced</recruitingCategory>
+    <employmentType>permanent</employmentType><seniority>experienced</seniority><schedule>full-time</schedule>
+    <yearsOfExperience>5-7</yearsOfExperience><keywords>Python,SQL</keywords>
+    <occupation>backend_developer</occupation><occupationCategory>it_software</occupationCategory>
+    <createdAt>2026-11-01T10:00:00+01:00</createdAt>
+    <salaryInformation><min>70000</min><max>90000</max><currencySymbol>€</currencySymbol><currencyCode>EUR</currencyCode><type>yearly</type></salaryInformation>
+    <jobDescriptions><jobDescription><name>Your role</name><value><![CDATA[<ul>
+      <li>Build Python services.</li>
+      <li>Work with SQL.</li>
+    </ul>]]></value></jobDescription></jobDescriptions>
+  </position>
+  <position>
+    <id>102</id><name>Data Scientist</name><office>Berlin</office>
+    <employmentType>permanent</employmentType><schedule>part-time</schedule>
+    <occupationCategory>r_and_d_and_science</occupationCategory>
+    <createdAt>2026-11-02T12:00:00+00:00</createdAt><jobDescriptions/>
+  </position>
+</workzag-jobs>

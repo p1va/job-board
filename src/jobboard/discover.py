@@ -19,10 +19,12 @@ from urllib.parse import quote
 
 from .http import Client
 from .registry import COLUMNS
+from .personio import board_slug, parse_feed
 
 CHECK = {
     "ashby": "https://api.ashbyhq.com/posting-api/job-board/{key}",
     "greenhouse": "https://boards-api.greenhouse.io/v1/boards/{key}/jobs",
+    "personio": "https://{key}.jobs.personio.de/xml",
 }
 
 
@@ -63,22 +65,27 @@ def read_csv(path: Path) -> list[dict]:
         return list(csv.DictReader(stream))
 
 
-def discover(rows: list[dict], known: set[tuple[str, str]], get, skip: set[tuple[str, str]] = frozenset()) -> tuple[list[dict], dict]:
+def discover(rows: list[dict], known: set[tuple[str, str]], get, skip: set[tuple[str, str]] = frozenset(),
+             providers: set[str] | None = None) -> tuple[list[dict], dict]:
     found, new, live, failed = Counter(), Counter(), Counter(), Counter()
-    out, jobs = [], {}
+    out, jobs, invalid = [], {}, {}
     for r in sorted(rows, key=lambda r: (r["ats"], -int(r.get("captures") or 0), r["board_key"])):
         ats, key = r["ats"], r["board_key"].strip()
         found[ats] += 1
         if not key or (ats, key.lower()) in known:
             continue
         if (ats, key.lower()) in skip:
-            failed[f"{ats} skipped (reposts another board)"] += 1
+            failed[f"{ats} excluded by skip list"] += 1
             continue
         new[ats] += 1
-        if ats not in CHECK:
+        if ats not in CHECK or (providers is not None and ats not in providers):
             continue
         try:
-            data = get(CHECK[ats].format(key=quote(key, safe="")))
+            if ats == "personio":
+                key = board_slug(key)
+                data = get(CHECK[ats].format(key=key), parse=parse_feed, accept="application/xml")
+            else:
+                data = get(CHECK[ats].format(key=quote(key, safe="")))
         except HTTPError as exc:
             failed[f"{ats} HTTP {exc.code}"] += 1
             continue
@@ -92,8 +99,12 @@ def discover(rows: list[dict], known: set[tuple[str, str]], get, skip: set[tuple
         known.add((ats, key.lower()))
         out.append({c: "" for c in COLUMNS} | {"provider": ats, "key": key, "origins": "athena"})
         jobs[f"{ats}:{key}"] = len(data.get("jobs") or [])
+        if ats == "personio" and data.get("invalid_positions"):
+            invalid[f"{ats}:{key}"] = len(data["invalid_positions"])
     report = dict(found=dict(found), new=dict(new), live_added=dict(live), not_added=dict(failed),
                   next_providers={a: n for a, n in new.most_common() if a not in CHECK}, jobs_on_added=jobs)
+    if invalid:
+        report["invalid_positions_on_added"] = invalid
     return out, report
 
 
@@ -104,12 +115,15 @@ def main(argv=None) -> int:
     ap.add_argument("--out", type=Path, default=Path("companies/athena.csv"))
     ap.add_argument("--report", type=Path, default=Path("reports/athena.json"))
     ap.add_argument("--skip", type=Path, default=Path("discovery/skip.csv"), help="provider,key,reason to leave out")
-    ap.add_argument("--interval", type=float, default=0.5)
+    ap.add_argument("--interval", type=float, help="request spacing; default 1s with Personio, 0.5s otherwise")
+    ap.add_argument("--providers", nargs="+", choices=sorted(CHECK), help="check only these providers")
     args = ap.parse_args(argv)
     skip = {(r["provider"], r["key"].lower()) for r in read_csv(args.skip)}
     previous = read_csv(args.out)                    # earlier discoveries stay, even if a check now fails
     known = known_boards(args.inputs, args.out) | {(r["provider"], r["key"].lower()) for r in previous}
-    rows, report = discover(candidates(args.results), known, Client(interval=args.interval).get, skip)
+    providers = set(args.providers) if args.providers else None
+    interval = args.interval if args.interval is not None else (1 if providers is None or "personio" in providers else 0.5)
+    rows, report = discover(candidates(args.results), known, Client(interval=interval).get, skip, providers)
     merged = {(r["provider"], r["key"].lower()): r for r in previous + rows}
     report["kept_from_before"] = len(previous)
     with args.out.open("w", newline="", encoding="utf-8") as stream:

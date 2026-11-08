@@ -10,6 +10,7 @@ uv sync --locked
 uv run python -m jobboard.collect --source ashby --out raw/ashby/0-of-1
 uv run python -m jobboard.collect --source greenhouse --out raw/greenhouse/0-of-1
 uv run python -m jobboard.collect --source workable --out raw/workable/0-of-1
+uv run python -m jobboard.collect --source personio --out raw/personio/0-of-1
 ```
 
 Ashby/Greenhouse read the corresponding provider rows in `companies/*.csv`.
@@ -18,6 +19,35 @@ Ashby requests `includeCompensation=true`; Greenhouse always requests
 Workable collects through its search API, independent of the reference company
 UUID inventory imported from Bet. Hosted Workable account slugs are not search
 company IDs.
+
+## Personio
+
+Personio reads the provider rows in `companies/*.csv` through each board's
+public `/xml` feed. No credentials or pagination are needed. Board keys are
+single DNS labels; `.jobs.personio.de` and `.jobs.personio.com` URLs resolve to
+one canonical key. The saved raw payload is JSON containing the parsed XML
+fields, including all offices, description sections, salary, schedule and
+experience metadata. Identity is `(personio, board slug, position id)`.
+
+When any position has no description, one optional `?language=en` fetch fills
+missing sections by native ID. Existing descriptions, titles, offices and the
+base feed's set of positions remain authoritative. There is no language guess
+or German retry. A failed optional fetch keeps the complete base board; missing
+descriptions and enrichment errors appear in the report and Actions summary.
+An HTTP 404 or malformed feed is unresolved; only a valid, empty XML feed is
+an empty successful board. A position without a title is set aside; usable
+postings flow through as partial, so absence cannot close a previously tracked
+job. Discovery retains these live boards and reports the invalid positions.
+Discovery validates the base feed without the
+optional description request.
+
+Locations are free text: the feed has no country field. The adapter preserves
+the main office and additional offices for the shared places rules; it does
+not assume Germany from the provider, employer or domain. Salary units stay
+year/month/hour as reported, and `createdAt` supplies the posting timestamp.
+The company name falls back to the most common `subcompany` across that board's
+open jobs when no cached/list profile exists, with a deterministic tie-break.
+One board uses the same label for headings, filters and roles.
 
 ## Workable scope and cost
 
@@ -65,14 +95,16 @@ means all. `input_sha` hashes the exact selection for this shard, so different
 shards normally have different input hashes.
 
 Requests share a pacing/retry budget within a shard: by default at most two
-requests per second for board APIs and one every two seconds for Workable, with two
-workers. Rate limits and server/network/truncation errors get bounded retries.
+requests per second for Ashby/Greenhouse, one per second for Personio and one
+every two seconds for Workable, with two workers. Retries and the optional
+Personio language request share the same pacing and deadline. Rate limits and
+server/network/truncation errors get bounded retries.
 Long Retry-After values defer the shard rather than hammering subsequent
 boards. These settings do not imply provider-published rate limits.
 
 The output directory contains:
 
-- `jobs.parquet`: the unchanged job JSON, native key, scope, run ID and fetch time.
+- `jobs.parquet`: provider fields (JSON or parsed XML), native key, scope, run ID and fetch time.
 - `manifest.json`: every attempted scope's completeness and errors, validated
   against the raw rows; written last as the completion marker.
 - `report.json`: timings (including per scope), counts, Parquet size, request
@@ -94,12 +126,14 @@ the maximum were returned. Any tolerance needs observed churn data first.
 
 ## Actions
 
-**Collect job boards** is manual-only. Its six independent matrix jobs collect
-two shards for each provider. `fail-fast: false` lets the other shards finish
-when one fails; `always()` uploads usable outputs. Artifacts are overwritten on
-reruns and retained for three days. The workflow has read-only repository
-permissions and makes no data commits, deployments or email requests. The join
-will consume these artifacts in the next phase.
+**Collect job boards** runs daily at 05:17 UTC and supports manual dispatch.
+Its eight matrix jobs collect two shards per provider. `fail-fast: false` lets
+other shards finish when one fails; `always()` uploads usable outputs.
+Artifacts are overwritten on reruns and retained for three days. Collection
+has read-only repository permissions. The serialized publisher joins valid
+shards with committed history, optionally refreshes company profiles, renders
+the board, commits its data and deploys that generation to GitHub Pages.
+Scheduled runs publish; manual runs publish only with `publish=true` on main.
 
 Dispatch inputs can limit Workable to country codes such as `DE,GB,IT`, include
 or exclude the additional worldwide remote query, and cap pages/scopes for a
@@ -109,3 +143,5 @@ API references: [Ashby](https://developers.ashbyhq.com/docs/public-job-posting-a
 [Greenhouse](https://docs.greenhouse.io/job-board). Workable has no published
 contract for the search endpoint; keep the recorded fixtures as regression
 examples, not a guarantee of future compatibility.
+Personio documents its [public XML integration](https://developer.personio.de/docs/integration-of-open-positions)
+and [language-specific description fields](https://support.personio.de/hc/en-us/articles/29375445597725-Frequently-asked-questions-on-XML-job-integration).

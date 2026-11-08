@@ -14,7 +14,9 @@ import sys
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-PROVIDERS = ("ashby", "greenhouse", "workable")
+from .personio import board_slug
+
+PROVIDERS = ("ashby", "greenhouse", "workable", "personio")
 GREENHOUSE_HOSTS = {"boards.greenhouse.io", "job-boards.greenhouse.io", "job-boards.eu.greenhouse.io",
                     "boards.eu.greenhouse.io"}
 COLUMNS = ["provider", "key", "name", "website", "origins", "bet_de", "bet_checked"]
@@ -25,9 +27,14 @@ def parse_board(line: str) -> tuple[str, str] | None:
     line = line.strip()
     if not line or line.startswith("#"):
         return None
-    if "/" in line:               # a URL, with or without scheme; unsupported hosts are reported, not guessed
+    if "/" in line or line.endswith((".jobs.personio.de", ".jobs.personio.com")):
         url = urlparse(line if "://" in line else "https://" + line)
         slug = url.path.strip("/").split("/")[0]
+        if url.hostname and url.hostname.endswith((".jobs.personio.de", ".jobs.personio.com")):
+            try:
+                return "personio", board_slug(url.hostname.split(".jobs.personio.", 1)[0])
+            except ValueError:
+                return None
         if url.hostname == "jobs.ashbyhq.com" and slug:
             return "ashby", slug
         if url.hostname in GREENHOUSE_HOSTS:
@@ -37,6 +44,11 @@ def parse_board(line: str) -> tuple[str, str] | None:
         return None
     provider, sep, key = line.partition(":")
     if sep and provider in PROVIDERS and key:
+        if provider == "personio":
+            try:
+                key = board_slug(key)
+            except ValueError:
+                return None
         return provider, key
     return ("ashby", line) if not sep else None
 
@@ -75,7 +87,7 @@ def import_bet(companies_txt: str, boards_json: str, workable_json: str) -> list
 
 
 LIST_COLUMNS = ["name", "website", "country", "city", "why", "source_url", "careers_url", "ats", "board_key", "checked"]
-SCANNED = {"ashby", "greenhouse"}     # list boards we can read today; Workable list keys are account slugs,
+SCANNED = {"ashby", "greenhouse", "personio"}  # Workable list keys are account slugs,
                                       # not the search's company IDs, so they wait for an account retriever
 
 
@@ -102,8 +114,9 @@ def import_lists(lists: Path) -> tuple[list[dict], list[dict]]:
     unscanned = []
     for r in read_lists(lists):
         if r["ats"] in SCANNED and r["board_key"]:
-            row = boards.setdefault((r["ats"], r["board_key"]), {c: "" for c in COLUMNS} | {
-                "provider": r["ats"], "key": r["board_key"], "name": r["name"], "website": r["website"]})
+            key = board_slug(r["board_key"]) if r["ats"] == "personio" else r["board_key"]
+            row = boards.setdefault((r["ats"], key), {c: "" for c in COLUMNS} | {
+                "provider": r["ats"], "key": key, "name": r["name"], "website": r["website"]})
             row["origins"] = "|".join(sorted(set(filter(None, row["origins"].split("|"))) | {"list:" + r["file"][:-4]}))
         else:
             unscanned.append(dict(list=r["list"], name=r["name"], ats=r["ats"], board_key=r["board_key"],
