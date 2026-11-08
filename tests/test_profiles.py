@@ -8,7 +8,7 @@ from test_join import JOB, T0, inputs, shard
 
 def test_refresh_fetches_missing_profiles_and_keeps_failures_out(tmp_path):
     shard(tmp_path / "raw", "1-1", {"ashby:acme": ("complete", 200, [JOB]), "ashby:broken": ("complete", 200, [JOB | {"id": "j9"}])}, T0)
-    join(tmp_path / "raw", tmp_path / "data", inputs(tmp_path, "acme", "broken"), "1-1", T0)
+    join(tmp_path / "raw", tmp_path / "data", inputs(tmp_path, "acme", "broken"), "1-1", T0, verify_inputs=False)
     path = tmp_path / "profiles.json"
     path.write_text(json.dumps({"ashby:fresh": {"name": "Fresh"}}))
 
