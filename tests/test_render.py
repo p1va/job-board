@@ -70,3 +70,19 @@ def test_list_memberships_reach_the_board(tmp_path):
     report = render(tmp_path / "data", tmp_path / "site", T0, {"ashby:acme": ["AI labs"]})
     data = json.loads((tmp_path / "site" / report["data_file"]).read_text())
     assert data["jobs"][0]["lists"] == ["AI labs"]
+
+
+def test_profiles_and_lists_name_companies(tmp_path):
+    from jobboard.render import load_companies
+    (tmp_path / "profiles.json").write_text(json.dumps({"ashby:acme": {"name": "Acme Inc", "logoUrl": "https://x/logo.png"}}))
+    lists = tmp_path / "lists"
+    lists.mkdir()
+    (lists / "ai-labs.csv").write_text("name,website,country,city,why,source_url,careers_url,ats,board_key,checked\n"
+                                        "Other Co,https://other.example,DE,Berlin,x,https://s,https://c,greenhouse,otherco,2026-11-08\n")
+    companies = load_companies(tmp_path / "profiles.json", lists)
+    assert companies["ashby:acme"]["name"] == "Acme Inc" and companies["greenhouse:otherco"]["website"] == "https://other.example"
+    shard(tmp_path / "raw", "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    join(tmp_path / "raw", tmp_path / "data", inputs(tmp_path, "acme"), "1-1", T0, verify_inputs=False)
+    report = render(tmp_path / "data", tmp_path / "site", T0, {}, companies)
+    data = json.loads((tmp_path / "site" / report["data_file"]).read_text())
+    assert data["jobs"][0]["companyName"] == "Acme Inc" and data["companies"]["ashby:acme"]["logoUrl"]
