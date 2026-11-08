@@ -1,7 +1,9 @@
 name: Collect job boards
 
-# Manual for now; a daily schedule follows the first reviewed publication.
+# Daily: collect and publish every morning; manual dispatches can limit scopes and choose to publish.
 on:
+  schedule:
+    - cron: '17 5 * * *'
   workflow_dispatch:
     inputs:
       publish:
@@ -59,10 +61,11 @@ jobs:
           SOURCE: '${{ matrix.source }}'
           SHARD: '${{ matrix.shard }}'
           RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
-          SCOPE_LIMIT: '${{ inputs.scope_limit }}'
-          MAX_PAGES: '${{ inputs.max_pages }}'
-          WORKABLE_COUNTRIES: '${{ inputs.workable_countries }}'
-          WORKABLE_REMOTE: '${{ inputs.workable_remote }}'
+          # scheduled runs have no inputs: full defaults
+          SCOPE_LIMIT: "${{ inputs.scope_limit || '0' }}"
+          MAX_PAGES: "${{ inputs.max_pages || '5000' }}"
+          WORKABLE_COUNTRIES: "${{ inputs.workable_countries || '' }}"
+          WORKABLE_REMOTE: "${{ inputs.workable_remote || 'include' }}"
         run: >-
           uv run python -m jobboard.collect --source "$SOURCE"
           --shard-index "$SHARD" --shard-count 2 --run-id "$RUN_ID"
@@ -84,7 +87,7 @@ jobs:
   # One writer: join, render and validate, commit data/, then deploy that same generation.
   publish:
     needs: collect
-    if: ${{ !cancelled() && inputs.publish && github.ref == 'refs/heads/main' }}
+    if: ${{ !cancelled() && (github.event_name == 'schedule' || inputs.publish) && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -108,9 +111,9 @@ jobs:
         id: join
         env:
           RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
-          SCOPE_LIMIT: '${{ inputs.scope_limit }}'
-          WORKABLE_COUNTRIES: '${{ inputs.workable_countries }}'
-          WORKABLE_REMOTE: '${{ inputs.workable_remote }}'
+          SCOPE_LIMIT: "${{ inputs.scope_limit || '0' }}"
+          WORKABLE_COUNTRIES: "${{ inputs.workable_countries || '' }}"
+          WORKABLE_REMOTE: "${{ inputs.workable_remote || 'include' }}"
           COLLECTED_SHA: '${{ github.sha }}'
         run: |
           # The companies/ this run collected from (not main's, which may have gained boards since), and the
