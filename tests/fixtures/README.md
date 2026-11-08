@@ -1,0 +1,7 @@
+# Recorded jobs
+
+Two unchanged job objects from each public provider, recorded on 8 November 2026.
+Ashby: n8n, `includeCompensation=true`. Greenhouse: n26, `content=true`.
+Workable: the first two hits of `workplace=remote`. Response envelopes in the
+tests deliberately set totals and cursors to exercise completion and failures;
+the job objects preserve the original descriptions and provider fields.
