@@ -1,9 +1,13 @@
 name: Collect job boards
 
-# Manual until the join, lifecycle persistence and publication are ready.
+# Manual for now; a daily schedule follows the first reviewed publication.
 on:
   workflow_dispatch:
     inputs:
+      publish:
+        description: 'Join, commit data/ and deploy the board after collecting'
+        type: boolean
+        default: false
       scope_limit:
         description: 'Scopes per shard (0 = all; 3 for a smoke run)'
         default: '0'
@@ -65,3 +69,60 @@ jobs:
           retention-days: 3
           overwrite: true
           compression-level: 0
+
+  # One writer: join, render and validate, commit data/, then deploy that same generation.
+  publish:
+    needs: collect
+    if: ${{ !cancelled() && inputs.publish && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    concurrency:
+      group: publish
+      cancel-in-progress: false
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
+      - run: uv sync --locked
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: raw-*
+          path: raw
+      - name: Join shards into data/
+        env:
+          RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
+        run: |
+          uv run python -m jobboard.join --raw raw --data data --inputs companies --run-id "$RUN_ID" | tee join.json
+          { echo '### Join'; echo '```json'; cat join.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Render and validate the board
+        run: |
+          uv run python -m jobboard.render --data data --out site | tee render.json
+          { echo '### Board'; echo '```json'; cat render.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit data/
+        env:
+          RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data
+          if git diff --cached --quiet; then echo 'No data changes.'; exit 0; fi
+          git commit -qm "data: run $RUN_ID [skip ci]"
+          git push
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    needs: publish
+    if: ${{ !cancelled() && needs.publish.result == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
