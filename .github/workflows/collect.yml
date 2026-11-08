@@ -30,6 +30,11 @@ permissions:
 
 # One run at a time, from collection through deployment: the final writer always starts from the latest
 # committed data, and an older generation can't deploy after a newer one. Source shards still run in parallel.
+# bash with -eo pipefail: a failing command before `| tee` fails its step
+defaults:
+  run:
+    shell: bash
+
 concurrency:
   group: collect-and-publish
   cancel-in-progress: false

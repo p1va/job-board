@@ -78,3 +78,8 @@ def test_declared_remote_inherits_named_regions():
 
 def test_where_keeps_place_and_mode_together():
     assert parse(["London, UK; Remote - United States"]).where == ("GB|unknown", "US|remote")
+
+
+def test_unicode_case_forms_never_crash_and_still_match():
+    assert parse(["İstanbul"]).countries == ("TR",)            # Turkish dotted capital I
+    assert parse(["MÜNCHEN"]).countries == ("DE",) and parse(["Zürich"]).countries == ("CH",)

@@ -86,24 +86,40 @@ def read_shards(raw: Path, run_id: str | None = None, inputs: Path | None = None
     return out
 
 
-def sightings(shards: Shards, tracked: set[Key], run_id: str, now: datetime) -> tuple[dict[Key, Sighting], dict[Key, dict]]:
+def sightings(shards: Shards, tracked: set[Key], run_id: str, now: datetime,
+              previous: dict[Key, JobState] | None = None, errors: list | None = None) -> tuple[dict[Key, Sighting], dict[Key, dict]]:
     """Merge raw rows by job key across scopes; keep normalised rows only for kept or tracked jobs."""
+    # Small columns only: payloads (full descriptions) are read one at a time when needed, so a day of
+    # ~240k jobs doesn't become gigabytes of Python strings at once.
     scopes: dict[Key, set[str]] = {}
-    latest: dict[Key, dict] = {}
-    for table in shards.tables:
-        for r in table.to_pylist():
-            key = (r["source"], r["board"], r["native_id"])
-            scopes.setdefault(key, set()).add(r["scope_id"])
-            if key not in latest or r["fetched_at"] > latest[key]["fetched_at"]:
-                latest[key] = r
+    latest: dict[Key, tuple] = {}                     # key -> (fetched_at, table index, row index)
+    for t, table in enumerate(shards.tables):
+        cols = {c: table.column(c).to_pylist() for c in ("source", "board", "native_id", "scope_id", "fetched_at")}
+        for i in range(table.num_rows):
+            key = (cols["source"][i], cols["board"][i], cols["native_id"][i])
+            scopes.setdefault(key, set()).add(cols["scope_id"][i])
+            if key not in latest or cols["fetched_at"][i] > latest[key][0]:
+                latest[key] = (cols["fetched_at"][i], t, i)
+    payloads = [table.column("payload") for table in shards.tables]
     seen: dict[Key, Sighting] = {}
     rows: dict[Key, dict] = {}
-    for key, r in latest.items():
+    for key, (fetched_at, t, i) in latest.items():
+        r = dict(source=key[0], board=key[1], native_id=key[2], fetched_at=fetched_at, payload=payloads[t][i].as_py())
         if key not in tracked and role_family(json.loads(r["payload"]).get("title") or "") is None:
             # never kept without a role family: skip the full normalisation (most jobs)
             seen[key] = Sighting(key, f"{key[0]}:{key[1]}", "", frozenset(scopes[key]), False, r["fetched_at"])
             continue
-        row = normalize(r["source"], r["board"], r["native_id"], r["payload"], run_id, r["fetched_at"])
+        try:
+            row = normalize(r["source"], r["board"], r["native_id"], r["payload"], run_id, r["fetched_at"])
+        except Exception as exc:
+            # one job we can't read must not stop the run: a tracked job counts as seen, unchanged
+            if errors is not None:
+                errors.append(f"{':'.join(key)}: {type(exc).__name__}: {exc}"[:200])
+            prev = (previous or {}).get(key)
+            if prev is not None:
+                seen[key] = Sighting(key, prev.company_id, prev.current_hash, frozenset(scopes[key]),
+                                     prev.status != "filtered_out", r["fetched_at"])
+            continue
         if row["kept"] or key in tracked:
             rows[key] = row
         seen[key] = Sighting(key, row["company_id"], row["payload_hash"], frozenset(scopes[key]), row["kept"],
@@ -233,7 +249,8 @@ def join(raw: Path, data: Path, inputs: Path, run_id: str, now: datetime, verify
         p.unlink()
     shards = read_shards(raw, run_id, inputs if verify_inputs else None, options)
     previous = load_state(data / "state.parquet")
-    seen, rows = sightings(shards, set(previous), run_id, now)
+    errors: list[str] = []
+    seen, rows = sightings(shards, set(previous), run_id, now, previous, errors)
     state, changed = step(previous, shards.outcomes, seen, now)
     changed = [k for k in changed if k in state]
     names = [f.name for f in VERSION]
@@ -246,6 +263,7 @@ def join(raw: Path, data: Path, inputs: Path, run_id: str, now: datetime, verify
                 shards_invalid=shards.invalid, scopes=dict(Counter(s.status.value for s in shards.outcomes.values())),
                 jobs_seen=len(seen), tracked=len(state), versions=versions.num_rows,
                 versions_file=str(versions_path), removed_leftovers=[str(p) for p in leftovers],
+                normalize_errors=len(errors), normalize_error_examples=errors[:10],
                 statuses=dict(Counter(s.status for s in state.values())))
 
 

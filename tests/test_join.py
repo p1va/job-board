@@ -220,3 +220,11 @@ def test_limited_and_custom_collections_are_checked_with_their_own_options(tmp_p
     assert not limited["shards_invalid"] and limited["tracked"] == 1            # zeta-co stays unresolved
     wk = plan("workable", seed, countries="DE,GB", remote="exclude")
     assert [s.scope_id for s in wk] == ["workable:search:country=DE", "workable:search:country=GB"]
+
+
+def test_a_job_that_fails_to_normalise_does_not_stop_the_run(tmp_path, monkeypatch):
+    run(tmp_path, "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    import jobboard.join as join_module
+    monkeypatch.setattr(join_module, "normalize", lambda *a, **k: (_ for _ in ()).throw(KeyError("odd")))
+    report = run(tmp_path, "2-1", {"ashby:acme": ("complete", 200, [JOB])}, T0 + DAY)
+    assert report["normalize_errors"] == 1 and report["statuses"] == {"open": 1} and report["versions"] == 0
