@@ -136,8 +136,8 @@ def normalize(source: str, board: str, native_id: str, payload: str, run_id: str
                salary_max=float(f["salary_max"]) if f["salary_max"] is not None else None,
                salary_currency=f["salary_currency"], salary_period=f["salary_period"],
                description_text=text, description_sha=hashlib.sha256(text.encode()).hexdigest()[:20],
-               role_family=classify.role_family(title), seniority=classify.seniority(title),
-               stack=classify.stack(f"{title}\n{text}"))
+               role_family=classify.role_family(title), seniority=classify.seniority(title))
+    row["stack"] = classify.stack(f"{title}\n{text}") if row["role_family"] else []
     row["payload_hash"] = payload_hash(row)
     row["kept"] = bool(row["role_family"]) and (places.in_europe(place) or (workplace == "remote" and not place.remote_regions
                                                                              and not place.countries))

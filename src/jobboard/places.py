@@ -135,10 +135,12 @@ def _word(term: str) -> re.Pattern:
     return re.compile(r"(?<![\w.])" + re.escape(term) + r"(?![\w])", re.I)
 
 
-_NAME_RE = [(_word(a), c) for a, c in sorted(((a, c) for c, names in COUNTRIES.items() for a in names
-                                                  if a not in ("us", "uk")), key=lambda x: -len(x[0]))]
-_CITY_RE = [(_word(a), c) for a, c in sorted(CITIES.items(), key=lambda x: -len(x[0]))]
-_REGION_RE = [(_word(a), r) for a, r in sorted(REGIONS.items(), key=lambda x: -len(x[0]))]
+# One alternation per kind (longest first), so a lookup is one regex pass instead of hundreds.
+_ALIASES = {a: c for c, names in COUNTRIES.items() for a in names if a not in ("us", "uk")} | CITIES
+_ANY = re.compile(r"(?<![\w.])(" + "|".join(re.escape(a) for a in sorted(_ALIASES, key=len, reverse=True))
+                  + r")(?![\w])", re.I)
+_REGION_ANY = re.compile(r"(?<![\w.])(" + "|".join(re.escape(a) for a in sorted(REGIONS, key=len, reverse=True))
+                         + r")(?![\w])", re.I)
 # Uppercase tokens only, so "us" in "join us" or "it" never count
 _UPPER = [(re.compile(r"(?<![\w.])US(?![\w])"), "US"), (re.compile(r"(?<![\w.])UK(?![\w])"), "GB")]
 # A trailing European ISO code ("Remote - GB"); codes that are also US states (DE, AL, ME, MD, MT, VA) need a
@@ -161,7 +163,8 @@ class Place:
 
 def countries_in(text: str) -> set[str]:
     """Country codes named in one place description."""
-    found = {code for pattern, code in _NAME_RE + _UPPER + _CITY_RE if pattern.search(text)}
+    found = {_ALIASES[m.group(1).lower()] for m in _ANY.finditer(text)}
+    found |= {code for pattern, code in _UPPER if pattern.search(text)}
     if m := _ISO_EUROPE.search(text.strip()):
         found.add(m.group(1))
     elif not found & EUROPE and (_STATE.search(text) or _STATE_NAME.search(text)):
@@ -171,9 +174,9 @@ def countries_in(text: str) -> set[str]:
 
 def regions_in(text: str) -> set[str]:
     found: set[str] = set()
-    for pattern, region in _REGION_RE:
-        if pattern.search(text):
-            found.update(GROUPS.get(region, (region,)))
+    for m in _REGION_ANY.finditer(text):
+        region = REGIONS[m.group(1).lower()]
+        found.update(GROUPS.get(region, (region,)))
     return found
 
 
