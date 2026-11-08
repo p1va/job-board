@@ -38,6 +38,7 @@ class Sighting:
     payload_hash: str
     scopes: frozenset[str]
     kept: bool                      # passes the role x Europe/remote filter
+    seen_at: datetime | None = None # when it was fetched; defaults to the run time
 
 
 def step(state: dict[Key, JobState], outcomes: dict[str, Scope], sightings: dict[Key, Sighting],
@@ -67,11 +68,12 @@ def step(state: dict[Key, JobState], outcomes: dict[str, Scope], sightings: dict
 
         if seen:
             is_new = prev is None or prev.current_hash != seen.payload_hash
+            observed = seen.seen_at or now
             new_state[key] = JobState(
                 key=key, company_id=seen.company_id,
-                first_seen=prev.first_seen if prev else now,
-                last_confirmed_seen=now,
-                last_changed=now if is_new or prev is None else prev.last_changed,
+                first_seen=prev.first_seen if prev else observed,
+                last_confirmed_seen=max(observed, prev.last_confirmed_seen) if prev else observed,
+                last_changed=observed if is_new or prev is None else prev.last_changed,
                 current_hash=seen.payload_hash,
                 status="open" if seen.kept else "filtered_out",
                 scopes=tuple(sorted(member)), closed_at=None)

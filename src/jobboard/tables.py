@@ -20,6 +20,8 @@ VERSION = pa.schema(KEY + [
     pa.field("seen_at", UTC, nullable=False),
     pa.field("payload_hash", pa.string(), nullable=False),   # over every display/selection field below
     pa.field("company_id", pa.string(), nullable=False),
+    pa.field("company_name", pa.string()),            # when the provider sends it
+    pa.field("listed", pa.bool_(), nullable=False),     # false: direct-link only (e.g. Ashby isListed)
     pa.field("url", pa.string()),
     pa.field("title", pa.string(), nullable=False),
     pa.field("department", pa.string()),
@@ -29,6 +31,7 @@ VERSION = pa.schema(KEY + [
     pa.field("locations", pa.list_(pa.string())),
     pa.field("countries", pa.list_(pa.string())),             # ISO 3166-1 alpha-2
     pa.field("remote_regions", pa.list_(pa.string())),        # worldwide | europe | eu | emea | ISO-2
+    pa.field("where", pa.list_(pa.string())),                 # "<place>|<mode>", see places.Place.where
     pa.field("published_at", UTC),
     pa.field("salary_raw", pa.string()),
     pa.field("salary_min", pa.float64()),

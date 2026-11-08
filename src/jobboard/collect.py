@@ -43,6 +43,18 @@ def shard_selections(source: str, selected: list[Selection], index: int, count: 
     return selected[index::count]
 
 
+def plan(source: str, inputs: Path, shard_index: int = 0, shard_count: int = 1, limit: int = 0,
+         countries: str | None = None, remote: str = "include") -> list[Selection]:
+    """The exact scopes one shard collects for these options; the join recomputes it to check inputs."""
+    selected = selections(source, inputs, countries.upper().split(",") if countries else None, remote)
+    selected = shard_selections(source, selected, shard_index, shard_count)
+    return selected[:limit] if limit else selected
+
+
+def selection_sha(selected: list[Selection]) -> str:
+    return hashlib.sha256(json.dumps([asdict(s) for s in selected], sort_keys=True).encode()).hexdigest()
+
+
 def collect(source: str, selected: list[Selection], get, run_id: str, shard: str,
             out: Path, *, workers=2, max_pages=5000, progress=None, deadline=None) -> tuple[Manifest, dict]:
     started = datetime.now(timezone.utc)
@@ -50,7 +62,7 @@ def collect(source: str, selected: list[Selection], get, run_id: str, shard: str
     deadline = tick + 6000 if deadline is None else deadline
     out.mkdir(parents=True, exist_ok=True)
     (out / "manifest.json").unlink(missing_ok=True)
-    input_sha = hashlib.sha256(json.dumps([asdict(s) for s in selected], sort_keys=True).encode()).hexdigest()
+    input_sha = selection_sha(selected)
     timings = {}
 
     def scan(selection):
@@ -119,15 +131,13 @@ def main(argv=None) -> int:
             or args.limit_scopes < 0 or args.deadline < 1 or (args.interval is not None and args.interval < 0)):
         parser.error("invalid shard, worker, page, scope limit or pacing value")
     try:
-        selected = selections(args.source, args.inputs,
-                              args.countries.upper().split(",") if args.countries else None, args.remote)
+        selected = plan(args.source, args.inputs, args.shard_index, args.shard_count, args.limit_scopes,
+                        args.countries, args.remote)
     except (ValueError, KeyError, OSError) as exc:
         parser.error(str(exc))
-    if not selected:
+    if not selected and not plan(args.source, args.inputs, 0, 1, 0, args.countries, args.remote):
         parser.error("no scopes selected; check companies/*.csv and the requested source")
-    selected = shard_selections(args.source, selected, args.shard_index, args.shard_count)
-    if args.limit_scopes:
-        selected = selected[:args.limit_scopes]
+    # a shard can be legitimately empty after splitting (e.g. --remote only): it writes an empty artifact
     deadline = time.monotonic() + args.deadline
     client = Client(interval=args.interval if args.interval is not None else (2 if args.source == "workable" else 0.5),
                     deadline=deadline)

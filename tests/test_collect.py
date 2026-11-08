@@ -101,3 +101,12 @@ def test_expired_deadline_still_writes_a_valid_unresolved_artifact(tmp_path):
     manifest, _ = collect('ashby', selected, get, 'r', '0', tmp_path, deadline=0)
     assert manifest.scopes[0].status == Status.FAILED and 'deadline' in manifest.scopes[0].error.lower()
     assert manifest.problems(pq.read_table(tmp_path / 'jobs.parquet')) == []
+
+
+
+def test_an_empty_shard_after_splitting_writes_an_empty_artifact(tmp_path):
+    out = tmp_path / "raw"
+    assert main(["--source", "workable", "--remote", "only", "--shard-index", "0", "--shard-count", "2",
+                 "--out", str(out), "--inputs", str(tmp_path)]) == 0
+    manifest = Manifest.from_json((out / "manifest.json").read_text())
+    assert manifest.scopes == [] and manifest.problems(pq.read_table(out / "jobs.parquet")) == []

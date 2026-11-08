@@ -1,9 +1,13 @@
 name: Collect job boards
 
-# Manual until the join, lifecycle persistence and publication are ready.
+# Manual for now; a daily schedule follows the first reviewed publication.
 on:
   workflow_dispatch:
     inputs:
+      publish:
+        description: 'Join, commit data/ and deploy the board after collecting'
+        type: boolean
+        default: false
       scope_limit:
         description: 'Scopes per shard (0 = all; 3 for a smoke run)'
         default: '0'
@@ -23,6 +27,12 @@ on:
 
 permissions:
   contents: read
+
+# One run at a time, from collection through deployment: the final writer always starts from the latest
+# committed data, and an older generation can't deploy after a newer one. Source shards still run in parallel.
+concurrency:
+  group: collect-and-publish
+  cancel-in-progress: false
 
 jobs:
   collect:
@@ -65,3 +75,106 @@ jobs:
           retention-days: 3
           overwrite: true
           compression-level: 0
+
+  # One writer: join, render and validate, commit data/, then deploy that same generation.
+  publish:
+    needs: collect
+    if: ${{ !cancelled() && inputs.publish && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    outputs:
+      artifact: ${{ steps.name.outputs.artifact }}
+      run_id: ${{ steps.join.outputs.run_id }}
+      superseded: ${{ steps.join.outputs.superseded }}
+    steps:
+      # the latest committed data, not the commit this run started from
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
+      - run: uv sync --locked
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: raw-*
+          path: raw
+      - name: Join shards into data/
+        id: join
+        env:
+          RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
+          SCOPE_LIMIT: '${{ inputs.scope_limit }}'
+          WORKABLE_COUNTRIES: '${{ inputs.workable_countries }}'
+          WORKABLE_REMOTE: '${{ inputs.workable_remote }}'
+        run: |
+          # the collection's own options, so the join can check each shard's inputs exactly
+          uv run python -m jobboard.join --raw raw --data data --inputs companies --run-id "$RUN_ID" \
+            --limit-scopes "$SCOPE_LIMIT" --countries "$WORKABLE_COUNTRIES" --remote "$WORKABLE_REMOTE" | tee join.json
+          { echo '### Join'; echo '```json'; cat join.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+          if python3 -c 'import json,sys; sys.exit(0 if json.load(open("join.json")).get("superseded_by") else 1)'; then
+            echo "superseded=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::A newer run's data is already committed; this run publishes nothing."
+          fi
+      - name: Render and validate the board
+        if: steps.join.outputs.superseded != 'true'
+        run: |
+          uv run python -m jobboard.render --data data --out site | tee render.json
+          { echo '### Board'; echo '```json'; cat render.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Commit data/
+        if: steps.join.outputs.superseded != 'true'
+        env:
+          RUN_ID: '${{ github.run_id }}-${{ github.run_attempt }}'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data
+          if git diff --cached --quiet; then echo 'No data changes.'; exit 0; fi
+          git commit -qm "data: run $RUN_ID [skip ci]"
+          for attempt in 1 2 3; do
+            git push && exit 0
+            git pull --rebase --quiet origin "${{ github.event.repository.default_branch }}"
+          done
+          exit 1
+      # A name per attempt: a re-run of publish can't collide with the first upload, and a re-run of only
+      # the deploy job still reads this attempt's name from the outputs.
+      - id: name
+        if: steps.join.outputs.superseded != 'true'
+        run: echo "artifact=github-pages-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-pages-artifact@v5
+        if: steps.join.outputs.superseded != 'true'
+        with:
+          path: site
+          name: ${{ steps.name.outputs.artifact }}
+
+  deploy:
+    needs: publish
+    if: ${{ !cancelled() && needs.publish.result == 'success' && needs.publish.outputs.superseded != 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # Deploy only the generation that is still the latest committed data: re-running an old deploy
+      # job after a newer publication must not roll the site back.
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: data/generation.json
+          sparse-checkout-cone-mode: false
+      - name: Check this is the current generation
+        env:
+          RUN_ID: ${{ needs.publish.outputs.run_id }}
+        run: |
+          current=$(python3 -c 'import json; print(json.load(open("data/generation.json"))["run_id"])')
+          if [ "$current" != "$RUN_ID" ]; then
+            echo "::error::Generation $RUN_ID was superseded by $current; not deploying it."
+            exit 1
+          fi
+      - id: deployment
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ needs.publish.outputs.artifact }}
