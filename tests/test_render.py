@@ -10,7 +10,7 @@ from test_join import JOB, T0, inputs, shard
 
 def built(tmp_path, jobs):
     shard(tmp_path / "raw", "1-1", {"ashby:acme": ("complete", 200, jobs)}, T0)
-    join(tmp_path / "raw", tmp_path / "data", inputs(tmp_path, "acme"), "1-1", T0)
+    join(tmp_path / "raw", tmp_path / "data", inputs(tmp_path, "acme"), "1-1", T0, verify_inputs=False)
     return render(tmp_path / "data", tmp_path / "site", T0)
 
 

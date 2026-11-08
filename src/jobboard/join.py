@@ -38,15 +38,40 @@ class Shards:
     invalid: dict[str, list[str]] = field(default_factory=dict)
 
 
-def read_shards(raw: Path) -> Shards:
-    """Every shard folder under raw/ with a valid manifest; the rest are reported and ignored."""
+def run_family(run_id: str) -> tuple[str, int | None]:
+    """'19034567890-2' -> ('19034567890', 2): attempts of one workflow run share the family."""
+    base, sep, attempt = run_id.rpartition("-")
+    return (base, int(attempt)) if sep and attempt.isdigit() else (run_id, None)
+
+
+def expected_input(manifest: Manifest, inputs: Path) -> str:
+    """The input_sha a full collection of this shard from companies/ would have."""
+    from dataclasses import asdict
+    import hashlib
+    from .collect import selections, shard_selections
+    index, _, count = manifest.shard.partition("-of-")
+    selected = shard_selections(manifest.source, selections(manifest.source, inputs), int(index), int(count))
+    return hashlib.sha256(json.dumps([asdict(s) for s in selected], sort_keys=True).encode()).hexdigest()
+
+
+def read_shards(raw: Path, run_id: str | None = None, inputs: Path | None = None) -> Shards:
+    """Every shard folder under raw/ with a valid manifest from this run (or an earlier attempt of it),
+    collected from the current companies/ inputs. The rest are reported and ignored: an old or
+    unrelated artifact must never become authoritative absence."""
     out = Shards()
+    family, attempt = run_family(run_id) if run_id else (None, None)
     for manifest_path in sorted(raw.glob("**/manifest.json")):     # any layout, e.g. one folder per artifact
         where = str(manifest_path.parent.relative_to(raw))
         try:
             manifest = Manifest.from_json(manifest_path.read_text(encoding="utf-8"))
             table = pq.read_table(manifest_path.parent / "jobs.parquet")
             problems = manifest.problems(table)
+            if run_id is not None:
+                theirs, their_attempt = run_family(manifest.run_id)
+                if theirs != family or (attempt is not None and (their_attempt or 0) > attempt):
+                    problems.append(f"from run {manifest.run_id}, not {run_id} or an earlier attempt of it")
+            if inputs is not None and manifest.input_sha != expected_input(manifest, inputs):
+                problems.append("collected from other inputs than companies/ (a limited or older selection)")
         except Exception as exc:              # unreadable shard: missing, never resolving
             problems = [f"{type(exc).__name__}: {exc}"]
         if problems:
@@ -76,12 +101,13 @@ def sightings(shards: Shards, tracked: set[Key], run_id: str, now: datetime) -> 
     for key, r in latest.items():
         if key not in tracked and role_family(json.loads(r["payload"]).get("title") or "") is None:
             # never kept without a role family: skip the full normalisation (most jobs)
-            seen[key] = Sighting(key, f"{key[0]}:{key[1]}", "", frozenset(scopes[key]), False)
+            seen[key] = Sighting(key, f"{key[0]}:{key[1]}", "", frozenset(scopes[key]), False, r["fetched_at"])
             continue
-        row = normalize(r["source"], r["board"], r["native_id"], r["payload"], run_id, now)
+        row = normalize(r["source"], r["board"], r["native_id"], r["payload"], run_id, r["fetched_at"])
         if row["kept"] or key in tracked:
             rows[key] = row
-        seen[key] = Sighting(key, row["company_id"], row["payload_hash"], frozenset(scopes[key]), row["kept"])
+        seen[key] = Sighting(key, row["company_id"], row["payload_hash"], frozenset(scopes[key]), row["kept"],
+                             r["fetched_at"])
     return seen, rows
 
 
@@ -169,26 +195,30 @@ def write_atomic(table: pa.Table, path: Path) -> None:
     os.replace(tmp, path)
 
 
-def join(raw: Path, data: Path, inputs: Path, run_id: str, now: datetime) -> dict:
+def join(raw: Path, data: Path, inputs: Path, run_id: str, now: datetime, verify_inputs: bool = True) -> dict:
     versions_path = data / "versions" / f"{now:%Y/%m/%d}" / f"{run_id}.parquet"
     replayed = [p for p in data.glob(f"versions/*/*/*/{run_id}.parquet") if committed(p)]
     if replayed:
         return dict(run_id=run_id, replay=True, versions_file=str(replayed[0]), note="run already committed: no-op")
-    shards = read_shards(raw)
+    # Version files an interrupted attempt left uncommitted are not history: remove them, so they can't
+    # be rendered or committed as part of this generation.
+    leftovers = [p for p in data.glob("versions/*/*/*/*.parquet") if not committed(p)]
+    for p in leftovers:
+        p.unlink()
+    shards = read_shards(raw, run_id, inputs if verify_inputs else None)
     previous = load_state(data / "state.parquet")
     seen, rows = sightings(shards, set(previous), run_id, now)
     state, changed = step(previous, shards.outcomes, seen, now)
     changed = [k for k in changed if k in state]
     names = [f.name for f in VERSION]
     versions = pa.Table.from_pylist([{n: rows[k].get(n) for n in names} for k in changed], schema=VERSION)
-    if versions.num_rows:
-        write_atomic(versions, versions_path)
+    write_atomic(versions, versions_path)      # always, even empty: the run's immutable replay marker
     write_atomic(state_table(state), data / "state.parquet")
     write_atomic(boards_table(inputs, data / "boards.parquet", shards.outcomes, now), data / "boards.parquet")
     return dict(run_id=run_id, replay=False, now=now.isoformat(), shards_valid=len(shards.tables),
                 shards_invalid=shards.invalid, scopes=dict(Counter(s.status.value for s in shards.outcomes.values())),
                 jobs_seen=len(seen), tracked=len(state), versions=versions.num_rows,
-                versions_file=str(versions_path) if versions.num_rows else None,
+                versions_file=str(versions_path), removed_leftovers=[str(p) for p in leftovers],
                 statuses=dict(Counter(s.status for s in state.values())))
 
 

@@ -28,6 +28,12 @@ on:
 permissions:
   contents: read
 
+# One run at a time, from collection through deployment: the final writer always starts from the latest
+# committed data, and an older generation can't deploy after a newer one. Source shards still run in parallel.
+concurrency:
+  group: collect-and-publish
+  cancel-in-progress: false
+
 jobs:
   collect:
     name: '${{ matrix.source }} ${{ matrix.shard }}-of-2'
@@ -76,13 +82,15 @@ jobs:
     if: ${{ !cancelled() && inputs.publish && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    concurrency:
-      group: publish
-      cancel-in-progress: false
     permissions:
       contents: write
+    outputs:
+      artifact: ${{ steps.name.outputs.artifact }}
     steps:
+      # the latest committed data, not the commit this run started from
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
       - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2  # v10.3.3
       - run: uv sync --locked
       - uses: actions/download-artifact@v8
@@ -108,10 +116,19 @@ jobs:
           git add data
           if git diff --cached --quiet; then echo 'No data changes.'; exit 0; fi
           git commit -qm "data: run $RUN_ID [skip ci]"
-          git push
+          for attempt in 1 2 3; do
+            git push && exit 0
+            git pull --rebase --quiet origin "${{ github.event.repository.default_branch }}"
+          done
+          exit 1
+      # A name per attempt: a re-run of publish can't collide with the first upload, and a re-run of only
+      # the deploy job still reads this attempt's name from the outputs.
+      - id: name
+        run: echo "artifact=github-pages-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site
+          name: ${{ steps.name.outputs.artifact }}
 
   deploy:
     needs: publish
@@ -126,3 +143,5 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+        with:
+          artifact_name: ${{ needs.publish.outputs.artifact }}

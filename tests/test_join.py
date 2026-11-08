@@ -42,7 +42,7 @@ def inputs(tmp: Path, *keys: str) -> Path:
 def run(tmp, run_id, scopes, now):
     raw = tmp / f"raw-{run_id}"
     shard(raw, run_id, scopes, now)
-    return join(raw, tmp / "data", inputs(tmp, "acme", "gone-co"), run_id, now)
+    return join(raw, tmp / "data", inputs(tmp, "acme", "gone-co"), run_id, now, verify_inputs=False)
 
 
 def test_first_run_writes_versions_state_and_boards(tmp_path):
@@ -58,7 +58,7 @@ def test_first_run_writes_versions_state_and_boards(tmp_path):
 def test_unchanged_rerun_writes_no_version(tmp_path):
     run(tmp_path, "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
     report = run(tmp_path, "2-1", {"ashby:acme": ("complete", 200, [JOB])}, T0 + DAY)
-    assert report["versions"] == 0 and report["versions_file"] is None
+    assert report["versions"] == 0 and pq.read_table(report["versions_file"]).num_rows == 0   # empty marker
     s = load_state(tmp_path / "data" / "state.parquet")
     assert next(iter(s.values())).last_confirmed_seen == T0 + DAY
 
@@ -76,7 +76,7 @@ def test_empty_board_closes_and_invalid_shard_is_ignored(tmp_path):
     manifest = json.loads((raw / "ashby/0-of-1/manifest.json").read_text())
     manifest["scopes"][0]["jobs"] = 5                                # now disagrees with the raw rows
     (raw / "ashby/0-of-1/manifest.json").write_text(json.dumps(manifest))
-    report = join(raw, tmp_path / "data", inputs(tmp_path, "acme"), "2-1", T0 + DAY)
+    report = join(raw, tmp_path / "data", inputs(tmp_path, "acme"), "2-1", T0 + DAY, verify_inputs=False)
     assert report["shards_invalid"] and report["statuses"] == {"open": 1}     # nothing closed
     report = run(tmp_path, "3-1", {"ashby:acme": ("empty", 200, [])}, T0 + 2 * DAY)
     assert report["statuses"] == {"closed": 1}
@@ -116,3 +116,76 @@ def test_reclassification_with_unchanged_source_writes_a_version(tmp_path, monke
     monkeypatch.setattr(normalize_module.classify, "stack", lambda text: original(text) + ["new-term"])
     report = run(tmp_path, "2-1", {"ashby:acme": ("complete", 200, [JOB])}, T0 + DAY)
     assert report["versions"] == 1
+
+
+def repo(tmp_path):
+    git(tmp_path, "init", "-q")
+    git(tmp_path, "config", "user.email", "t@example.com")
+    git(tmp_path, "config", "user.name", "t")
+
+
+def commit(tmp_path, message):
+    git(tmp_path, "add", "-A")
+    git(tmp_path, "commit", "-qm", message)
+
+
+def test_interrupted_edit_is_not_rendered_after_a_failed_retry(tmp_path):
+    from jobboard.render import render
+    repo(tmp_path)
+    run(tmp_path, "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    commit(tmp_path, "run 1")
+    run(tmp_path, "2-1", {"ashby:acme": ("complete", 200, [JOB | {"title": "Staff Backend Engineer"}])}, T0 + DAY)
+    # interrupted before commit; the retry (another attempt) finds the board failing
+    report = run(tmp_path, "2-2", {"ashby:acme": ("failed", 503, [])}, T0 + DAY)
+    assert report["removed_leftovers"] and report["versions"] == 0
+    site = render(tmp_path / "data", tmp_path / "site", T0 + DAY)
+    data = json.loads((tmp_path / "site" / site["data_file"]).read_text())
+    assert data["jobs"][0]["title"] == "Senior Backend Engineer"
+
+
+def test_committed_run_without_changes_is_still_a_replay_no_op(tmp_path):
+    repo(tmp_path)
+    run(tmp_path, "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    commit(tmp_path, "run 1")
+    assert run(tmp_path, "2-1", {"ashby:acme": ("complete", 200, [JOB])}, T0 + DAY)["versions"] == 0
+    commit(tmp_path, "run 2")
+    replay = run(tmp_path, "2-1", {"ashby:acme": ("complete", 200, [JOB | {"title": "Changed"}])}, T0 + 2 * DAY)
+    assert replay["replay"] is True
+
+
+def test_artifacts_from_another_run_are_rejected_but_earlier_attempts_count(tmp_path):
+    run(tmp_path, "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    stale = tmp_path / "raw-stale"
+    shard(stale, "other-run-1", {"ashby:acme": ("empty", 200, [])}, T0 + DAY)
+    report = join(stale, tmp_path / "data", inputs(tmp_path, "acme"), "7-1", T0 + DAY, verify_inputs=False)
+    assert report["shards_invalid"] and report["statuses"] == {"open": 1}
+    earlier = tmp_path / "raw-earlier"
+    shard(earlier, "7-1", {"ashby:acme": ("empty", 200, [])}, T0 + DAY)
+    report = join(earlier, tmp_path / "data", inputs(tmp_path, "acme"), "7-2", T0 + DAY, verify_inputs=False)
+    assert not report["shards_invalid"] and report["statuses"] == {"closed": 1}
+
+
+def test_shards_must_match_the_current_inputs(tmp_path):
+    import hashlib
+    from dataclasses import asdict
+    from jobboard.collect import selections
+    seed = inputs(tmp_path, "acme")
+    raw = tmp_path / "raw-inputs"
+    shard(raw, "9-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    report = join(raw, tmp_path / "data", seed, "9-1", T0)                 # placeholder input_sha
+    assert report["shards_invalid"] and report["tracked"] == 0
+    manifest_path = raw / "ashby/0-of-1/manifest.json"
+    m = json.loads(manifest_path.read_text())
+    m["input_sha"] = hashlib.sha256(json.dumps([asdict(s) for s in selections("ashby", seed)], sort_keys=True).encode()).hexdigest()
+    manifest_path.write_text(json.dumps(m))
+    report = join(raw, tmp_path / "data", seed, "9-2", T0)                 # a retry attempt of the same run
+    assert not report["shards_invalid"] and report["tracked"] == 1
+
+
+def test_confirmation_time_is_when_the_job_was_fetched(tmp_path):
+    fetched = T0 - timedelta(hours=5)                                      # an earlier attempt's artifact
+    raw = tmp_path / "raw-old"
+    shard(raw, "3-1", {"ashby:acme": ("complete", 200, [JOB])}, fetched)
+    join(raw, tmp_path / "data", inputs(tmp_path, "acme"), "3-2", T0, verify_inputs=False)
+    state = load_state(tmp_path / "data" / "state.parquet")
+    assert next(iter(state.values())).last_confirmed_seen == fetched

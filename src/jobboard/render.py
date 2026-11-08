@@ -78,16 +78,18 @@ def company_name(v: dict) -> str:
     return board if any(c.isdigit() for c in board) else " ".join(w.capitalize() for w in board.replace("_", "-").split("-"))
 
 
-def latest_versions(data: Path, keys: set[tuple]) -> dict[tuple, dict]:
+def current_versions(data: Path, wanted: dict[tuple, str]) -> dict[tuple, dict]:
+    """The version each open job's state points to (by current_hash), never simply the newest file:
+    an uncommitted or interrupted attempt's version must not replace what state references."""
     files = sorted((data / "versions").glob("*/*/*/*.parquet"))
     if not files:
         return {}
-    latest: dict[tuple, dict] = {}
+    found: dict[tuple, dict] = {}
     for v in ds.dataset(files, format="parquet").to_table().to_pylist():
         key = (v["source"], v["board"], v["native_id"])
-        if key in keys and (key not in latest or v["seen_at"] > latest[key]["seen_at"]):
-            latest[key] = v
-    return latest
+        if wanted.get(key) == v["payload_hash"]:
+            found[key] = v
+    return found
 
 
 def hashed(name: str, content: bytes) -> str:
@@ -97,11 +99,11 @@ def hashed(name: str, content: bytes) -> str:
 
 def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | None = None) -> dict:
     state = pq.read_table(data / "state.parquet").to_pylist()
-    open_keys = {(s["source"], s["board"], s["native_id"]) for s in state if s["status"] == "open"}
-    versions = latest_versions(data, open_keys)
-    missing = open_keys - versions.keys()
+    wanted = {(s["source"], s["board"], s["native_id"]): s["current_hash"] for s in state if s["status"] == "open"}
+    versions = current_versions(data, wanted)
+    missing = wanted.keys() - versions.keys()
     if missing:
-        raise ValueError(f"{len(missing)} open jobs have no version, e.g. {sorted(missing)[:3]}")
+        raise ValueError(f"{len(missing)} open jobs have no version matching their state, e.g. {sorted(missing)[:3]}")
     lists = lists or {}
     jobs, descriptions = [], {}
     for key in sorted(versions):
