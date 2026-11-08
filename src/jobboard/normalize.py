@@ -94,9 +94,12 @@ def _greenhouse(job: dict) -> dict:
     loc = (job.get("location") or {}).get("name") or ""
     meta = {m.get("name"): m.get("value") for m in job.get("metadata") or [] if isinstance(m, dict)}
     countries = meta.get("Country") or []
+    countries = [c for c in (countries if isinstance(countries, list) else [countries]) if isinstance(c, str) and c]
+    # one location and one Country value belong together (like Ashby's per-location address)
+    pairs = [(loc, countries[0])] if loc and len(countries) == 1 else [loc] if loc else []
     return dict(title=job.get("title"), department=", ".join(d.get("name", "") for d in job.get("departments") or []) or None,
-                employment=None, workplace=None, locations=[loc] if loc else [], pairs=[loc] if loc else [],
-                structured=countries if isinstance(countries, list) else [countries],
+                employment=None, workplace=None, locations=[loc] if loc else [], pairs=pairs,
+                structured=[] if loc and len(countries) == 1 else countries,
                 published_at=_time(job.get("first_published")), url=job.get("absolute_url"),
                 salary_raw=None, salary_min=None, salary_max=None, salary_currency=None, salary_period=None,
                 description_text=html_text(html.unescape(job.get("content") or "")),

@@ -105,3 +105,23 @@ def test_ashby_address_country_decides_a_bare_city():
 
 def test_indented_html_lists_stay_compact():
     assert html_text("<ul>\n  <li>One</li>\n  <li>Two</li>\n</ul>") == "• One\n• Two"
+
+
+def gh(**changes):
+    return first("greenhouse") | {"title": "Senior Backend Engineer"} | changes
+
+
+def test_greenhouse_country_field_belongs_to_its_location():
+    london = norm("greenhouse", gh(location={"name": "London"}, metadata=[{"name": "Country", "value": ["Canada"]}]))
+    remote_de = norm("greenhouse", gh(location={"name": "Remote"}, metadata=[{"name": "Country", "value": ["Germany"]}]))
+    assert london["countries"] == ["CA"] and not london["kept"]
+    assert remote_de["where"] == ["DE|remote"] and remote_de["workplace"] == "remote" and remote_de["kept"]
+
+
+def test_an_address_never_narrows_an_explicit_worldwide_label():
+    row = norm("ashby", ashby(location="Remote - Worldwide", workplaceType="Remote",
+                              address={"postalAddress": {"addressCountry": "US"}}))
+    assert "worldwide|remote" in row["where"] and row["kept"]
+    restricted = norm("ashby", ashby(location="Remote - Anywhere in the United States", workplaceType="Remote",
+                                     address={"postalAddress": {"addressCountry": "US"}}))
+    assert not restricted["kept"]

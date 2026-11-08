@@ -249,12 +249,14 @@ def parse(locations, structured_countries=(), workplace: str | None = None) -> P
         for part in parts:
             named, explicit = _countries(part)
             regions = regions_in(part)
-            if code and (not named or not explicit):
-                named = {code}                # the provider's country for this location beats a city alias
-            # Worldwide only as an explicit scope label, and never beside a narrower scope:
-            # "Remote - Anywhere in the United States" is US, "Bonifacio Global City" is a place.
+            # Worldwide only as an explicit scope label, and never beside a narrower scope stated in the
+            # text: "Remote - Anywhere in the United States" is US, "Bonifacio Global City" is a place.
             if "worldwide" in regions and (named or regions - {"worldwide"} or not _bare(part)):
                 regions.discard("worldwide")
+            if code and not regions and (not named or not explicit):
+                # the provider's country for this location beats a city alias; an address never narrows
+                # an explicit scope label such as "Remote - Worldwide"
+                named = {code}
             if REMOTE.search(part) or "worldwide" in regions:
                 mode = "remote"
             elif declared:
