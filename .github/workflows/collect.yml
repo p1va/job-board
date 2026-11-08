@@ -111,9 +111,13 @@ jobs:
           SCOPE_LIMIT: '${{ inputs.scope_limit }}'
           WORKABLE_COUNTRIES: '${{ inputs.workable_countries }}'
           WORKABLE_REMOTE: '${{ inputs.workable_remote }}'
+          COLLECTED_SHA: '${{ github.sha }}'
         run: |
-          # the collection's own options, so the join can check each shard's inputs exactly
-          uv run python -m jobboard.join --raw raw --data data --inputs companies --run-id "$RUN_ID" \
+          # The companies/ this run collected from (not main's, which may have gained boards since), and the
+          # collection's own options, so the join checks each shard's inputs exactly.
+          git fetch --quiet --depth=1 origin "$COLLECTED_SHA"
+          mkdir -p .collected && git archive "$COLLECTED_SHA" companies | tar -x -C .collected
+          uv run python -m jobboard.join --raw raw --data data --inputs .collected/companies --run-id "$RUN_ID" \
             --limit-scopes "$SCOPE_LIMIT" --countries "$WORKABLE_COUNTRIES" --remote "$WORKABLE_REMOTE" | tee join.json
           { echo '### Join'; echo '```json'; cat join.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
@@ -121,6 +125,12 @@ jobs:
             echo "superseded=true" >> "$GITHUB_OUTPUT"
             echo "::warning::A newer run's data is already committed; this run publishes nothing."
           fi
+      # optional enrichment, capped at 5 minutes; a failure here never blocks publishing
+      - name: Fetch missing company names and logos
+        if: steps.join.outputs.superseded != 'true'
+        continue-on-error: true
+        timeout-minutes: 7
+        run: uv run python -m jobboard.profiles --data data --profiles companies/profiles.json --limit 300 --budget 300
       - name: Render and validate the board
         if: steps.join.outputs.superseded != 'true'
         run: |
@@ -133,7 +143,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data
+          git add data companies/profiles.json
           if git diff --cached --quiet; then echo 'No data changes.'; exit 0; fi
           git commit -qm "data: run $RUN_ID [skip ci]"
           for attempt in 1 2 3; do

@@ -20,6 +20,7 @@ import pyarrow.dataset as ds
 import pyarrow.parquet as pq
 
 from .places import EUROPE
+from .registry import memberships, read_lists
 
 BOARD = Path(__file__).resolve().parents[2] / "board"
 STYLE = {"remote": "Remote", "hybrid": "Hybrid", "onsite": "Office", "unknown": "Not stated"}
@@ -71,7 +72,10 @@ def salary(v: dict) -> str | None:
     return span + (f" per {v['salary_period']}" if v["salary_period"] and v["salary_period"] != "year" else "")
 
 
-def company_name(v: dict) -> str:
+def company_name(v: dict, profile: dict | None = None) -> str:
+    """Best name we have: cached profile, the provider's own, a list's, then the board slug."""
+    if profile and profile.get("name"):
+        return profile["name"]
     if v["company_name"]:
         return v["company_name"]
     board = v["board"]
@@ -97,14 +101,28 @@ def hashed(name: str, content: bytes) -> str:
     return f"{stem}-{hashlib.sha256(content).hexdigest()[:12]}{dot}{ext}"
 
 
-def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | None = None) -> dict:
+def load_companies(profiles: Path, lists_dir: Path) -> dict[str, dict]:
+    """company_id -> {name, website, logoUrl}: cached board profiles first, then list entries."""
+    companies = json.loads(profiles.read_text(encoding="utf-8")) if profiles.exists() else {}
+    if lists_dir.exists():
+        for r in read_lists(lists_dir):
+            if r["board_key"]:
+                entry = companies.setdefault(f"{r['ats']}:{r['board_key']}".lower(), {})
+                entry.setdefault("name", r["name"])
+                if r["website"]:
+                    entry.setdefault("website", r["website"])
+    return companies
+
+
+def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | None = None,
+           companies: dict[str, dict] | None = None) -> dict:
     state = pq.read_table(data / "state.parquet").to_pylist()
     wanted = {(s["source"], s["board"], s["native_id"]): s["current_hash"] for s in state if s["status"] == "open"}
     versions = current_versions(data, wanted)
     missing = wanted.keys() - versions.keys()
     if missing:
         raise ValueError(f"{len(missing)} open jobs have no version matching their state, e.g. {sorted(missing)[:3]}")
-    lists = lists or {}
+    lists, companies = lists or {}, companies or {}
     jobs, descriptions = [], {}
     for key in sorted(versions):
         v = versions[key]
@@ -112,14 +130,15 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
         bucket = hashlib.sha256(job_id.encode()).hexdigest()[:2]
         descriptions.setdefault(bucket, {})[job_id] = v["description_text"] or ""
         jobs.append(dict(
-            id=job_id, d=bucket, source=v["source"], company=v["company_id"], companyName=company_name(v),
+            id=job_id, d=bucket, source=v["source"], company=v["company_id"],
+            companyName=company_name(v, companies.get(v["company_id"].lower())),
             title=v["title"], url=v["url"], location=(v["locations"] or [None])[0] or v["location_raw"] or "",
             locations=v["locations"] or [], style=STYLE.get(v["workplace"], "Not stated"),
             employment=v["employment"], department=v["department"], salary=salary(v),
             published=v["published_at"].isoformat() if v["published_at"] else None,
             family=v["role_family"], level=v["seniority"], stack=v["stack"] or [], regions=regions(v),
             where=where_pairs(v),
-            lists=lists.get(v["company_id"], [])))
+            lists=lists.get(v["company_id"].lower(), [])))
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -128,7 +147,9 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
     (out / desc_dir).mkdir()
     for bucket, texts in descriptions.items():
         (out / desc_dir / f"{bucket}.json").write_text(json.dumps(texts, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    payload = json.dumps(dict(generatedAt=now.isoformat(), descriptions=desc_dir + "/", jobs=jobs, companies={}),
+    used = {j["company"] for j in jobs}
+    shown = {c: companies[c.lower()] for c in used if c.lower() in companies}
+    payload = json.dumps(dict(generatedAt=now.isoformat(), descriptions=desc_dir + "/", jobs=jobs, companies=shown),
                          ensure_ascii=False, separators=(",", ":")).encode()
     data_file = hashed("jobs.json", payload)
     (out / data_file).write_bytes(payload)
@@ -155,8 +176,11 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--data", type=Path, default=Path("data"))
     ap.add_argument("--out", type=Path, default=Path("site"))
+    ap.add_argument("--lists", type=Path, default=Path("lists"))
+    ap.add_argument("--profiles", type=Path, default=Path("companies/profiles.json"))
     args = ap.parse_args(argv)
-    print(json.dumps(render(args.data, args.out, datetime.now(timezone.utc)), indent=1))
+    print(json.dumps(render(args.data, args.out, datetime.now(timezone.utc), memberships(args.lists),
+                            load_companies(args.profiles, args.lists)), indent=1))
     return 0
 
 

@@ -1,0 +1,61 @@
+list,name,ats,board_key,reason
+AI labs,Google DeepMind,other,,no board found
+AI labs,Hugging Face,workable,huggingface,Workable account slug; only Workable search is read
+AI labs,Kyutai,unknown,,no board found
+AI labs,Sakana AI,workable,sakana-ai,Workable account slug; only Workable search is read
+AI labs,AI21 Labs,other,,no board found
+AI labs,Contextual AI,unknown,,no board found
+AI labs,EvolutionaryScale,unknown,,no board found
+AI labs,InstaDeep,other,,no board found
+Berlin hottest,Langfuse,other,,no board found
+Berlin hottest,Circula,recruitee,circula,recruitee not read yet
+Berlin hottest,sennder,smartrecruiters,senndergmbh,smartrecruiters not read yet
+Berlin hottest,Pitch,workable,pitch-software,Workable account slug; only Workable search is read
+Global remote,Deel,other,,no board found
+Global remote,Ghost,other,,no board found
+Global remote,Meilisearch,lever,meili,lever not read yet
+Global remote,Fly.io,other,,no board found
+Global remote,Nextcloud,other,,no board found
+Global remote,Discourse,other,,no board found
+Global remote,Toggl,unknown,,no board found
+Global remote,Float,other,,no board found
+Global remote,Chainlink Labs,unknown,,no board found
+Italy hottest,Bending Spoons,other,,no board found
+Italy hottest,Casavo,other,,no board found
+Italy hottest,Jet HR,teamtailor,,no board found
+Italy hottest,Niulinx,unknown,,no board found
+Italy hottest,Qomodo,unknown,,no board found
+Italy hottest,Compri,teamtailor,compriai,teamtailor not read yet
+Italy hottest,Pillar,unknown,,no board found
+Italy hottest,Tundr,teamtailor,,no board found
+Italy hottest,Skillvue,unknown,,no board found
+Italy hottest,Smartness,other,,no board found
+Italy hottest,Up2You,unknown,,no board found
+Italy hottest,Spoki,other,,no board found
+Italy hottest,Hotiday,unknown,,no board found
+Italy hottest,Cubbit,other,,no board found
+Italy hottest,Mia-Platform,recruitee,miaplatform,recruitee not read yet
+Italy hottest,Cortilia,teamtailor,,no board found
+Italy hottest,Prima Assicurazioni,lever,prima,lever not read yet
+Italy hottest,Tot,unknown,,no board found
+Italy hottest,Fiscozen,other,,no board found
+Italy hottest,Arduino,other,,no board found
+Italy hottest,D-Orbit,other,,no board found
+Italy hottest,AIKO,unknown,,no board found
+Italy hottest,Leaf Space,teamtailor,leafspace,teamtailor not read yet
+Italy hottest,Kurs Orbital,unknown,,no board found
+Italy hottest,newcleo,other,,no board found
+Italy hottest,Energy Dome,other,,no board found
+Italy hottest,Domyn (iGenius),other,,no board found
+Italy hottest,Translated,other,,no board found
+Italy hottest,Musixmatch,lever,musixmatch,lever not read yet
+Italy hottest,Unobravo,teamtailor,unobravo,teamtailor not read yet
+Italy hottest,WeRoad,teamtailor,weroad,teamtailor not read yet
+Italy hottest,MotorK,workable,motork,Workable account slug; only Workable search is read
+Italy hottest,Vedrai,unknown,,no board found
+UK hottest,Revolut,other,,no board found
+UK hottest,Starling Bank,workable,starling-bank,Workable account slug; only Workable search is read
+UK hottest,Luminance,workable,luminance-1,Workable account slug; only Workable search is read
+UK hottest,Octopus Energy,lever,octoenergy,lever not read yet
+UK hottest,Fuse Energy,workable,fuseenergy,Workable account slug; only Workable search is read
+UK hottest,Numan,lever,numan,lever not read yet

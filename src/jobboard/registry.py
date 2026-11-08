@@ -74,6 +74,62 @@ def import_bet(companies_txt: str, boards_json: str, workable_json: str) -> list
     return [rows[k] for k in sorted(rows)]
 
 
+LIST_COLUMNS = ["name", "website", "country", "city", "why", "source_url", "careers_url", "ats", "board_key", "checked"]
+SCANNED = {"ashby", "greenhouse"}     # list boards we can read today; Workable list keys are account slugs,
+                                      # not the search's company IDs, so they wait for an account retriever
+
+
+def list_label(path: Path) -> str:
+    """lists/ai-labs.csv -> 'AI labs'; uk-hottest -> 'UK hottest'."""
+    words = path.stem.replace("_", "-").split("-")
+    return " ".join(w.upper() if w in ("ai", "uk", "eu", "us") else w for w in words).capitalize().replace("Ai ", "AI ").replace("Uk ", "UK ")
+
+
+def read_lists(lists: Path) -> list[dict]:
+    rows = []
+    for path in sorted(lists.glob("*.csv")):
+        with path.open(newline="", encoding="utf-8") as stream:
+            reader = csv.DictReader(stream)
+            if reader.fieldnames != LIST_COLUMNS:
+                raise ValueError(f"{path}: columns {reader.fieldnames} != {LIST_COLUMNS}")
+            rows += [r | {"list": list_label(path), "file": path.name} for r in reader]
+    return rows
+
+
+def import_lists(lists: Path) -> tuple[list[dict], list[dict]]:
+    """Boards to scan (companies/lists.csv rows) and the entries we can't scan yet (coverage report)."""
+    boards: dict[tuple[str, str], dict] = {}
+    unscanned = []
+    for r in read_lists(lists):
+        if r["ats"] in SCANNED and r["board_key"]:
+            row = boards.setdefault((r["ats"], r["board_key"]), {c: "" for c in COLUMNS} | {
+                "provider": r["ats"], "key": r["board_key"], "name": r["name"], "website": r["website"]})
+            row["origins"] = "|".join(sorted(set(filter(None, row["origins"].split("|"))) | {"list:" + r["file"][:-4]}))
+        else:
+            unscanned.append(dict(list=r["list"], name=r["name"], ats=r["ats"], board_key=r["board_key"],
+                                  reason="no board found" if not r["board_key"] else
+                                  "Workable account slug; only Workable search is read" if r["ats"] == "workable"
+                                  else f"{r['ats']} not read yet"))
+    return [boards[k] for k in sorted(boards)], unscanned
+
+
+def memberships(lists: Path) -> dict[str, list[str]]:
+    """company_id (provider:key, lowercase) -> list labels, for the board's list filter."""
+    out: dict[str, set[str]] = {}
+    if lists.exists():
+        for r in read_lists(lists):
+            if r["board_key"]:
+                out.setdefault(f"{r['ats']}:{r['board_key']}".lower(), set()).add(r["list"])
+    return {k: sorted(v) for k, v in out.items()}
+
+
+def write_csv(path: str, rows: list[dict], columns: list[str]) -> None:
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=columns, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -82,7 +138,18 @@ def main() -> int:
     bet.add_argument("boards_json")
     bet.add_argument("workable_json")
     bet.add_argument("--out", required=True)
+    lst = sub.add_parser("import-lists")
+    lst.add_argument("lists", type=Path)
+    lst.add_argument("--out", required=True)
+    lst.add_argument("--coverage", required=True)
     args = ap.parse_args()
+    if args.cmd == "import-lists":
+        boards, unscanned = import_lists(args.lists)
+        write_csv(args.out, boards, COLUMNS)
+        write_csv(args.coverage, unscanned, ["list", "name", "ats", "board_key", "reason"])
+        print(f"{args.out}: {len(boards)} boards to scan; {args.coverage}: {len(unscanned)} entries not scanned",
+              file=sys.stderr)
+        return 0
     rows = import_bet(*(Path(p).read_text(encoding="utf-8") for p in
                         (args.companies_txt, args.boards_json, args.workable_json)))
     with open(args.out, "w", newline="", encoding="utf-8") as f:
