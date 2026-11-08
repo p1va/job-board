@@ -132,9 +132,13 @@ SUBDIVISIONS = {
     **{s: "CA" for s in ("ontario", "quebec", "québec", "british columbia", "alberta", "nova scotia", "manitoba",
                          "saskatchewan", "new brunswick", "newfoundland")},
     **{s: "AU" for s in ("new south wales", "queensland")},
-    # European states and regions, which German, Austrian, Swiss, Italian, Spanish, French and Dutch
-    # employers often give instead of a country ("Remote (Sachsen)", "BK, Bayern"). Names shared with a
-    # country or another country's region (Limburg, Luxembourg, Georgia, Marche) are left out.
+}
+
+# European states and regions, which German, Austrian, Swiss, Italian, Spanish, French and Dutch employers
+# often give instead of a country ("Remote (Sachsen)", "BK, Bayern"). Weaker than SUBDIVISIONS: like a city,
+# they count only when nothing explicit is said, so "Normandy, MO" and "Hessen, Kansas" stay American.
+# Names shared with a country or another country's region (Limburg, Luxembourg, Georgia, Marche) are left out.
+EU_REGIONS = {
     **{s: "DE" for s in ("baden-württemberg", "baden-wuerttemberg", "bayern", "bavaria", "brandenburg", "hessen",
                          "hesse", "mecklenburg-vorpommern", "niedersachsen", "lower saxony", "nordrhein-westfalen",
                          "north rhine-westphalia", "nrw", "rheinland-pfalz", "rhineland-palatinate", "saarland",
@@ -203,6 +207,7 @@ _COUNTRY_ANY = _alternation(_COUNTRY_NAMES)
 _COUNTRY_KEYS, _CITY_KEYS = _lookup(_COUNTRY_NAMES), _lookup(CITIES)
 _CITY_ANY = _alternation(CITIES)
 _SUBDIV_ANY = _alternation(SUBDIVISIONS)
+_EU_REGION_ANY, _EU_REGION_KEYS = _alternation(EU_REGIONS), _lookup(EU_REGIONS)
 _REGION_ANY = _alternation(REGIONS)
 _SUBDIV_KEYS, _REGION_KEYS = _lookup(SUBDIVISIONS), _lookup(REGIONS)
 # Uppercase tokens only, so "us" in "join us" or "it" never count
@@ -243,7 +248,9 @@ def _countries(text: str) -> tuple[set[str], bool]:
         explicit.add("US")                    # ", NH", ", CA": only US states
     if explicit:
         return explicit, True
-    cities = {c for m in _CITY_ANY.finditer(masked) if (c := _CITY_KEYS.get(_key(m.group(1))))} or _town(masked)
+    cities = {c for m in _EU_REGION_ANY.finditer(masked) if (c := _EU_REGION_KEYS.get(_key(m.group(1))))}
+    cities |= {c for m in _CITY_ANY.finditer(masked) if (c := _CITY_KEYS.get(_key(m.group(1))))}
+    cities = cities or _town(masked)
     if state and not cities & EUROPE:
         return cities | {"US"}, True          # ", DE" without a European city: Delaware
     return cities, False                      # "Berlin, DE", "Valletta, MT": the city decides
@@ -285,6 +292,29 @@ def _bare(part: str) -> bool:
     return not FILLER.sub("", _REGION_ANY.sub("", REMOTE.sub("", part))).strip()
 
 
+STYLE_WORD = r"(?:remote|hybrid|on[- ]?site|in[- ]office|office[- ]based)"
+# "(On-site/Remote/Hybrid)": alternative work styles for the place they follow
+STYLE_GROUP = re.compile(rf"\(\s*({STYLE_WORD}(?:\s*[/,|&]\s*{STYLE_WORD})*)\s*\)", re.I)
+
+
+def _style(word: str) -> str:
+    return "remote" if REMOTE.search(word) else "hybrid" if HYBRID.search(word) else "onsite"
+
+
+def _split(raw: str) -> list[str]:
+    """SEGMENT pieces, except inside a closed pair of parentheses: "Remote (US/CAN)" and
+    "Tokyo (Remote/Hybrid)" each stay one place."""
+    out, start = [], 0
+    for m in SEGMENT.finditer(raw):
+        before, after = raw[:m.start()], raw[m.end():]
+        if before.count("(") > before.count(")") and after.count(")") > after.count("("):
+            continue
+        out.append(raw[start:m.start()])
+        start = m.end()
+    out.append(raw[start:])
+    return [p for p in out if p and p.strip()]
+
+
 def _style_only(part: str) -> bool:
     """Only "Hybrid" or "On-site" (and filler): how the job is worked, not where."""
     return bool(HYBRID.search(part) or ONSITE.search(part)) and not REMOTE.search(part) \
@@ -311,14 +341,13 @@ def parse(locations, structured_countries=(), workplace: str | None = None) -> P
         code = country_code(attached) if attached else None
         if attached and not code:
             unparsed = True
-        parts = [p for p in SEGMENT.split(raw or "") if p and p.strip()]
+        parts = _split(raw or "")
         if not parts and code:
             where.add((code, declared or "unknown"))
-        styles: set[str] = set()   # a work style given as its own piece: "Darmstadt // Hybrid"
-        found: list[tuple[set[str], str]] = []
+        items: list[tuple] = []   # in order: ("style", mode) or ("place", places, modes)
         for part in parts:
             if not declared and _style_only(part):
-                styles.add("hybrid" if HYBRID.search(part) else "onsite")
+                items.append(("style", _style(part)))
                 continue
             named, explicit = _countries(part)
             regions = regions_in(part)
@@ -330,7 +359,10 @@ def parse(locations, structured_countries=(), workplace: str | None = None) -> P
                 # the provider's country for this location beats a city alias; an address never narrows
                 # an explicit scope label such as "Remote - Worldwide"
                 named = {code}
-            if REMOTE.search(part) or "worldwide" in regions:
+            group = None if declared else STYLE_GROUP.search(part)
+            if group:
+                mode = "styles"
+            elif REMOTE.search(part) or "worldwide" in regions:
                 mode = "remote"
             elif declared:
                 mode = declared
@@ -341,19 +373,32 @@ def parse(locations, structured_countries=(), workplace: str | None = None) -> P
             else:
                 mode = "unknown"
             places_named = named | regions
+            modes = {_style(w) for w in re.split(r"\s*[/,|&]\s*", group.group(1))} if group else {mode}
             if places_named:
-                found.append((places_named, mode))
-            elif mode == "remote" and _bare(part):
+                items.append(("place", places_named, modes))
+            elif "remote" in modes and _bare(STYLE_GROUP.sub(" ", part) if group else part):
                 where.add(("unstated", "remote"))
             elif not _bare(part) and not HYBRID.fullmatch(part.strip()):
                 unparsed = True
             elif declared == "remote":
                 where.add(("unstated", "remote"))
-        # "Germany (Remote/Hybrid/On-site)": the styles apply to the places in the same string, and
-        # replace "unknown"; a bare "Remote" piece keeps meaning remote from somewhere unstated.
-        for places_named, mode in found:
-            modes = (styles | {mode}) - {"unknown"} if styles else {mode}
-            where |= {(pl, m) for pl in places_named for m in modes}
+        # "Darmstadt // Hybrid", "Hybrid / Berlin": a work style on its own describes the nearest place
+        # before it (else after it), and only one that doesn't already say how it's worked. A bare
+        # "Remote" piece is not a style here: it keeps meaning remote from somewhere unstated.
+        styled: dict[int, set[str]] = {}
+        for i, item in enumerate(items):
+            if item[0] != "style":
+                continue
+            for step in (-1, 1):
+                j = i + step
+                while 0 <= j < len(items) and items[j][0] == "style":
+                    j += step
+                if 0 <= j < len(items) and items[j][2] == {"unknown"}:
+                    styled.setdefault(j, set()).add(item[1])
+                    break
+        for i, item in enumerate(items):
+            if item[0] == "place":
+                where |= {(pl, m) for pl in item[1] for m in styled.get(i, item[2])}
     for name in structured_countries:
         if not name:
             continue

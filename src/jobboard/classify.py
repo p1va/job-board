@@ -57,7 +57,9 @@ BARE = re.compile(r"^\W*((senior|sr\.?|staff|principal|lead|junior|jr\.?|mid[- ]
 COMPOUND = re.compile(
     r"\b(software|backend|back-end|frontend|front-end|full-?stack|web|app|apps|anwendungs|applikations|mobile|"
     r"ios|android|java|python|php|spiele|game|datenbank|embedded|cloud|sap|abap|typo3|ki|devops|plattform|"
-    r"platform|net)-?(entwickler|architekt|ingenieur)|\b(software|anwendungs)-?entwicklung\b", _I)
+    r"platform|net)-?(entwickler|architekt|ingenieur)|\b(software|anwendungs)-?entwicklung\b|"
+    r"\bing[ée]nieur(\(e\)|e|s)? (en )?(logiciel|d[ée]veloppement|software|backend|frontend|full[- ]?stack|devops)|"
+    r"\bingegner[ei] (del )?software\b|\bingenier[oa]s? de software\b|\bdesarrollo de software\b", _I)
 
 RULES: list[tuple[str, re.Pattern]] = [
     ("engineering_management", re.compile(
@@ -66,7 +68,8 @@ RULES: list[tuple[str, re.Pattern]] = [
         r"head of (platform|infrastructure|data engineering|ml|ai|machine learning)|engineering lead|"
         r"(software|platform|data|ml|infrastructure) engineering (team )?(manager|lead|director)|"
         r"(director|head|vp|vice president)\b[^|]{0,40}\bengineering|"
-        r"(head|director|vp|team ?lead|manager),? (of )?(software development|development(?=\s*($|[,(\-–—|:])))|"
+        r"(head|director|vp|team ?lead|manager),? (of )?(software|mobile|web|app|game|platform|backend|frontend) "
+        r"development|"
         r"(development|developer|dev) team (lead|manager)|"
         r"(team ?leiter(in)?|team ?leitung|leiter(in)?|leitung|abteilungsleiter(in)?|bereichsleiter(in)?|head of)"
         r"\b[^|]{0,30}(software-?entwicklung|anwendungsentwicklung|(software|mobile|web|app|backend|frontend) "
@@ -92,8 +95,8 @@ SOFTWARE_DE = re.compile(r"\bsoftware\b|software-?(entwickl|architekt|ingenieur)
 
 SENIORITY: list[tuple[str, re.Pattern]] = [
     ("intern", re.compile(r"\b(intern|internship|praktikum|praktikant(in)?|working student|werkstudent(in)?|trainee|"
-                         r"apprentice(ship)?|ausbildung|auszubildende[rn]?|azubi|stage|stagiaire|tirocinio|"
-                         r"becario|pr[áa]cticas|stagiair)\b", _I)),
+                         r"apprentice(ship)?|ausbildung|auszubildende[rn]?|azubi|stagiaire|tirocinio|"
+                         r"becario|pr[áa]cticas|stagiair)\b|^\W*stage\b|(?<![-\w])stage (de|d'|d’|en)\b", _I)),
     ("executive", re.compile(r"\b(cto|cpo|chief|vp|vice president|svp|head of|director)\b", _I)),
     ("manager", re.compile(r"\b(manager|management)\b", _I)),
     ("principal", re.compile(r"\b(principal|staff|distinguished|fellow|architect)\b", _I)),

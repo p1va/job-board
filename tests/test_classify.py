@@ -41,6 +41,8 @@ FAMILIES = [
     ("Softwareentwicklung - .NET (C# / VB.NET) mit Kundenprojekten", "software_engineering"),
     ("Teamleiter Softwareentwicklung C++ - Mobile Security (w/m/d)", "engineering_management"),
     ("Teamleiter Mobile Development - Flutter (w/m/d)", "engineering_management"),
+    ("Ingénieur logiciel", "software_engineering"), ("Ingénieur(e) Développement Java", "software_engineering"),
+    ("Ingegnere del Software", "software_engineering"), ("Ingeniera de Software Senior", "software_engineering"),
     ("Desarrollador/a Senior Full Stack", "software_engineering"), ("Développeur Fullstack H/F", "software_engineering"),
     ("Développeur(se) logiciel principal", "software_engineering"), ("Sviluppatore Backend Java", "software_engineering"),
     ("Senior Developer m/w/d", "software_engineering"), ("Entwickler (m/w/d)", "software_engineering"),
@@ -55,9 +57,12 @@ FAMILIES = [
     ("Staff Engineer, Full Stack (Trust, Safety & Risk)", "software_engineering"),
     ("Senior Security Engineer (AI Safety)", "software_engineering"), ("Senior Systems HPC Engineer", "software_engineering"),
     ("IT-Netzwerk Engineer (m/w/d) – Netzwerk & Security", None),
-    # development leadership, but not fundraising or finance "development"
-    ("Director of Development, Minecraft Core", "engineering_management"), ("VP Development", "engineering_management"),
-    ("Development Team Lead", "engineering_management"),
+    # development leadership only with a software word: bare "Director of Development" is often fundraising
+    # or real estate
+    ("Head of Software Development", "engineering_management"), ("Development Team Lead", "engineering_management"),
+    ("Director of Development", None), ("Head of Development", None),
+    ("Head of Development - Real Estate", None), ("VP Development - Fundraising", None),
+    ("Director of Development (Philanthropy)", None),
     ("Director, Development Cost Management & Capital Planning EMEA", None),
     # never kept
     ("Sales Engineer", None), ("Solutions Engineer", None), ("Forward Deployed Engineer", None),
@@ -77,7 +82,10 @@ def test_role_family(title, family):
     ("Staff Engineer", "principal"), ("Engineering Manager", "manager"), ("VP Engineering", "executive"),
     ("Junior Developer", "junior"), ("Backend Engineer", None),
     ("Ausbildung Fachinformatiker*in Anwendungsentwicklung (m/w/d)", "intern"),
-    ("Werkstudentin Softwareentwicklung", "intern"), ("Stage Développeur Python", "intern")])
+    ("Werkstudentin Softwareentwicklung", "intern"), ("Stage Développeur Python", "intern"),
+    ("Stage de fin d'études - Data Engineer", "intern"),
+    ("Senior Software Engineer - Early-Stage Startup", "senior"), ("Stage Data Analyst", "intern"),
+    ("Senior Software Engineer - Stage Lighting", "senior"), ("Staff Engineer, Multi-Stage Pipelines", "principal")])
 def test_seniority(title, level):
     assert seniority(title) == level
 
