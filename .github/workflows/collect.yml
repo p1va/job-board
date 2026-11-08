@@ -121,9 +121,12 @@ jobs:
             echo "superseded=true" >> "$GITHUB_OUTPUT"
             echo "::warning::A newer run's data is already committed; this run publishes nothing."
           fi
+      # optional enrichment, capped at 5 minutes; a failure here never blocks publishing
       - name: Fetch missing company names and logos
         if: steps.join.outputs.superseded != 'true'
-        run: uv run python -m jobboard.profiles --data data --profiles companies/profiles.json --limit 300
+        continue-on-error: true
+        timeout-minutes: 7
+        run: uv run python -m jobboard.profiles --data data --profiles companies/profiles.json --limit 300 --budget 300
       - name: Render and validate the board
         if: steps.join.outputs.superseded != 'true'
         run: |

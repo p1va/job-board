@@ -40,7 +40,7 @@ def public_url(value) -> str | None:
 
 
 def _json(request: urllib.request.Request) -> dict:
-    with urllib.request.urlopen(request, timeout=30) as response:
+    with urllib.request.urlopen(request, timeout=10) as response:
         return json.load(response)
 
 
@@ -77,30 +77,35 @@ def wanted(data: Path, profiles: dict, now: datetime) -> list[str]:
 
     def stale(board_id: str) -> bool:
         fetched = (profiles.get(board_id) or {}).get("fetchedAt")
-        if not profiles.get(board_id):
-            return True
-        return bool(fetched) and now - datetime.fromisoformat(fetched) > MAX_AGE
+        if not profiles.get(board_id) or not fetched:
+            return True                       # missing, or of unknown age
+        return now - datetime.fromisoformat(fetched) > MAX_AGE
 
     return sorted((b for b in counts if stale(b)), key=lambda b: (-counts[b], b))
 
 
 def refresh(data: Path, path: Path, now: datetime, *, limit: int = 300, interval: float = 0.5,
-            fetchers=FETCH, sleep=time.sleep) -> dict:
+            budget: float = 300, fetchers=FETCH, sleep=time.sleep, clock=time.monotonic) -> dict:
+    """Optional enrichment: stops after `budget` seconds so it can't hold up publishing."""
     profiles = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
     todo = wanted(data, profiles, now)[:limit]
-    done, failed = 0, {}
+    done, failed, started = 0, {}, clock()
     for board_id in todo:
+        if clock() - started > budget:
+            break
         provider, key = board_id.split(":", 1)
         try:
             profile = fetchers[provider](key)
         except (urllib.error.URLError, OSError, ValueError) as exc:
             failed[board_id] = f"{type(exc).__name__}: {exc}"[:120]
         else:
-            profiles[board_id] = profile | {"fetchedAt": now.isoformat()}
+            # keep fields this provider doesn't send (a Greenhouse refresh has no logo or website)
+            profiles[board_id] = (profiles.get(board_id) or {}) | profile | {"fetchedAt": now.isoformat()}
             done += 1
         sleep(interval)
     path.write_text(json.dumps(profiles, indent=1, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8")
-    return dict(wanted=len(todo), fetched=done, failed=len(failed), failures=dict(list(failed.items())[:20]))
+    return dict(wanted=len(todo), fetched=done, failed=len(failed), unfinished=len(todo) - done - len(failed),
+                failures=dict(list(failed.items())[:20]))
 
 
 def main(argv=None) -> int:
@@ -108,8 +113,10 @@ def main(argv=None) -> int:
     ap.add_argument("--data", type=Path, default=Path("data"))
     ap.add_argument("--profiles", type=Path, default=Path("companies/profiles.json"))
     ap.add_argument("--limit", type=int, default=300)
+    ap.add_argument("--budget", type=float, default=300, help="seconds to spend at most")
     args = ap.parse_args(argv)
-    print(json.dumps(refresh(args.data, args.profiles, datetime.now(timezone.utc), limit=args.limit), indent=1))
+    print(json.dumps(refresh(args.data, args.profiles, datetime.now(timezone.utc), limit=args.limit,
+                             budget=args.budget), indent=1))
     return 0
 
 
