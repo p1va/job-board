@@ -14,6 +14,7 @@ from datetime import datetime
 from enum import StrEnum
 
 import pyarrow as pa
+import pyarrow.compute as pc
 
 SCHEMA_VERSION = 1
 
@@ -108,7 +109,8 @@ class Manifest:
         p = []
         for f in RAW_SCHEMA:          # an in-memory table can hold nulls in non-nullable columns
             nulls = raw.column(f.name).null_count
-            empty = sum(1 for v in raw.column(f.name).to_pylist() if v == "") if pa.types.is_string(f.type) else 0
+            # counted in Arrow: converting the payload column to Python would copy every description
+            empty = pc.sum(pc.equal(raw.column(f.name), "")).as_py() or 0 if pa.types.is_string(f.type) else 0
             if not f.nullable and (nulls or empty):
                 p.append(f"{f.name}: {nulls + empty} missing values")
         for col, expected in (("schema_version", SCHEMA_VERSION), ("source", self.source), ("run_id", self.run_id)):

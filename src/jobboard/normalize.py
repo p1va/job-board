@@ -154,10 +154,14 @@ def normalize(source: str, board: str, native_id: str, payload: str, run_id: str
                salary_currency=f["salary_currency"], salary_period=f["salary_period"],
                description_text=text, description_sha=hashlib.sha256(text.encode()).hexdigest()[:20],
                role_family=classify.role_family(title), seniority=classify.seniority(title))
-    row["stack"] = classify.stack(f"{title}\n{text}") if row["role_family"] else []
-    row["payload_hash"] = payload_hash(row)
+    row["stack"] = []
     # Kept: listed publicly, a role family, and in or open to Europe; or remote with nothing stated at all
     # (a place we couldn't read is not "nothing stated").
     unstated = "unstated|remote" in place.where and not place.countries and not place.unparsed
     row["kept"] = bool(row["role_family"]) and row["listed"] and (places.in_europe(place) or unstated)
+    # Stack tags are the costliest step (dozens of patterns over the description), so only kept jobs
+    # get them; deterministic, so the hash of a job is stable from run to run.
+    if row["kept"]:
+        row["stack"] = classify.stack(f"{title}\n{text}")
+    row["payload_hash"] = payload_hash(row)
     return row
