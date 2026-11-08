@@ -113,6 +113,9 @@ def write_summary(manifest: Manifest, report: dict) -> str:
         text += f"\nEnglish fallback filled {filled} descriptions; {missing} jobs still have no description.\n"
         if missing:
             print(f"::warning::Personio {manifest.shard}: {missing} jobs have no description after the English fallback.")
+        invalid = sum(t.get("invalid_positions", 0) for t in report["scope_totals"].values())
+        if invalid:
+            text += f"\nSkipped {invalid} postings with no title; affected boards remain incomplete.\n"
     if path := os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(path, "a", encoding="utf-8") as stream:
             stream.write(text + "\n")

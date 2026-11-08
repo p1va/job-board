@@ -13,6 +13,7 @@ import hashlib
 import json
 import shutil
 import sys
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -123,6 +124,17 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
     if missing:
         raise ValueError(f"{len(missing)} open jobs have no version matching their state, e.g. {sorted(missing)[:3]}")
     lists, companies = lists or {}, companies or {}
+    companies = {k: dict(v) for k, v in companies.items()}
+    names = defaultdict(Counter)
+    for v in versions.values():
+        if v["company_name"]:
+            names[v["company_id"].lower()][v["company_name"].strip()] += 1
+    # A board can contain several legal entities: choose one fallback consistently for its
+    # heading, dropdown and every role, including roles without a company name.
+    for company_id, counts in names.items():
+        profile = companies.setdefault(company_id, {})
+        if not profile.get("name"):
+            profile["name"] = min(counts, key=lambda name: (-counts[name], name.casefold(), name))
     jobs, descriptions = [], {}
     for key in sorted(versions):
         v = versions[key]

@@ -35,14 +35,19 @@ base feed's set of positions remain authoritative. There is no language guess
 or German retry. A failed optional fetch keeps the complete base board; missing
 descriptions and enrichment errors appear in the report and Actions summary.
 An HTTP 404 or malformed feed is unresolved; only a valid, empty XML feed is
-an empty successful board. Discovery validates the base feed without the
+an empty successful board. A position without a title is set aside; usable
+postings flow through as partial, so absence cannot close a previously tracked
+job. Discovery retains these live boards and reports the invalid positions.
+Discovery validates the base feed without the
 optional description request.
 
 Locations are free text: the feed has no country field. The adapter preserves
 the main office and additional offices for the shared places rules; it does
 not assume Germany from the provider, employer or domain. Salary units stay
 year/month/hour as reported, and `createdAt` supplies the posting timestamp.
-The company name falls back to `subcompany` when no cached/list profile exists.
+The company name falls back to the most common `subcompany` across that board's
+open jobs when no cached/list profile exists, with a deterministic tie-break.
+One board uses the same label for headings, filters and roles.
 
 ## Workable scope and cost
 

@@ -134,6 +134,10 @@ def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: 
                 for job in jobs:
                     _identity(job, source, selection.board)
                 jobs, totals = _personio_descriptions(jobs, get, url, scope, deadline, clock)
+                invalid = data.get("invalid_positions") or []
+                if invalid:
+                    totals["invalid_positions"] = len(invalid)
+                    totals["invalid_position_ids"] = [j["id"] for j in invalid][:10]
             total = data.get("totalSize") if source == "workable" else (data.get("meta") or {}).get("total")
             if source == "workable" and type(total) is not int:
                 raise ValueError("Workable response missing integer totalSize")
@@ -159,7 +163,11 @@ def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: 
             if token is None or token == "":
                 if len(rows) < expected:
                     raise ValueError(f"pagination ended with {len(rows)} jobs, advertised {expected}")
-                scope.status = Status.COMPLETE if rows else Status.EMPTY
+                if source == "personio" and totals.get("invalid_positions"):
+                    scope.status = Status.PARTIAL if rows else Status.FAILED
+                    scope.error = f"{totals['invalid_positions']} Personio positions have no name"
+                else:
+                    scope.status = Status.COMPLETE if rows else Status.EMPTY
                 break
             if not isinstance(token, str) or token in cursors or not jobs:
                 raise ValueError("invalid/repeated cursor or empty intermediate page")

@@ -68,7 +68,7 @@ def read_csv(path: Path) -> list[dict]:
 def discover(rows: list[dict], known: set[tuple[str, str]], get, skip: set[tuple[str, str]] = frozenset(),
              providers: set[str] | None = None) -> tuple[list[dict], dict]:
     found, new, live, failed = Counter(), Counter(), Counter(), Counter()
-    out, jobs = [], {}
+    out, jobs, invalid = [], {}, {}
     for r in sorted(rows, key=lambda r: (r["ats"], -int(r.get("captures") or 0), r["board_key"])):
         ats, key = r["ats"], r["board_key"].strip()
         found[ats] += 1
@@ -99,8 +99,12 @@ def discover(rows: list[dict], known: set[tuple[str, str]], get, skip: set[tuple
         known.add((ats, key.lower()))
         out.append({c: "" for c in COLUMNS} | {"provider": ats, "key": key, "origins": "athena"})
         jobs[f"{ats}:{key}"] = len(data.get("jobs") or [])
+        if ats == "personio" and data.get("invalid_positions"):
+            invalid[f"{ats}:{key}"] = len(data["invalid_positions"])
     report = dict(found=dict(found), new=dict(new), live_added=dict(live), not_added=dict(failed),
                   next_providers={a: n for a, n in new.most_common() if a not in CHECK}, jobs_on_added=jobs)
+    if invalid:
+        report["invalid_positions_on_added"] = invalid
     return out, report
 
 

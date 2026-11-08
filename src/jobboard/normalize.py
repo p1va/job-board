@@ -134,7 +134,11 @@ def _personio(job: dict, board: str) -> dict:
                   "freelance": "Contract", "temporary": "Temporary", "fixed_term": "Fixed term"}.get(job.get("employmentType"))
     employment = employment or {"full-time": "FullTime", "part-time": "PartTime",
                                  "full-or-part-time": "Full or part time"}.get(job.get("schedule")) or job.get("employmentType")
-    return dict(title=job.get("name"), department=job.get("department") or job.get("occupationCategory") or None,
+    category = job.get("occupationCategory")
+    department = job.get("department") or (
+        {"it_software": "IT / software", "r_and_d_and_science": "Research and science"}.get(category)
+        or category.replace("_", " ").capitalize() if category and category != "other" else None)
+    return dict(title=job.get("name"), department=department,
                 employment=employment, workplace=None, locations=locations, pairs=locations, structured=[],
                 published_at=_time(job.get("createdAt")), url=f"https://{board_slug(board)}.jobs.personio.de/job/{job['id']}",
                 salary_raw=None, salary_min=salary.get("min") or None, salary_max=salary.get("max") or None,

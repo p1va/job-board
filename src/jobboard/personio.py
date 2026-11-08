@@ -35,7 +35,7 @@ def parse_feed(body: bytes) -> dict:
         raise ValueError(f"invalid Personio XML: {exc}") from exc
     if root.tag != "workzag-jobs" or (root.text or "").strip():
         raise ValueError("not a Personio workzag-jobs feed")
-    jobs, ids = [], set()
+    jobs, invalid, ids = [], [], set()
     for position in root:
         if position.tag != "position":
             raise ValueError(f"unexpected Personio feed element: {position.tag}")
@@ -47,13 +47,14 @@ def parse_feed(body: bytes) -> dict:
         native_id = job.get("id")
         if not isinstance(native_id, str) or not re.fullmatch(r"[0-9]+", native_id):
             raise ValueError("Personio position has no numeric ID")
-        if not isinstance(job.get("name"), str) or not job["name"].strip():
-            raise ValueError(f"Personio position {native_id} has no name")
         if native_id in ids:
             raise ValueError(f"duplicate Personio position ID: {native_id}")
         ids.add(native_id)
+        if not isinstance(job.get("name"), str) or not job["name"].strip():
+            invalid.append(job)
+            continue
         jobs.append(job)
-    return {"jobs": jobs}
+    return {"jobs": jobs, "invalid_positions": invalid}
 
 
 def has_description(job: dict) -> bool:

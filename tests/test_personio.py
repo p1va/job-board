@@ -55,7 +55,7 @@ def test_urls_and_prefixed_keys_use_one_canonical_board(value):
 @pytest.mark.parametrize("body", [b"<html>Error</html>", b"<workzag-jobs>",
     b"<workzag-jobs><error>Unavailable</error></workzag-jobs>",
     b"<workzag-jobs><position><name>Engineer</name></position></workzag-jobs>",
-    b"<workzag-jobs><position><id>1</id></position></workzag-jobs>"])
+    b"<not-a-feed/>"])
 def test_an_error_or_malformed_feed_is_never_an_empty_board(body):
     with pytest.raises(ValueError):
         parse_feed(body)
@@ -112,6 +112,35 @@ def test_empty_board_needs_no_language_fetch_and_404_is_unresolved():
     assert result.scope.status == Status.FAILED and result.scope.http_status == 404
 
 
+def test_a_nameless_position_keeps_healthy_positives_but_cannot_resolve_absence():
+    data = parse_feed(XML.replace(b"<name>Data Scientist</name>", b"<name/>"))
+    assert len(data["jobs"]) == 1 and data["invalid_positions"][0]["id"] == "102"
+    get, _ = replay(data)
+    result = retrieve("personio", selection(), get, "run")
+    assert result.scope.status == Status.PARTIAL and result.scope.jobs == 1 and result.scope.error
+    assert result.totals["invalid_positions"] == 1 and result.rows[0]["native_id"] == "101"
+    get, _ = replay(data)
+    boards, report = discover([dict(ats="personio", board_key="example-gmbh", captures="1")], set(), get)
+    assert len(boards) == 1 and report["invalid_positions_on_added"] == {"personio:example-gmbh": 1}
+    empty_invalid = parse_feed(b"<workzag-jobs><position><id>1</id><name/></position></workzag-jobs>")
+    get, _ = replay(empty_invalid)
+    assert retrieve("personio", selection(), get, "run").scope.status == Status.FAILED
+
+
+def test_a_partial_feed_cannot_close_a_previously_named_job(tmp_path):
+    inputs = tmp_path / "companies"
+    inputs.mkdir()
+    (inputs / "seed.csv").write_text("provider,key\npersonio,example-gmbh\n")
+    for run_id, data in [("100-1", parse_feed(XML)),
+                         ("101-1", parse_feed(XML.replace(b"<name>Data Scientist</name>", b"<name/>")))]:
+        get, _ = replay(data, data)
+        raw = tmp_path / run_id
+        collect("personio", plan("personio", inputs), get, run_id, "0-of-1", raw / "personio/0-of-1")
+        joined = join(raw, tmp_path / "data", inputs, run_id, NOW)
+        assert joined["statuses"] == {"open": 2}
+    assert joined["scopes"] == {"partial": 1}
+
+
 @pytest.mark.parametrize("period,expected", [("yearly", "year"), ("monthly", "month"), ("hourly", "hour")])
 def test_normalisation_keeps_all_offices_and_salary_units(period, expected):
     job = parse_feed(XML)["jobs"][0]
@@ -124,6 +153,13 @@ def test_normalisation_keeps_all_offices_and_salary_units(period, expected):
     assert row["published_at"].isoformat() == "2026-11-01T09:00:00+00:00"
     assert row["employment"] == "FullTime" and "• Build Python services.\n• Work with SQL." in row["description_text"]
     assert row["url"] == "https://example-gmbh.jobs.personio.de/job/101"
+
+
+def test_occupation_fallback_is_readable_and_other_is_unknown():
+    job = parse_feed(XML)["jobs"][1]
+    for category, expected in [("other", None), ("it_software", "IT / software"), ("engineering", "Engineering")]:
+        row = normalize("personio", "example-gmbh", "102", json.dumps(job | {"occupationCategory": category}), "r", NOW)
+        assert row["department"] == expected
 
 
 def test_personio_manifest_reaches_join_and_the_board_without_a_title_field(tmp_path):
@@ -140,6 +176,7 @@ def test_personio_manifest_reaches_join_and_the_board_without_a_title_field(tmp_
     board = render(tmp_path / "data", tmp_path / "site", NOW)
     jobs = json.loads((tmp_path / "site" / board["data_file"]).read_text())["jobs"]
     assert len(jobs) == 2 and all(j["source"] == "personio" for j in jobs)
+    assert {j["companyName"] for j in jobs} == {"Example GmbH"}
     assert pq.read_table(tmp_path / "data/boards.parquet")["status"].to_pylist() == ["live"]
 
 
@@ -150,3 +187,19 @@ def test_discovery_checks_xml_but_never_interpolates_an_invalid_host():
     boards, report = discover(rows, set(), get)
     assert len(boards) == 1 and boards[0]["provider"] == "personio" and len(calls) == 1
     assert report["not_added"] == {"personio ValueError": 1}
+
+
+def test_mixed_subcompanies_have_one_stable_board_label(tmp_path):
+    inputs = tmp_path / "companies"
+    inputs.mkdir()
+    (inputs / "seed.csv").write_text("provider,key\npersonio,example-gmbh\n")
+    data = parse_feed(XML)
+    data["jobs"][0]["subcompany"] = "Alpha GmbH"
+    data["jobs"][1]["subcompany"] = "Beta GmbH"
+    get, _ = replay(data, data)
+    collect("personio", plan("personio", inputs), get, "100-1", "0-of-1", tmp_path / "raw/personio/0-of-1")
+    join(tmp_path / "raw", tmp_path / "data", inputs, "100-1", NOW)
+    for profiles, expected in [({}, "Alpha GmbH"), ({"personio:example-gmbh": {"name": "Brand"}}, "Brand")]:
+        result = render(tmp_path / "data", tmp_path / "site", NOW, companies=profiles)
+        jobs = json.loads((tmp_path / "site" / result["data_file"]).read_text())["jobs"]
+        assert {j["companyName"] for j in jobs} == {expected}
