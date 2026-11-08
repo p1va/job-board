@@ -29,6 +29,7 @@ jobs:
     name: '${{ matrix.source }} ${{ matrix.shard }}-of-2'
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    # The collector flushes after 100 minutes, leaving time to validate and upload.
     strategy:
       fail-fast: false
       matrix:
@@ -53,8 +54,9 @@ jobs:
           --out "raw/$SOURCE/$SHARD-of-2"
           --limit-scopes "$SCOPE_LIMIT" --max-pages "$MAX_PAGES"
           --countries "$WORKABLE_COUNTRIES" --remote "$WORKABLE_REMOTE"
+          --deadline 6000
       # Upload successful scopes and partial positives even if another scope failed.
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: 'raw-${{ matrix.source }}-${{ matrix.shard }}-of-2'

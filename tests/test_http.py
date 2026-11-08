@@ -4,7 +4,7 @@ from urllib.error import HTTPError
 
 import pytest
 
-from jobboard.http import Client, retry_after
+from jobboard.http import Client, DeadlineExceeded, retry_after
 
 
 class Clock:
@@ -28,7 +28,7 @@ class Response(io.BytesIO):
         self.headers = headers
 
 
-def client(*responses, interval=0):
+def client(*responses, interval=0, deadline=None):
     clock, calls, events = Clock(), [], iter(responses)
 
     def open_(request, timeout):
@@ -38,7 +38,7 @@ def client(*responses, interval=0):
             raise event
         return event
 
-    return Client(opener=open_, interval=interval, sleep=clock.sleep, clock=clock), calls, clock
+    return Client(opener=open_, interval=interval, sleep=clock.sleep, clock=clock, deadline=deadline), calls, clock
 
 
 def test_requests_gzip_and_decodes_it():
@@ -90,3 +90,19 @@ def test_requests_are_paced_even_without_errors():
     c.get('https://example.test/two')
     assert clock.waits == [0.5]
     assert retry_after('bad') == 0
+
+
+def test_deadline_prevents_another_request_or_waiting_past_flush_time():
+    c, calls, clock = client(Response(), Response(), interval=2, deadline=1)
+    c.get('https://example.test/one')
+    with pytest.raises(DeadlineExceeded):
+        c.get('https://example.test/two')
+    assert len(calls) == 1 and clock.waits == []
+
+
+def test_socket_timeout_is_bounded_by_remaining_deadline():
+    timeouts = []
+    c = Client(interval=0, deadline=1, clock=lambda: 0,
+               opener=lambda req, timeout: timeouts.append(timeout) or Response())
+    c.get('https://example.test/jobs')
+    assert timeouts == [1]

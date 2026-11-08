@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import json
+import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from urllib.parse import quote, urlencode
 
 from .contract import SCHEMA_VERSION, Kind, Scope, Status
+from .http import DeadlineExceeded
 
 # Geographic Europe, including transcontinental countries and dependencies.
 # These are discovery selections, not evidence of a job's actual work eligibility.
@@ -35,6 +37,7 @@ class Selection:
 class Result:
     scope: Scope
     rows: list[dict] = field(default_factory=list)
+    totals: dict = field(default_factory=dict)
 
 
 def workable_selections(countries=None, remote: str = "include") -> list[Selection]:
@@ -67,13 +70,17 @@ def _identity(job: dict, source: str, board: str) -> tuple[str, str]:
     return board, str(native_id)
 
 
-def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: int = 5000, progress=None) -> Result:
+def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: int = 5000,
+             progress=None, deadline=None, clock=time.monotonic) -> Result:
     """A failed page keeps earlier positives, but can never establish absence."""
     scope = Scope(selection.scope_id, selection.kind, Status.FAILED)
     rows: dict[tuple[str, str], dict] = {}
     expected, cursor, cursors = 0, None, set()
+    totals = {}
     try:
         for _ in range(max_pages):
+            if deadline is not None and clock() >= deadline:
+                raise DeadlineExceeded("shard deadline reached")
             if source == "ashby":
                 url = f"https://api.ashbyhq.com/posting-api/job-board/{quote(selection.board, safe='')}?includeCompensation=true"
             elif source == "greenhouse":
@@ -96,6 +103,8 @@ def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: 
                 if type(total) is not int or total < 0:
                     raise ValueError("response has invalid total")
                 expected = max(expected, total)
+                totals.setdefault("first", total)
+                totals.update(last=total, maximum=expected)
             fetched_at = datetime.now(timezone.utc)
             page = {}
             for job in jobs:
@@ -124,5 +133,8 @@ def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: 
         scope.status = Status.PARTIAL if rows else Status.FAILED
         scope.http_status = getattr(exc, "code", scope.http_status)
         scope.error = f"{type(exc).__name__}: {exc}"
+        retry = (getattr(exc, "headers", None) or {}).get("Retry-After")
+        if retry:
+            scope.error += f" (Retry-After: {retry})"
     scope.jobs = len(rows)
-    return Result(scope, list(rows.values()))
+    return Result(scope, list(rows.values()), totals)

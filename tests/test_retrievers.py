@@ -113,3 +113,29 @@ def test_all_europe_and_remote_have_explicit_query_memberships():
     assert selected[-1].query == {'workplace': 'remote'}
     with pytest.raises(ValueError):
         workable_selections(['US'])
+
+
+def test_deadline_preserves_a_partial_walk_and_stops_unstarted_scopes():
+    now, calls = [0], []
+
+    def get(url):
+        calls.append(url)
+        now[0] = 10
+        return {'jobs': jobs('workable')[:1], 'totalSize': 2, 'nextPageToken': 'next'}
+
+    s = workable_selections([], 'only')[0]
+    result = retrieve('workable', s, get, 'r', deadline=1, clock=lambda: now[0])
+    assert result.scope.status == Status.PARTIAL and result.scope.jobs == 1 and result.scope.pages == 1
+    assert 'deadline' in result.scope.error.lower() and len(calls) == 1
+    result = retrieve('workable', s, get, 'r', deadline=1, clock=lambda: now[0])
+    assert result.scope.status == Status.FAILED and not result.rows and result.scope.pages == 0
+    assert len(calls) == 1
+
+
+def test_falling_totals_are_reported_without_claiming_a_complete_snapshot():
+    original = jobs('workable')
+    get, _ = replay({'jobs': original[:1], 'totalSize': 3, 'nextPageToken': 'next'},
+                    {'jobs': original[1:], 'totalSize': 2})
+    result = retrieve('workable', workable_selections([], 'only')[0], get, 'r')
+    assert result.totals == {'first': 3, 'last': 2, 'maximum': 3}
+    assert result.scope.status == Status.PARTIAL

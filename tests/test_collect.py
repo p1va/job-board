@@ -3,9 +3,9 @@ from pathlib import Path
 
 import pyarrow.parquet as pq
 
-from jobboard.collect import collect, selections
+from jobboard.collect import collect, main, selections, shard_selections
 from jobboard.contract import Kind, Manifest, Status
-from jobboard.retrievers import Selection
+from jobboard.retrievers import Selection, workable_selections
 
 
 def test_mixed_shard_writes_a_valid_artifact_and_unchanged_payload(tmp_path):
@@ -61,3 +61,43 @@ def test_invalid_retry_cannot_leave_an_old_completion_marker(tmp_path, monkeypat
     with pytest.raises(ValueError):
         collect('ashby', selected, lambda u: None, 'r', '0', tmp_path)
     assert not (tmp_path / 'manifest.json').exists()
+
+
+def test_workable_remote_has_its_own_shard_and_no_membership_is_lost():
+    selected = workable_selections()
+    shards = [shard_selections('workable', selected, i, 2) for i in range(2)]
+    assert [s.scope_id for s in shards[1]] == ['workable:search:remote']
+    assert len(shards[0]) == len(selected) - 1
+    assert sorted(s.scope_id for shard in shards for s in shard) == sorted(s.scope_id for s in selected)
+
+
+def test_cli_valid_failed_scopes_succeed_but_are_visible_in_actions_summary(tmp_path, monkeypatch):
+    import importlib
+    from urllib.error import HTTPError
+
+    module = importlib.import_module('jobboard.collect')
+    class FailedClient:
+        metrics = {'requests': 1, 'http_error_404': 1}
+        def __init__(self, **kwargs):
+            pass
+        def get(self, url):
+            raise HTTPError(url, 404, 'not found', {}, None)
+
+    monkeypatch.setattr(module, 'Client', FailedClient)
+    (tmp_path / 'seed.csv').write_text('provider,key\nashby,dead\n')
+    summary = tmp_path / 'summary.md'
+    monkeypatch.setenv('GITHUB_STEP_SUMMARY', str(summary))
+    out = tmp_path / 'raw'
+    assert main(['--source', 'ashby', '--inputs', str(tmp_path), '--out', str(out)]) == 0
+    manifest = Manifest.from_json((out / 'manifest.json').read_text())
+    assert manifest.problems(pq.read_table(out / 'jobs.parquet')) == []
+    assert '| failed | 404 | 1 |' in summary.read_text()
+
+
+def test_expired_deadline_still_writes_a_valid_unresolved_artifact(tmp_path):
+    def get(url):
+        raise AssertionError('should not request after deadline')
+    selected = [Selection('ashby:acme', Kind.BOARD, 'acme')]
+    manifest, _ = collect('ashby', selected, get, 'r', '0', tmp_path, deadline=0)
+    assert manifest.scopes[0].status == Status.FAILED and 'deadline' in manifest.scopes[0].error.lower()
+    assert manifest.problems(pq.read_table(tmp_path / 'jobs.parquet')) == []
