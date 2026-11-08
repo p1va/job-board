@@ -12,7 +12,7 @@ import csv
 import json
 import sys
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 PROVIDERS = ("ashby", "greenhouse", "workable")
 GREENHOUSE_HOSTS = {"boards.greenhouse.io", "job-boards.greenhouse.io", "job-boards.eu.greenhouse.io",
@@ -25,13 +25,15 @@ def parse_board(line: str) -> tuple[str, str] | None:
     line = line.strip()
     if not line or line.startswith("#"):
         return None
-    if "://" in line or line.startswith(("jobs.ashbyhq.com/", "boards.greenhouse.io/", "job-boards.")):
+    if "/" in line:               # a URL, with or without scheme; unsupported hosts are reported, not guessed
         url = urlparse(line if "://" in line else "https://" + line)
         slug = url.path.strip("/").split("/")[0]
         if url.hostname == "jobs.ashbyhq.com" and slug:
             return "ashby", slug
-        if url.hostname in GREENHOUSE_HOSTS and slug:
-            return "greenhouse", slug
+        if url.hostname in GREENHOUSE_HOSTS:
+            if slug == "embed":   # boards.greenhouse.io/embed/job_board?for=<slug>
+                slug = (parse_qs(url.query).get("for") or [""])[0]
+            return ("greenhouse", slug) if slug else None
         return None
     provider, sep, key = line.partition(":")
     if sep and provider in PROVIDERS and key:
@@ -60,8 +62,8 @@ def import_bet(companies_txt: str, boards_json: str, workable_json: str) -> list
         elif line.strip() and not line.strip().startswith("#"):
             skipped.append(line.strip())
     for board, info in json.loads(boards_json).items():
-        if board == "completed_crawls" or not isinstance(info, dict):
-            continue
+        if board.startswith("_") or board == "completed_crawls" or not isinstance(info, dict):
+            continue              # metadata such as "_meta": {"completed_crawls": [...]}, not a board
         de = info.get("de")
         add(*split_key(board), "bet-registry", bet_de="" if de is None else str(bool(de)).lower(),
             bet_checked=info.get("checked") or "")
