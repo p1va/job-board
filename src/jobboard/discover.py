@@ -75,7 +75,7 @@ def discover(rows: list[dict], known: set[tuple[str, str]], get, skip: set[tuple
         if not key or (ats, key.lower()) in known:
             continue
         if (ats, key.lower()) in skip:
-            failed[f"{ats} skipped (reposts another board)"] += 1
+            failed[f"{ats} excluded by skip list"] += 1
             continue
         new[ats] += 1
         if ats not in CHECK or (providers is not None and ats not in providers):

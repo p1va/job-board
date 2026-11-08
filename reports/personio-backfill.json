@@ -7,30 +7,36 @@
   "empty": 255,
   "partial": 1
  },
- "boards_added": 2233,
- "valid_positions": 19359,
+ "boards_added": 2232,
+ "valid_positions": 19203,
+ "excluded_boards": [
+  {
+   "key": "demorecruiting",
+   "reason": "Demo Recruiting test feed with placeholder and repeated job titles; excluded from the catalog",
+   "valid_positions": 156
+  }
+ ],
  "invalid_positions": 2,
- "base_descriptions": 17127,
- "base_missing_descriptions": 2232,
+ "base_descriptions": 17090,
+ "base_missing_descriptions": 2113,
  "salary_periods": {
-  "yearly": 1281,
-  "hourly": 248,
-  "monthly": 590
+  "yearly": 1265,
+  "hourly": 247,
+  "monthly": 588
  },
  "kept_by_current_rules": {
-  "software_engineering": 877,
-  "product_management": 155,
-  "engineering_management": 35,
+  "software_engineering": 874,
+  "product_management": 154,
+  "engineering_management": 34,
   "data_ml_engineering": 153,
   "data_science": 40,
   "research": 12
  },
  "normalization_errors": [],
- "kept_boards": 511,
- "kept_missing_base_description": 273,
+ "kept_boards": 510,
+ "kept_missing_base_description": 269,
  "most_missing_base_descriptions": {
   "sungrow-emea": 142,
-  "demorecruiting": 119,
   "certify360": 60,
   "herbrand-gruppe": 59,
   "desotec": 39,
@@ -38,10 +44,11 @@
   "ercsystem": 32,
   "altagramgroup": 25,
   "arethia": 25,
-  "eerstelijnszorg-zoetermeer": 25
+  "eerstelijnszorg-zoetermeer": 25,
+  "avega": 24
  },
  "cached_feeds_replayed": 2233,
- "parser_commit": "60b2a0e4cd221f4c40f52c55bdeffb1599c5bda2",
+ "parser_commit": "7df13b0829e27ef1b731dcaafe23fe3f625b9cf9",
  "evidence": ".notes/personio-backfill-20261108/validation.jsonl",
  "partial_boards": [
   {
