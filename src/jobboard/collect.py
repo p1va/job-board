@@ -135,8 +135,9 @@ def main(argv=None) -> int:
                         args.countries, args.remote)
     except (ValueError, KeyError, OSError) as exc:
         parser.error(str(exc))
-    if not selected:
+    if not selected and not plan(args.source, args.inputs, 0, 1, 0, args.countries, args.remote):
         parser.error("no scopes selected; check companies/*.csv and the requested source")
+    # a shard can be legitimately empty after splitting (e.g. --remote only): it writes an empty artifact
     deadline = time.monotonic() + args.deadline
     client = Client(interval=args.interval if args.interval is not None else (2 if args.source == "workable" else 0.5),
                     deadline=deadline)
