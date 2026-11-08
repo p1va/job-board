@@ -9,6 +9,8 @@ import re
 import unicodedata
 from dataclasses import dataclass
 
+from jobboard import gazetteer
+
 # ISO-2 -> names and aliases (lowercase), English plus common native spellings.
 COUNTRIES: dict[str, tuple[str, ...]] = {
     "AD": ("andorra",), "AL": ("albania", "shqipëri"), "AT": ("austria", "österreich", "oesterreich"),
@@ -130,6 +132,31 @@ SUBDIVISIONS = {
     **{s: "CA" for s in ("ontario", "quebec", "québec", "british columbia", "alberta", "nova scotia", "manitoba",
                          "saskatchewan", "new brunswick", "newfoundland")},
     **{s: "AU" for s in ("new south wales", "queensland")},
+    # European states and regions, which German, Austrian, Swiss, Italian, Spanish, French and Dutch
+    # employers often give instead of a country ("Remote (Sachsen)", "BK, Bayern"). Names shared with a
+    # country or another country's region (Limburg, Luxembourg, Georgia, Marche) are left out.
+    **{s: "DE" for s in ("baden-württemberg", "baden-wuerttemberg", "bayern", "bavaria", "brandenburg", "hessen",
+                         "hesse", "mecklenburg-vorpommern", "niedersachsen", "lower saxony", "nordrhein-westfalen",
+                         "north rhine-westphalia", "nrw", "rheinland-pfalz", "rhineland-palatinate", "saarland",
+                         "sachsen", "saxony", "sachsen-anhalt", "saxony-anhalt", "schleswig-holstein",
+                         "thüringen", "thueringen", "thuringia", "deutschlandweit")},
+    **{s: "AT" for s in ("niederösterreich", "lower austria", "oberösterreich", "upper austria", "steiermark",
+                         "styria", "kärnten", "carinthia", "tirol", "tyrol", "vorarlberg", "burgenland")},
+    **{s: "CH" for s in ("aargau", "st. gallen", "graubünden", "ticino", "vaud", "valais", "wallis",
+                         "thurgau", "solothurn", "schwyz", "luzern", "lucerne")},
+    **{s: "IT" for s in ("lombardia", "lombardy", "lazio", "piemonte", "piedmont", "veneto", "toscana", "tuscany",
+                         "emilia-romagna", "campania", "sicilia", "sicily", "sardegna", "sardinia", "puglia",
+                         "apulia", "liguria", "abruzzo", "calabria", "friuli-venezia giulia",
+                         "trentino-alto adige", "südtirol", "alto adige", "umbria")},
+    **{s: "ES" for s in ("cataluña", "catalunya", "catalonia", "andalucía", "andalucia", "andalusia",
+                         "país vasco", "euskadi", "basque country", "comunidad de madrid", "comunidad valenciana",
+                         "castilla y león", "castilla-la mancha", "aragón", "asturias", "navarra",
+                         "islas baleares", "canary islands", "islas canarias", "galicia")},
+    **{s: "FR" for s in ("île-de-france", "ile-de-france", "auvergne-rhône-alpes", "provence-alpes-côte d'azur",
+                         "occitanie", "nouvelle-aquitaine", "bretagne", "brittany", "normandie", "normandy",
+                         "hauts-de-france", "grand est", "pays de la loire", "alsace")},
+    **{s: "NL" for s in ("noord-holland", "north holland", "zuid-holland", "south holland", "noord-brabant",
+                         "north brabant", "gelderland", "overijssel")},
 }
 
 REGIONS = {  # region words -> codes
@@ -147,6 +174,9 @@ OPEN_TO_EUROPE = EUROPE | {"worldwide", "europe", "eu", "emea"}
 REMOTE = re.compile(r"\b(remote|remotely|anywhere|work from home|wfh|telecommute|distributed|home[- ]based|"
                     r"remoto|remota|teletrabajo|t[ée]l[ée]travail|home ?office|fernarbeit|mobiles arbeiten)\b", re.I)
 HYBRID = re.compile(r"\bhybrid\b", re.I)
+WORKSTYLE = re.compile(r"\b(remote|hybrid|on[- ]?site|in[- ]office|office[- ]based|vor ort)\b", re.I)
+ONSITE = re.compile(r"\b(on[- ]?site|in[- ]office|office[- ]based|vor ort|pr[äa]senz|presencial|in presenza|"
+                    r"sur site)\b", re.I)
 # Separators between different places in one location string. Within a part, "Remote - UK" stays together.
 SEGMENT = re.compile(r"\s*(?:;|\||•|·|/|\n|\bor\b|\band\b|&(?!i\b))\s*", re.I)
 # What a bare scope label may contain besides remote and region words ("Remote - Global", "100% remote")
@@ -213,10 +243,27 @@ def _countries(text: str) -> tuple[set[str], bool]:
         explicit.add("US")                    # ", NH", ", CA": only US states
     if explicit:
         return explicit, True
-    cities = {c for m in _CITY_ANY.finditer(masked) if (c := _CITY_KEYS.get(_key(m.group(1))))}
+    cities = {c for m in _CITY_ANY.finditer(masked) if (c := _CITY_KEYS.get(_key(m.group(1))))} or _town(masked)
     if state and not cities & EUROPE:
         return cities | {"US"}, True          # ", DE" without a European city: Delaware
     return cities, False                      # "Berlin, DE", "Valletta, MT": the city decides
+
+
+# Pieces of one place description that may be a town name on their own: "Bielefeld - Cherusker",
+# "Darmstadt (Hybrid)", "Münster, DE".
+PIECE = re.compile(r"\s*(?:,|\(|\)|:|\s[-–—]\s|\[|\])\s*")
+
+
+def _town(text: str) -> set[str]:
+    """The country of the first piece that is exactly a known town (gazetteer), else nothing. Whole
+    pieces only, so words inside a longer name never count."""
+    for piece in [text, *PIECE.split(text)]:   # whole first: "Halle (Saale)" is one name
+        piece = WORKSTYLE.sub("", piece).strip(" .-–—")
+        if len(piece) <= 4 and piece.isupper():
+            continue                          # codes and abbreviations ("CAN", "PERM"), not towns
+        if piece and not _bare(piece) and (code := gazetteer.country(piece)):
+            return {code}
+    return set()
 
 
 def countries_in(text: str) -> set[str]:
@@ -236,6 +283,12 @@ def regions_in(text: str) -> set[str]:
 def _bare(part: str) -> bool:
     """Only remote/region words and filler: a scope label rather than a place name."""
     return not FILLER.sub("", _REGION_ANY.sub("", REMOTE.sub("", part))).strip()
+
+
+def _style_only(part: str) -> bool:
+    """Only "Hybrid" or "On-site" (and filler): how the job is worked, not where."""
+    return bool(HYBRID.search(part) or ONSITE.search(part)) and not REMOTE.search(part) \
+        and not FILLER.sub("", ONSITE.sub("", HYBRID.sub("", part))).strip()
 
 
 MODES = ("onsite", "hybrid", "remote", "unknown")
@@ -261,7 +314,12 @@ def parse(locations, structured_countries=(), workplace: str | None = None) -> P
         parts = [p for p in SEGMENT.split(raw or "") if p and p.strip()]
         if not parts and code:
             where.add((code, declared or "unknown"))
+        styles: set[str] = set()   # a work style given as its own piece: "Darmstadt // Hybrid"
+        found: list[tuple[set[str], str]] = []
         for part in parts:
+            if not declared and _style_only(part):
+                styles.add("hybrid" if HYBRID.search(part) else "onsite")
+                continue
             named, explicit = _countries(part)
             regions = regions_in(part)
             # Worldwide only as an explicit scope label, and never beside a narrower scope stated in the
@@ -278,17 +336,24 @@ def parse(locations, structured_countries=(), workplace: str | None = None) -> P
                 mode = declared
             elif HYBRID.search(part):
                 mode = "hybrid"
+            elif ONSITE.search(part):
+                mode = "onsite"
             else:
                 mode = "unknown"
             places_named = named | regions
             if places_named:
-                where |= {(pl, mode) for pl in places_named}
+                found.append((places_named, mode))
             elif mode == "remote" and _bare(part):
                 where.add(("unstated", "remote"))
             elif not _bare(part) and not HYBRID.fullmatch(part.strip()):
                 unparsed = True
             elif declared == "remote":
                 where.add(("unstated", "remote"))
+        # "Germany (Remote/Hybrid/On-site)": the styles apply to the places in the same string, and
+        # replace "unknown"; a bare "Remote" piece keeps meaning remote from somewhere unstated.
+        for places_named, mode in found:
+            modes = (styles | {mode}) - {"unknown"} if styles else {mode}
+            where |= {(pl, m) for pl in places_named for m in modes}
     for name in structured_countries:
         if not name:
             continue
