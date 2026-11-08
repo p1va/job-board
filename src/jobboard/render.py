@@ -20,6 +20,7 @@ import pyarrow.dataset as ds
 import pyarrow.parquet as pq
 
 from .places import EUROPE
+from .registry import memberships
 
 BOARD = Path(__file__).resolve().parents[2] / "board"
 STYLE = {"remote": "Remote", "hybrid": "Hybrid", "onsite": "Office", "unknown": "Not stated"}
@@ -119,7 +120,7 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
             published=v["published_at"].isoformat() if v["published_at"] else None,
             family=v["role_family"], level=v["seniority"], stack=v["stack"] or [], regions=regions(v),
             where=where_pairs(v),
-            lists=lists.get(v["company_id"], [])))
+            lists=lists.get(v["company_id"].lower(), [])))
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -155,8 +156,9 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--data", type=Path, default=Path("data"))
     ap.add_argument("--out", type=Path, default=Path("site"))
+    ap.add_argument("--lists", type=Path, default=Path("lists"))
     args = ap.parse_args(argv)
-    print(json.dumps(render(args.data, args.out, datetime.now(timezone.utc)), indent=1))
+    print(json.dumps(render(args.data, args.out, datetime.now(timezone.utc), memberships(args.lists)), indent=1))
     return 0
 
 

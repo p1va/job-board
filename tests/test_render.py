@@ -62,3 +62,11 @@ def test_explicit_remote_with_a_named_region_reaches_the_default_view(tmp_path):
     report = built(tmp_path, [JOB | {"id": "j3", "title": "Data Scientist", "location": "Europe", "workplaceType": "Remote"}])
     data = json.loads((tmp_path / "site" / report["data_file"]).read_text())
     assert data["jobs"][0]["where"] == [["Remote: Europe", "Remote"]]
+
+
+def test_list_memberships_reach_the_board(tmp_path):
+    shard(tmp_path / "raw", "1-1", {"ashby:acme": ("complete", 200, [JOB])}, T0)
+    join(tmp_path / "raw", tmp_path / "data", inputs(tmp_path, "acme"), "1-1", T0, verify_inputs=False)
+    report = render(tmp_path / "data", tmp_path / "site", T0, {"ashby:acme": ["AI labs"]})
+    data = json.loads((tmp_path / "site" / report["data_file"]).read_text())
+    assert data["jobs"][0]["lists"] == ["AI labs"]
