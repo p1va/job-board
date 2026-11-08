@@ -1,0 +1,24 @@
+[project]
+name = "job-board"
+version = "0.1.0"
+description = "Daily job radar and board: software, research, product and data roles in Europe and remote"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pyarrow>=21",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.13"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "jobboard"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
