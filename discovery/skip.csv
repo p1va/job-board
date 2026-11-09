@@ -4,3 +4,29 @@ greenhouse,artefactlinkedin,"flagged for review: 72 internal ids shared with art
 greenhouse,sonymusicde,"flagged for review: all 6 internal ids also on sonymusicentertainment"
 greenhouse,thinkcellsoftware,"flagged for review: all 16 internal ids also on think-cell; 2 postings without an id"
 personio,demorecruiting,"Demo Recruiting test feed with placeholder and repeated job titles; excluded from the catalog"
+lever,jobgether,"aggregator reposting other employers' jobs: 4,226 postings in 42 countries, 405 matches (Claude curation 2026-11-09)"
+lever,tsmg,"field and crowd data-collection contractor: 4,477 postings in 79 countries (ADAS drivers, AI speech testers); matches include crowd roles such as Locality Expert and Field Surveyor"
+lever,bee-talents,"IT recruitment agency: titles name the client employer (Naturaily, ITFS); 3 matches"
+lever,weloglobal,"Welocalize crowd and localisation work: 444 postings in 81 countries (search raters, scouts); 1 match"
+lever,rws,RWS TrainAI crowd talent pool: 125 postings in 53 countries; 0 matches
+lever,lionbridge,crowd transcription gigs: 50 postings in 34 countries; 0 matches
+lever,appen,"crowd voice-recording gigs per language: 48 postings in 29 countries; 0 matches (appen-2, the corporate board, stays)"
+lever,usasurveyjob,"paid-survey and data-entry gig listings: 1,572 postings; 0 matches"
+lever,getwingapp,remote-staffing marketplace: 376 repeated sales and assistant postings in 38 countries; 0 matches
+lever,T6TalentPartners,recruiting firm posting a client's roles (Canadian Strategic Missions Corp.); 0 matches
+lever,outsourcedstaff,offshore staffing placements for client businesses (NDIS provider and others); 0 matches
+lever,thepieexecsearch,executive search firm; postings are candidate sign-up forms; 0 matches
+lever,eu:second,"Hosted feed quarantine: matching posting https://jobs.eu.lever.co/second/86356e70-6824-4f5b-8543-f48ba8e0ba80, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (2 matching postings in cached snapshot)"
+lever,global:Anovium,"Hosted feed quarantine: matching posting https://jobs.lever.co/Anovium/3016fb9d-c439-4383-b2bf-a31bfdd73852, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (4 matching postings in cached snapshot)"
+lever,global:FitifyWorkouts,"Hosted feed quarantine: matching posting https://jobs.lever.co/FitifyWorkouts/53757d98-cbd8-4a19-90eb-ae48080a34b0, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (5 matching postings in cached snapshot)"
+lever,global:crossing-minds,"Hosted feed quarantine: matching posting https://jobs.lever.co/crossing-minds/9b865198-635c-4172-8ae4-8e1e7319a89c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+lever,global:editorialist,"Hosted feed quarantine: matching posting https://jobs.lever.co/editorialist/d1113fc5-4d3c-4dd9-9a39-994bebd9e900, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+lever,global:groupbyinc,"Hosted feed quarantine: matching posting https://jobs.lever.co/groupbyinc/02028cbe-6b6b-44a8-ab96-6217db77175c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+lever,global:joyrideautos,"Hosted feed quarantine: matching posting https://jobs.lever.co/joyrideautos/8bf0628b-6a5c-401f-a5a7-30032c4d4d8d, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+lever,global:magnify,"Hosted feed quarantine: matching posting https://jobs.lever.co/magnify/29a9424b-5d7c-4b92-8440-37e53822ee33, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+lever,global:remedyproductstudio,"Hosted feed quarantine: matching posting https://jobs.lever.co/remedyproductstudio/49258ac7-eb96-416e-a6ee-7e5dd67cd632, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (2 matching postings in cached snapshot)"
+lever,global:roofstacks,"Hosted feed quarantine: matching posting https://jobs.lever.co/roofstacks/0848346f-8e70-4c08-aa18-5bd1626f801c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (5 matching postings in cached snapshot)"
+lever,global:seedify-fund,"Hosted feed quarantine: matching posting https://jobs.lever.co/seedify-fund/7ced6023-7480-4c93-a572-6ac4c0c88e0c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+lever,global:techquarter,"Hosted feed quarantine: matching posting https://jobs.lever.co/techquarter/0c73630c-0a79-4a6a-a7a4-1162b8d9ecba, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (5 matching postings in cached snapshot)"
+lever,global:teller,"Hosted feed quarantine: matching posting https://jobs.lever.co/teller/dd21975a-901b-49ee-926c-336c92f8673d, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+lever,global:tryriot,"Hosted feed quarantine: matching posting https://jobs.lever.co/tryriot/17c61f6d-952c-46e2-90c2-9e583b53d5d2, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (4 matching postings in cached snapshot)"

@@ -40,3 +40,8 @@ a bare Lever skip token excludes both regions. Invalid skip entries are warned
 and included in the report. Discovery
 establishes that a board is live; matching job counts require the join's normal
 role/location filters.
+
+Lever can return a published-job array after its hosted pages have disappeared.
+The initial import also checks a matching posting per board; suspected inactive
+feeds are confirmed with root, posting and application URLs before adding their
+regional key to the skip list. An unavailable board index alone is insufficient.
