@@ -10,8 +10,8 @@ def test_parse_board_forms():
     assert parse_board("greenhouse:n26") == ("greenhouse", "n26")
     assert parse_board("https://job-boards.eu.greenhouse.io/n26") == ("greenhouse", "n26")
     assert parse_board("# comment") is None and parse_board("  ") is None
-    assert parse_board("lever:foo") is None                   # not a provider we read yet
-    assert parse_board("jobs.eu.lever.co/acme") is None       # unsupported host, not an Ashby slug
+    assert parse_board("lever:foo") is None                   # region is required
+    assert parse_board("jobs.eu.lever.co/acme") == ("lever", "eu:acme")
     assert parse_board("https://boards.greenhouse.io/embed/job_board?for=acme") == ("greenhouse", "acme")
     assert parse_board("https://boards.greenhouse.io/embed/job_board") is None
 

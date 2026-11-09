@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        source: [ashby, greenhouse, workable, personio]
+        source: [ashby, greenhouse, workable, personio, lever]
         shard: [0, 1]
     steps:
       - uses: actions/checkout@v7

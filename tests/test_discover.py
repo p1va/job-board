@@ -7,7 +7,7 @@ def test_only_new_live_supported_boards_are_added():
     rows = [dict(ats="ashby", board_key="known-co", captures="9"),
             dict(ats="ashby", board_key="new-co", captures="5"),
             dict(ats="greenhouse", board_key="dead-co", captures="3"),
-            dict(ats="lever", board_key="leverco", captures="7"),
+            dict(ats="smartrecruiters", board_key="smartco", captures="7"),
             dict(ats="ashby", board_key="New-Co", captures="1")]          # same board, other case
 
     def get(url):
@@ -18,8 +18,8 @@ def test_only_new_live_supported_boards_are_added():
     out, report = discover(rows, {("ashby", "known-co")}, get)
     assert [(r["provider"], r["key"]) for r in out] == [("ashby", "new-co")] and report["jobs_on_added"] == {"ashby:new-co": 2}
     assert report["not_added"] == {"greenhouse HTTP 404": 1}
-    assert report["next_providers"] == {"lever": 1}
-    assert report["found"] == {"ashby": 3, "greenhouse": 1, "lever": 1}
+    assert report["next_providers"] == {"smartrecruiters": 1}
+    assert report["found"] == {"ashby": 3, "greenhouse": 1, "smartrecruiters": 1}
 
 
 def test_error_bodies_and_skipped_boards_are_not_added():

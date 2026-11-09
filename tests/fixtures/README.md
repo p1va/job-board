@@ -8,3 +8,6 @@ the job objects preserve the original descriptions and provider fields.
 
 `personio.xml` is synthetic. It exercises multi-office jobs, salary units,
 description sections and a missing description without copying an employer's ad.
+
+`lever.json` is synthetic. It covers regional identity, full description sections,
+multi-office locations and structured salary without copying an employer's ad.

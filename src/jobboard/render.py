@@ -9,6 +9,7 @@ of jobs. Asset names carry content hashes, so a new generation is never mixed wi
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import shutil
@@ -21,7 +22,8 @@ import pyarrow.dataset as ds
 import pyarrow.parquet as pq
 
 from .places import EUROPE
-from .registry import memberships, read_lists
+from .lever import board_key as lever_key
+from .registry import company_key, list_key, memberships, read_lists
 
 BOARD = Path(__file__).resolve().parents[2] / "board"
 STYLE = {"remote": "Remote", "hybrid": "Hybrid", "onsite": "Office", "unknown": "Not stated"}
@@ -80,6 +82,8 @@ def company_name(v: dict, profile: dict | None = None) -> str:
     if v["company_name"]:
         return v["company_name"]
     board = v["board"]
+    if v["source"] == "lever":
+        return board.split(":", 1)[1]
     return board if any(c.isdigit() for c in board) else " ".join(w.capitalize() for w in board.replace("_", "-").split("-"))
 
 
@@ -102,16 +106,27 @@ def hashed(name: str, content: bytes) -> str:
     return f"{stem}-{hashlib.sha256(content).hexdigest()[:12]}{dot}{ext}"
 
 
-def load_companies(profiles: Path, lists_dir: Path) -> dict[str, dict]:
-    """company_id -> {name, website, logoUrl}: cached board profiles first, then list entries."""
+def load_companies(profiles: Path, lists_dir: Path, inputs: Path | None = None) -> dict[str, dict]:
+    """Company labels: cached profiles first, then lists and the board registry."""
     companies = json.loads(profiles.read_text(encoding="utf-8")) if profiles.exists() else {}
     if lists_dir.exists():
         for r in read_lists(lists_dir):
-            if r["board_key"]:
-                entry = companies.setdefault(f"{r['ats']}:{r['board_key']}".lower(), {})
+            if key := list_key(r):
+                entry = companies.setdefault(company_key(f"{r['ats']}:{key}"), {})
                 entry.setdefault("name", r["name"])
                 if r["website"]:
                     entry.setdefault("website", r["website"])
+    if inputs is not None:
+        for path in sorted(inputs.glob("*.csv")):
+            with path.open(newline="", encoding="utf-8") as stream:
+                for row in csv.DictReader(stream):
+                    if row["provider"] != "lever":
+                        continue
+                    key = lever_key(row["key"])
+                    entry = companies.setdefault(company_key(f"{row['provider']}:{key}"), {})
+                    for field in ("name", "website"):
+                        if not entry.get(field) and row.get(field):
+                            entry[field] = row[field]
     return companies
 
 
@@ -128,7 +143,7 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
     names = defaultdict(Counter)
     for v in versions.values():
         if v["company_name"]:
-            names[v["company_id"].lower()][v["company_name"].strip()] += 1
+            names[company_key(v["company_id"])][v["company_name"].strip()] += 1
     # A board can contain several legal entities: choose one fallback consistently for its
     # heading, dropdown and every role, including roles without a company name.
     for company_id, counts in names.items():
@@ -143,14 +158,14 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
         descriptions.setdefault(bucket, {})[job_id] = v["description_text"] or ""
         jobs.append(dict(
             id=job_id, d=bucket, source=v["source"], company=v["company_id"],
-            companyName=company_name(v, companies.get(v["company_id"].lower())),
+            companyName=company_name(v, companies.get(company_key(v["company_id"]))),
             title=v["title"], url=v["url"], location=(v["locations"] or [None])[0] or v["location_raw"] or "",
             locations=v["locations"] or [], style=STYLE.get(v["workplace"], "Not stated"),
             employment=v["employment"], department=v["department"], salary=salary(v),
             published=v["published_at"].isoformat() if v["published_at"] else None,
             family=v["role_family"], level=v["seniority"], stack=v["stack"] or [], regions=regions(v),
             where=where_pairs(v),
-            lists=lists.get(v["company_id"].lower(), [])))
+            lists=lists.get(company_key(v["company_id"]), [])))
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -160,7 +175,7 @@ def render(data: Path, out: Path, now: datetime, lists: dict[str, list[str]] | N
     for bucket, texts in descriptions.items():
         (out / desc_dir / f"{bucket}.json").write_text(json.dumps(texts, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     used = {j["company"] for j in jobs}
-    shown = {c: companies[c.lower()] for c in used if c.lower() in companies}
+    shown = {c: companies[company_key(c)] for c in used if company_key(c) in companies}
     payload = json.dumps(dict(generatedAt=now.isoformat(), descriptions=desc_dir + "/", jobs=jobs, companies=shown),
                          ensure_ascii=False, separators=(",", ":")).encode()
     data_file = hashed("jobs.json", payload)
@@ -190,9 +205,10 @@ def main(argv=None) -> int:
     ap.add_argument("--out", type=Path, default=Path("site"))
     ap.add_argument("--lists", type=Path, default=Path("lists"))
     ap.add_argument("--profiles", type=Path, default=Path("companies/profiles.json"))
+    ap.add_argument("--inputs", type=Path, default=Path("companies"))
     args = ap.parse_args(argv)
     print(json.dumps(render(args.data, args.out, datetime.now(timezone.utc), memberships(args.lists),
-                            load_companies(args.profiles, args.lists)), indent=1))
+                            load_companies(args.profiles, args.lists, args.inputs)), indent=1))
     return 0
 
 

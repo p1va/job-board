@@ -21,6 +21,7 @@ from .contract import RAW_SCHEMA, Kind, Manifest, Status
 from .http import Client
 from .retrievers import Selection, retrieve, workable_selections
 from .personio import board_slug
+from .lever import board_key as lever_key
 
 
 def selections(source: str, inputs: Path, countries=None, remote="include") -> list[Selection]:
@@ -31,7 +32,8 @@ def selections(source: str, inputs: Path, countries=None, remote="include") -> l
         with path.open(newline="", encoding="utf-8") as stream:
             for row in csv.DictReader(stream):
                 if row["provider"] == source and row["key"].strip():
-                    keys.add(board_slug(row["key"]) if source == "personio" else row["key"].strip())
+                    key = row["key"].strip()
+                    keys.add(board_slug(key) if source == "personio" else lever_key(key) if source == "lever" else key)
     return [Selection(f"{source}:{key}", Kind.BOARD, key) for key in sorted(keys)]
 
 
@@ -124,7 +126,7 @@ def write_summary(manifest: Manifest, report: dict) -> str:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", required=True, choices=("ashby", "greenhouse", "workable", "personio"))
+    parser.add_argument("--source", required=True, choices=("ashby", "greenhouse", "workable", "personio", "lever"))
     parser.add_argument("--inputs", type=Path, default=Path("companies"))
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--run-id", default=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
@@ -150,7 +152,7 @@ def main(argv=None) -> int:
         parser.error("no scopes selected; check companies/*.csv and the requested source")
     # a shard can be legitimately empty after splitting (e.g. --remote only): it writes an empty artifact
     deadline = time.monotonic() + args.deadline
-    interval = args.interval if args.interval is not None else {"workable": 2, "personio": 1}.get(args.source, 0.5)
+    interval = args.interval if args.interval is not None else {"workable": 2, "personio": 1, "lever": 1}.get(args.source, 0.5)
     client = Client(interval=interval, deadline=deadline)
     manifest, report = collect(args.source, selected, client.get, args.run_id,
                         f"{args.shard_index}-of-{args.shard_count}", args.out,

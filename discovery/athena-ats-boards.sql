@@ -88,8 +88,8 @@ parsed AS (
 SELECT
   ats,
   api_region,
-  -- SmartRecruiters company identifiers are case-sensitive; the others are compared lowercase
-  CASE WHEN ats = 'smartrecruiters' THEN slug ELSE lower(slug) END AS board_key,
+  -- SmartRecruiters and Lever identifiers are case-sensitive (Lever /Legend works, /legend is 404).
+  CASE WHEN ats IN ('smartrecruiters', 'lever') THEN slug ELSE lower(slug) END AS board_key,
   COUNT(*)                          AS captures,
   COUNT_IF(fetch_status = 200)      AS ok_captures,
   COUNT(DISTINCT crawl)             AS crawls,

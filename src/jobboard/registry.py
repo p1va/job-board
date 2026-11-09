@@ -15,11 +15,22 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from .personio import board_slug
+from .lever import HOSTS as LEVER_HOSTS, board_key as lever_key
 
-PROVIDERS = ("ashby", "greenhouse", "workable", "personio")
+PROVIDERS = ("ashby", "greenhouse", "workable", "personio", "lever")
 GREENHOUSE_HOSTS = {"boards.greenhouse.io", "job-boards.greenhouse.io", "job-boards.eu.greenhouse.io",
                     "boards.eu.greenhouse.io"}
 COLUMNS = ["provider", "key", "name", "website", "origins", "bet_de", "bet_checked"]
+
+
+def lookup_key(provider: str, key: str) -> str:
+    """Lever tokens are case-sensitive; older providers retain their lookup convention."""
+    return lever_key(key) if provider == "lever" else key.lower()
+
+
+def company_key(board_id: str) -> str:
+    provider, _, key = board_id.partition(":")
+    return f"{provider}:{lookup_key(provider, key)}"
 
 
 def parse_board(line: str) -> tuple[str, str] | None:
@@ -30,6 +41,11 @@ def parse_board(line: str) -> tuple[str, str] | None:
     if "/" in line or line.endswith((".jobs.personio.de", ".jobs.personio.com")):
         url = urlparse(line if "://" in line else "https://" + line)
         slug = url.path.strip("/").split("/")[0]
+        if url.hostname in LEVER_HOSTS:
+            try:
+                return "lever", lever_key(line)
+            except ValueError:
+                return None
         if url.hostname and url.hostname.endswith((".jobs.personio.de", ".jobs.personio.com")):
             try:
                 return "personio", board_slug(url.hostname.split(".jobs.personio.", 1)[0])
@@ -47,6 +63,11 @@ def parse_board(line: str) -> tuple[str, str] | None:
         if provider == "personio":
             try:
                 key = board_slug(key)
+            except ValueError:
+                return None
+        elif provider == "lever":
+            try:
+                key = lever_key(key)
             except ValueError:
                 return None
         return provider, key
@@ -87,7 +108,7 @@ def import_bet(companies_txt: str, boards_json: str, workable_json: str) -> list
 
 
 LIST_COLUMNS = ["name", "website", "country", "city", "why", "source_url", "careers_url", "ats", "board_key", "checked"]
-SCANNED = {"ashby", "greenhouse", "personio"}  # Workable list keys are account slugs,
+SCANNED = {"ashby", "greenhouse", "personio", "lever"}  # Workable list keys are account slugs,
                                       # not the search's company IDs, so they wait for an account retriever
 
 
@@ -108,31 +129,50 @@ def read_lists(lists: Path) -> list[dict]:
     return rows
 
 
+def list_key(row: dict) -> str | None:
+    """Canonical list identity; a bare Lever slug needs its hosted careers URL."""
+    key = row["board_key"]
+    if not key:
+        return None
+    if row["ats"] == "personio":
+        return board_slug(key)
+    if row["ats"] == "lever":
+        try:
+            return lever_key(key)
+        except ValueError:
+            parsed = parse_board(row.get("careers_url") or "")
+            if parsed and parsed[0] == "lever" and parsed[1].split(":", 1)[1].casefold() == key.strip().casefold():
+                return parsed[1]
+            return None
+    return key
+
+
 def import_lists(lists: Path) -> tuple[list[dict], list[dict]]:
     """Boards to scan (companies/lists.csv rows) and the entries we can't scan yet (coverage report)."""
     boards: dict[tuple[str, str], dict] = {}
     unscanned = []
     for r in read_lists(lists):
-        if r["ats"] in SCANNED and r["board_key"]:
-            key = board_slug(r["board_key"]) if r["ats"] == "personio" else r["board_key"]
+        key = list_key(r)
+        if r["ats"] in SCANNED and key:
             row = boards.setdefault((r["ats"], key), {c: "" for c in COLUMNS} | {
                 "provider": r["ats"], "key": key, "name": r["name"], "website": r["website"]})
             row["origins"] = "|".join(sorted(set(filter(None, row["origins"].split("|"))) | {"list:" + r["file"][:-4]}))
         else:
             unscanned.append(dict(list=r["list"], name=r["name"], ats=r["ats"], board_key=r["board_key"],
                                   reason="no board found" if not r["board_key"] else
+                                  "Lever region unknown; use a regional key or hosted careers URL" if r["ats"] == "lever" and not key else
                                   "Workable account slug; only Workable search is read" if r["ats"] == "workable"
                                   else f"{r['ats']} not read yet"))
     return [boards[k] for k in sorted(boards)], unscanned
 
 
 def memberships(lists: Path) -> dict[str, list[str]]:
-    """company_id (provider:key, lowercase) -> list labels, for the board's list filter."""
+    """Company lookup identity -> list labels, preserving Lever token case."""
     out: dict[str, set[str]] = {}
     if lists.exists():
         for r in read_lists(lists):
-            if r["board_key"]:
-                out.setdefault(f"{r['ats']}:{r['board_key']}".lower(), set()).add(r["list"])
+            if key := list_key(r):
+                out.setdefault(company_key(f"{r['ats']}:{key}"), set()).add(r["list"])
     return {k: sorted(v) for k, v in out.items()}
 
 

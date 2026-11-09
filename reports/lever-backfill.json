@@ -1,0 +1,819 @@
+{
+  "cohort": "Validated Lever boards from the supplied candidates; postings, not deduplicated vacancies; snapshot counts, refreshed by collection before publication",
+  "validation_parser": "c626e86",
+  "normalizer_commit": "718bc9e",
+  "input_sha256": "9cbcf87e720e89cec90dfd45c8c363fd69ee463c281c7bf168ace096580a23de",
+  "generated_at": "2026-11-09T11:01:00.533693+00:00",
+  "validated_boards": 1636,
+  "imported_boards": 1610,
+  "matching_postings": 1452,
+  "matching_board_keys": 238,
+  "validated_jobs": 58888,
+  "validated_matches_before_curation": 1904,
+  "imported_jobs": 47423,
+  "populated_boards": 1279,
+  "empty_boards": 331,
+  "role_families": {
+    "software_engineering": 848,
+    "research": 44,
+    "engineering_management": 76,
+    "product_management": 185,
+    "data_ml_engineering": 203,
+    "data_science": 96
+  },
+  "workplace": {
+    "hybrid": 806,
+    "remote": 395,
+    "onsite": 250,
+    "unknown": 1
+  },
+  "without_description": 1,
+  "salary_periods": {
+    "year": 148,
+    "month": 37,
+    "day": 16,
+    "hour": 10
+  },
+  "filtered_before_curation": {
+    "location_outside_current_rules": 5706,
+    "title_outside_current_families": 51278
+  },
+  "normalize_errors": [],
+  "excluded_boards": [
+    {
+      "key": "eu:lionbridge",
+      "name": "",
+      "jobs": 50,
+      "matching_postings": 0,
+      "countries": "AU|BR|CA|CN|CZ|DE|DK|EG|ES|FI|FR|GB|HU|ID|IE|IN|IT|JP|KR|MX|MY|NL|NO|PL|PT|RO|RU|SA|SE|TH|TR|TW|US|VN",
+      "excluded": true,
+      "reason": "crowd transcription gigs: 50 postings in 34 countries; 0 matches"
+    },
+    {
+      "key": "eu:second",
+      "name": "second",
+      "jobs": 4,
+      "matching_postings": 2,
+      "countries": "FR",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.eu.lever.co/second/86356e70-6824-4f5b-8543-f48ba8e0ba80, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (2 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:Anovium",
+      "name": "",
+      "jobs": 13,
+      "matching_postings": 4,
+      "countries": "BD|CO|US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/Anovium/3016fb9d-c439-4383-b2bf-a31bfdd73852, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (4 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:FitifyWorkouts",
+      "name": "",
+      "jobs": 8,
+      "matching_postings": 5,
+      "countries": "CZ|US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/FitifyWorkouts/53757d98-cbd8-4a19-90eb-ae48080a34b0, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (5 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:T6TalentPartners",
+      "name": "",
+      "jobs": 8,
+      "matching_postings": 0,
+      "countries": "CA|US",
+      "excluded": true,
+      "reason": "recruiting firm posting a client's roles (Canadian Strategic Missions Corp.); 0 matches"
+    },
+    {
+      "key": "global:appen",
+      "name": "",
+      "jobs": 48,
+      "matching_postings": 0,
+      "countries": "AE|AR|BH|CD|CF|CL|CO|CR|CZ|DE|DK|EE|EG|ES|FR|GE|HR|IN|JP|LV|MM|MX|MY|PE|PL|QA|SA|TW|US",
+      "excluded": true,
+      "reason": "crowd voice-recording gigs per language: 48 postings in 29 countries; 0 matches (appen-2, the corporate board, stays)"
+    },
+    {
+      "key": "global:bee-talents",
+      "name": "",
+      "jobs": 14,
+      "matching_postings": 3,
+      "countries": "PL",
+      "excluded": true,
+      "reason": "IT recruitment agency: titles name the client employer (Naturaily, ITFS); 3 matches"
+    },
+    {
+      "key": "global:crossing-minds",
+      "name": "",
+      "jobs": 4,
+      "matching_postings": 1,
+      "countries": "FR|US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/crossing-minds/9b865198-635c-4172-8ae4-8e1e7319a89c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:editorialist",
+      "name": "",
+      "jobs": 8,
+      "matching_postings": 1,
+      "countries": "BD|IT|PT|US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/editorialist/d1113fc5-4d3c-4dd9-9a39-994bebd9e900, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:getwingapp",
+      "name": "",
+      "jobs": 376,
+      "matching_postings": 0,
+      "countries": "AE|AR|BG|CA|CL|CN|CO|CR|EE|ES|GB|GT|HK|HN|HR|ID|IL|IN|JM|KE|LV|MX|MY|NI|NO|PE|PH|PK|PL|RO|RS|SV|TH|TW|UA|US|VE|ZA",
+      "excluded": true,
+      "reason": "remote-staffing marketplace: 376 repeated sales and assistant postings in 38 countries; 0 matches"
+    },
+    {
+      "key": "global:groupbyinc",
+      "name": "",
+      "jobs": 2,
+      "matching_postings": 1,
+      "countries": "GB|SG",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/groupbyinc/02028cbe-6b6b-44a8-ab96-6217db77175c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:jobgether",
+      "name": "",
+      "jobs": 4226,
+      "matching_postings": 405,
+      "countries": "AE|AR|AT|AU|BE|BG|BR|CA|CH|CL|CO|CZ|DE|DK|EE|ES|FI|FR|GB|GR|HR|HU|IE|IL|IN|IT|KE|LU|MX|NG|NL|NO|NZ|PL|PT|RO|SA|SE|SI|TR|US|ZA",
+      "excluded": true,
+      "reason": "aggregator reposting other employers' jobs: 4,226 postings in 42 countries, 405 matches (Claude curation 2026-11-09)"
+    },
+    {
+      "key": "global:joyrideautos",
+      "name": "",
+      "jobs": 9,
+      "matching_postings": 1,
+      "countries": "UA|US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/joyrideautos/8bf0628b-6a5c-401f-a5a7-30032c4d4d8d, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:magnify",
+      "name": "",
+      "jobs": 3,
+      "matching_postings": 1,
+      "countries": "GB|US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/magnify/29a9424b-5d7c-4b92-8440-37e53822ee33, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:outsourcedstaff",
+      "name": "",
+      "jobs": 7,
+      "matching_postings": 0,
+      "countries": "PH",
+      "excluded": true,
+      "reason": "offshore staffing placements for client businesses (NDIS provider and others); 0 matches"
+    },
+    {
+      "key": "global:remedyproductstudio",
+      "name": "",
+      "jobs": 6,
+      "matching_postings": 2,
+      "countries": "BR|PL",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/remedyproductstudio/49258ac7-eb96-416e-a6ee-7e5dd67cd632, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (2 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:roofstacks",
+      "name": "",
+      "jobs": 23,
+      "matching_postings": 5,
+      "countries": "TR",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/roofstacks/0848346f-8e70-4c08-aa18-5bd1626f801c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (5 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:rws",
+      "name": "",
+      "jobs": 125,
+      "matching_postings": 0,
+      "countries": "AR|AT|AU|BE|BR|CA|CH|CM|CN|CZ|DE|DK|EE|ES|FR|GB|ID|IE|IL|IN|IS|IT|JO|JP|KE|KR|LA|LK|LT|LV|MA|MT|MX|MY|NL|NO|NP|NZ|PL|PT|RS|SA|SE|SG|SI|TH|TR|TW|UA|US|UZ|VN|ZA",
+      "excluded": true,
+      "reason": "RWS TrainAI crowd talent pool: 125 postings in 53 countries; 0 matches"
+    },
+    {
+      "key": "global:seedify-fund",
+      "name": "",
+      "jobs": 2,
+      "matching_postings": 1,
+      "countries": "ES|PT",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/seedify-fund/7ced6023-7480-4c93-a572-6ac4c0c88e0c, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:techquarter",
+      "name": "",
+      "jobs": 7,
+      "matching_postings": 5,
+      "countries": "RO",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/techquarter/0c73630c-0a79-4a6a-a7a4-1162b8d9ecba, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (5 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:teller",
+      "name": "",
+      "jobs": 3,
+      "matching_postings": 1,
+      "countries": "US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/teller/dd21975a-901b-49ee-926c-336c92f8673d, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (1 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:thepieexecsearch",
+      "name": "",
+      "jobs": 3,
+      "matching_postings": 0,
+      "countries": "GB",
+      "excluded": true,
+      "reason": "executive search firm; postings are candidate sign-up forms; 0 matches"
+    },
+    {
+      "key": "global:tryriot",
+      "name": "",
+      "jobs": 23,
+      "matching_postings": 4,
+      "countries": "FR|US",
+      "excluded": true,
+      "reason": "Hosted feed quarantine: matching posting https://jobs.lever.co/tryriot/17c61f6d-952c-46e2-90c2-9e583b53d5d2, root and /apply all HTTP 404 on 2026-11-09; a second posting also 404 when available; API still lists jobs (4 matching postings in cached snapshot)"
+    },
+    {
+      "key": "global:tsmg",
+      "name": "",
+      "jobs": 4477,
+      "matching_postings": 9,
+      "countries": "AE|AL|AR|AT|AU|AW|BA|BE|BG|BM|BR|CA|CH|CL|CN|CO|CW|CY|CZ|DE|DK|EC|EE|EG|ES|FI|FR|GB|GL|GR|HK|HR|HU|ID|IE|IL|IN|IQ|IT|JO|JP|KH|KR|KZ|LI|LK|LT|LU|LV|MC|MD|MT|MX|MY|NA|NL|NO|NZ|PE|PH|PL|PT|QA|RO|RS|SA|SE|SG|SI|SK|SR|SX|TH|TR|TW|UA|US|VN|ZA",
+      "excluded": true,
+      "reason": "field and crowd data-collection contractor: 4,477 postings in 79 countries (ADAS drivers, AI speech testers); matches include crowd roles such as Locality Expert and Field Surveyor"
+    },
+    {
+      "key": "global:usasurveyjob",
+      "name": "",
+      "jobs": 1572,
+      "matching_postings": 0,
+      "countries": "AE|AR|AT|AU|BE|CA|CH|CL|CN|CO|DE|DK|EG|ES|FI|GB|GR|HK|HU|ID|IE|IL|IN|IT|JP|KR|MX|MY|NL|NO|NZ|PH|PL|PT|SA|SE|SG|TR|US|ZA",
+      "excluded": true,
+      "reason": "paid-survey and data-entry gig listings: 1,572 postings; 0 matches"
+    },
+    {
+      "key": "global:weloglobal",
+      "name": "",
+      "jobs": 444,
+      "matching_postings": 1,
+      "countries": "AF|AL|AM|AR|AT|AU|AZ|BA|BE|BG|BR|BY|CA|CH|CL|CN|CO|CZ|DE|DK|EE|EG|ES|ET|FI|FR|GB|GE|GH|GR|HK|HR|HU|ID|IE|IL|IN|IS|IT|JO|JP|KE|KG|KH|KR|KZ|LA|LK|LT|LV|MG|MK|MN|MT|MX|MY|NG|NL|NO|NP|NZ|PE|PH|PK|PL|PT|RO|RS|SA|SE|SG|SI|SK|SR|TH|TR|TW|US|UZ|VN|ZA",
+      "excluded": true,
+      "reason": "Welocalize crowd and localisation work: 444 postings in 81 countries (search raters, scouts); 1 match"
+    }
+  ],
+  "validation_not_added": {
+    "lever HTTP 404": 4562
+  },
+  "unmatched_skip_keys": [
+    "eu:T6TalentPartners",
+    "eu:appen",
+    "eu:bee-talents",
+    "eu:getwingapp",
+    "eu:jobgether",
+    "eu:outsourcedstaff",
+    "eu:rws",
+    "eu:thepieexecsearch",
+    "eu:tsmg",
+    "eu:usasurveyjob",
+    "eu:weloglobal",
+    "global:lionbridge"
+  ],
+  "names_added": 144,
+  "matching_boards_without_name": [],
+  "curation_sources": [
+    {
+      "file": "claude-curation.csv",
+      "sha256": "38db75efd42741e9700f681d2f4426d6bf4de2b4360b87b841d50d20c9111aca"
+    },
+    {
+      "file": "hosted-quarantine.csv",
+      "sha256": "84a3c21cb60c197642bf3a485a186f31b7805118d060efbfe85df1e02e4e5e84"
+    }
+  ],
+  "evidence": ".notes/lever-backfill-20261109/",
+  "validation": {
+    "found": {
+      "lever": 3099
+    },
+    "new": {
+      "lever": 6198
+    },
+    "live_added": {
+      "lever": 1636
+    },
+    "not_added": {
+      "lever HTTP 404": 4562
+    },
+    "parser_commit": "c626e86",
+    "http": {
+      "requests": 6207,
+      "http_200": 1636,
+      "wire_bytes": 757662355,
+      "http_error_404": 4562,
+      "retries": 9
+    },
+    "elapsed_seconds": 9756.37,
+    "completed_at": "2026-11-09T10:30:48.303040+00:00",
+    "source_sha256": "9cbcf87e720e89cec90dfd45c8c363fd69ee463c281c7bf168ace096580a23de"
+  },
+  "name_enrichment": {
+    "new_names": 144,
+    "matching_boards_named": 238,
+    "targets": 157,
+    "http": {
+      "requests": 156,
+      "http_200": 142,
+      "wire_bytes": 13630928,
+      "http_error_404": 13,
+      "retries": 1
+    },
+    "sha256": "0bf25f4d704eeee6d5da16719ffc1fe0f800442406fa73535d7cf986828a6a73"
+  },
+  "hosted_link_audit": {
+    "boards_sampled": 252,
+    "healthy_samples": 236,
+    "quarantined": [
+      {
+        "key": "eu:second",
+        "matching_postings": 2,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.eu.lever.co/second/86356e70-6824-4f5b-8543-f48ba8e0ba80",
+            "checked_at": "2026-11-09T10:50:19.982547+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.eu.lever.co/second",
+            "checked_at": "2026-11-09T10:50:20.938518+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.eu.lever.co/second/86356e70-6824-4f5b-8543-f48ba8e0ba80/apply",
+            "checked_at": "2026-11-09T10:50:21.998216+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.eu.lever.co/second/ca60c7cb-aebc-4f76-9123-47bf8a0e7afc",
+            "checked_at": "2026-11-09T10:50:23.045132+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:Anovium",
+        "matching_postings": 4,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/Anovium/3016fb9d-c439-4383-b2bf-a31bfdd73852",
+            "checked_at": "2026-11-09T10:50:37.967316+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/Anovium",
+            "checked_at": "2026-11-09T10:50:38.972447+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/Anovium/3016fb9d-c439-4383-b2bf-a31bfdd73852/apply",
+            "checked_at": "2026-11-09T10:50:40.302734+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/Anovium/e22f5cc3-ec3a-40e7-8ceb-a2fb9ab4eb7a",
+            "checked_at": "2026-11-09T10:50:41.129417+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:FitifyWorkouts",
+        "matching_postings": 5,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/FitifyWorkouts/53757d98-cbd8-4a19-90eb-ae48080a34b0",
+            "checked_at": "2026-11-09T10:50:46.362633+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/FitifyWorkouts",
+            "checked_at": "2026-11-09T10:50:47.470714+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/FitifyWorkouts/53757d98-cbd8-4a19-90eb-ae48080a34b0/apply",
+            "checked_at": "2026-11-09T10:50:55.560432+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/FitifyWorkouts/88727ef3-e420-43b5-a430-051017a2ff3d",
+            "checked_at": "2026-11-09T10:50:55.851157+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:crossing-minds",
+        "matching_postings": 1,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/crossing-minds/9b865198-635c-4172-8ae4-8e1e7319a89c",
+            "checked_at": "2026-11-09T10:51:53.231685+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/crossing-minds",
+            "checked_at": "2026-11-09T10:51:54.060114+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/crossing-minds/9b865198-635c-4172-8ae4-8e1e7319a89c/apply",
+            "checked_at": "2026-11-09T10:51:55.158915+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/crossing-minds/0161efe4-4564-4a17-aa98-f1de6d561ec5",
+            "checked_at": "2026-11-09T10:51:56.184621+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:editorialist",
+        "matching_postings": 1,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/editorialist/d1113fc5-4d3c-4dd9-9a39-994bebd9e900",
+            "checked_at": "2026-11-09T10:52:10.756535+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/editorialist",
+            "checked_at": "2026-11-09T10:52:11.748532+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/editorialist/d1113fc5-4d3c-4dd9-9a39-994bebd9e900/apply",
+            "checked_at": "2026-11-09T10:52:12.771941+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/editorialist/57b35b23-fd9c-46b5-8465-8de11c3f7695",
+            "checked_at": "2026-11-09T10:52:14.820436+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:groupbyinc",
+        "matching_postings": 1,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/groupbyinc/02028cbe-6b6b-44a8-ab96-6217db77175c",
+            "checked_at": "2026-11-09T10:52:52.827927+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/groupbyinc",
+            "checked_at": "2026-11-09T10:52:53.630993+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/groupbyinc/02028cbe-6b6b-44a8-ab96-6217db77175c/apply",
+            "checked_at": "2026-11-09T10:52:54.757566+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/groupbyinc/ab35d3bb-adf9-47ca-9338-3fe1051ad1ed",
+            "checked_at": "2026-11-09T10:52:57.830833+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:joyrideautos",
+        "matching_postings": 1,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/joyrideautos/8bf0628b-6a5c-401f-a5a7-30032c4d4d8d",
+            "checked_at": "2026-11-09T10:53:16.378850+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/joyrideautos",
+            "checked_at": "2026-11-09T10:53:17.286179+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/joyrideautos/8bf0628b-6a5c-401f-a5a7-30032c4d4d8d/apply",
+            "checked_at": "2026-11-09T10:53:19.547841+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/joyrideautos/51f88577-eb5f-4c5e-a07d-1d0c8626bc25",
+            "checked_at": "2026-11-09T10:53:19.848194+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:magnify",
+        "matching_postings": 1,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/magnify/29a9424b-5d7c-4b92-8440-37e53822ee33",
+            "checked_at": "2026-11-09T10:53:37.017903+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/magnify",
+            "checked_at": "2026-11-09T10:53:37.992835+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/magnify/29a9424b-5d7c-4b92-8440-37e53822ee33/apply",
+            "checked_at": "2026-11-09T10:53:39.045696+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/magnify/87433067-ba70-4783-b9b2-ed7419fecb96",
+            "checked_at": "2026-11-09T10:53:40.090133+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:remedyproductstudio",
+        "matching_postings": 2,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/remedyproductstudio/49258ac7-eb96-416e-a6ee-7e5dd67cd632",
+            "checked_at": "2026-11-09T10:55:00.825203+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/remedyproductstudio",
+            "checked_at": "2026-11-09T10:55:01.799855+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/remedyproductstudio/49258ac7-eb96-416e-a6ee-7e5dd67cd632/apply",
+            "checked_at": "2026-11-09T10:55:02.833075+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/remedyproductstudio/49219fba-3bea-4a6c-a95f-7f4e1497e478",
+            "checked_at": "2026-11-09T10:55:03.866336+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:roofstacks",
+        "matching_postings": 5,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/roofstacks/0848346f-8e70-4c08-aa18-5bd1626f801c",
+            "checked_at": "2026-11-09T10:55:04.915874+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/roofstacks",
+            "checked_at": "2026-11-09T10:55:05.971384+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/roofstacks/0848346f-8e70-4c08-aa18-5bd1626f801c/apply",
+            "checked_at": "2026-11-09T10:55:07.053672+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/roofstacks/49e4f4cb-430d-4f93-bbbe-c2556b20f79c",
+            "checked_at": "2026-11-09T10:55:08.114902+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:seedify-fund",
+        "matching_postings": 1,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/seedify-fund/7ced6023-7480-4c93-a572-6ac4c0c88e0c",
+            "checked_at": "2026-11-09T10:55:39.353598+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/seedify-fund",
+            "checked_at": "2026-11-09T10:55:39.630860+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/seedify-fund/7ced6023-7480-4c93-a572-6ac4c0c88e0c/apply",
+            "checked_at": "2026-11-09T10:55:40.651241+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/seedify-fund/1a2961c0-2787-4a5b-b7cd-f97a834df68c",
+            "checked_at": "2026-11-09T10:55:41.769512+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:techquarter",
+        "matching_postings": 5,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/techquarter/0c73630c-0a79-4a6a-a7a4-1162b8d9ecba",
+            "checked_at": "2026-11-09T10:56:02.493316+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/techquarter",
+            "checked_at": "2026-11-09T10:56:03.459378+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/techquarter/0c73630c-0a79-4a6a-a7a4-1162b8d9ecba/apply",
+            "checked_at": "2026-11-09T10:56:04.508932+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/techquarter/d86be1fc-bed0-4668-8d80-f5266fae9ec4",
+            "checked_at": "2026-11-09T10:56:06.046715+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:teller",
+        "matching_postings": 1,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/teller/dd21975a-901b-49ee-926c-336c92f8673d",
+            "checked_at": "2026-11-09T10:56:06.542081+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/teller",
+            "checked_at": "2026-11-09T10:56:07.684611+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/teller/dd21975a-901b-49ee-926c-336c92f8673d/apply",
+            "checked_at": "2026-11-09T10:56:08.910978+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/teller/75fd6897-7d6c-4071-a28e-bcfe158e75ec",
+            "checked_at": "2026-11-09T10:56:09.702813+00:00",
+            "status": 404
+          }
+        ]
+      },
+      {
+        "key": "global:tryriot",
+        "matching_postings": 4,
+        "checks": [
+          {
+            "kind": "posting",
+            "url": "https://jobs.lever.co/tryriot/17c61f6d-952c-46e2-90c2-9e583b53d5d2",
+            "checked_at": "2026-11-09T10:56:16.813992+00:00",
+            "status": 404
+          },
+          {
+            "kind": "root",
+            "url": "https://jobs.lever.co/tryriot",
+            "checked_at": "2026-11-09T10:56:17.976891+00:00",
+            "status": 404
+          },
+          {
+            "kind": "apply",
+            "url": "https://jobs.lever.co/tryriot/17c61f6d-952c-46e2-90c2-9e583b53d5d2/apply",
+            "checked_at": "2026-11-09T10:56:19.151933+00:00",
+            "status": 404
+          },
+          {
+            "kind": "second_posting",
+            "url": "https://jobs.lever.co/tryriot/96f233f5-370f-4dbe-87b4-0cfc53297a35",
+            "checked_at": "2026-11-09T10:56:19.977129+00:00",
+            "status": 404
+          }
+        ]
+      }
+    ],
+    "closure_drift": [
+      {
+        "key": "global:integrators.cz",
+        "closed_sample_url": "https://jobs.lever.co/integrators.cz/6b1d4c81-3685-4422-8950-f9bde0e7cb07",
+        "fresh_api_omits_id": true,
+        "board_root_status": 200,
+        "another_posting_status": 200
+      },
+      {
+        "key": "global:qualysoft",
+        "closed_sample_url": "https://jobs.lever.co/qualysoft/014797a6-af87-426f-9e58-99772940c69d",
+        "fresh_api_omits_id": true,
+        "board_root_status": 200,
+        "another_posting_status": 200
+      }
+    ],
+    "remaining_unresolved": [],
+    "http": {
+      "requests": 301,
+      "http_200": 240,
+      "wire_bytes": 23207306,
+      "http_error_404": 60,
+      "retries": 1
+    }
+  },
+  "curated_list_regions": [
+    {
+      "file": "global-remote.csv",
+      "key": "global:meili"
+    },
+    {
+      "file": "italy-hottest.csv",
+      "key": "eu:prima"
+    },
+    {
+      "file": "italy-hottest.csv",
+      "key": "global:musixmatch"
+    },
+    {
+      "file": "uk-hottest.csv",
+      "key": "global:octoenergy"
+    },
+    {
+      "file": "uk-hottest.csv",
+      "key": "eu:numan"
+    }
+  ],
+  "registry_sha256": "453ae5f6918c7c4ddc40062160074175e7b7c8c6062987af83991a76f6ab83fa"
+}
