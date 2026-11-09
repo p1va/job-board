@@ -17,3 +17,8 @@ uv run python -m jobboard.registry import-bet companies.txt boards.json discover
 
 Workable keys are company IDs from Workable's search, not the account slugs of
 `apply.workable.com/<slug>`; see docs/contract.md.
+
+Lever keys are regional: `global:<slug>` or `eu:<slug>`, with `provider=lever`.
+Slug case is significant. The same slug can have independent boards in both regions. Discovery validates
+each region; company names and websites in these rows also supply board labels
+when no cached profile or curated list entry has them.

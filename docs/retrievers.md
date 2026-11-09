@@ -11,6 +11,7 @@ uv run python -m jobboard.collect --source ashby --out raw/ashby/0-of-1
 uv run python -m jobboard.collect --source greenhouse --out raw/greenhouse/0-of-1
 uv run python -m jobboard.collect --source workable --out raw/workable/0-of-1
 uv run python -m jobboard.collect --source personio --out raw/personio/0-of-1
+uv run python -m jobboard.collect --source lever --out raw/lever/0-of-1
 ```
 
 Ashby/Greenhouse read the corresponding provider rows in `companies/*.csv`.
@@ -48,6 +49,35 @@ year/month/hour as reported, and `createdAt` supplies the posting timestamp.
 The company name falls back to the most common `subcompany` across that board's
 open jobs when no cached/list profile exists, with a deterministic tie-break.
 One board uses the same label for headings, filters and roles.
+
+## Lever
+
+Lever reads `provider=lever` rows from `companies/*.csv`. Keys explicitly include
+the API region: `global:<slug>` or `eu:<slug>`. Slug case is preserved: `Legend`
+and `legend` are different API tokens. The two regions can host different
+live boards with the same slug, so they have separate scope and job identities.
+Daily collection calls only the stored endpoint, never switches region on an
+error, and requests the full published-postings array with `mode=json`.
+No API key or detail requests are needed. The native posting payload is preserved.
+
+For example, `lever,eu:prima` calls
+`https://api.eu.lever.co/v0/postings/prima?mode=json`. A valid `[]` is an empty
+board; a 404, malformed array, duplicate ID or missing title leaves the board
+unresolved. The shared HTTP client validates gzip/truncation and retries within
+the same pacing/deadline budget. There is no inferred absence from a failed feed.
+
+The normalizer joins opening/body, list sections and closing content into readable
+text, without repeating the combined description's opening. It preserves salary
+units, all locations, and the provider's workplace declaration. `country` qualifies
+the primary location only; neither the EU API region nor a remote flag proves
+European eligibility. `createdAt` is a creation timestamp in milliseconds, not
+verified evidence of when a role was first published. Registry names/websites
+are fallback labels when profiles and curated lists have no better information.
+
+Discovery checks both regions for a bare candidate slug, even if the global board
+is live. Explicit regional keys check only that region. Hosted board URLs can also
+establish region when importing curated lists; ambiguous list entries stay in the
+coverage report until their region is known.
 
 ## Workable scope and cost
 
@@ -95,7 +125,7 @@ means all. `input_sha` hashes the exact selection for this shard, so different
 shards normally have different input hashes.
 
 Requests share a pacing/retry budget within a shard: by default at most two
-requests per second for Ashby/Greenhouse, one per second for Personio and one
+requests per second for Ashby/Greenhouse, one per second for Personio/Lever and one
 every two seconds for Workable, with two workers. Retries and the optional
 Personio language request share the same pacing and deadline. Rate limits and
 server/network/truncation errors get bounded retries.
@@ -127,7 +157,7 @@ the maximum were returned. Any tolerance needs observed churn data first.
 ## Actions
 
 **Collect job boards** runs daily at 05:17 UTC and supports manual dispatch.
-Its eight matrix jobs collect two shards per provider. `fail-fast: false` lets
+Its ten matrix jobs collect two shards per provider. `fail-fast: false` lets
 other shards finish when one fails; `always()` uploads usable outputs.
 Artifacts are overwritten on reruns and retained for three days. Collection
 has read-only repository permissions. The serialized publisher joins valid
@@ -145,3 +175,4 @@ contract for the search endpoint; keep the recorded fixtures as regression
 examples, not a guarantee of future compatibility.
 Personio documents its [public XML integration](https://developer.personio.de/docs/integration-of-open-positions)
 and [language-specific description fields](https://support.personio.de/hc/en-us/articles/29375445597725-Frequently-asked-questions-on-XML-job-integration).
+Lever documents its [public Postings API](https://github.com/lever/postings-api).

@@ -147,7 +147,46 @@ def _personio(job: dict, board: str) -> dict:
                 description_text="\n\n".join(sections), company_name=job.get("subcompany") or None, listed=True)
 
 
-SOURCES = {"ashby": _ashby, "greenhouse": _greenhouse, "workable": _workable}
+def _lever(job: dict) -> dict:
+    cat = job.get("categories") or {}
+    primary = cat.get("location") or ""
+    locations = list(dict.fromkeys(l for l in [primary] + (cat.get("allLocations") or []) if l))
+    # country qualifies the primary location, not every office or the API's storage region.
+    pairs = [(l, job.get("country") if l == primary else None) for l in locations]
+    kind = (job.get("workplaceType") or "").lower()
+    workplace = {"onsite": "onsite", "on-site": "onsite", "hybrid": "hybrid", "remote": "remote"}.get(kind)
+    salary = job.get("salaryRange") or {}
+    description = html_text(job.get("description")) or tidy(job.get("descriptionPlain") or "")
+    if not description:
+        description = "\n\n".join(filter(None, (
+            html_text(job.get("opening")) or tidy(job.get("openingPlain") or ""),
+            html_text(job.get("descriptionBody")) or tidy(job.get("descriptionBodyPlain") or ""))))
+    text = [description]
+    for section in job.get("lists") or []:
+        body = html_text("<ul>" + (section.get("content") or "") + "</ul>")
+        if body:
+            text.append("\n".join(filter(None, (html_text(section.get("text")), body))))
+    salary_text = html_text(job.get("salaryDescription")) or tidy(job.get("salaryDescriptionPlain") or "")
+    text += [html_text(job.get("additional")) or tidy(job.get("additionalPlain") or ""), salary_text]
+    created = job.get("createdAt")
+    published = None
+    if type(created) in (int, float):
+        try:
+            published = datetime.fromtimestamp(created / 1000, tz=timezone.utc)
+        except (ValueError, OverflowError, OSError):
+            pass
+    return dict(title=job.get("text"), department=cat.get("department") or cat.get("team"),
+                employment=cat.get("commitment"), workplace=workplace, locations=locations,
+                pairs=pairs, structured=[] if primary else [job.get("country")],
+                published_at=published, url=job.get("hostedUrl"),
+                salary_raw=(salary_text or None) if salary.get("min") is None and salary.get("max") is None else None,
+                salary_min=salary.get("min"), salary_max=salary.get("max"), salary_currency=salary.get("currency"),
+                salary_period={"per-year-salary": "year", "per-month-salary": "month", "per-hour-wage": "hour",
+                               "per-week-salary": "week", "per-day-wage": "day"}.get(salary.get("interval")),
+                description_text="\n\n".join(filter(None, text)), company_name=None, listed=True)
+
+
+SOURCES = {"ashby": _ashby, "greenhouse": _greenhouse, "workable": _workable, "lever": _lever}
 
 
 def payload_hash(row: dict) -> str:

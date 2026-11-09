@@ -28,6 +28,7 @@ from .lifecycle import JobState, Key, Sighting, step
 from .normalize import normalize
 from .retrievers import job_title
 from .personio import board_slug
+from .lever import board_key as lever_key
 from .tables import BOARD, STATE, VERSION
 
 DEAD_AFTER = 3           # consecutive HTTP 404s before a board is marked dead
@@ -178,11 +179,15 @@ def boards_table(inputs: Path, previous: Path, outcomes: dict[str, Scope], now: 
             for row in csv.DictReader(stream):
                 if row["provider"] == "personio":
                     row["key"] = board_slug(row["key"])
+                elif row["provider"] == "lever":
+                    row["key"] = lever_key(row["key"])
                 board_id = f"{row['provider']}:{row['key']}"
                 b = boards.setdefault(board_id, prior.get(board_id) or dict(
                     board_id=board_id, provider=row["provider"], key=row["key"], company_id=board_id,
                     api_region=None, origins=[], status="unchecked", consecutive_404=0,
                     last_checked=None, last_complete=None))
+                if row["provider"] == "lever":
+                    b["api_region"] = row["key"].split(":", 1)[0]
                 b["origins"] = sorted(set(b["origins"]) | set(filter(None, (row.get("origins") or "").split("|"))))
     for board_id, b in boards.items():
         scope = outcomes.get(board_id)

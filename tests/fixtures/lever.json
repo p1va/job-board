@@ -1,0 +1,28 @@
+[
+  {
+    "id": "example-job-1",
+    "text": "Senior Software Engineer",
+    "hostedUrl": "https://jobs.eu.lever.co/example/example-job-1",
+    "applyUrl": "https://jobs.eu.lever.co/example/example-job-1/apply",
+    "createdAt": 1793523600000,
+    "country": "DE",
+    "workplaceType": "hybrid",
+    "categories": {
+      "location": "Berlin",
+      "allLocations": ["Berlin", "London"],
+      "team": "Platform",
+      "department": "Engineering",
+      "commitment": "Full-time"
+    },
+    "opening": "<p>Opening.</p>",
+    "descriptionBody": "<p>Body.</p>",
+    "description": "<p>Opening.</p><p>Body.</p>",
+    "lists": [
+      {"text": "Responsibilities", "content": "\n  <li>Build Python services.</li>\n  <li>Work with SQL.</li>\n"}
+    ],
+    "additional": "<p>Benefits.</p>",
+    "salaryDescription": "<p>Plus equity.</p>",
+    "salaryRange": {"min": 70000, "max": 90000, "currency": "EUR", "interval": "per-year-salary"},
+    "unknownField": "preserved in raw"
+  }
+]

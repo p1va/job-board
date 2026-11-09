@@ -9,6 +9,7 @@ from urllib.parse import quote, urlencode
 
 from .contract import SCHEMA_VERSION, Kind, Scope, Status
 from .http import DeadlineExceeded
+from .lever import parse_postings, postings_url
 from .personio import feed_url, has_description, parse_feed
 
 # Geographic Europe, including transcontinental countries and dependencies.
@@ -54,7 +55,7 @@ def workable_selections(countries=None, remote: str = "include") -> list[Selecti
 
 
 def job_title(source: str, job: dict) -> str:
-    return job.get("name" if source == "personio" else "title") or ""
+    return job.get({"personio": "name", "lever": "text"}.get(source, "title")) or ""
 
 
 def _identity(job: dict, source: str, board: str) -> tuple[str, str]:
@@ -122,9 +123,16 @@ def retrieve(source: str, selection: Selection, get, run_id: str, *, max_pages: 
                 url = "https://jobs.workable.com/api/v1/jobs?" + urlencode(params)
             elif source == "personio":
                 url = feed_url(selection.board)
+            elif source == "lever":
+                url = postings_url(selection.board)
             else:
                 raise ValueError(f"unsupported source: {source}")
-            data = get(url, parse=parse_feed, accept="application/xml") if source == "personio" else get(url)
+            if source == "personio":
+                data = get(url, parse=parse_feed, accept="application/xml")
+            elif source == "lever":
+                data = get(url, parse=parse_postings)
+            else:
+                data = get(url)
             scope.http_status = 200
             scope.pages += 1
             jobs = data.get("jobs")
