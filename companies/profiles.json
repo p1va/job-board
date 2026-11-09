@@ -5,11 +5,23 @@
   "name": "10x Team",
   "website": "https://10x.team/"
  },
+ "ashby:42dot": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/aed244c6-a0fc-49e9-a798-803fb7a54fb7/251599e8-cc2a-4447-909a-6d465a91b71b/621c9a8e-95a4-4902-95ff-4ec6403d7976.png",
+  "name": "42dot",
+  "website": "https://42dot.ai"
+ },
  "ashby:5bluesoftware": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/51301d8f-5afd-4afc-bebd-3368a2eb793e/f154e41f-6f35-4e6c-9b59-cf2fe1c29bbf/d3c080c3-475d-4946-9950-373c30d78cba.png",
   "name": "5Blue Software",
   "website": "https://www.5bsoftware.com/"
+ },
+ "ashby:5dcfe507-5c82-4b61-a84e-47020a17f7dc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6e3e6e15-95ff-4cec-b37e-7789c6e77516/16d03318-d5a1-4927-b288-b02744a638dd/37d67297-357b-4f1f-b509-1392056811db.png",
+  "name": "GetYourGuide",
+  "website": "https://www.getyourguide.com"
  },
  "ashby:8returns": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -52,6 +64,12 @@
   "name": "AeroVect",
   "website": "http://aerovect.com"
  },
+ "ashby:aim-solutions": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/726cafb7-2084-4bff-b9a3-b61131a5d1b9/aa146850-f971-42f9-8823-6950f98e88bf/b418b831-b34d-4122-a56a-0306a7513d03.png",
+  "name": "AIM Solutions",
+  "website": "https://aim-solutions.nl/"
+ },
  "ashby:aios": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/65637f55-1b6b-4244-bd9e-2e72e255233a/514061e2-f559-4c1e-8e23-282681c5cee1/fdfcfc47-6195-4756-9fad-fe81602cb04e.png",
@@ -81,6 +99,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/16fb5c4f-12a4-4e77-a698-3c881ea0c4f7/afa477a5-ddfc-4c59-b5e9-b926972e3e58/b8987509-72b3-449b-8d58-1af70771e1e8.png",
   "name": "Alan",
   "website": "https://alan.com/"
+ },
+ "ashby:allica-bank": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a7bfe884-dda5-4af7-9803-f720e5745b45/9edccdb6-0d89-4ec7-b099-1623f89937f8/03be921c-d576-441b-9230-ea983a66ddf9.png",
+  "name": "Allica Bank",
+  "website": "https://www.allica.bank/"
  },
  "ashby:almedia": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -117,6 +141,12 @@
   "name": "amo",
   "website": "https://amo.co/"
  },
+ "ashby:anagram": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b16de0bb-5ad7-48bb-8781-c4595b29f7ab/24b89178-ac6e-4fc2-b86b-9a39f6b0ca80/33460fe9-55cb-419a-ba16-cf2d4b1821c5.png",
+  "name": "Anagram",
+  "website": "https://www.anagram.xyz/"
+ },
  "ashby:andercore": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "name": "Andercore",
@@ -126,6 +156,12 @@
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "name": "Andromeda Cluster",
   "website": "https://andromeda.ai"
+ },
+ "ashby:ankar": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9499e0a6-9857-4df9-9eb0-f841a071231f/695612e5-7274-466d-9d32-287e6ef843b6/7220e7f3-86a0-4ad7-a440-f9f8f30b7ec3.png",
+  "name": "Ankar",
+  "website": "https://ankar.ai/"
  },
  "ashby:anyone-ai": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -169,6 +205,12 @@
   "name": "Ashby",
   "website": "https://www.ashbyhq.com"
  },
+ "ashby:astronomer": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/42edc236-8d2a-4469-92ad-f7886150ee6f/c881ec39-5df3-43db-b99b-27b50bb05606/64f12915-c33d-4f90-ad02-044ac373b1e3.png",
+  "name": "Astronomer",
+  "website": "https://www.astronomer.io/"
+ },
  "ashby:atira": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9bde818c-48cf-4d97-9997-aeada276dc66/08fb3ffb-5bf8-4fc0-a9b8-888fb8d21848/36e1b644-b20d-449e-9189-5f94d5726404.png",
@@ -199,6 +241,24 @@
   "name": "Avelios Medical",
   "website": "https://www.avelios.com/"
  },
+ "ashby:aveni": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/b9f743d1-2134-4580-a214-3ad5b0908792/de51f642-4b92-4285-a56a-2d68d23443c3/781eab9c-8388-4488-85c9-e0e3d34bfe10.png",
+  "name": "Aveni",
+  "website": "https://aveni.ai/"
+ },
+ "ashby:axle-careers": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e9e25135-0f50-4376-9066-300000f75706/5f4be980-87ee-4a52-b33e-94227fd5f780/2ec95eca-3110-46e9-8478-0cbb82e72594.png",
+  "name": "Axle Energy",
+  "website": "https://axle.energy"
+ },
+ "ashby:b2spin": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/43823d75-97e8-4696-a5de-2d18c84e32ef/cf415756-dfed-406f-9d7c-16a5adb0184c/7571d135-10cd-4ea4-bb41-182dba687334.png",
+  "name": "B2spin",
+  "website": "https://www.b2spin.com/"
+ },
  "ashby:babbel": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "name": "Babbel",
@@ -216,6 +276,11 @@
   "name": "Beam",
   "website": "https://beam.org/"
  },
+ "ashby:beamery": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Beamery",
+  "website": "https://www.beamery.com"
+ },
  "ashby:beparallel": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e4b22446-5ce8-4cf1-a67c-527ca902f4b4/3a3f31de-20bf-4244-9bc4-63a245cff119/fd4e7fa1-c456-4b67-88a5-58d928000413.png",
@@ -228,11 +293,23 @@
   "name": "Berlitz",
   "website": "https://berlitz.careers/"
  },
+ "ashby:beyondmath": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7f59b527-24cd-47a9-9b4b-61a477a7575a/c7e2547e-2795-43b2-8577-0a0a72e2952a/b0415730-510f-408f-87a6-fc0ac68589fc.png",
+  "name": "BeyondMath",
+  "website": "https://beyondmath.com/"
+ },
  "ashby:biggergames": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b6dd9437-9893-4c25-bc85-fb8af3a41360/fd6d97e2-208f-4718-b9f7-3ead981cfd7a/6c62ab49-2e5c-450b-836c-03ecf455bda2.png",
   "name": "Bigger Games",
   "website": "https://biggergames.com/"
+ },
+ "ashby:bio": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/130bbf77-c1a9-476f-b2c1-48d5226f3b49/10ca59f6-b305-4949-bb88-43a30ed5c667/d90bafdf-b0dc-4568-9133-60a2b11328c0.png",
+  "name": "BIO",
+  "website": "https://www.bio.xyz/"
  },
  "ashby:bjakcareer": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -245,6 +322,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3009845f-228b-4c08-9ef9-ab43708cb0f3/a8222f1a-e14b-4f32-bf20-b46b98d67919/2317cc55-1605-49e1-9713-da7a7604fb5a.png",
   "name": "Black Forest Labs",
   "website": "https://bfl.ai/"
+ },
+ "ashby:block-labs": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6e3ccdf0-72b3-4104-a3e2-26b85dfc640c/e3edbd4f-120c-4865-ade9-27e3c0a7f166/7b0d88ed-a2c4-4678-9218-8bf20f066415.png",
+  "name": "Block Labs",
+  "website": "https://www.blocklabs.io/"
  },
  "ashby:blockstream": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -264,10 +347,28 @@
   "name": "BLP Digital AG",
   "website": "https://www.blp-digital.com/career"
  },
+ "ashby:bounce": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6fd7f460-6646-445c-bd3c-3f383b10d10f/f87b193f-84f6-48e6-947f-6bb47f531f66/f1a3efaa-2522-4a99-87c3-97ea2cb6254d.png",
+  "name": "Bounce",
+  "website": "https://bounce.com/"
+ },
  "ashby:bowatt": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "name": "BoWatt GmbH",
   "website": "https://www.bowatt.com/"
+ },
+ "ashby:braiins": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b0dfbacc-8864-45c0-a909-17ec0483151d/8c09ee14-fa14-4e72-b964-3e8ee548e82e/904dbd80-547b-42b5-b873-c80e1a539db1.png",
+  "name": "Braiins",
+  "website": "https://braiins.com/careers"
+ },
+ "ashby:brainco": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/40cb856d-099e-4744-b111-116395387e3d/55a49ada-4058-43cb-a6d7-0d6ed0695c7b/0f43c329-e9e2-4504-8105-d6e949539bda.png",
+  "name": "Brain Co.",
+  "website": "https://www.brain.co"
  },
  "ashby:buena": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -287,6 +388,12 @@
   "name": "Bureau",
   "website": "https://bureau.id/"
  },
+ "ashby:bynder": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9eab85a9-e939-4a9d-8816-8ec09bd672d3/c433cf05-f42c-4fe2-b9c6-b67165bcd4c8/4ec82b09-61d2-46a3-a0ba-902e65b2a3fc.png",
+  "name": "Bynder",
+  "website": "https://www.bynder.com"
+ },
  "ashby:callosum": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e8903dc7-6eb5-4181-a289-1e8530232de0/31c1b670-da53-4fab-952c-9e6c894b7ad5/b0cf370c-6907-4e4f-8d0f-0daec5f774ff.png",
@@ -305,11 +412,23 @@
   "name": "Cantina",
   "website": "https://www.cantina.com"
  },
+ "ashby:capsa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7bdd6b9d-2754-4f2c-bfa1-70a2ae9e6fad/c191cbee-f9b7-42be-b9b5-f31ce8a7a1b3/91dd40ce-fd31-4b26-82ae-4ac4fd012409.png",
+  "name": "Capsa",
+  "website": "https://capsa.ai/"
+ },
  "ashby:carwow": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5fd288ca-0909-40bd-9a5e-726c54a06e96/374afaa4-9772-4e83-8bf4-6595d174cbb5/b2a18448-b502-44a2-a41d-53e8571d3515.png",
   "name": "Carwow",
   "website": "https://www.carwow.co.uk"
+ },
+ "ashby:causaly": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4a6b0a99-ce8e-4e4b-9a4f-cdfa6ecffecd/403b3faa-dd95-4709-ad22-12f8502e8287/8b56b025-49e7-4d0c-a0ad-d650cf54cded.png",
+  "name": "Causaly",
+  "website": "https://www.causaly.com/"
  },
  "ashby:causaprima": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -358,6 +477,12 @@
   "name": "CLAR AI",
   "website": "http://www.clar.ai/"
  },
+ "ashby:clearbank": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4fc04ed1-f171-4688-8229-d7968e3e9f83/e7662e78-44bc-4b84-8cc1-8b3e4dec4f12/6d6c88d0-91eb-4c26-8134-a86a17558c31.png",
+  "name": "ClearBank",
+  "website": "https://clear.bank/"
+ },
  "ashby:cleo-2": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5669a0b4-abd0-40bb-9a86-3b216736de2b/2e6a963c-a42b-4ffe-ac33-ae7674a97153/8e054094-270b-4f50-b925-8b1b754f0d4d.png",
@@ -376,6 +501,12 @@
   "name": "ClickHouse",
   "website": "https://clickhouse.com/"
  },
+ "ashby:clickup": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/2f86a38f-fd5d-40f8-a393-1e5be29b5592/af1f17df-e3af-4725-8edf-4b406940e72d/37ca2008-f3e9-4aa6-b44a-94809bdf76ee.png",
+  "name": "ClickUp",
+  "website": "https://clickup.com/"
+ },
  "ashby:clipboard": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/de0da823-924d-48d4-8f40-3549a5c44810/61ba8fbf-5934-4cb6-92c0-21def16d1282/bbd75baf-bdf5-4861-a3c2-cf7cba2038f2.png",
@@ -388,17 +519,41 @@
   "name": "Clipbook",
   "website": "https://clipbook.com/"
  },
+ "ashby:coder": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/26859603-6351-4769-8c1f-4e8c1581c69a/7d2c0b9c-74c1-41df-927b-1d748a679438/81f63f75-51fb-4ae9-903d-050b36230e4b.png",
+  "name": "Coder",
+  "website": "https://coder.com/"
+ },
  "ashby:codesphere": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7fd9c456-e6fd-4d76-86f0-52b82609fbfc/3efae879-86d0-4147-b49b-e34c71a979c1/d6750dfb-afb0-4e31-ad8c-cc7e8e73bd23.png",
   "name": "Codesphere",
   "website": "https://codesphere.com/"
  },
+ "ashby:codeway": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/fa4b969e-4990-4d9c-a666-8753fc94e0b0/1160cb39-6a80-43bf-bbb5-86e81ad565a4/39882044-07c2-43d4-88e8-3958b4548b36.png",
+  "name": "Codeway",
+  "website": "https://www.codeway.co/"
+ },
  "ashby:cohere": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/951a1fca-ef74-47dd-9932-d2e6ae54beb2/c275a67b-c32a-426c-bc5a-e64c488df273/f9bad60a-761a-4d26-9d99-39bda6bbaed4.png",
   "name": "Cohere",
   "website": "https://cohere.com/"
+ },
+ "ashby:colonist": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/882a2853-9b06-4b95-b692-17e954b528b4/7023150d-0970-4ea9-985e-062c51c8800f/2f7fbab1-8255-4b48-9c27-bbfc62641dc0.png",
+  "name": "Colonist",
+  "website": "https://www.colonist.io/careers"
+ },
+ "ashby:comand-ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/19f8e534-25c5-4cf5-932c-0f72676d44a8/2797a610-d11f-4b32-b68f-fa9f0b2abde3/e20701eb-88b9-4545-bd47-a0ba137d0358.png",
+  "name": "Comand AI",
+  "website": "https://www.comand.ai/"
  },
  "ashby:comena": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -418,11 +573,34 @@
   "name": "comstruct ICT",
   "website": "https://www.comstruct.com/"
  },
+ "ashby:conduct": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4b6e1185-f805-4d4e-8a0f-1085508e0c1b/95d79442-b68a-4f40-9495-82c4de1fa4c7/b180ed21-4d23-4fb2-bbeb-e007de220554.png",
+  "name": "Conduct",
+  "website": "https://www.conduct.ai"
+ },
+ "ashby:consensys": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Consensys",
+  "website": "https://consensys.com"
+ },
  "ashby:constructor": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/199df5c2-7a86-4dcb-903d-1d1664cb7529/90382b37-7265-4df6-913d-abd2d8733689/184a8277-7ee6-44fb-82a4-f8e246eef8df.png",
   "name": "Constructor",
   "website": "https://constructor.io"
+ },
+ "ashby:conveo": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/49c7399e-a401-4987-ab34-2ca5e18d2f29/4f81bb59-0d91-4182-b07c-c15f1dd6cf80/91634811-8e91-4f95-8464-2ab45d8874db.png",
+  "name": "Conveo.ai",
+  "website": "https://conveo.ai/"
+ },
+ "ashby:coram-ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0fd99e1a-d779-4665-8d71-7cd89be3f61c/a3ce922c-7b8f-46cf-81ff-6ced6edc28d1/bcdf9f21-5a61-4413-b4be-ea1888957344.png",
+  "name": "Coram AI",
+  "website": "https://www.coram.ai/"
  },
  "ashby:cortea": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -441,6 +619,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/8fd0335e-5a2d-43e5-ae3d-a108bb9726e1/ff9c1c74-2363-4d43-a24b-951acba15a87/6c447bd8-18e2-4d0b-946f-2482120776ad.png",
   "name": "Cracken",
   "website": "https://cracken.ai/"
+ },
+ "ashby:creatoriq": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/187d5be1-f271-439a-aa88-242f1fa6ef65/f5d0135a-871b-4a8c-be3d-a829cd518c7c/8331a403-c30e-440b-b815-856d433525bf.png",
+  "name": "CreatorIQ",
+  "website": "https://www.creatoriq.com/"
  },
  "ashby:cuspai": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -484,6 +668,12 @@
   "name": "Datatonic",
   "website": "https://datatonic.com/"
  },
+ "ashby:decagon": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c9d1b6ec-be84-4801-bf17-4fe1422349e6/185d14f2-d29e-4562-98ef-d44a32883376/ed11392e-a580-48f2-9720-bbca7a9df696.png",
+  "name": "Decagon",
+  "website": "https://decagon.ai/"
+ },
  "ashby:dedale-intelligence": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f0c5b9f8-0764-4405-bcc7-a564450380e8/80b386c7-b1ac-46f5-b53b-18eb41f2e505/cbd5d681-a09f-47a7-b4cf-b9fb2bd98750.png",
@@ -507,6 +697,36 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/6e182d8c-bbed-4f69-ac4a-eaa88cab3de9/b53fb0da-1c14-4541-ad08-48840c85daeb/0e7fabdd-28a0-4b94-88bd-601c6b2aa89a.png",
   "name": "deepset",
   "website": "https://www.deepset.ai/"
+ },
+ "ashby:deepslate": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d74a2ef8-ec8e-4a6f-af4d-ac53fc9e9d1a/4506187e-4c5e-4713-a047-bf22b255a09d/69df60c2-b7f5-4ce4-9e5a-4650d3c995e6.png",
+  "name": "Deepslate",
+  "website": "https://deepslate.eu/"
+ },
+ "ashby:dewarmte": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e042c831-8983-448c-8c1d-25dbb95179c8/f36f8f88-2750-48d4-a47a-8fcc9be28c16/4075d151-7ba1-48ca-b759-7f72d3170821.png",
+  "name": "DeWarmte",
+  "website": "https://www.dewarmte.nl/"
+ },
+ "ashby:dialo": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/fe0a1a8e-1092-4d76-b556-28304bf48cc0/e2d7e245-1fca-4067-be30-674fc5901c00/2513cbf2-9b9e-4c5f-b311-f5ea3286371e.png",
+  "name": "Dialo",
+  "website": "https://dialo.ai/"
+ },
+ "ashby:distance": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/47c01ac0-e0ea-4fcf-b83a-083d95b0fbbb/d26262c8-0853-4243-9a29-91e83e9a2a14/374debdc-6d83-40b1-88ce-b0fab6fc31a4.png",
+  "name": "Distance Technologies",
+  "website": "https://distance.tech/"
+ },
+ "ashby:docebo": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/28d4bce2-b336-48e2-b159-535dda8a2624/366eac42-ab4a-4a3e-b126-f77c79739ef4/4cc3c495-bff4-470d-bd22-ebccb7518122.png",
+  "name": "Docebo",
+  "website": "https://www.docebo.com/"
  },
  "ashby:docker": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -543,6 +763,17 @@
   "name": "DualEntry",
   "website": "https://www.dualentry.com/"
  },
+ "ashby:duck-duck-go": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c7a118c9-86fe-448f-8fcd-581db95f7ffb/988a780a-4880-40ac-87ac-7b1bf89f1b43/8e558f29-9b4e-49bb-9445-fc3b3c8eb2eb.png",
+  "name": "DuckDuckGo"
+ },
+ "ashby:duffel": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4c89f533-c0fd-40c8-9676-10e6135be9db/4bc8c12c-00f9-47f0-8b43-6c02bf9d806a/93631256-ec83-4631-8130-433db771a280.png",
+  "name": "Duffel",
+  "website": "https://duffel.com"
+ },
  "ashby:duna": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/fa07b9e4-1a7b-4a33-a23d-11d16767c6f4/157904ae-78d7-4ea9-b28f-44b2a52a3544/8f9af25d-4e4c-416e-99b5-e0cc85851c0d.png",
@@ -573,11 +804,23 @@
   "name": "Easygenerator",
   "website": "https://www.easygenerator.com/"
  },
+ "ashby:edra": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6f923116-f635-44b0-992a-848b82eaa2d7/27c05251-1378-4253-bda0-aeee4ad00c6c/edab3371-1e91-4dbe-bd6e-72d8067683d1.png",
+  "name": "Edra",
+  "website": "https://www.edra.ai/"
+ },
  "ashby:egym": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e7250d03-2445-471d-a363-dae76ece3035/c22df4aa-5392-4842-afc7-a5e50d85ae12/986f0c03-0f12-4eeb-bb05-cb71318bcd1c.png",
   "name": "EGYM",
   "website": "https://egym.com"
+ },
+ "ashby:eightsleep": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/beb8bf8c-4355-469f-9eb9-59a3c94c47eb/944a615f-7e0e-4215-bf95-563917755f78/ecde18ee-89dc-4d40-91c3-1a5311ab71bd.png",
+  "name": "Eight Sleep",
+  "website": "https://www.eightsleep.com/"
  },
  "ashby:elevenlabs": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -590,6 +833,18 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/28738f56-e179-4962-96bf-6576133dfdb5/9cc203cb-c29e-4dad-8cfd-57ae6330b1de/9b775056-626f-42e3-8b67-dbc6f14ed46f.png",
   "name": "Encord",
   "website": "https://encord.com/"
+ },
+ "ashby:endex": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/217091f6-970c-492c-83e9-36a10a229a95/9e760723-f081-4eb0-824d-fb0ac59f2105/0a0a47ef-fd74-4885-90c7-430a6a58f80e.png",
+  "name": "Endex",
+  "website": "https://endex.ai/"
+ },
+ "ashby:endra": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5ff3094d-26a0-4ce2-b167-63a2b7d176af/c05e2453-7016-40ea-9d79-75b85690a0e8/328e06a7-4ce0-422a-bfd7-9749f2cd01f7.png",
+  "name": "Endra",
+  "website": "https://www.endra.ai/"
  },
  "ashby:eneba": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -609,11 +864,29 @@
   "name": "Epidemic Sound",
   "website": "https://www.epidemicsound.com/careers/"
  },
+ "ashby:epistemix": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3ff5e955-3565-491f-b3cc-5178e3a78d3e/848b1d8f-39f0-45ba-b773-0a40e4a8dfdc/ce6874b7-92ce-4737-8cd3-553b4faa9821.png",
+  "name": "Epistemix",
+  "website": "https://epistemix.com/"
+ },
  "ashby:everai": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9005b74e-fc9c-4512-82e1-d01c84cd24a4/da936d20-f762-47dd-85c6-56a4b5687501/e8e31231-37aa-4853-acb4-c60796259891.png",
   "name": "EverAI",
   "website": "https://www.everai.ai/"
+ },
+ "ashby:evervault": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/90f47eeb-122f-42c2-addc-cf50786ad0b5/29b3a839-8139-4257-8de5-ab0394225c09/b84c1cbb-84bb-40a5-868a-bb619cb20731.png",
+  "name": "Evervault",
+  "website": "https://evervault.com"
+ },
+ "ashby:exa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/528e5060-c438-49f0-a3b6-ba1f0417bbd6/a872c1ea-8c84-4d88-abb0-3366a3c1b3b5/142124b6-e130-4cf6-8b8c-113a4ef6ed88.png",
+  "name": "Exa",
+  "website": "https://exa.ai/"
  },
  "ashby:eye-security": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -627,11 +900,35 @@
   "name": "Faculty",
   "website": "https://faculty.ai"
  },
+ "ashby:fal-ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5377fe5a-6f2f-46b4-9757-cf8bfba55961/1f6ca367-e623-4556-ae6a-fdfed9474faf/dabdcf2b-23e2-4e75-8b1d-146758a3f73d.png",
+  "name": "fal",
+  "website": "https://fal.ai/careers"
+ },
+ "ashby:fanvue.com": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/506fe9ba-3cd7-4282-8a68-3b692e8188cd/a4e4dbe9-49e7-4424-a2cb-78bd9a459ceb/f84714c6-0343-48d2-9a62-7900e605f466.png",
+  "name": "Fanvue",
+  "website": "https://www.fanvue.com/"
+ },
  "ashby:featherlessai": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a32f13ae-804a-40cc-a297-21b878eeb46a/f8140a85-f61a-47d0-bca3-91fa5008080d/9d70daff-f9a7-4a39-af2c-453aded1bc69.png",
   "name": "Featherless AI",
   "website": "https://featherless.ai/"
+ },
+ "ashby:feedbackfruits": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4e478da3-a428-4592-8cb7-cbab281f2397/48dbb397-77f6-4223-bf39-292d7cb399f6/5eccc5e6-1957-4d5a-bcf7-6fb86bee7e18.png",
+  "name": "FeedbackFruits",
+  "website": "https://feedbackfruits.com/"
+ },
+ "ashby:filigran": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9f4c4fe3-61fc-4fe2-9cc6-2e0457d39914/ce999ace-c22e-4605-9a76-62799379e144/41171e76-0d1c-45fa-b405-92186e9d568c.png",
+  "name": "Filigran",
+  "website": "https://filigran.io"
  },
  "ashby:finmid.com": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -645,10 +942,46 @@
   "name": "Finto",
   "website": "https://www.gofinto.com/"
  },
+ "ashby:flowengineering": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/1a0e73c2-0e99-4277-b350-e4af4139aaa8/846f6597-2e03-4b01-a802-41a6762f8dc4/29194707-5f23-4cb7-8ae4-a9249128009e.png",
+  "name": "Flow Engineering",
+  "website": "https://flowengineering.com/"
+ },
+ "ashby:fluidstack": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/38361580-1e4b-4a1f-8664-7ac8da2ab6ce/041bd862-fa7c-4c18-b4cb-311865e7ead2/69cb7d80-2fdb-44ba-b37e-cb0cb84fad6d.png",
+  "name": "Fluidstack",
+  "website": "https://www.fluidstack.io/"
+ },
+ "ashby:focused": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/922792c5-b9f1-4d04-94b9-a5d7f1722ec1/1793a95f-c342-4b9e-95fe-1ead6e37037d/ca3289ab-bfd2-449f-b232-38f503628ad0.png",
+  "name": "Focused",
+  "website": "https://focused-energy.co"
+ },
  "ashby:fonio": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "name": "fonio",
   "website": "https://fonio.ai"
+ },
+ "ashby:fonoa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/1a810de3-4855-4367-bbdb-01c989c70eae/40be62b1-a878-4a42-8210-9fd64005e08c/e6a9e2cd-81b5-4583-8bdd-7a3340651814.png",
+  "name": "Fonoa",
+  "website": "https://www.fonoa.com/"
+ },
+ "ashby:foundational": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e25a197d-419a-46b9-990d-cdcec1e972eb/e06a6ab6-a502-4381-bd34-047fe7c3fb9b/a665c2cc-4d85-493e-8c9d-940c01eab6b3.png",
+  "name": "Foundational",
+  "website": "https://foundational.space"
+ },
+ "ashby:foundationhealthcareers": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a43e0fa7-4dab-4b31-8d94-5f4b0c8d607c/34c87910-3277-4c15-8ad5-426c1929bafd/119a7a03-3e1b-49ee-9dbd-a1e52f658981.png",
+  "name": "Foundation Health",
+  "website": "https://www.foundationhealth.com/"
  },
  "ashby:founders-factory": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -680,11 +1013,23 @@
   "name": "FUTRUE",
   "website": "https://futrue.com/"
  },
+ "ashby:gainsight": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/da05ebb3-c911-4029-8ffe-897a7fdaff27/af2c8b32-2768-4145-bf62-5b98241e795e/f71cf4b4-9a65-4141-b542-615f6abfa41c.png",
+  "name": "Gainsight",
+  "website": "https://www.gainsight.com/"
+ },
  "ashby:galvany": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/df742d94-5303-44c6-8ba5-944454b6f2fa/46ce0d89-afa3-4151-8c2a-e94ccfcff57c/72f6ec5c-c48e-42c2-a1fb-d53fc806741a.png",
   "name": "GALVANY",
   "website": "https://galvany.de"
+ },
+ "ashby:gearset": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/170ab1b5-16ac-40cf-9e33-43f4ef3a0664/1d497a8a-0ff1-4fbe-9c72-c6478ea57461/eef1698e-d48e-4e7f-8748-20c034892b0c.png",
+  "name": "Gearset",
+  "website": "https://gearset.com/"
  },
  "ashby:gen-digital": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -698,6 +1043,12 @@
   "name": "GenPeach AI",
   "website": "https://genpeach.ai"
  },
+ "ashby:gismart": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/d5fc9a0c-9608-448b-b96f-2a4966f020bf/57c55b9e-8539-479e-bc48-4191b79f7097/0e1886ff-b86a-48ee-b914-4ed11164850c.png",
+  "name": "Gismart",
+  "website": "https://gismart.com/"
+ },
  "ashby:gitbook": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/90c4aedc-660f-4607-a20a-126906266779/129e3d74-4ab9-47b9-90ce-c0d9133af8f2/fbda3cdd-424b-44b1-a448-2a987acc80fc.png",
@@ -710,11 +1061,23 @@
   "name": "Glia",
   "website": "https://www.glia.com/"
  },
+ "ashby:glinttglobal": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/717dff7b-b4e8-4965-b94f-548df0b440eb/ad6e2991-a303-49d8-8659-e5e4544f57a5/bec5621b-5b18-4bbd-9562-3943ff4f9822.png",
+  "name": "Glintt Global",
+  "website": "https://glinttglobal.com/"
+ },
  "ashby:glow25": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/1f226be1-736e-452f-b821-b549ae515063/f09dfc8e-097f-4cc3-ae7b-0181b685d05c/62daf584-3828-41ab-aea3-0f5309073c93.png",
   "name": "Glow25",
   "website": "https://glow25.de/"
+ },
+ "ashby:gooddata": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b3d62626-b8de-407d-a734-a5ac621c8a01/84a05a06-c470-4fbd-a450-9913743b7da2/7b9a498d-994e-437a-9364-4969d7241406.png",
+  "name": "GoodData.AI",
+  "website": "https://www.gooddata.ai/"
  },
  "ashby:gotphoto": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -739,11 +1102,35 @@
   "name": "Growth Protocol",
   "website": "https://growthprotocol.ai"
  },
+ "ashby:happyrobot.ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/adbc3eab-e3f7-4a9c-8173-a0ef17bc3722/2c59f75f-f196-4327-86d6-d8b97175692d/97a16ae3-4cdf-4d99-b255-ed2359cc18c0.png",
+  "name": "Happyrobot Inc.",
+  "website": "https://www.happyrobot.ai/"
+ },
  "ashby:harmattan-ai": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3ee6b4e6-8930-43f2-8e80-bdaf5bc16c08/a82b8792-ee8a-4ba3-ac75-8fe311574741/f9d23933-a181-4cce-9fc8-8e4659f5a9dd.png",
   "name": "Harmattan AI",
   "website": "https://www.harmattan.ai/"
+ },
+ "ashby:harmonic-security-inc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/48abbc31-3ad2-4aae-94c3-4c1290b17c9d/bbfe7d0f-80f3-483a-962e-29f018743f36/50c935d3-2a2a-47c7-b096-18b04315b5f6.png",
+  "name": "Harmonic Security, Inc",
+  "website": "https://www.harmonic.security/"
+ },
+ "ashby:harvey": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/868dcb5b-0628-48f1-b4f7-fed828a37e35/8ee59e75-fb38-4eb7-80b7-3b902c5da994/ba4329fb-4c07-4f68-9a2a-ea85386fb430.png",
+  "name": "Harvey",
+  "website": "https://www.harvey.ai/"
+ },
+ "ashby:hawk": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/925455fc-f9c2-4d60-9d79-56d3a5703a94/4bb3a185-2ed6-4788-8300-d6af993dc94c/29dab2bc-9141-4d7c-8f8e-35fb3c54a733.png",
+  "name": "Hawk",
+  "website": "https://hawk.ai/"
  },
  "ashby:hawkeyeinnovations": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -762,11 +1149,35 @@
   "name": "Hercules",
   "website": "https://hercules.app/"
  },
+ "ashby:hexa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7d50eafa-b293-4e88-a908-23ab31951cfa/773700fa-ab1c-4128-8ceb-012ea9a560b7/883f0c19-0acb-4621-b233-3e2bf9bd8c18.png",
+  "name": "Hexa",
+  "website": "https://www.hexa.com"
+ },
  "ashby:higgsfieldai": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/500301af-1a8c-4bd5-befd-c558c71ea7c1/573677a7-8f2f-4daf-8c3f-b4dc921b6186/1b6933bd-618a-4dfd-8c03-4e9e4ab7d1db.png",
   "name": "Higgsfield",
   "website": "https://higgsfield.ai/"
+ },
+ "ashby:hims-and-hers": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ef04ce11-38f4-42d8-8950-d9fe75ea1526/142d3320-f551-489e-b962-9a73d9354444/4fc71df0-3d09-4812-8ab3-52a0bcf4f4f2.png",
+  "name": "Hims & Hers",
+  "website": "https://www.hims.com"
+ },
+ "ashby:hirehire": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/17b5e53b-9680-4859-99da-aa0208b8f1c8/590e1248-be0e-41fb-a019-74f29da16a18/3f6d14bf-f385-4092-95f4-1eeda33a7714.png",
+  "name": "hirehire",
+  "website": "https://hirehire.me/"
+ },
+ "ashby:hiverge": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/aea8a329-eb6c-4a17-98c2-9c0a87f9c6a5/a5e9a580-f25b-4075-a665-b68b63507c28/e7730042-8417-4c23-9f7f-4ad10cebb8a0.png",
+  "name": "Hiverge Ltd",
+  "website": "https://www.hiverge.ai"
  },
  "ashby:hiya": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -780,6 +1191,12 @@
   "name": "Hostinger",
   "website": "https://www.hostinger.com/"
  },
+ "ashby:httpie": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/eb4289b7-e31e-4f3e-9b8e-caee0e328f12/d659ba19-e015-488c-910f-71644a3e8bd3/10b5bc14-c486-4e8c-ad35-e84a0b0d1b4d.png",
+  "name": "HTTPie",
+  "website": "https://httpie.io"
+ },
  "ashby:humanoid": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d466f34d-2ccf-410c-9bd4-8d9a135bdd80/96998b1d-f004-45aa-bd4d-83da2e62a535/2bd5da6d-ed30-4275-8724-c3b259d9986c.png",
@@ -792,17 +1209,47 @@
   "name": "hyperexponential",
   "website": "https://hyperexponential.com"
  },
+ "ashby:hyperhug": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a441c5d3-9aad-4162-9e49-424ad6c42190/e87ff272-fcf7-4dd2-b877-dc378dd88445/0f9b3577-8c45-4402-8369-6c0aacf5b414.png",
+  "name": "HyperHug",
+  "website": "https://hyperhug.io/"
+ },
  "ashby:iceye": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/966b03ea-0daf-4486-95a2-185451d1de83/d423a891-6ca3-4a28-b46b-163422ce1965/21c22ab7-e0b4-4196-9f0a-69b58ada0cb6.png",
   "name": "ICEYE",
   "website": "https://www.iceye.com/"
  },
+ "ashby:ideals": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/11e3dee6-eec2-4bfd-8323-80e9b243e283/94cd58c2-e6a4-47ac-805a-c6126192306d/db7569f0-7148-4d2e-b374-6eaf0df58cae.png",
+  "name": "Ideals",
+  "website": "https://www.idealsvdr.com/"
+ },
+ "ashby:inato": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f5f50af0-decb-4b2f-aae4-d9f68313d93f/da60ad9b-2050-4b84-80ed-ad6748aa09d2/d1973248-0041-42df-a4d7-5bd6c6e5366d.png",
+  "name": "Inato",
+  "website": "https://www.Inato.com"
+ },
  "ashby:incard": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d063a702-7a81-4d2f-a29c-2c9cf1905ce4/1886cd28-d27f-41c8-9f0e-9a17118155f3/dd9b0096-7591-4f6e-b034-c9d4e8f236e9.png",
   "name": "Incard",
   "website": "https://www.incard.com/"
+ },
+ "ashby:incident": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d20f9a88-e378-4f93-a832-730ddf900c45/52197761-40e0-404f-b344-57f716faaef9/aea09a75-5c15-49b4-971f-6d4596c5979c.png",
+  "name": "incident.io",
+  "website": "https://incident.io/"
+ },
+ "ashby:inherent": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3056a8f0-b4bf-40f1-a80a-26d1523d8eb2/e9ab683a-b1a8-45bf-a517-e8bb17ef864e/13ffecd8-c58e-4752-a75a-7361fa69f533.png",
+  "name": "Inherent",
+  "website": "https://inherentlabs.ai/"
  },
  "ashby:instructure": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -864,11 +1311,23 @@
   "name": "JustPlay GmbH",
   "website": "https://www.justplayengine.com/"
  },
+ "ashby:kandou-ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/8b6a9efe-633a-424e-8c33-c65a739898ec/20e31d4a-ecf7-46bb-b0f4-f7b140e8f63b/b84d9c47-0539-4cb6-b14f-920af8ba3613.png",
+  "name": "Kandou AI",
+  "website": "https://www.kandou.ai/"
+ },
  "ashby:kayak": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/438bf580-e307-402b-a0ca-bcc1ec945da8/741dbae0-0e7d-4716-9e36-3dc35073b8cf/143a228c-c4dc-435f-8564-b6873fab8b23.png",
   "name": "KAYAK",
   "website": "https://www.kayak.com/"
+ },
+ "ashby:kernel": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3c884be4-bb43-440e-821a-97aabcddbcf9/003d4d88-6452-445d-8f18-d49e4ef0a694/bb4bd98b-6b5b-4cac-863b-bdc500c6f68a.png",
+  "name": "Kernel",
+  "website": "https://www.kernel.ai/"
  },
  "ashby:keyrock": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -880,6 +1339,22 @@
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d1306808-5b57-4f3a-b730-72384b872a09/75584072-88a6-4029-8bf3-c959851b5dda/95800489-e4f5-403c-bcb8-5b1a066d7fc1.png",
   "name": "Kijimea"
+ },
+ "ashby:kinship": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/8b02c1be-57b2-4ec2-851d-aa1ee7d12635/09f4fab1-dfb8-438e-b1f8-a3060b9edd19/05865e64-0b17-4dda-9c2d-d8bd78799ecf.png",
+  "name": "Kinship",
+  "website": "https://kinship.io"
+ },
+ "ashby:kissmyapps": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Kiss My Apps",
+  "website": "https://www.kissmyapps.tech/"
+ },
+ "ashby:kiwi-com": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Kiwi.com",
+  "website": "https://www.kiwi.com/"
  },
  "ashby:klim": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -941,11 +1416,29 @@
   "name": "Laelaps AI",
   "website": "https://laelaps.ai/"
  },
+ "ashby:langdock": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/4c391c82-4c37-466e-8edf-f3b3b78a1aa2/fdeba954-2f84-4d4e-963a-41b2dde001fc/2872f762-0cf4-454e-b72c-1398e3a1e189.png",
+  "name": "Langdock",
+  "website": "https://www.langdock.com/"
+ },
  "ashby:lap": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/185deae3-c575-4780-8869-d1c9a083a504/27441959-5eb4-4899-a110-a21042c46e5f/c95848b8-8f17-4bd9-8e2e-765e863fae1f.png",
   "name": "LAP Coffee",
   "website": "https://lap.coffee/"
+ },
+ "ashby:latentlabs": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9dad2001-98c6-4263-8054-e54dba99a659/8a6ded14-cb2d-4784-96b0-3e0bd29fdb74/52ba2125-7917-44b7-bc6e-e6efc16f5b3b.png",
+  "name": "Latent Labs",
+  "website": "https://latentlabs.com"
+ },
+ "ashby:ledger": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/445169a9-d02f-49ee-8d1c-81e69fd1458b/df64d11c-048f-40bf-a0e0-6f970edc0035/af94f63e-e8a8-4e78-ad69-ae4fd9dbf8fd.png",
+  "name": "Ledger",
+  "website": "https://www.ledger.com/"
  },
  "ashby:legora": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -971,6 +1464,12 @@
   "name": "lemon.markets",
   "website": "https://www.lemon.markets/"
  },
+ "ashby:lemrock": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6979254c-b025-4660-9d03-0ac22e8928ca/ceab52c3-0c96-454d-a905-c3c6f43b358e/ce745517-84a4-4178-a486-6997eadd10af.png",
+  "name": "Lemrock",
+  "website": "https://www.lemrock.com/"
+ },
  "ashby:lendable": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4d8d56bf-fee1-4a9d-afc3-02ea3bce7de3/e30fbe7d-9dab-490d-ab7f-81e9667c264e/5fc04d79-38f2-435b-af1e-3144804e9404.png",
@@ -994,6 +1493,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/bfd0b819-c2e8-4dec-88ce-c1d737976bdf/90535c9b-f771-4282-90a0-55c97de62fd5/b7a5b597-59c4-4e0d-a941-7ed0cfad95ce.png",
   "name": "Lightspeed Commerce, Inc.",
   "website": "https://www.lightspeedhq.com/"
+ },
+ "ashby:lilt-corporate": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/42ac9dd9-90cb-4af4-8913-7a8b74ad21cc/9e20b622-f09d-4caa-b340-02bd27e2156d/1b4af7ab-d3cd-448c-b1c3-3da14700e432.png",
+  "name": "LILT",
+  "website": "https://lilt.com"
  },
  "ashby:lilt-production": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1043,10 +1548,22 @@
   "name": "Litmus",
   "website": "https://litmus.io/"
  },
+ "ashby:livekit": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c7f786d9-6b65-4a57-a228-ac3b704e7ade/766937d1-97de-4de0-8b56-f1091d5ac04e/92e55b49-bb25-4124-a745-0aa882d5ca6c.png",
+  "name": "LiveKit",
+  "website": "https://livekit.io/"
+ },
  "ashby:liven": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/586ac3cb-f234-40cf-96fd-3daae8c41309/8c36d83f-3cba-4dc5-99d8-48daa7e1c3f6/900ce476-a37a-488f-8332-cba71c61e8eb.png",
   "name": "Liven"
+ },
+ "ashby:localstack": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/efe79c97-71af-4d69-9cd5-0302e41ef424/c05c9642-de0b-47f0-8ac6-9208fba67b00/9a1c4385-2ad2-4a93-939d-212e18a544e1.png",
+  "name": "LocalStack",
+  "website": "https://www.localstack.cloud/"
  },
  "ashby:lovable": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1060,6 +1577,18 @@
   "name": "loveholidays",
   "website": "https://www.loveholidays.com/"
  },
+ "ashby:lucidcomputing": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3b9be5f0-9ccd-40ec-a55a-73f532a600e2/44fa7f68-6608-4e21-888d-d0db5f571416/c692dc1f-3c1a-42b4-b963-248697220e0e.png",
+  "name": "Lucid Computing",
+  "website": "https://lucidcomputing.ai/"
+ },
+ "ashby:lucidlink": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/155f5d6c-a20a-4ad5-9a68-28d2aebf08da/da60e98d-d972-4e38-a9a3-63289e4ef8ef/573b3e9e-24d5-44e6-b1b8-849061290373.png",
+  "name": "LucidLink",
+  "website": "http://lucidlink.com"
+ },
  "ashby:lumaai": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/78fb67f5-e94b-4976-a797-047b2482f17f/eed73c38-eb27-4f1a-b74c-3d63d889bc35/778526e2-be39-4dc1-918e-3f91d1b9dee7.png",
@@ -1071,6 +1600,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/64955700-3b58-4273-8bc5-d452cf3acdca/59441496-8cef-475e-a726-82bb301ed2bc/c0a3c7eb-635f-4ef0-ab07-612334639857.png",
   "name": "Luminovo",
   "website": "https://luminovo.com/"
+ },
+ "ashby:lupapets": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5112474e-b714-48fe-b9d2-849a93789667/2207d8cd-4d8b-4710-849f-7675bc9c2acf/8154b800-dd99-489d-8a12-276dfdcb71ad.png",
+  "name": "Lupa Pets",
+  "website": "https://lupapets.com/"
  },
  "ashby:lyceum": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1096,17 +1631,35 @@
   "name": "Mapbox",
   "website": "https://www.mapbox.com"
  },
+ "ashby:marshmallow": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a1421ee1-d692-4a73-bf13-a84a9aac042a/a45def09-e69f-4ff1-9834-a53151b64eff/17ce88f0-302f-4363-8567-8b9a0ddb0412.png",
+  "name": "marshmallow",
+  "website": "https://www.marshmallow.co"
+ },
  "ashby:masabi": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/be3ff8e3-f9b5-4a45-9069-c71c963b467c/3c615b52-db97-4bc0-97f8-b0639b355553/e53b3a64-7257-43ee-859c-f3391c7cf96d.png",
   "name": "Masabi",
   "website": "https://www.masabi.com/company/careers/"
  },
+ "ashby:mazedesign": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6a0f2e35-27c4-4860-8161-c83aafe7f4fd/31f46b51-2273-41d1-8a21-e417939003e9/8c76f180-0d2c-4685-8a14-2039a4e7a2fb.png",
+  "name": "Maze",
+  "website": "https://maze.co/"
+ },
  "ashby:melotech": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d8c1b192-5902-45bd-9f46-e56a3c6e01d3/78710efc-ae18-44ce-a528-ab980ecfd923/8c9dbebd-a5e9-42de-914e-2fe049b0f930.png",
   "name": "Melotech",
   "website": "https://www.melotech.ai"
+ },
+ "ashby:menlosecurity": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7a88f106-5475-4896-b430-d28384daeb67/9b7c7127-8890-459d-a861-5b6f3c4729b4/c4debcfc-88cc-454b-8683-45edcb537b8b.png",
+  "name": "Menlo Security",
+  "website": "https://menlosecurity.com"
  },
  "ashby:mento": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -1125,6 +1678,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d439fb25-a0d3-4dfd-b0b4-11cd708ac441/aef4637c-8b30-4d47-86cf-623357cb368b/6894b16d-5eb5-4629-a549-e2fc286af332.png",
   "name": "Mimica",
   "website": "https://www.mimica.ai/"
+ },
+ "ashby:mindpeak": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/30a23103-d03b-447e-8e23-141f22694153/87ecf54e-b15b-445f-80ff-33fa2b8d5d05/2027d564-174d-483e-b03d-8f8499711784.png",
+  "name": "Mindpeak",
+  "website": "https://www.mindpeak.ai"
  },
  "ashby:mirelo": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -1150,11 +1709,35 @@
   "name": "Mollie",
   "website": "https://mollie.com"
  },
+ "ashby:monday.com": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/8e35184e-c096-472d-95eb-503f27995abf/8507a1fa-8bf5-4bbb-a2f4-bfee49ab92b3/518c2f23-5707-4758-b47c-3e09404be233.png",
+  "name": "monday.com",
+  "website": "https://monday.com/"
+ },
+ "ashby:mondoo": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/13039b54-5483-4858-8656-9776680dace9/383e7f8e-ee98-4066-a905-e40a83574010/003d872f-fd79-45c6-a363-da0664dd9772.png",
+  "name": "Mondoo",
+  "website": "https://mondoo.com/"
+ },
  "ashby:monumental": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3fb3ec91-8674-4f2c-9cc4-dd71691440c2/20eedd58-9ddf-40e3-af36-9dd43ae1778f/3114047b-8b10-448f-ba12-6f1e6627b179.png",
   "name": "Monumental",
   "website": "https://www.monumental.co/"
+ },
+ "ashby:moonactive": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/09c1aeab-0b01-46e5-bf76-4c037228e2ae/897f20d8-2058-4784-a6df-63f321954141/e6451dd0-7146-4e1a-aa86-bbbae2451759.png",
+  "name": "Moon Active",
+  "website": "https://www.moonactive.com/"
+ },
+ "ashby:morpho": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ec777735-732f-4f1f-adc6-5f7f52d6caf8/2691d0bc-f623-4a95-be9e-bdb8471436a2/09c9b077-31ac-4b6e-9513-f426b374f686.png",
+  "name": "Morpho",
+  "website": "https://morpho.org/"
  },
  "ashby:moss": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1168,11 +1751,35 @@
   "name": "Motorway",
   "website": "https://motorway.co.uk"
  },
+ "ashby:moxie": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/0455bac6-2e1f-4caf-bba6-ed497aec1b3b/36022622-cff1-444b-a2e1-0fe1043dcacd/ee673f86-ccea-4521-9a4f-de4929fedc1f.png",
+  "name": "Moxie",
+  "website": "https://www.joinmoxie.com"
+ },
  "ashby:munich-electrification": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/f2b1af71-9f43-4f05-8814-d5054534a475/8abbcfb0-0011-43b6-9675-c812ce97fc2a/d797600e-3fd5-4fa3-830f-f30b03d8b4ae.png",
   "name": "Munich Electrification",
   "website": "https://www.munichelectrification.com/"
+ },
+ "ashby:myriad-ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/8fc2c9d0-e661-481f-b65d-e6c70a9fccae/c0427e41-693c-49d4-a142-6eddb17e1cf7/9ce9b9e9-d1e3-4809-8449-3ad63e7ee2ac.png",
+  "name": "Myriad AI",
+  "website": "https://myriad.ai"
+ },
+ "ashby:mytomorrows": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/59dcab83-a68c-4eeb-a5ea-91b5e089a213/90d6b8a2-82a7-4a11-bf8a-4b587dcd7b90/9e48c466-ff82-40c2-b513-6b46f9105a03.png",
+  "name": "myTomorrows",
+  "website": "https://myTomorrows.com/"
+ },
+ "ashby:n1": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/46e65283-5f85-4e23-a466-b0678fc73270/981c003f-16f5-4779-9f92-fcfb940aee0a/ddb42187-1326-42d4-b6e2-aad274860cc7.png",
+  "name": "N1",
+  "website": "https://www.n1.xyz/"
  },
  "ashby:n8n": {
   "fetchedAt": "2026-10-26T13:58:33.191126+00:00",
@@ -1180,11 +1787,23 @@
   "name": "n8n",
   "website": "https://n8n.io/"
  },
+ "ashby:namespace": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4782c3b9-31a1-4038-b7a7-1162d394b06e/f11fd3c3-3394-4584-a02f-94099b2d8f88/dfba1752-e815-4422-aa7e-85f29671b57f.png",
+  "name": "Namespace",
+  "website": "http://namespace.so"
+ },
  "ashby:ndeavour": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/040e8523-c1e7-46de-a618-50ce862a52ec/9b7d2f4b-2764-4526-8523-65830e481cb7/de4b3560-fd6c-4666-b391-7a0204f9f7d9.png",
   "name": "Mobile Wave Solutions",
   "website": "https://ndeavour.eu/"
+ },
+ "ashby:nebuly": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/15dd8377-537f-4777-9ee4-483576597a7b/b9185256-0a8a-4e65-9eee-af6473dccbbd/39b3d0b9-df23-443e-89c9-93e8120e9185.png",
+  "name": "Nebuly",
+  "website": "https://www.nebuly.com/"
  },
  "ashby:neko-health": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1203,6 +1822,18 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d2d9be5c-311b-41ea-b871-6f50d14f78dc/f9c66df7-3659-47ba-a9c1-892efd00c359/dd1f363d-11c0-4df0-bb6e-004aa8040edc.png",
   "name": "NetBird",
   "website": "https://netbird.io"
+ },
+ "ashby:netboxlabs": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/37ef05fa-7e24-4a10-a130-e1b1680f2700/980aba70-ff39-4a7a-bf9a-306c7354c651/31d37927-6f33-4519-998d-d0e208ec03ae.png",
+  "name": "NetBox Labs",
+  "website": "https://www.netboxlabs.com/"
+ },
+ "ashby:netgear": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/522162c5-380f-48f4-b796-4712726212a9/a8ef9645-9c9a-475e-b6e1-83af9f663980/8f6a0ab7-6c5b-4f76-b9bf-7765c1fc6ed4.png",
+  "name": "NETGEAR",
+  "website": "https://www.netgear.com/"
  },
  "ashby:neura-robotics-gmbh": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1228,6 +1859,18 @@
   "name": "Nevis Wealth",
   "website": "https://www.neviswealth.com/"
  },
+ "ashby:nexos-ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6c66202c-b9c0-4378-a50c-ae5a2a50cb13/017bbfdb-8ba3-4d94-be29-d216ae2a9b44/0d9b9f74-9663-4c6c-9a1e-6101a3e39581.png",
+  "name": "nexos.ai",
+  "website": "https://nexos.ai/"
+ },
+ "ashby:niantic-spatial": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/2649859e-38e7-44b2-aa8f-6e4f1dc14495/ad9a9f1c-b138-484b-8960-47ace92aa218/cb68eb2b-034a-4b86-899b-9bbb986b784f.png",
+  "name": "Niantic Spatial",
+  "website": "https://www.nianticspatial.com/"
+ },
  "ashby:nomos": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3eb1252b-3481-4b47-9ca2-d20616d38f57/499edb99-ddad-44f0-92fa-4374d85de989/4020a54d-6889-416e-893b-26fab3c2f62d.png",
@@ -1239,6 +1882,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7b5619e7-2b3d-400c-837e-237f51164776/174a6581-17da-4aee-af6c-578a2a28da11/0db1966a-aba4-44f9-bee1-ccdfa245628e.png",
   "name": "Nord Security",
   "website": "https://nordsecurity.com/"
+ },
+ "ashby:nous": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/530f5ac4-5b39-4e4b-a310-fadae11146e4/234c5218-9f78-40f6-8270-219d07cd5f77/a56083cb-c49e-4dbe-886b-f003a2b44eb1.png",
+  "name": "Nous",
+  "website": "https://www.nous.co/"
  },
  "ashby:obrio": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1269,6 +1918,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/aabd8e71-1f63-4593-a3bd-fb92bb6599c3/161dc598-1a0f-4b21-8b00-70929b3a0626/fbc04a62-7d84-44d7-8c13-f1453ca20fb2.png",
   "name": "Omnea",
   "website": "https://www.omnea.co/"
+ },
+ "ashby:oneleet": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/28148f2f-fd9b-4251-87bf-29e936ebdeda/5972d544-f3d6-48d4-83c7-942f04d3ff3e/4483a7f7-3fa3-4989-9120-ccd09e326c98.png",
+  "name": "Oneleet",
+  "website": "https://www.oneleet.com/"
  },
  "ashby:onhires": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -1341,6 +1996,12 @@
   "name": "Parloa",
   "website": "https://www.parloa.com/"
  },
+ "ashby:partisiablockchain": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/64ebf830-5209-48bf-9e92-0feca182c363/70639349-e51e-4944-928e-8f987853d310/82701fda-be98-4ed9-b4d7-e8e2344ac614.png",
+  "name": "Partisia Blockchain Applications",
+  "website": "https://partisiablockchain.com/"
+ },
  "ashby:partyhat": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/be57d1a7-5209-4529-91c7-dcbb134576c0/9151d4c5-09c0-4fd8-a9b1-9b37ba13eb03/a7f16cfd-a3cb-4bb5-b4f6-95f6f714e3cc.png",
@@ -1359,11 +2020,29 @@
   "name": "Patrianna",
   "website": "https://www.patrianna.com/"
  },
+ "ashby:pear-vc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/cca476c0-947e-4006-a2cb-409350de667a/eb3645e5-b519-4b6f-9a54-ba4f0a98ff63/3fa44d75-990e-4858-b96e-8d56698b94b0.png",
+  "name": "Pear VC",
+  "website": "https://pear.vc"
+ },
  "ashby:peec": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d46a70e4-dda0-4df5-a31f-79355b4ff19c/2919a77f-5939-434a-91d4-2ba07a939e2c/3678d21b-c6a9-4627-a04c-1ebd0e502920.png",
   "name": "Peec AI",
   "website": "https://peec.ai/"
+ },
+ "ashby:pelico": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/03fd50f6-149e-48a5-bd8d-2e4348c0c6ec/75854d81-16f5-40d2-a8c0-3d654f87cb90/e96d92e5-21bc-4b96-86e9-1da5266f8256.png",
+  "name": "Pelico",
+  "website": "https://www.pelico.ai/"
+ },
+ "ashby:pencil": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/33b26215-ab40-4049-92b7-95f1e24613f8/09560954-3462-4e9a-8df1-1cd33ca838e2/fff33fd4-4678-4a62-b8b2-062fa1c1d8f2.png",
+  "name": "Pencil",
+  "website": "https://trypencil.com/"
  },
  "ashby:pennylane": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1401,6 +2080,18 @@
   "name": "Phantom",
   "website": "https://phantom.app/"
  },
+ "ashby:photoroom": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f86d9c5f-3cc3-4995-b9a6-0a6749dc5343/4f118c4b-f1a8-43ff-9e23-608fa467ba2e/44b7a510-5647-4408-b035-92339d10ffda.png",
+  "name": "Photoroom",
+  "website": "https://www.photoroom.com/"
+ },
+ "ashby:plain": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/62aa65d9-d329-4989-a1e9-3c678a1f3bea/b7306ed0-6cec-4758-af73-4d40d0d46bef/89755d40-8017-4c6d-b8eb-f1ca50fc53cc.png",
+  "name": "Plain",
+  "website": "https://www.plain.com/"
+ },
  "ashby:plancraft": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/61bc69d3-acd3-45ed-b3b9-be5697dc36ff/20340ce8-1ea7-45b3-bf8e-e6f6809cb15f/9acf05e9-7034-46de-9a2c-64754c11c687.png",
@@ -1437,6 +2128,18 @@
   "name": "Pliant",
   "website": "https://www.getpliant.com/"
  },
+ "ashby:plumerai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/eec8fa71-a112-43c8-8592-40ffb9c1a5cc/4f49181a-64ba-4fe3-b2fa-b418134f9312/b2879655-3d43-4e1d-852f-bfe8dc1521e6.png",
+  "name": "Plumerai",
+  "website": "https://plumerai.com/"
+ },
+ "ashby:polarsteps": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/31512ef5-f920-4d32-8c69-1df8033ddf6f/09899c66-3eff-4b48-9ebe-a03ce1ba1bcf/9d3a2629-6497-4ed3-95dd-3be2b32fe0d4.png",
+  "name": "Polarsteps",
+  "website": "https://careers.polarsteps.com/"
+ },
  "ashby:pplwise": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/bb66ebb0-81bb-433e-8041-41b9e8de3ec9/67d2c67c-eba6-483f-9e4c-fdba2be75897/8a1971b2-85d0-4a40-ba5f-e2d385c0d409.png",
@@ -1448,6 +2151,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/18ee68f5-76b4-4ff7-aa42-d4fc953bb083/4852d2ec-ac1d-45ed-9ae5-2d81dc411321/b566c10e-12f4-47ff-92b7-8c90fea2ef23.png",
   "name": "Pragmatike",
   "website": "https://www.pragmatike.com/"
+ },
+ "ashby:prelude": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/cf1d3036-65b7-48ca-9f5f-58c82f53b398/dcb1827e-dd34-45de-80f8-6ffbdbc5cad5/6eeaef9e-7957-4d38-b0dd-eeefeac946aa.png",
+  "name": "Prelude",
+  "website": "https://www.prelude.so"
  },
  "ashby:preply": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1461,6 +2170,12 @@
   "name": "Prime Intellect",
   "website": "https://www.primeintellect.ai/"
  },
+ "ashby:primer.io": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e19d2228-9782-44f5-8e56-794cb9be0acd/88f366cc-c0b6-4d9c-91a4-c371af5869c3/21ed393f-f9a0-4b30-be3e-d55ebeadf854.png",
+  "name": "Primer.io",
+  "website": "https://primer.io/"
+ },
  "ashby:prior-labs": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/aee2caf3-27eb-4140-b7be-7e6a294d8271/d9b35307-fb0e-4fe0-8d78-67aa7b315667/ad3e48da-44dc-4a89-9c59-8460ff220630.png",
@@ -1473,11 +2188,23 @@
   "name": "Progress Partners",
   "website": "https://progresspartners.net/"
  },
+ "ashby:prosper-ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e8f9e399-5c93-4523-8ab7-40d938e3dd51/fcec6582-5541-47dd-81af-fc79e0feac18/ae604c5e-3e97-40c3-b0be-4277175e7b54.png",
+  "name": "Prosper AI",
+  "website": "https://www.getprosper.ai/"
+ },
  "ashby:prosus": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/dba3a264-dfc1-4856-a3bb-bb1a4100174f/15b2a904-e8bb-4244-aae3-934576da61f8/aea52ab3-87a7-4fef-bf3c-12421744496c.png",
   "name": "Prosus",
   "website": "https://www.prosus.com/"
+ },
+ "ashby:protex ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ff9b569b-5def-41ef-a2f8-e523759aebd9/665259e3-120b-45c1-8bf2-234a2071b9db/66dca386-6f36-4ad9-9cba-f9a98ff586c1.png",
+  "name": "Protex AI",
+  "website": "https://www.protex.ai"
  },
  "ashby:proxima-fusion": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1497,11 +2224,23 @@
   "name": "qlub",
   "website": "https://qlub.io/"
  },
+ "ashby:qontext": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/92b379a5-4f3a-4e0f-882d-ffc589c8e03d/dfb1fb3a-0c14-4d8a-af79-cf5aa481a16f/1fc04001-72f9-4c05-b0e4-38182ab27ab6.png",
+  "name": "Qontext",
+  "website": "https://qontext.ai/"
+ },
  "ashby:qorelo": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a6de7190-0b35-4f1a-b300-de449ca3378e/74d96dba-32cb-4fd5-9ed1-58d780afc37d/147aa61b-5e2e-4dbe-980b-2a752eb1bbb7.png",
   "name": "Qorelo",
   "website": "https://qorelo.com/"
+ },
+ "ashby:quantexa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5c0d8f44-14dd-4e4a-8496-c596666b794d/cde1be16-0bfa-4864-b5f7-1f1f864ee76d/5730695f-3ccc-4811-bba4-3f3f8a8bd1c9.png",
+  "name": "Quantexa",
+  "website": "https://www.quantexa.com/"
  },
  "ashby:quantum": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1509,11 +2248,35 @@
   "name": "Quantum",
   "website": "https://www.quantum.media"
  },
+ "ashby:quantware": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3ebad9de-c0ee-449b-bb52-86da7d893347/a4713c35-a7f5-421f-a8ea-244fd270dd2e/c4a9a46c-a2aa-4a63-90da-513a172178d2.png",
+  "name": "QuantWare",
+  "website": "https://www.quantware.com"
+ },
+ "ashby:quora": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f6796641-6a8f-4737-85da-80958c490a56/52ab3a31-ee53-476b-b412-6f188e5eab7f/6d7cf2cc-8516-4738-b066-8080f2b0564e.png",
+  "name": "Quora",
+  "website": "https://www.careers.quora.com"
+ },
  "ashby:radiant": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0e1e0e25-cb7f-4521-94c2-30d11184b8e3/67d92f84-45a7-4eaf-999e-24c37a74c2f0/3b65f188-5889-4a17-8c1a-df2a155659e3.png",
   "name": "Radiant",
   "website": "https://radiant.co/"
+ },
+ "ashby:railway": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/be829fcc-c9a0-4d42-a868-839316479552/0b185b7f-42bd-416f-ab5f-77550ac46138/e6ce0f38-8368-4348-b93f-d421146d7d7f.png",
+  "name": "Railway",
+  "website": "https://railway.app/"
+ },
+ "ashby:reactivemarkets": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/71ed80b5-6620-47f6-a8d5-c4ed7a5b0fa5/d3ec8984-cbbd-462c-82d4-9d62d6ed709f/f9aea808-827c-4850-8120-9f208f87801a.png",
+  "name": "Reactive Markets",
+  "website": "https://reactivemarkets.com/"
  },
  "ashby:reaktor": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1521,11 +2284,35 @@
   "name": "Reaktor",
   "website": "https://www.reaktor.com/"
  },
+ "ashby:red-gate": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4eb25e1c-1381-4d5e-9a56-4cbdb988660a/b7b80823-6ad0-47d1-823b-25d20a7229b2/1f67dbd9-8acb-499a-95f4-eca6b59ed1ca.png",
+  "name": "Redgate",
+  "website": "https://www.red-gate.com/"
+ },
+ "ashby:redpanda-data": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d3e96b7d-a7a7-4693-bc3a-0498761300fe/e3cd067e-da30-4806-a204-86f6190e0d9e/813b1532-83dc-4026-84fa-6f7e227a38dc.png",
+  "name": "Redpanda Data",
+  "website": "https://www.redpanda.com/"
+ },
+ "ashby:reedsy": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5d5163cc-460a-4be6-9a3f-b98517044e8d/f7452e18-19d3-4888-aa76-149e219ff16d/b41352f6-7a29-42ad-be73-4d4790fcb8e4.png",
+  "name": "Reedsy",
+  "website": "https://reedsy.com/"
+ },
  "ashby:reflectionai": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9b6d3035-a562-4cb9-9525-f07a19b4b5b8/7f8fa445-3ea8-4c37-a24b-e63216f638e0/9f54249c-1e4f-459a-a899-c2732ca723cc.png",
   "name": "Reflection",
   "website": "http://reflection.ai"
+ },
+ "ashby:reflow": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0dae9d25-83ae-4d7d-9181-2d3ae414ddcc/a8f3feed-f4aa-4c80-ad45-f4965dd7b2db/e1a094d9-0be5-4640-9302-165e50c9ff2a.png",
+  "name": "Reflow",
+  "website": "https://www.reflow.ai"
  },
  "ashby:reka": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1562,6 +2349,11 @@
   "name": "Reonic",
   "website": "https://reonic.com/en"
  },
+ "ashby:rerun": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3bc0cb77-9467-41c1-8442-c76056ed1400/a65f93be-ca1a-4b9d-9c98-d5867e323b0f/974fbbe6-4308-434f-8baa-e8ef9e5fc1ed.png",
+  "name": "Rerun"
+ },
  "ashby:resend": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Resend",
@@ -1573,11 +2365,23 @@
   "name": "Restream",
   "website": "https://restream.io/"
  },
+ "ashby:revelrobotics": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/22d87f8c-f50b-4fdb-a4d6-c8c6aa528da5/740f9080-43ca-451c-b5f9-ffeec4f9d43c/267124ac-43d4-4151-a5c1-ede3f3b8d238.png",
+  "name": "Revel Robotics",
+  "website": "https://revelrobotics.com/"
+ },
  "ashby:revenuecat": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e837fc34-cfaa-421b-af50-19f4cce80419/ad78db14-ed2a-4efd-a0be-08628a69f28a/20e649c4-1d97-4734-b817-ce47aeb22ece.png",
   "name": "RevenueCat",
   "website": "https://www.revenuecat.com/"
+ },
+ "ashby:rho": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e714755b-2dd1-42cf-9607-2d2ab5e2d7f1/ee2db97f-7b6a-492d-8160-214d319f34fa/ad9cdaa2-ec09-483b-9b39-5901fb52a681.png",
+  "name": "Rho",
+  "website": "https://www.rho.co/"
  },
  "ashby:rivianvw.tech": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1596,6 +2400,17 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/bdca10f3-fffe-4205-8335-501eae58899a/409f6b41-cec5-407b-b89a-13798c5de215/b4d4e3db-6d77-4a92-a163-039e5f69b89e.png",
   "name": "RobCo",
   "website": "https://www.rob.co/careers"
+ },
+ "ashby:robin-radar": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Robin Radar Systems",
+  "website": "https://www.robinradar.com/"
+ },
+ "ashby:rogo": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/08d1effe-dbc7-46cb-adea-384faf82eed8/dd30419d-779b-4b69-854c-e15f27376530/d23583ea-85a9-44d4-b414-f48cee6a6abd.png",
+  "name": "Rogo",
+  "website": "https://rogo.com/"
  },
  "ashby:rohlik": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -1627,11 +2442,34 @@
   "name": "Rwazi, Inc.",
   "website": "https://rwazi.com"
  },
+ "ashby:sagelabs.ai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Sage AI Labs",
+  "website": "http://www.sagelabs.ai"
+ },
+ "ashby:salespatriot": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3942fb13-ca34-4efa-a774-063bbaf9fa6e/4d3808e3-f8b9-4d17-b149-7f59761e675e/107143d3-e5e5-4826-aaae-5c38a91df7f6.png",
+  "name": "SalesPatriot",
+  "website": "https://salespatriot.com/"
+ },
  "ashby:salmon-group": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e57ae5d5-95d6-4f48-a057-3daf90efa695/927e3e3a-e637-4a1b-a948-a1e24f08dcf1/accd8491-155b-400c-a6eb-bfc0ae23e809.png",
   "name": "Salmon Group",
   "website": "https://salmon.group/"
+ },
+ "ashby:sanity": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/4f3025b4-535c-48d3-8a18-092289f6a2c4/6b86d7e5-4746-45ac-9108-deff26e3ff15/31f8252e-b3f6-4f0c-91c6-f6c4ac6358dd.png",
+  "name": "Sanity",
+  "website": "https://www.sanity.io/"
+ },
+ "ashby:sash": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0bda4f7e-7bc9-45d8-891b-dee98e600e86/60704d81-8c03-444a-96e9-90530c93558a/8d38fe53-9f15-47a3-a100-7009e62f2d9e.png",
+  "name": "Singapore AI Safety Hub",
+  "website": "https://www.aisafety.sg/"
  },
  "ashby:satispay": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1645,6 +2483,12 @@
   "name": "ScaleMath",
   "website": "https://scalemath.com"
  },
+ "ashby:scalera": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/da5c03d9-0d08-46de-a77a-4dfd7e36858c/763123e9-135d-492a-b298-2e85487a720f/9c183bc3-46b7-4bf7-8799-3c0a8a352689.png",
+  "name": "Scalera",
+  "website": "https://www.scalera.ai/"
+ },
  "ashby:scarlet": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/290becd9-e4b6-4e1f-bbba-1386593dbedb/38d01fa4-ab69-4a11-8646-0e8766815c9d/734f24b3-d379-4399-a59c-115eebb939d9.png",
@@ -1657,11 +2501,29 @@
   "name": "ScorePlay",
   "website": "https://www.scoreplay.io/"
  },
+ "ashby:scrunch": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6d3cfc59-be35-4c60-b0fe-c904ba8557d5/03875695-1184-459e-ab58-32e87bbf7ee5/7c753931-11cf-484f-b10b-855f8a62f84a.png",
+  "name": "Scrunch",
+  "website": "https://scrunch.com/"
+ },
  "ashby:se3": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/480c79a6-913b-4e71-9cad-9ec33331d1d3/f9c030b6-d313-484b-8620-1437c0ea3835/503cd500-e2f0-4109-ab94-0313ec22a0d7.png",
   "name": "SE3 Labs",
   "website": "https://se3.ai"
+ },
+ "ashby:seamflow": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f59735cd-f99e-4fc3-9323-97580a662578/ce190191-5d10-4fee-962a-fccb3f5fac71/aeeade43-1aee-4058-9ef4-2baf8e60a3fb.png",
+  "name": "Seamflow",
+  "website": "https://www.seamflow.com/"
+ },
+ "ashby:searchable": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3f8dd7fd-df7c-4455-8bb6-4f8eca159205/a4f27b48-9902-4a69-8b80-49560ce9fcaf/d80579f8-ea44-4965-a697-97b4403749d6.png",
+  "name": "Searchable",
+  "website": "https://searchable.com/"
  },
  "ashby:searchapi": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1693,11 +2555,47 @@
   "name": "Sensor Tower",
   "website": "https://sensortower.com/"
  },
+ "ashby:sent": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/776013c9-4de4-4cdd-b5a7-0ab17b9791d8/d3fbe472-82d1-4fc9-9c37-5322c55db2f8/b8452b2e-e65e-45eb-8751-270ea1125c1e.png",
+  "name": "Sent, Inc.",
+  "website": "https://sent.dm"
+ },
+ "ashby:sentry": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/70314e3c-1d69-48b1-afae-2d1f93bf2db4/498778db-68e9-485d-a2fa-4e4542131406/daad4b40-a8ce-4811-822a-a4e5e27b1637.png",
+  "name": "Sentry",
+  "website": "https://sentry.io/"
+ },
  "ashby:seon": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/697b117f-290d-442b-bdda-b90ce8b51063/e687d085-4229-4ecd-b22c-2bd0168a3411/70e5a8b2-d487-432a-a3ed-51e78fd983ae.png",
   "name": "Seon",
   "website": "https://seon.io/"
+ },
+ "ashby:seqera.io": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4645d347-78cd-44ff-8f15-0bbcfb7736d0/a41b097f-d215-4607-bfea-fe82d631a0a8/d3419966-efcc-41fb-9e04-f13e7dd1febc.png",
+  "name": "Seqera",
+  "website": "https://seqera.io/"
+ },
+ "ashby:sequence": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ac02f170-c811-4dfb-b7a3-9d09c398fa62/45dbb0f8-f6ef-4690-af93-0dba711194e6/83ba3134-2e1a-4ffd-895c-532b8e0e060b.png",
+  "name": "Sequence",
+  "website": "https://www.sequencehq.com"
+ },
+ "ashby:sereact": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e0cbe9e9-09d7-4021-a33e-0b9315b1164c/be8faa7c-e707-47c7-81c7-7b83184162c2/bdf84c7a-0d67-4675-93bf-97180f9c8924.png",
+  "name": "Sereact",
+  "website": "https://sereact.ai/"
+ },
+ "ashby:sibill": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/decd4de3-abe7-49dc-99f8-74cab289856e/338c9bf2-6b8c-42fb-8a9d-d55bfb2d9179/ca544991-1f0d-4e8f-8b33-4610237d525c.png",
+  "name": "Sibill Srl",
+  "website": "https://sibill.com/"
  },
  "ashby:siena": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -1741,11 +2639,35 @@
   "name": "Skydio",
   "website": "https://www.skydio.com/"
  },
+ "ashby:smarkets": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c7affbdb-3281-4464-90f9-7edfb6170e07/43a1cba7-c354-49a8-ba61-0c5efd4c0735/0fdcde6d-c341-4531-844a-b001b25a6921.png",
+  "name": "Smarkets",
+  "website": "https://smarkets.com/"
+ },
  "ashby:snowflake": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/9fdea007-eec9-4e3a-b2f6-3ba1159f5962/9d45592a-7d07-4a07-b067-461f31dfdd74/b707aca0-b315-4ce2-8fcb-c03dd4d4cccf.png",
   "name": "Snowflake",
   "website": "https://www.snowflake.com/"
+ },
+ "ashby:snyk": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/afb6ae11-df57-4863-b75b-0fb9da5bbe6a/57d90f05-c656-4b30-8b4c-831bcee85cd6/df89d5a0-a665-48a1-91a2-461343972e5a.png",
+  "name": "Snyk",
+  "website": "https://snyk.io/"
+ },
+ "ashby:socket": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a1e99752-fffd-415c-ab55-e28b4ba99921/7d72d052-3c02-4c15-82be-5c6ead5f436a/1177b2f1-c019-4ebe-afd5-47ea128b9f73.png",
+  "name": "Socket",
+  "website": "https://socket.dev"
+ },
+ "ashby:socure": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f47d1f69-9ec3-4b39-a4ac-f777b1c17492/b1873013-c031-47ea-ae98-bc6be0665d8a/36eded5d-27ab-456c-827b-1ddd2dc9e57c.png",
+  "name": "Socure",
+  "website": "https://www.socure.com/"
  },
  "ashby:solana foundation": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -1783,11 +2705,29 @@
   "name": "SoSafe",
   "website": "https://sosafe-awareness.com/careers/"
  },
+ "ashby:southgeeks": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c87ca1f4-b05e-470d-a31e-2a4d9e3d4369/8203eb21-dc41-4143-85b4-ff2e8ffa7c3a/1f695696-97da-45c3-8034-d9d3154a85e8.png",
+  "name": "South Geeks",
+  "website": "https://www.southgeeks.com/"
+ },
+ "ashby:spaice-tech": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c6dee8c9-0990-44eb-8568-6abff114cb27/f66f6ef6-f807-43c7-a92e-e386a3ca9966/e0474574-73ec-4159-b740-5fdd5087380e.png",
+  "name": "SPAICE",
+  "website": "https://spaice.tech/"
+ },
  "ashby:spaitial": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f0ea2049-cfec-405f-87a7-deb62b7f8adb/4461645b-83d6-4af9-97a2-acb346c9fe41/5f29e152-63bb-4e40-88dc-1c3229d7b3e5.png",
   "name": "SpAItial",
   "website": "https://spaitial.ai/"
+ },
+ "ashby:sparta-commodities": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/80fe6ac5-84ef-42ea-addd-3c4885b178b1/237210f6-085e-4dc2-be23-6c8f5bc98df4/686fe286-0737-4a99-b1f7-5a6494445172.png",
+  "name": "Sparta",
+  "website": "https://spartacommodities.com/"
  },
  "ashby:splitmetrics": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -1819,6 +2759,12 @@
   "name": "Statista",
   "website": "https://www.statista.com/"
  },
+ "ashby:stream": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ca40064a-9ae5-4a1b-af16-0dfcc0c408aa/3435c37b-183d-48b2-b475-c83edd0d5016/89a981ae-0a80-47ea-8d3c-5f17c8204a72.png",
+  "name": "Stream",
+  "website": "https://getstream.io/"
+ },
  "ashby:streetgroup": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ee6d6deb-2fdf-439e-b82d-161cc72e7be6/5983f398-44f3-4a8e-ab68-7dd4d1f09912/55f8302e-e6df-4159-a2a0-a1c122ce5a3b.png",
@@ -1848,6 +2794,18 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ef9fb9dc-0cef-44e5-83ff-b5245e587659/14baf2a3-7405-4af4-9b9c-fbd31962837d/15872dff-cad8-4db6-b565-7f7c914cf7e0.png",
   "name": "Swap",
   "website": "https://www.swap-commerce.com/"
+ },
+ "ashby:swarmaero": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7ba38e66-6093-4a8a-97a2-817625350de3/af56f472-f26c-4179-87b9-fd61028d271f/e84689f7-a556-4091-bdda-a2e32f361abd.png",
+  "name": "Swarm Aero",
+  "website": "https://www.swarm.aero/"
+ },
+ "ashby:swarmer": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/52117c34-363b-4330-ae5a-e92c3058f8e4/7e2a512e-2bc8-478b-99e9-46b45d53a1c9/1a0c087e-7797-4f43-921a-de7cf59d503d.png",
+  "name": "Swarmer",
+  "website": "https://swarmer.com/"
  },
  "ashby:synthesia": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1879,11 +2837,23 @@
   "name": "Tandem Health",
   "website": "https://tandemhealth.ai"
  },
+ "ashby:taptapsend": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/acf6b543-8f0c-4b9b-ba9d-9f7b4c79a448/460f2638-576d-494c-a48e-098a44f232e7/5a3c6f59-bc96-4249-9230-39d244c9d40e.png",
+  "name": "Taptap Send",
+  "website": "https://www.taptapsend.com/"
+ },
  "ashby:taxfix.com": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d2d6ba4b-16cf-4fb1-a544-b1fc6ee470aa/1a67ad7b-30eb-4200-a716-804fb3baaf5d/aee755da-3f65-46f1-b319-bd8b76450b4f.png",
   "name": "Taxfix",
   "website": "https://taxfix.com/"
+ },
+ "ashby:tebi": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/856f719a-dd08-4b81-8d81-d799c7ab994e/200884bf-425b-40fd-a81c-9d5bf04d3d36/1f6c0c18-b130-42f2-af44-a112db7cb76d.png",
+  "name": "Tebi",
+  "website": "https://www.tebi.com"
  },
  "ashby:telli": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -1897,11 +2867,23 @@
   "name": "tem",
   "website": "https://www.tem.energy/"
  },
+ "ashby:tempo-io": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/36919a69-d750-448b-9c48-fbe96230184e/97e3e9ec-7797-4633-b0c7-f985c97c3b8e/110d0d49-7bda-47af-ae5d-9afc270165be.png",
+  "name": "Tempo",
+  "website": "https://www.tempo.io/"
+ },
  "ashby:temporal": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5614133d-0052-4bc6-ac2b-a2b46f0d02db/7cff9ba3-2322-4ac2-8d08-5b18f27c008c/712ee276-e7de-45f8-98cb-287b272205bd.png",
   "name": "Temporal Technologies",
   "website": "https://temporal.io"
+ },
+ "ashby:tesslcareers": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/1c8441a6-ce4a-48cc-8b9e-108c44035e9b/0aee5b5c-17f4-4a32-97fc-5c0f1ace0a57/dc53549e-491c-4708-842b-c4a0c708734b.png",
+  "name": "Tessl AI",
+  "website": "https://tessl.io/"
  },
  "ashby:teton": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1914,6 +2896,11 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0690005c-051a-491e-9bec-a83be7fd6f5b/7f3e4fc8-d62b-4d34-ae85-ff30491d4303/50c58867-5476-4ed2-9ad0-f52c06f4175c.png",
   "name": "Teya",
   "website": "https://www.teya.com/"
+ },
+ "ashby:teza-technologies": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Teza Technologies",
+  "website": "https://www.teza.com/"
  },
  "ashby:the-exploration-company": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1938,6 +2925,18 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/436b396f-ad6c-4330-b9e1-77dc6d58e1e9/7d81fc2b-7f52-4f4b-9c8b-fb900c13ec0f/6e3dd4a0-19b5-444a-9b6a-16fb63f96fbf.png",
   "name": "The Rec Hub",
   "website": "https://www.rec-hub.com/"
+ },
+ "ashby:thndr": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b0f2af85-b493-4d05-af5f-913c0d4290f4/8872e39e-a07b-4db6-8f4b-ebb09109c864/47d236a2-22ee-4ecf-bf67-d32fa5793598.png",
+  "name": "Thndr",
+  "website": "https://thndr.app"
+ },
+ "ashby:thorit": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a492fbed-ede3-42c8-8794-6cfa98b2302f/f557088c-7481-4c4e-9ea3-a268f79b11c1/e6d6a9a0-2024-4c51-a207-c3632f418f7f.png",
+  "name": "Thorit",
+  "website": "https://www.thorit.com/"
  },
  "ashby:thought-machine": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -1991,6 +2990,12 @@
   "name": "UiPath",
   "website": "https://www.uipath.com/"
  },
+ "ashby:ultralytics": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/46e37e24-e09c-4086-86e8-e3dde02c3c10/dbe8d1d5-50c6-4f98-9b4b-a41147a3b2a4/a8c35cdb-37c7-4c2e-a137-d024f41cf36d.png",
+  "name": "Ultralytics",
+  "website": "https://www.ultralytics.com"
+ },
  "ashby:uncountable": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3fa07d44-64ca-4664-a2a2-8de7b77d244c/4482b633-31a5-42df-9bb2-63c53f0f11d9/9265ae01-4287-4ad5-a215-7396bba867b0.png",
@@ -2002,6 +3007,18 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/62892892-771a-4a6f-8e97-928a72615476/c97a8608-278f-4c94-8edf-d32ae881f11c/90b6c2ad-0123-40d1-8b38-deabb6bf3737.png",
   "name": "Unicorn Pro",
   "website": "https://unicorn.pro/"
+ },
+ "ashby:universe": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a50e3173-57b2-44a6-92fe-1e8b320f01ec/88398601-b6e2-4a61-8848-5e0d754c745d/9d168f84-63ba-49c3-ac21-3c18c0a65f77.png",
+  "name": "Universe",
+  "website": "https://uni.tech/"
+ },
+ "ashby:unstructured": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/625a8fc7-b7f6-4f6e-8457-b42ff5480c0c/3a1526f7-9491-45dd-86c7-f891a148102c/197b7b7e-16eb-40c5-975e-12b4c03296f2.png",
+  "name": "Unstructured Technologies Inc.",
+  "website": "https://unstructured.io/"
  },
  "ashby:uplane": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -2015,11 +3032,23 @@
   "name": "Upvest",
   "website": "https://upvest.co/"
  },
+ "ashby:v7labs.com": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3619c0f3-d4a5-456f-abf7-e2ec0ca4f8c9/d509eb21-f70c-498c-8ec4-ced24c5986f1/ba409a1d-de82-4d7a-982f-c4899aa5be7f.png",
+  "name": "V7",
+  "website": "https://www.v7labs.com/"
+ },
  "ashby:vaeridion": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b64f6d80-b5c7-429b-a80d-67c6537b7c36/fbd30099-73e0-4d5a-8eff-f4936d1f11ee/389aa3d3-19fc-440e-80cd-c542b67463bb.png",
   "name": "VÆRIDION",
   "website": "https://vaeridion.com/"
+ },
+ "ashby:validio": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/81555937-7a53-4039-ad65-ac1d3f426ec7/eda68a4c-0830-4dfd-9723-ad5502315dda/8aede1c7-a9a9-42a9-a96f-74dd12cc7c4b.png",
+  "name": "Validio",
+  "website": "https://validio.io/"
  },
  "ashby:vclusterlabs": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -2039,6 +3068,12 @@
   "name": "VERTANICAL",
   "website": "https://vertanical.com/"
  },
+ "ashby:vertice": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c96e29e0-914b-4c43-95b3-125e7ee771a8/d3fbde5c-0831-4a60-b337-7b13a329a08e/16d9fb73-6efd-45c2-b977-a346283b225e.png",
+  "name": "Vertice",
+  "website": "https://www.vertice.one/"
+ },
  "ashby:viktor": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ab9df39f-8bf3-4da7-8915-a21198f12350/3c44347f-7b72-4b0b-beb0-397a44f117b8/fd8cf5dc-e66d-474c-9ad7-8fb4e2aafd42.png",
@@ -2056,6 +3091,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/cfabe164-11bb-47a0-96bb-1802c858137f/f46f1522-d3e4-49a7-9157-c9cddcf6d477/bb57e78f-5425-4f2e-a3f3-89e4ad0ed487.png",
   "name": "voize",
   "website": "https://www.voize.ai/"
+ },
+ "ashby:volta": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a85b0030-f493-4bbf-9760-b490bf078eb0/14440c2b-80be-4a95-8bd6-0381d653a2af/c1575f22-c7a8-4842-a5f9-01d49e9b1e53.png",
+  "name": "Volta",
+  "website": "https://volta.com/"
  },
  "ashby:voodoo": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -2093,6 +3134,11 @@
   "name": "Beyond Sports",
   "website": "https://www.beyondsports.nl/"
  },
+ "ashby:welltech": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Welltech",
+  "website": "https://welltech.com/"
+ },
  "ashby:wemolo": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d1d9f8c6-d4d3-4a34-9689-c2e93fa705de/cdd3be65-383b-4620-ab5b-0e35b62d4c1f/6b6e66e7-87c9-4292-ae0c-d6adb24cdf11.png",
@@ -2110,6 +3156,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/76cc92e3-bcdb-4f03-bf71-209def45b76f/84f3fa91-bb13-440f-acfa-11e68d530ce1/a45b126e-e013-4614-b812-7861b5cfb932.png",
   "name": "Whetstone Research",
   "website": "https://whetstone.cc/"
+ },
+ "ashby:whitecircle": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/47738230-7285-4809-a4e0-73286292aadf/2b16866c-d889-4afd-b367-ac062dbfeb65/9e085e66-898e-454d-9829-2df9ad5c7218.png",
+  "name": "White Circle",
+  "website": "https://whitecircle.ai"
  },
  "ashby:wincent": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2135,6 +3187,17 @@
   "name": "WRITER",
   "website": "https://writer.com/"
  },
+ "ashby:xapien": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/615b56e0-772e-4470-a457-89c29ce150e0/2458525d-9709-442b-a300-629f22e76107/2d66bbbb-1366-464b-9b6a-eda0e69df2d7.png",
+  "name": "Xapien",
+  "website": "https://xapien.com/"
+ },
+ "ashby:xyz-reality": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "XYZ Reality",
+  "website": "https://www.xyzreality.com/"
+ },
  "ashby:yazio": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/970c4466-3be2-44cb-9b81-2f1c4e2da370/6f777eee-6d4b-4c52-b286-4da15e2d6325/a9deed09-dc78-4691-b5e4-9911bd1e0081.png",
@@ -2158,6 +3221,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/445b8e3d-921a-4001-9ef9-fee6982cf7af/898ad906-eb78-4e80-9f38-515de19ca3c5/3e016272-20e4-4eb7-ad00-511b35cdbf39.png",
   "name": "Zapier",
   "website": "https://zapier.com/"
+ },
+ "ashby:zeal-network": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/36537c28-60fe-424e-98f6-401076cb3c1d/e2828869-6010-4f7f-b597-0fa261c9dbf7/89d6c8df-4c36-43fc-aa83-228daee2b734.png",
+  "name": "Zeal Network",
+  "website": "https://www.zealnetwork.de/"
  },
  "ashby:zeely": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2194,6 +3263,10 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b222cd96-837a-480a-a945-15b07eae0903/0a7318b6-2cf2-4a45-9f58-74a1fa7012d5/1f07f633-c3e8-4c00-930c-6113a41c8135.png",
   "name": "Zip"
  },
+ "greenhouse:2k": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "2K"
+ },
  "greenhouse:84674th44metrea9999": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Metrea"
@@ -2201,6 +3274,10 @@
  "greenhouse:abbyy": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "ABBYY"
+ },
+ "greenhouse:abinbev": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "AB InBev  | Growth Group"
  },
  "greenhouse:accelerationpartners": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2229,6 +3306,10 @@
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/375/110/original/AR-Trademark-Digital-RGB-Blue.png?1776866293",
   "name": "Agile Robots SE"
  },
+ "greenhouse:agilityrobotics": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Agility Robotics"
+ },
  "greenhouse:airbnb": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Airbnb"
@@ -2251,6 +3332,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Alarm.com"
  },
+ "greenhouse:alemnafora": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Naphora Games Group"
+ },
  "greenhouse:algolia": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Algolia"
@@ -2263,6 +3348,10 @@
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://s4-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/709/800/original/01-primary-alpaca-logo.png?1763575446",
   "name": "Alpaca"
+ },
+ "greenhouse:alphafmcroles": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Alpha Financial Markets Consulting"
  },
  "greenhouse:alphasense": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2312,6 +3401,26 @@
   "logoUrl": "https://s5-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/079/300/original/Aptos_wordmark_transparent_BLK.png?1645630131",
   "name": "Aptos"
  },
+ "greenhouse:aquaticcapitalmanagement": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Aquatic Capital Management"
+ },
+ "greenhouse:arcesiumllc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Arcesium LLC"
+ },
+ "greenhouse:arcoeducacao": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Arco Educação"
+ },
+ "greenhouse:ardentmc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Ardent"
+ },
+ "greenhouse:arsys": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "arsys EN"
+ },
  "greenhouse:artefact": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Artefact"
@@ -2328,6 +3437,14 @@
  "greenhouse:asm": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "ASM"
+ },
+ "greenhouse:aspenviewtech": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Aspenview Technology Partners"
+ },
+ "greenhouse:astspacemobile": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "AST SpaceMobile"
  },
  "greenhouse:atosssoftwarese": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2360,9 +3477,25 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Awin"
  },
+ "greenhouse:axios": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Axios"
+ },
  "greenhouse:axon": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Axon"
+ },
+ "greenhouse:axs": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "AXS"
+ },
+ "greenhouse:baringa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Baringa"
+ },
+ "greenhouse:bearingpoint": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "BearingPoint Ireland"
  },
  "greenhouse:beat81": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2388,9 +3521,17 @@
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "name": "BlackSky"
  },
+ "greenhouse:blockchain": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Blockchain.com"
+ },
  "greenhouse:bloomreach": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Bloomreach"
+ },
+ "greenhouse:bluefishai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Bluefish AI"
  },
  "greenhouse:boosta": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -2423,6 +3564,10 @@
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/365/810/original/Screenshot_2026-03-10_at_9.06.02 PM.png?1773162709",
   "name": "Bybit"
  },
+ "greenhouse:cabify": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Cabify"
+ },
  "greenhouse:canonical": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Canonical"
@@ -2449,6 +3594,10 @@
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/028/310/original/CarOnSale_Black_Yellow.png?1782719749",
   "name": "CarOnSale"
  },
+ "greenhouse:carrotfertility": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Carrot"
+ },
  "greenhouse:catapultsports": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Catapult Sports"
@@ -2466,9 +3615,25 @@
   "logoUrl": "https://s6-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/158/600/original/1password.png?1761860501",
   "name": "Chainguard"
  },
+ "greenhouse:clarityinnovates": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Clarity Innovations"
+ },
  "greenhouse:clearstreet": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Clear Street"
+ },
+ "greenhouse:clinchoice": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "ClinChoice"
+ },
+ "greenhouse:cloudflare": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Cloudflare"
+ },
+ "greenhouse:cognite": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Cognite - AI for Industry"
  },
  "greenhouse:coherentsolutions": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2477,6 +3642,10 @@
  "greenhouse:commercetools": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "commercetools"
+ },
+ "greenhouse:conga": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Conga"
  },
  "greenhouse:consensys": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -2498,6 +3667,10 @@
  "greenhouse:corcepttherapeutics": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Corcept Therapeutics"
+ },
+ "greenhouse:coreview": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "CoreView"
  },
  "greenhouse:cresta": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2542,6 +3715,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "DATAPAO"
  },
+ "greenhouse:ddome": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "DataDome"
+ },
  "greenhouse:decathlontechnology": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Decathlon Digital FR"
@@ -2562,6 +3739,10 @@
  "greenhouse:dept": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "DEPT®"
+ },
+ "greenhouse:digilab": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "digiLab"
  },
  "greenhouse:digitalassetcorp": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2599,6 +3780,10 @@
   "logoUrl": "https://s3-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/168/500/original/Untitled_design.png?1719931483",
   "name": "DoiT"
  },
+ "greenhouse:droidsonroids": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Droids On Roids"
+ },
  "greenhouse:drweng": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "DRW"
@@ -2619,6 +3804,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Elastic"
  },
+ "greenhouse:enchargeai36": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "EnCharge AI"
+ },
  "greenhouse:encora10": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Encora"
@@ -2626,6 +3815,14 @@
  "greenhouse:engineeringatgigs": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Builders at Gigs"
+ },
+ "greenhouse:enginy": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Enginy"
+ },
+ "greenhouse:enhesa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Enhesa"
  },
  "greenhouse:enmacc": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2636,6 +3833,10 @@
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://s8-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/063/400/original/enveritas_logotype-2377x486.gif?1741988098",
   "name": "Enveritas"
+ },
+ "greenhouse:eqtpartners": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "EQT Group"
  },
  "greenhouse:eqvilentjobs": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2654,6 +3855,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Exiger"
  },
+ "greenhouse:extend": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Extend"
+ },
  "greenhouse:externaljobboards": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Exadel"
@@ -2661,6 +3866,10 @@
  "greenhouse:fanaticsfbg": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Fanatics Betting & Gaming"
+ },
+ "greenhouse:federato": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Federato"
  },
  "greenhouse:feverup": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2674,6 +3883,10 @@
  "greenhouse:flaconi": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "flaconi"
+ },
+ "greenhouse:flatironhealth": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Flatiron Health"
  },
  "greenhouse:flexport": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2691,9 +3904,21 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Flow Traders"
  },
+ "greenhouse:focalsystems": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Focal Systems"
+ },
+ "greenhouse:focused": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Focused"
+ },
  "greenhouse:formlabs": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Formlabs"
+ },
+ "greenhouse:fosphamarketing": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Fospha"
  },
  "greenhouse:foundry": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2704,6 +3929,14 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Freenome"
  },
+ "greenhouse:future": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Future"
+ },
+ "greenhouse:galaxydigitalservices": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Galaxy"
+ },
  "greenhouse:gallup": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Gallup"
@@ -2713,6 +3946,10 @@
   "logoUrl": "https://s8-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/096/700/original/geotab-logofull-colour-rgb.jpg?1713210167",
   "name": "Geotab"
  },
+ "greenhouse:getnet": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Getnet"
+ },
  "greenhouse:getyourguide": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/000/000/490/original/BC21-SOME-TW-001.png?1676299174",
@@ -2721,6 +3958,22 @@
  "greenhouse:gitlab": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "GitLab"
+ },
+ "greenhouse:gitlabcrm": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "GitLab Prospects"
+ },
+ "greenhouse:givedirectly": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "GiveDirectly"
+ },
+ "greenhouse:globalizationpartners": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "G-P"
+ },
+ "greenhouse:globalwebindex": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "GWI"
  },
  "greenhouse:globetech": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2733,6 +3986,10 @@
  "greenhouse:gocardless": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "GoCardless"
+ },
+ "greenhouse:gofasti": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "GoFasti"
  },
  "greenhouse:goodjobgames": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2756,9 +4013,21 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Grover"
  },
+ "greenhouse:guardsquare": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Guardsquare"
+ },
  "greenhouse:guidepointsecurity": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "GuidePoint Security"
+ },
+ "greenhouse:headlandstechnologiesllc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Headlands Technologies LLC"
+ },
+ "greenhouse:healthie": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Healthie"
  },
  "greenhouse:hellofresh": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2797,9 +4066,21 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "IMC"
  },
+ "greenhouse:incode": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Incode Technologies"
+ },
  "greenhouse:indiciumai": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Indicium AI"
+ },
+ "greenhouse:infinitesima": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Infinitesima"
+ },
+ "greenhouse:infinniinnovationssa": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Infinni Innovations S.A."
  },
  "greenhouse:infuse": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2831,6 +4112,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "IonQ"
  },
+ "greenhouse:isam": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "iSAM"
+ },
  "greenhouse:isaraerospace": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Isar Aerospace SE"
@@ -2838,6 +4123,14 @@
  "greenhouse:isomorphiclabs": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Isomorphic Labs"
+ },
+ "greenhouse:jamf": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Jamf"
+ },
+ "greenhouse:jensenhughes": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Jensen Hughes"
  },
  "greenhouse:jetbrains": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2848,10 +4141,18 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Jusbrasil"
  },
+ "greenhouse:justanswer": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Pearl"
+ },
  "greenhouse:justmarkets": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/196/210/original/Blue_logo_long_().jpg?1757614389",
   "name": "JustMarkets"
+ },
+ "greenhouse:kardfinancialinc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Kard Financial, Inc."
  },
  "greenhouse:kayzen": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2863,18 +4164,50 @@
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/446/610/original/Kazimi_wordmark_symbol_lockup_WHITE.png?1787239528",
   "name": "KAZIMI"
  },
+ "greenhouse:keyfactorinc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Keyfactor, Inc."
+ },
+ "greenhouse:knowbe4": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "KnowBe4"
+ },
  "greenhouse:koboldmetals": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "KoBold Metals"
+ },
+ "greenhouse:lawzero": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "LawZero"
  },
  "greenhouse:leasingmarkt": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s3-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/738/700/original/LM_2330x1000_Logo.png?1709908556",
   "name": "LeasingMarkt.de"
  },
+ "greenhouse:leolabsinc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "LeoLabs, Inc."
+ },
+ "greenhouse:lhvuk": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "LHV Bank"
+ },
+ "greenhouse:liberis": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Liberis"
+ },
+ "greenhouse:lighthouse": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Lighthouse"
+ },
  "greenhouse:lightningai": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Lightning AI"
+ },
+ "greenhouse:lilasciences": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Lila Sciences"
  },
  "greenhouse:linkedinjobs": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -2888,6 +4221,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Lucid Motors"
  },
+ "greenhouse:lynxtech": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Lynx"
+ },
  "greenhouse:mangroup": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Man Group"
@@ -2896,9 +4233,17 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "MariaDB plc"
  },
+ "greenhouse:materialbank": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Material Bank"
+ },
  "greenhouse:mavensecuritiesholdingltd": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Maven"
+ },
+ "greenhouse:mcghealth": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "MCG Health"
  },
  "greenhouse:medsien": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2921,6 +4266,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Moniepoint"
  },
+ "greenhouse:monks": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Monks"
+ },
  "greenhouse:monzo": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Monzo"
@@ -2937,6 +4286,10 @@
  "greenhouse:n26": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "N26"
+ },
+ "greenhouse:nametag": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Nametag"
  },
  "greenhouse:navapbc": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -2963,13 +4316,25 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Neptune North"
  },
+ "greenhouse:nexgencloud": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "NexGen Cloud"
+ },
  "greenhouse:nice": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "NICE"
  },
+ "greenhouse:nozominetworks": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Nozomi Networks"
+ },
  "greenhouse:nscaleoperationsukltd": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Nscale"
+ },
+ "greenhouse:ntconcepts": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "NT Concepts"
  },
  "greenhouse:nuitee": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -3018,20 +4383,40 @@
   "logoUrl": "https://recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/000/009/707/original/02-pd-logo_onwhite.png?1501091044",
   "name": "PandaDoc"
  },
+ "greenhouse:paretocaptiveservicesllc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "ParetoHealth"
+ },
  "greenhouse:parloa": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/153/310/original/Bildschirmfoto_2026-02-01_um_14.53.10.png?1769954007",
   "name": "Parloa"
+ },
+ "greenhouse:pathward": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Pathward, N.A."
  },
  "greenhouse:payhawkio": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/006/310/original/Payhawk-logo.png?1761051334",
   "name": "Payhawk"
  },
+ "greenhouse:perfectserve": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "PerfectServe"
+ },
  "greenhouse:phiture": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/048/310/original/Phiture_by_Precis_Logo.png?1774456542",
   "name": "Phiture"
+ },
+ "greenhouse:phoenixtechnologiesag": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Phoeniqs Technologies"
+ },
+ "greenhouse:physicsx": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "PhysicsX"
  },
  "greenhouse:planetlabs": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -3070,6 +4455,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Everpure"
  },
+ "greenhouse:quanata": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Quanata"
+ },
  "greenhouse:quberesearchandtechnologies": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Qube Research & Technologies"
@@ -3087,18 +4476,38 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Rackner"
  },
+ "greenhouse:radixuniversity": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Radix Trading University Job Board"
+ },
  "greenhouse:raisin": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/348/510/original/Raisin_Logo_Blue_RGB_v3.png?1770915340",
   "name": "Raisin"
  },
+ "greenhouse:rapidfortinc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "RapidFort, Inc."
+ },
  "greenhouse:readdle70": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Readdle"
  },
+ "greenhouse:recordedfuture": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Recorded Future"
+ },
+ "greenhouse:reddit": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Reddit"
+ },
  "greenhouse:referralsuseonly": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Referral Board"
+ },
+ "greenhouse:relex": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "RELEX Solutions"
  },
  "greenhouse:remotepeople": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -3121,6 +4530,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Ripple"
  },
+ "greenhouse:rise8": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Rise8"
+ },
  "greenhouse:ritual": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Ritual"
@@ -3136,6 +4549,10 @@
  "greenhouse:robotsandpencils": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Robots and Pencils"
+ },
+ "greenhouse:rocketfactoryaugsburgag": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Rocket Factory Augsburg AG (EN)"
  },
  "greenhouse:rocketlab": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -3170,6 +4587,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Bitdefender"
  },
+ "greenhouse:scm": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Stevens Capital Management LP"
+ },
  "greenhouse:scopely": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Scopely"
@@ -3195,21 +4616,45 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Shift Technology"
  },
+ "greenhouse:shipmonk": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "ShipMonk"
+ },
+ "greenhouse:shopfully": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Shopfully"
+ },
  "greenhouse:showpad": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Showpad"
+ },
+ "greenhouse:sidecarhealth": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Sidecar Health"
  },
  "greenhouse:similarweb": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Similarweb"
  },
+ "greenhouse:singlestore": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "SingleStore"
+ },
  "greenhouse:skdse": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "STARK"
  },
+ "greenhouse:skyepointdecisionsinc": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "SkyePoint Decisions"
+ },
  "greenhouse:smartlyio": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Smartly"
+ },
+ "greenhouse:sohohouseco": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Soho House & Co."
  },
  "greenhouse:solarisbank": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -3220,6 +4665,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Cadence Solutions"
  },
+ "greenhouse:sonatus": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Sonatus"
+ },
  "greenhouse:sonyinteractiveentertainmentglobal": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "PlayStation Global"
@@ -3228,6 +4677,14 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s2-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/401/144/300/original/SM_Primary_RedandBlack_RGB_Logo_Small.jpg?1746468595",
   "name": "Sony Music Global Job Board"
+ },
+ "greenhouse:soundcloud71": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "SoundCloud"
+ },
+ "greenhouse:sparkadvisors": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Spark Advisors"
  },
  "greenhouse:spcareers": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -3242,6 +4699,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Speechmatics"
  },
+ "greenhouse:sphinxdefense": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Sphinx Defense"
+ },
  "greenhouse:sportygroup": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/346/210/original/sportylogo.png?1768474368",
@@ -3250,6 +4711,10 @@
  "greenhouse:spotme": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "name": "SpotMe"
+ },
+ "greenhouse:sproutsocial": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Sprout Social"
  },
  "greenhouse:staffbase": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -3280,6 +4745,14 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Sword"
  },
+ "greenhouse:talkdesk2": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Talkdesk"
+ },
+ "greenhouse:tavily": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Tavily"
+ },
  "greenhouse:teads1": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Teads"
@@ -3288,13 +4761,29 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Telnyx"
  },
+ "greenhouse:tensordyne": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Tensordyne"
+ },
  "greenhouse:tenstorrent": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Tenstorrent"
  },
+ "greenhouse:teravision": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Teravision Technologies"
+ },
+ "greenhouse:thedotcollective": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Dot Collective"
+ },
  "greenhouse:theeconomistgroup": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "The Economist Group"
+ },
+ "greenhouse:thefork": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "The Fork"
  },
  "greenhouse:theorchard": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -3337,6 +4826,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "TransferGo"
  },
+ "greenhouse:trgscreen": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "TRG Screen"
+ },
  "greenhouse:tripledotstudios": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Tripledot Studios"
@@ -3348,6 +4841,10 @@
  "greenhouse:tulip": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Tulip Interfaces"
+ },
+ "greenhouse:twilio": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Twilio"
  },
  "greenhouse:twinstream": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -3396,13 +4893,29 @@
   "logoUrl": "https://s2-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/069/900/original/verve-logo_2x.png?1778089890",
   "name": "Verve"
  },
+ "greenhouse:vestwell": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Vestwell"
+ },
  "greenhouse:via": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Via"
  },
+ "greenhouse:virginactivelimited": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Virgin Active & KAUAI"
+ },
+ "greenhouse:vmlenterprisesolutions": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "VML/WPP Enterprise Solutions"
+ },
  "greenhouse:vonage": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Vonage"
+ },
+ "greenhouse:wallapop": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Wallapop"
  },
  "greenhouse:wargamingen": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -3419,6 +4932,14 @@
  "greenhouse:whitetech": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "WhiteTech"
+ },
+ "greenhouse:wikimedia": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Wikimedia Foundation"
+ },
+ "greenhouse:winton": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Winton"
  },
  "greenhouse:wolt": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -3459,6 +4980,14 @@
   "logoUrl": "https://s5-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/249/300/original/We_are_hiring_images_-__Klaxoon___Wrike_3_(2).png?1791180163",
   "name": "Wrike"
  },
+ "greenhouse:xai": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "SpaceXSI"
+ },
+ "greenhouse:xantium": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Xantium"
+ },
  "greenhouse:xdesign": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "CreateFuture"
@@ -3485,6 +5014,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s9-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/348/800/original/Logo-200X200.png?1770158617",
   "name": "Yubico Inc."
+ },
+ "greenhouse:zencoder": {
+  "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
+  "name": "Zencoder"
  },
  "greenhouse:zetaglobal": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
