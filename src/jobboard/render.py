@@ -82,6 +82,8 @@ def company_name(v: dict, profile: dict | None = None) -> str:
     if v["company_name"]:
         return v["company_name"]
     board = v["board"]
+    if v["source"] == "lever":
+        return board.split(":", 1)[1]
     return board if any(c.isdigit() for c in board) else " ".join(w.capitalize() for w in board.replace("_", "-").split("-"))
 
 
@@ -118,7 +120,9 @@ def load_companies(profiles: Path, lists_dir: Path, inputs: Path | None = None) 
         for path in sorted(inputs.glob("*.csv")):
             with path.open(newline="", encoding="utf-8") as stream:
                 for row in csv.DictReader(stream):
-                    key = lever_key(row["key"]) if row["provider"] == "lever" else row["key"]
+                    if row["provider"] != "lever":
+                        continue
+                    key = lever_key(row["key"])
                     entry = companies.setdefault(company_key(f"{row['provider']}:{key}"), {})
                     for field in ("name", "website"):
                         if not entry.get(field) and row.get(field):

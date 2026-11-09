@@ -35,7 +35,8 @@ uv run python -m jobboard.discover results.csv --providers lever --interval 1 \
 
 The report's `checks` records each attempted regional board separately, including
 empty boards, HTTP failures and invalid responses. Duplicate candidates are not
-retried within one import. Skip-list keys must include the region, so excluding
-one board does not exclude a different board with the same slug. Discovery
+retried within one import. A regional skip-list key excludes only that board;
+a bare Lever skip token excludes both regions. Invalid skip entries are warned
+and included in the report. Discovery
 establishes that a board is live; matching job counts require the join's normal
 role/location filters.

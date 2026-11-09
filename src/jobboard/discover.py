@@ -144,7 +144,14 @@ def main(argv=None) -> int:
     ap.add_argument("--interval", type=float, help="request spacing; default 1s with Personio/Lever, 0.5s otherwise")
     ap.add_argument("--providers", nargs="+", choices=sorted(CHECK), help="check only these providers")
     args = ap.parse_args(argv)
-    skip = {(r["provider"], lookup_key(r["provider"], r["key"])) for r in read_csv(args.skip)}
+    skip, invalid_skips = set(), []
+    for row in read_csv(args.skip):
+        try:
+            keys = candidate_keys(row["key"]) if row["provider"] == "lever" else [row["key"].lower()]
+            skip.update((row["provider"], key) for key in keys)
+        except ValueError:
+            invalid_skips.append(f"{row['provider']}:{row['key']}")
+            print(f"Invalid skip entry: {invalid_skips[-1]}", file=sys.stderr)
     previous = read_csv(args.out)                    # earlier discoveries stay, even if a check now fails
     known = known_boards(args.inputs, args.out) | {(r["provider"], lookup_key(r["provider"], r["key"])) for r in previous}
     providers = set(args.providers) if args.providers else None
@@ -152,6 +159,8 @@ def main(argv=None) -> int:
     rows, report = discover(candidates(args.results), known, Client(interval=interval).get, skip, providers)
     merged = {(r["provider"], lookup_key(r["provider"], r["key"])): r for r in previous + rows}
     report["kept_from_before"] = len(previous)
+    if invalid_skips:
+        report["invalid_skip_entries"] = invalid_skips
     with args.out.open("w", newline="", encoding="utf-8") as stream:
         writer = csv.DictWriter(stream, fieldnames=COLUMNS, lineterminator="\n")
         writer.writeheader()

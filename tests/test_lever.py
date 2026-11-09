@@ -16,7 +16,7 @@ from jobboard.join import join
 from jobboard.lever import board_key, candidate_keys, parse_postings, postings_url
 from jobboard.normalize import normalize
 from jobboard.registry import import_lists, memberships, parse_board
-from jobboard.render import load_companies, render, salary
+from jobboard.render import company_name, load_companies, render, salary
 from jobboard.retrievers import Selection, retrieve
 from test_http import Response, client
 
@@ -212,6 +212,33 @@ def test_regional_lists_and_seed_names_use_the_same_identity(tmp_path):
     assert load_companies(profiles, lists, inputs)["lever:eu:example"] == {"name": "List Name", "website": "https://example.test"}
     profiles.write_text(json.dumps({"lever:eu:example": {"name": "Cached Name"}}))
     assert load_companies(profiles, lists, inputs)["lever:eu:example"]["name"] == "Cached Name"
+
+
+def test_fallback_name_preserves_the_token_without_the_region():
+    for key, expected in [("global:Legend", "Legend"), ("eu:wypoon", "wypoon")]:
+        assert company_name(dict(source="lever", board=key, company_name=None), None) == expected
+
+
+def test_cli_bare_lever_skip_expands_both_regions_and_invalid_skip_is_reported(tmp_path, monkeypatch):
+    import jobboard.discover as module
+    inputs = tmp_path / "companies"
+    inputs.mkdir()
+    results = tmp_path / "candidates.csv"
+    results.write_text("ats,board_key,captures\nlever,example,1\n")
+    skip = tmp_path / "skip.csv"
+    skip.write_text("provider,key,reason\nlever,example,exclude both\nlever,evil@host,invalid\n")
+    class NoRequests:
+        def __init__(self, **kwargs):
+            pass
+        def get(self, *args, **kwargs):
+            raise AssertionError("neither regional board should be fetched")
+    monkeypatch.setattr(module, "Client", NoRequests)
+    out, report = inputs / "lever.csv", tmp_path / "report.json"
+    assert module.main([str(results), "--inputs", str(inputs), "--out", str(out),
+                        "--report", str(report), "--skip", str(skip)]) == 0
+    saved = json.loads(report.read_text())
+    assert saved["not_added"] == {"lever excluded by skip list": 2}
+    assert saved["invalid_skip_entries"] == ["lever:evil@host"]
 
 
 def test_regional_lifecycle_and_board_work_end_to_end(tmp_path):
