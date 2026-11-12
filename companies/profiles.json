@@ -277,6 +277,12 @@
   "name": "Ankar",
   "website": "https://ankar.ai/"
  },
+ "ashby:antithesis": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/edb1602a-93a9-42d1-acbd-c3f76c22e215/45298967-06f3-40ac-af16-e58d1922d49e/80645646-5857-4bcf-84df-be8eace2d90d.png",
+  "name": "Antithesis",
+  "website": "http://antithesis.com"
+ },
  "ashby:anyone-ai": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d175fdeb-2bfe-4149-bd3b-a23aadb66345/8623ca5a-a8a8-4de8-9ed2-0fba7a62a11b/9b71b649-aa65-43e8-b1c7-46ba056dd668.png",
@@ -936,6 +942,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/cdf63702-d9e2-4c9e-9cc0-7dbc7158167f/38eaf64b-8b81-438d-b6c9-2440529a1cc2/2b3e6763-082f-4d5b-8f19-45a5881ae196.png",
   "name": "CoMind",
   "website": "https://comind.io/"
+ },
+ "ashby:commure": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/91a64651-f472-406d-b381-be99c3d1f4b4/b14fe7c2-7e71-4551-9627-a8b8211089e0/e31b9c7d-d3be-47ae-8336-9228bd0c68b6.png",
+  "name": "Commure",
+  "website": "https://www.commure.com"
  },
  "ashby:comstruct": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -2044,6 +2056,18 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3056a8f0-b4bf-40f1-a80a-26d1523d8eb2/e9ab683a-b1a8-45bf-a517-e8bb17ef864e/13ffecd8-c58e-4752-a75a-7361fa69f533.png",
   "name": "Inherent",
   "website": "https://inherentlabs.ai/"
+ },
+ "ashby:injective": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/412e44b8-a5a6-4c69-bdc6-a837f744454e/dd64382e-2c8b-4e98-8908-5cdc5f4a6b92/d8d772ca-0c15-41d7-8b76-fcf87f824800.png",
+  "name": "Injective",
+  "website": "https://injective.com/"
+ },
+ "ashby:injective-labs": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/8f1bd457-0e30-41c5-8b14-c7757bd3b8b5/2768c82d-da13-481a-8dd3-5f4950179ad7/a79bb120-f979-4e7b-b23c-1a3ac07f2260.png",
+  "name": "Injective Labs",
+  "website": "https://injectivelabs.org/"
  },
  "ashby:innatera": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
@@ -3991,6 +4015,12 @@
   "name": "SalesPatriot",
   "website": "https://salespatriot.com/"
  },
+ "ashby:salient": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7b0a14d8-667b-49c1-851d-77acd0df222f/7811aec4-3e66-469a-a1f6-45832d70c1b0/37775fb1-d5d8-4525-9e15-742080be7567.png",
+  "name": "Salient",
+  "website": "https://www.trysalient.com/"
+ },
  "ashby:salmon-group": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/e57ae5d5-95d6-4f48-a057-3daf90efa695/927e3e3a-e637-4a1b-a948-a1e24f08dcf1/accd8491-155b-400c-a6eb-bfc0ae23e809.png",
@@ -4821,6 +4851,12 @@
   "name": "Trustly",
   "website": "https://www.trustly.com/"
  },
+ "ashby:turbopuffer": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/d125d4c4-2db5-4c10-a7c6-e00dc8e8a5e6/06f412f4-e07c-4f6a-a718-edfe45d83c7a/38eade7a-3de7-43a2-a042-602dba3c387a.png",
+  "name": "turbopuffer",
+  "website": "https://turbopuffer.com"
+ },
  "ashby:uberall": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/dc9f54ab-fa56-47a2-bad6-80044ef09d40/21a3444b-4c30-48ea-a8ba-84d818400d09/4eb4a751-dcc1-4a99-8a3e-0144368f6195.png",
@@ -5172,6 +5208,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/867624d5-fe59-46c3-8d95-ca85fb468e30/6a1c098d-21e2-4ccc-8f17-e18406f74e59/12ca2aee-c3a5-4db9-a69d-cd8b056ff0ee.png",
   "name": "XBOW",
   "website": "https://xbow.com/"
+ },
+ "ashby:xero": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/bf70678a-ce6f-4343-a19f-4d3099acfa72/52fa5ae4-4de3-460c-8b06-7b82ee57c032/0db6992f-0587-4828-a375-723de8d7e7c6.png",
+  "name": "Xero",
+  "website": "https://www.xero.com/"
  },
  "ashby:xyz-reality": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
@@ -6206,6 +6248,10 @@
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Designed Conveyor Systems"
  },
+ "greenhouse:dexory": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "name": "Dexory"
+ },
  "greenhouse:dialecticch": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Dialectic"
@@ -6345,6 +6391,10 @@
  "greenhouse:encora10": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Encora"
+ },
+ "greenhouse:energyexemplarllc": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "name": "Energy Exemplar"
  },
  "greenhouse:energyhub": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -7006,6 +7056,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "IonQ"
  },
+ "greenhouse:iovancebiotherapeutics": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "name": "Iovance Biotherapeutics"
+ },
  "greenhouse:isam": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "iSAM"
@@ -7038,6 +7092,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/314/310/original/878437.jpeg?1756323414",
   "name": "JetBrains"
+ },
+ "greenhouse:joblogic": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "name": "Joblogic"
  },
  "greenhouse:jobsatphamily": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -7641,6 +7699,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/368/110/original/Logo_RGB_Pink__Rosa__Anhrazit.png?1764931047",
   "name": "EN - Online Birds GmbH"
+ },
+ "greenhouse:oodlefinance": {
+  "fetchedAt": "2026-11-12T14:09:53.066476+00:00",
+  "name": "Oodle Finance"
  },
  "greenhouse:opencoreventures": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
