@@ -2461,6 +2461,11 @@
   "name": "LI.FI",
   "website": "https://li.fi/"
  },
+ "ashby:light-inc": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Light",
+  "website": "https://light.inc/"
+ },
  "ashby:lightdash": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/118a5d75-b907-4616-ade7-b67eaa6b5c16/3577330f-7a08-4e82-a5c2-d0d19b054e31/0e2997f7-6255-4c9e-9ea4-0199b51c80ef.png",
@@ -2651,6 +2656,12 @@
   "name": "M-KOPA",
   "website": "https://www.m-kopa.com"
  },
+ "ashby:magentic": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/535ca645-2fc7-4ba1-8b16-17c06cf57c45/508e1d1a-8eec-496e-a1ec-9d661392152a/f74fd0cd-5d87-4487-9ce2-152119944934.png",
+  "name": "Magentic",
+  "website": "https://www.magentic.com/"
+ },
  "ashby:maki": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5b4e7163-cef2-41b1-87e4-0af1511154bd/7361c300-2e6a-49b2-887b-ef48d0e474ae/d8d6c1d9-a52b-4c91-b25a-6470276e5804.png",
@@ -2704,6 +2715,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3877c7d5-5c11-42ba-a7b6-b1421d6e00d2/c004ad4b-78c2-43b5-913a-518d5af176e0/239f74cf-b8ec-4c5b-8eed-5a3d6af910c5.png",
   "name": "Mastra",
   "website": "https://mastra.ai/"
+ },
+ "ashby:matter-labs": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/f9748766-bdad-432a-8ff6-640cf44351cc/38b1006b-d654-466e-bac8-052d75b77d93/5273006d-b3cf-4ebd-ae39-ed4d8ca6acc0.png",
+  "name": "Matter Labs",
+  "website": "https://matter-labs.io"
  },
  "ashby:maven": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
@@ -3729,6 +3746,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/be829fcc-c9a0-4d42-a868-839316479552/0b185b7f-42bd-416f-ab5f-77550ac46138/e6ce0f38-8368-4348-b93f-d421146d7d7f.png",
   "name": "Railway",
   "website": "https://railway.app/"
+ },
+ "ashby:rain": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/dc58a004-9283-4567-8b9e-641f9135d176/f93d4997-00f5-421f-9ba6-5979c6300ded/08f5f2c5-6aa1-4bec-aed4-844b122762ba.png",
+  "name": "Rain",
+  "website": "https://www.rain.xyz/"
  },
  "ashby:raintree-systems": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
@@ -5036,6 +5059,12 @@
   "name": "Viktor",
   "website": "https://viktor.com/"
  },
+ "ashby:vitvio": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/abea5001-92da-49c8-b316-5c228fa78d17/2d595678-a45b-4687-92b2-30a244c401a4/e73b4cb5-cad2-4244-9718-cd3b3198ee0a.png",
+  "name": "VitVio",
+  "website": "https://www.vitvio.com"
+ },
  "ashby:vocca": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c7dade2b-f483-44d4-8452-3a16af5d6787/99d13a9c-d0fb-48c8-bacf-c64684016f24/7459bcb2-8e4a-49db-9644-30ddb1e0d8be.png",
@@ -5895,6 +5924,10 @@
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Buynomics"
  },
+ "greenhouse:buzzsolutions": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Buzz Solutions"
+ },
  "greenhouse:bvnk": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "BVNK"
@@ -6528,6 +6561,10 @@
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Figma"
  },
+ "greenhouse:figure": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Figure Lending"
+ },
  "greenhouse:financialtimes33": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Financial Times"
@@ -6982,6 +7019,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Indicium AI"
  },
+ "greenhouse:indigo": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Indigo"
+ },
  "greenhouse:infinitesima": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "Infinitesima"
@@ -7340,6 +7381,10 @@
  "greenhouse:lunarenergy": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Lunar Energy"
+ },
+ "greenhouse:lyft": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Lyft"
  },
  "greenhouse:lynxtech": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
@@ -7799,6 +7844,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/153/310/original/Bildschirmfoto_2026-02-01_um_14.53.10.png?1769954007",
   "name": "Parloa"
+ },
+ "greenhouse:parsleyhealth": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Parsley Health"
  },
  "greenhouse:pathstream": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -8292,6 +8341,10 @@
   "logoUrl": "https://s9-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/065/300/original/Secretariat-Logo.-Mark-ONLY-RGB.png?1752687069",
   "name": "Secretariat"
  },
+ "greenhouse:securitize": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Securitize"
+ },
  "greenhouse:sedna": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Sedna"
@@ -8441,6 +8494,10 @@
  "greenhouse:sourcegraph91": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Sourcegraph"
+ },
+ "greenhouse:sparetech": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "SPARETECH"
  },
  "greenhouse:sparkadvisors": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
@@ -8995,6 +9052,10 @@
  "greenhouse:xebiacee": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Poland and Central-Eastern Europe"
+ },
+ "greenhouse:xebiadach": {
+  "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
+  "name": "Xebia DACH"
  },
  "greenhouse:xntltd": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
