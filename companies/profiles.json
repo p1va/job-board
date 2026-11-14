@@ -567,6 +567,12 @@
   "name": "Bite Engineering",
   "website": "https://bite.engineering/"
  },
+ "ashby:bitstack": {
+  "fetchedAt": "2026-11-14T12:34:24.097741+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/21768e8a-f2a1-4359-8e5c-f8924cdacc76/f42d0c9e-abf8-44ce-beb3-07497765be21/3a62d94b-25f8-4066-b040-6fcf4a96e4b1.png",
+  "name": "Bitstack",
+  "website": "https://www.bitstack-app.com"
+ },
  "ashby:bjakcareer": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/cfdb13fd-7d62-4b21-a335-caf230b55bd2/50220d6f-75bd-4d17-9199-b4361604b1da/776b0d6d-b264-47fc-a116-7219811654b6.png",
@@ -5687,6 +5693,10 @@
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Atomic Industries, Inc."
  },
+ "greenhouse:atoms": {
+  "fetchedAt": "2026-11-14T12:34:24.097741+00:00",
+  "name": "Atoms"
+ },
  "greenhouse:atosssoftwarese": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "ATOSS Software SE"
@@ -6620,6 +6630,10 @@
  "greenhouse:flohealth": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Flo Health"
+ },
+ "greenhouse:flowfuse": {
+  "fetchedAt": "2026-11-14T12:34:24.097741+00:00",
+  "name": "FlowFuse"
  },
  "greenhouse:flowtraders": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -7959,6 +7973,10 @@
  "greenhouse:polyai": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "PolyAI"
+ },
+ "greenhouse:poppulo": {
+  "fetchedAt": "2026-11-14T12:34:24.097741+00:00",
+  "name": "Poppulo"
  },
  "greenhouse:postscript": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
