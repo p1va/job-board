@@ -5214,6 +5214,12 @@
   "name": "WORKERBASE",
   "website": "https://workerbase.com/"
  },
+ "ashby:worldly": {
+  "fetchedAt": "2026-11-15T13:07:53.871161+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/30f9ccd0-82a5-4cad-b0ce-f5a967043a34/c19d7dc5-0078-4f8a-afd9-bbaac321c7f1/72c50a65-4c47-4699-95ff-7a36a7672cee.png",
+  "name": "Worldly",
+  "website": "https://worldly.io/"
+ },
  "ashby:wormholelabs": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ef02a9fa-baac-44f7-bbdf-1de7a23bb899/56c58f41-c66c-4588-9b21-e71f07f6e76f/54356b6b-203f-46d7-8c95-8fb5d368690d.png",
