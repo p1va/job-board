@@ -1008,6 +1008,12 @@
   "name": "Cortea AI",
   "website": "https://www.cortea.ai/"
  },
+ "ashby:corti": {
+  "fetchedAt": "2026-11-16T14:01:42.142288+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/096cf805-c612-403a-9340-2f1e581d097c/b7c49ac3-099e-4927-a971-dba7273412cf/9d4e7d5d-aedd-49a8-b292-4ffd98b22a2a.png",
+  "name": "Corti",
+  "website": "https://www.corti.ai/"
+ },
  "ashby:cosuno": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7f2782f0-48ed-41b8-8535-2cbce5924faf/74aa9373-7981-4ac4-98d5-7318ef60e6de/9a821f40-9e81-490f-8b79-add35022874b.png",
@@ -2086,6 +2092,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b949a8cc-05b8-45a5-9987-f18e9f747d61/19cfff6e-1a2d-40b8-bce2-6117d02c5803/e05e76ce-ea81-4281-86aa-21173e32fca2.png",
   "name": "Inscribe",
   "website": "https://www.inscribe.ai/"
+ },
+ "ashby:instil": {
+  "fetchedAt": "2026-11-16T14:01:42.142288+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/f461d6b2-ef3d-46f9-a0df-6b1788dcb473/bbf95bd8-76eb-4e73-8bf6-49457facea87/ebc79a57-0b23-4186-877e-efd4425932e6.png",
+  "name": "Instil Software Ltd",
+  "website": "https://instil.co/"
  },
  "ashby:instructure": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
