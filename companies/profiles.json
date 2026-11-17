@@ -889,6 +889,12 @@
   "name": "CoachHub",
   "website": "https://www.coachhub.com"
  },
+ "ashby:codat": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/4c32d6dd-2928-4cda-977c-91f94afb9358/f73536fa-fb04-4d0c-8f75-89f391d709f5/9d7ae0ed-5022-4b70-a81b-ad285ec1fa74.png",
+  "name": "Codat",
+  "website": "https://codat.io/"
+ },
  "ashby:coder": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/26859603-6351-4769-8c1f-4e8c1581c69a/7d2c0b9c-74c1-41df-927b-1d748a679438/81f63f75-51fb-4ae9-903d-050b36230e4b.png",
@@ -1121,6 +1127,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f0c5b9f8-0764-4405-bcc7-a564450380e8/80b386c7-b1ac-46f5-b53b-18eb41f2e505/cbd5d681-a09f-47a7-b4cf-b9fb2bd98750.png",
   "name": "Dedale Intelligence",
   "website": "https://www.dedale.com/"
+ },
+ "ashby:deepgram": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0b400815-2382-4efe-bebd-9dbabab3d592/917c2907-663a-42ec-ae7c-bfb45e209460/241bc066-58fd-4295-86a7-faf880260bb2.png",
+  "name": "Deepgram",
+  "website": "https://www.deepgram.com"
  },
  "ashby:deepjudge": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -5455,6 +5467,10 @@
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "Agility Robotics"
  },
+ "greenhouse:aiedu": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "name": "The AI Education Project"
+ },
  "greenhouse:airbnb": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Airbnb"
@@ -5921,6 +5937,10 @@
  "greenhouse:brainlabs": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Brainlabs"
+ },
+ "greenhouse:brainrocketltd": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "name": "BrainRocket"
  },
  "greenhouse:brave": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
@@ -6926,6 +6946,10 @@
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "HealthJoy"
  },
+ "greenhouse:heliosx": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "name": "HeliosX"
+ },
  "greenhouse:hellofresh": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "HelloFresh"
@@ -7009,6 +7033,10 @@
  "greenhouse:hummingbirdregtech": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Hummingbird"
+ },
+ "greenhouse:iai": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "name": "i.AI"
  },
  "greenhouse:icapitalnetwork": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
@@ -8234,6 +8262,14 @@
  "greenhouse:rise8": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "Rise8"
+ },
+ "greenhouse:rithum": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "name": "Rithum"
+ },
+ "greenhouse:rithumliboard": {
+  "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
+  "name": "Rithum LinkedIn Board"
  },
  "greenhouse:ritual": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
