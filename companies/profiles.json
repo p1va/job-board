@@ -1772,6 +1772,12 @@
   "name": "Glow25",
   "website": "https://glow25.de/"
  },
+ "ashby:goanagram": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/cbfc0827-fb53-4af4-9c2f-2fa90151a05b/7262ca9f-68c5-4d21-8061-5029ef8a4b53/730cb1f7-4202-4dbd-b080-b090152f5614.png",
+  "name": "Anagram",
+  "website": "https://www.goanagram.com/"
+ },
  "ashby:gooddata": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/b3d62626-b8de-407d-a734-a5ac621c8a01/84a05a06-c470-4fbd-a450-9913743b7da2/7b9a498d-994e-437a-9364-4969d7241406.png",
@@ -2322,6 +2328,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a963b0d2-9b00-4cf7-ab50-5b990b5df44e/44a3f6ca-34b8-4ccd-8761-49811b3b1979/aa1801aa-3927-4db0-a600-34357c3ef96c.png",
   "name": "Kong",
   "website": "https://konghq.com/"
+ },
+ "ashby:kontakt": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/ff10c476-a7d3-42b1-8043-bb57e3947469/1cffdfa2-e853-4bd7-b2db-6a702250ffce/462ff48c-d9d7-4da3-be1e-31286049ee27.png",
+  "name": "Kontakt.io",
+  "website": "https://kontakt.io"
  },
  "ashby:koro": {
   "fetchedAt": "2026-10-26T13:42:24.074017+00:00",
@@ -6100,6 +6112,14 @@
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "CHAOS Industries"
  },
+ "greenhouse:chargepoint": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "name": "ChargePoint"
+ },
+ "greenhouse:ciq": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "name": "CIQ"
+ },
  "greenhouse:clarityinnovates": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "Clarity Innovations"
@@ -6111,6 +6131,10 @@
  "greenhouse:clearstreet": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Clear Street"
+ },
+ "greenhouse:climatecabinet": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "name": "Climate Cabinet"
  },
  "greenhouse:clinchoice": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
@@ -7575,6 +7599,10 @@
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/043/310/original/LinkedIn_Logo_16x9.jpg?1643793940",
   "name": "MOIA GmbH"
  },
+ "greenhouse:moloco": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "name": "Moloco"
+ },
  "greenhouse:mongodb": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "MongoDB"
@@ -7916,6 +7944,10 @@
  "greenhouse:pathward": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "Pathward, N.A."
+ },
+ "greenhouse:patriotgrowthinsuranceservicesllc": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "name": "Patriot Growth Insurance Services, LLC"
  },
  "greenhouse:payhawkio": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -9013,6 +9045,10 @@
  "greenhouse:virtu": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
   "name": "Virtu Financial"
+ },
+ "greenhouse:visualconcepts": {
+  "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
+  "name": "Visual Concepts"
  },
  "greenhouse:vmlenterprisesolutions": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
