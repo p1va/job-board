@@ -5292,6 +5292,12 @@
   "name": "Xero",
   "website": "https://www.xero.com/"
  },
+ "ashby:xona-space": {
+  "fetchedAt": "2026-11-19T14:53:18.024289+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/5028decb-2141-41f6-a811-62d431a874db/3ff0e045-647c-4592-a3bd-b76dde9f838c/46d78819-5aec-4f59-b460-4a355a215827.png",
+  "name": "Xona Space Systems",
+  "website": "https://www.xonaspace.com/"
+ },
  "ashby:xyz-reality": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "XYZ Reality",
@@ -5685,6 +5691,10 @@
  "greenhouse:arlosolutionsllc": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
   "name": "Arlo Solutions LLC"
+ },
+ "greenhouse:armada": {
+  "fetchedAt": "2026-11-19T14:53:18.024289+00:00",
+  "name": "Armada"
  },
  "greenhouse:array": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
@@ -6115,6 +6125,10 @@
  "greenhouse:chargepoint": {
   "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
   "name": "ChargePoint"
+ },
+ "greenhouse:ciazumano": {
+  "fetchedAt": "2026-11-19T14:53:18.024289+00:00",
+  "name": "CI Azumano"
  },
  "greenhouse:ciq": {
   "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
@@ -7374,6 +7388,10 @@
   "logoUrl": "https://s3-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/738/700/original/LM_2330x1000_Logo.png?1709908556",
   "name": "LeasingMarkt.de"
  },
+ "greenhouse:ledgy": {
+  "fetchedAt": "2026-11-19T14:53:18.024289+00:00",
+  "name": "Ledgy"
+ },
  "greenhouse:legion": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Legion"
@@ -7777,6 +7795,10 @@
  "greenhouse:ocadogroup": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Ocado Group"
+ },
+ "greenhouse:occamindustries": {
+  "fetchedAt": "2026-11-19T14:53:18.024289+00:00",
+  "name": "Occam Industries"
  },
  "greenhouse:octopuslegacy": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -8262,6 +8284,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s2-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/401/013/500/original/Platformsh_logo_black_2x.png?1654509056",
   "name": "Upsun (via Remote Woman)"
+ },
+ "greenhouse:renaissancelearning-emea": {
+  "fetchedAt": "2026-11-19T14:53:18.024289+00:00",
+  "name": "Renaissance Learning EMEA APAC"
  },
  "greenhouse:renttherunway": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
