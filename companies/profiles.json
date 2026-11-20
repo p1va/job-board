@@ -5476,6 +5476,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Affirm"
  },
+ "greenhouse:affirmedrxpbc": {
+  "fetchedAt": "2026-11-20T14:24:05.757549+00:00",
+  "name": "AffirmedRx, PBC"
+ },
  "greenhouse:agilerobotsse": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/375/110/original/AR-Trademark-Digital-RGB-Blue.png?1776866293",
@@ -5891,6 +5895,14 @@
  "greenhouse:bitwarden": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Bitwarden"
+ },
+ "greenhouse:blab": {
+  "fetchedAt": "2026-11-20T14:24:05.757549+00:00",
+  "name": "B Lab"
+ },
+ "greenhouse:blackbirdhealth": {
+  "fetchedAt": "2026-11-20T14:24:05.757549+00:00",
+  "name": "Blackbird Health"
  },
  "greenhouse:blackduck": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
@@ -6582,6 +6594,10 @@
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Everway"
  },
+ "greenhouse:everycure": {
+  "fetchedAt": "2026-11-20T14:24:05.757549+00:00",
+  "name": "Every Cure"
+ },
  "greenhouse:evoplaygames": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Evoplay Games"
@@ -7055,6 +7071,10 @@
  "greenhouse:hrtechx": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "HRtechX"
+ },
+ "greenhouse:hrwallingford": {
+  "fetchedAt": "2026-11-20T14:24:05.757549+00:00",
+  "name": "HR Wallingford"
  },
  "greenhouse:hubspotjobs": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
@@ -8012,6 +8032,10 @@
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Pharo Management"
  },
+ "greenhouse:phenogyag": {
+  "fetchedAt": "2026-11-20T14:24:05.757549+00:00",
+  "name": "PHENOGY AG"
+ },
  "greenhouse:phiture": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/048/310/original/Phiture_by_Precis_Logo.png?1774456542",
@@ -8417,6 +8441,10 @@
  "greenhouse:safariai": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Safari AI"
+ },
+ "greenhouse:sagebionetworks": {
+  "fetchedAt": "2026-11-20T14:24:05.757549+00:00",
+  "name": "Sage Bionetworks"
  },
  "greenhouse:salaryfinancecareers": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
