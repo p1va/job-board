@@ -3969,6 +3969,12 @@
   "name": "Rho",
   "website": "https://www.rho.co/"
  },
+ "ashby:rhoda-ai": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/004a3831-2d85-42a0-ba5f-4b2c24b119d5/92eca82c-f7c0-4fd9-ac0b-22f8debc5e33/953a5786-3de9-413e-b601-56777090ca90.png",
+  "name": "Rhoda AI",
+  "website": "http://rhoda.ai"
+ },
  "ashby:riplo": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/a2439f16-6801-4aeb-9e5e-f59fce216aa6/ff4fce2c-5472-46eb-bd41-e1e8dcf0c2db/d1d5dc0d-6d2b-4144-b3f8-ffea2422655d.png",
@@ -5125,6 +5131,11 @@
   "name": "voize",
   "website": "https://www.voize.ai/"
  },
+ "ashby:voldex": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "Voldex Games",
+  "website": "http://voldex.com"
+ },
  "ashby:voleon": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/dc039ef5-b0ae-4fcc-966c-3c095142ccd7/ac18c82a-7737-43ba-a7bc-e9952ae721fb/ff6759ec-4fba-49a0-b502-c1be79b8c574.png",
@@ -5551,6 +5562,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Algolia"
  },
+ "greenhouse:allego": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "Allego"
+ },
  "greenhouse:alma31": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Alma"
@@ -5827,6 +5842,10 @@
  "greenhouse:axon": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Axon"
+ },
+ "greenhouse:axontalentcommunity": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "Join Our Talent Community"
  },
  "greenhouse:axs": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
@@ -6275,6 +6294,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/285/810/original/DAM_Pic_Shot_GM_20240604_1412.png?1744206294",
   "name": "ATOSS Aloud GmbH - Crewmeister"
+ },
+ "greenhouse:crfamilyofcompanies": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "The Copper River Family of Companies"
  },
  "greenhouse:crunchyroll": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -7068,6 +7091,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Horizon Industries"
  },
+ "greenhouse:housinganywhere": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "HousingAnywhere Group"
+ },
  "greenhouse:hrtechx": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "HRtechX"
@@ -7091,6 +7118,10 @@
  "greenhouse:hummingbirdregtech": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Hummingbird"
+ },
+ "greenhouse:i360technologiesinc": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "i360technologies, Inc."
  },
  "greenhouse:iai": {
   "fetchedAt": "2026-11-17T14:45:16.229349+00:00",
@@ -8141,6 +8172,10 @@
  "greenhouse:privateequityinsights": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Private Equity Insights"
+ },
+ "greenhouse:privatehealthmanagement": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "Private Health Management"
  },
  "greenhouse:privateidentity": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
@@ -9210,6 +9245,10 @@
  "greenhouse:xdesign": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "CreateFuture"
+ },
+ "greenhouse:xealth": {
+  "fetchedAt": "2026-11-21T13:52:01.082905+00:00",
+  "name": "Xealth"
  },
  "greenhouse:xebiacee": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
