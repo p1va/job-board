@@ -1557,6 +1557,12 @@
   "name": "Fireworks",
   "website": "https://fireworks.ai/"
  },
+ "ashby:fleek": {
+  "fetchedAt": "2026-11-23T16:19:59.936244+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0f03b313-af36-4ca3-930a-d6a7832d6bd1/c235aa79-7e03-476a-9785-ea505de4400b/b9b50ee8-0448-4d96-81ce-9f00b3cf4749.png",
+  "name": "Fleek",
+  "website": "https://www.joinfleek.com/"
+ },
  "ashby:fleetcraft": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c912f39f-c0cb-4ee9-ab4a-c0edf662ac8a/fc9f493b-88d1-4a2b-9724-288b3ca84043/a8017f3b-4220-410f-95c9-3b8b5ae72f3c.png",
@@ -3382,6 +3388,12 @@
   "name": "Partyhat",
   "website": "https://partyhat.com/"
  },
+ "ashby:passage": {
+  "fetchedAt": "2026-11-23T16:19:59.936244+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f35b9bda-bdd0-4116-b4b3-d0a6bfb06e6d/7be901cd-757c-4763-a517-44cf84756a8c/2c60bf1c-9164-4596-ba7b-0c6b971b2b7c.png",
+  "name": "Passage",
+  "website": "https://passage.com"
+ },
  "ashby:passionfroot": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3a7203f2-5f74-4756-ae1f-9a26c901cff2/ed817881-9ea7-40c6-9bda-5ecd2bd3b914/3cbd928f-7041-4bd1-abcf-7fdcb172963c.png",
@@ -4324,6 +4336,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/cd8cfc6f-ebfb-4f49-8ed3-435ef32e4044/f60eead5-66f3-4298-8d6c-c23fa7a80378/20c7459b-7643-4f12-be10-c4005d370dff.png",
   "name": "Sierra",
   "website": "https://sierra.ai/"
+ },
+ "ashby:signal-ai": {
+  "fetchedAt": "2026-11-23T16:19:59.936244+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/8a75306c-ef1d-427c-8d5f-afd87a3408c7/09fe1071-3352-4696-852d-bdb5314525d1/2dacc820-6a85-4889-b679-875eab29a2dd.png",
+  "name": "Signal AI",
+  "website": "https://signal-ai.com/"
  },
  "ashby:signoz": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -6165,6 +6183,10 @@
   "fetchedAt": "2026-11-18T14:31:17.067428+00:00",
   "name": "CIQ"
  },
+ "greenhouse:civisanalytics": {
+  "fetchedAt": "2026-11-23T16:19:59.936244+00:00",
+  "name": "Civis Analytics"
+ },
  "greenhouse:clarityinnovates": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "Clarity Innovations"
@@ -7429,6 +7451,10 @@
  "greenhouse:leaflink": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "LeafLink"
+ },
+ "greenhouse:leap46": {
+  "fetchedAt": "2026-11-23T16:19:59.936244+00:00",
+  "name": "Leap"
  },
  "greenhouse:learnupon": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -8761,6 +8787,10 @@
  "greenhouse:stone": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Stone - Linkedin"
+ },
+ "greenhouse:strato": {
+  "fetchedAt": "2026-11-23T16:19:59.936244+00:00",
+  "name": "STRATO DE"
  },
  "greenhouse:strike": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
