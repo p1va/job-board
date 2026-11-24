@@ -1903,6 +1903,12 @@
   "name": "Healthtech-1",
   "website": "https://www.healthtech1.uk/"
  },
+ "ashby:heidihealth.com.au": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/58cc832f-8033-498a-90ab-da17fe0ae2c7/288abbe0-8e09-4b58-ac96-f6f3de5e498e/561ba1a1-fe81-4baf-9242-07839b370562.png",
+  "name": "Heidi",
+  "website": "https://www.heidihealth.com/"
+ },
  "ashby:hercules": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
   "name": "Hercules",
@@ -3270,6 +3276,12 @@
   "name": "Open Home Foundation",
   "website": "https://www.openhomefoundation.org/"
  },
+ "ashby:opensea": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/40e3e66e-d83c-4c7b-bcbb-e0f7eb7f2083/111dfe7e-08f8-49d7-a7e4-8203763616c4/7eead2be-47e0-4755-9817-d122ffd0441b.png",
+  "name": "OpenSea",
+  "website": "https://opensea.io"
+ },
  "ashby:options-it": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/3fe3423c-5cf1-4725-8039-a2afe3f786b0/d678fa2e-10c3-4935-b84b-2767884f9615/fdcdb775-ea86-4aac-bc15-3387c8bdd5e4.png",
@@ -3674,6 +3686,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/aee2caf3-27eb-4140-b7be-7e6a294d8271/d9b35307-fb0e-4fe0-8d78-67aa7b315667/ad3e48da-44dc-4a89-9c59-8460ff220630.png",
   "name": "Prior Labs",
   "website": "https://priorlabs.ai/"
+ },
+ "ashby:profound": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/f490d015-9516-4e2f-ac7b-a121d724cb80/4947571e-761e-41bc-89ef-fbb77ffce641/eac00b06-b0cb-4cc2-b5de-94705baafc38.png",
+  "name": "Profound",
+  "website": "https://www.tryprofound.com/"
  },
  "ashby:progress-partners": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -4379,6 +4397,12 @@
   "name": "SKELAR",
   "website": "https://www.skelar.tech"
  },
+ "ashby:skin-analytics": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7bb07007-a3fe-4f9c-8e6b-7d8b14130950/527385f6-ce7c-4e05-b6bf-1ca004a3f01b/3e7077bf-08ed-46fe-a649-47604d665b29.png",
+  "name": "Skin Analytics Ltd",
+  "website": "https://skin-analytics.com/"
+ },
  "ashby:skydio": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/21a61557-3218-41ab-8ad9-0e51787557d8/a9e76ce4-e230-42bd-bb82-b6c903c38b46/8ed341db-f97d-4659-ae4c-000ef80249bc.png",
@@ -4927,6 +4951,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/fb26659d-6cd3-4816-9026-065249ec7986/04a258e9-6431-433e-81e3-a815e14e191b/88b868b0-50c2-4286-a0f0-1216103c5956.png",
   "name": "Trilitech",
   "website": "https://www.trili.tech/trilitech"
+ },
+ "ashby:truelayer": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/c57a13f4-6719-428e-9e24-828f51f6d2de/141b9a78-ddd8-4b5a-9a32-31c528ff76d0/26b4030c-1277-4afa-b420-bdadb4c8c735.png",
+  "name": "TrueLayer",
+  "website": "https://truelayer.com/"
  },
  "ashby:trust-wallet": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -7133,6 +7163,10 @@
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Hudl"
  },
+ "greenhouse:humanrightswatch": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "name": "Human Rights Watch"
+ },
  "greenhouse:humansignal": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "HumanSignal"
@@ -7544,6 +7578,10 @@
  "greenhouse:lokainc": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Loka, Inc"
+ },
+ "greenhouse:lookers": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "name": "Lookers"
  },
  "greenhouse:lotusworks": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -8022,6 +8060,10 @@
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/000/009/707/original/02-pd-logo_onwhite.png?1501091044",
   "name": "PandaDoc"
+ },
+ "greenhouse:pantheonpublic": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "name": "Pantheon Ventures Careers"
  },
  "greenhouse:paretocaptiveservicesllc": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
@@ -9176,6 +9218,10 @@
  "greenhouse:vonage": {
   "fetchedAt": "2026-11-09T07:28:28.413241+00:00",
   "name": "Vonage"
+ },
+ "greenhouse:voyagertechnologiesinc": {
+  "fetchedAt": "2026-11-24T16:15:30.752036+00:00",
+  "name": "Voyager Technologies, Inc."
  },
  "greenhouse:vtex": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
