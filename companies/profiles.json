@@ -289,6 +289,12 @@
   "name": "Anyone AI",
   "website": "https://www.anyoneai.com/"
  },
+ "ashby:anyvan": {
+  "fetchedAt": "2026-11-26T16:33:53.192625+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/6c32398b-bb5c-4176-910f-417a17ae2801/e3ff0e02-3425-4fc9-8c41-879294a9e053/519112f4-0c85-44d6-b180-73f89c341196.png",
+  "name": "AnyVan",
+  "website": "https://www.anyvan.com/"
+ },
  "ashby:apexx": {
   "fetchedAt": "2026-11-10T13:52:32.487487+00:00",
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-wordmark/05338990-6be0-4322-83f5-e76fca0a9bea/c17f2a96-f5ca-4d56-958f-e9d904a9f43e/addf89b3-0873-4694-8a23-93dc7f57580d.png",
@@ -1079,6 +1085,12 @@
   "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/7b9b05c3-0877-408c-b450-603e6571049b/53f67649-1ab6-4ca7-acc5-e9a403d002a7/2e2a36d9-d1c5-435c-b885-9bb3c7a664b6.png",
   "name": "Dandy",
   "website": "https://www.meetdandy.com/"
+ },
+ "ashby:darkroom": {
+  "fetchedAt": "2026-11-26T16:33:53.192625+00:00",
+  "logoUrl": "https://app.ashbyhq.com/api/images/org-theme-logo/0c8d9c8a-99cd-4cd0-aa31-ce978c403680/e0ed4153-0713-4a23-9a41-3882ebf72119/ebc5572d-47b4-4965-ba41-4ce365d54e01.png",
+  "name": "Darkroom",
+  "website": "https://www.darkroomagency.com/"
  },
  "ashby:dash0": {
   "fetchedAt": "2026-11-01T11:09:25.251145+00:00",
@@ -6179,6 +6191,10 @@
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "Cargoo"
  },
+ "greenhouse:caribou": {
+  "fetchedAt": "2026-11-26T16:33:53.192625+00:00",
+  "name": "Caribou Financial"
+ },
  "greenhouse:caronsale": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "logoUrl": "https://s101-recruiting.cdn.greenhouse.io/external_greenhouse_job_boards/logos/400/028/310/original/CarOnSale_Black_Yellow.png?1782719749",
@@ -7134,6 +7150,10 @@
  "greenhouse:helsing": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
   "name": "Helsing"
+ },
+ "greenhouse:hereio": {
+  "fetchedAt": "2026-11-26T16:33:53.192625+00:00",
+  "name": "HERE"
  },
  "greenhouse:heritageholdings": {
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
@@ -8665,6 +8685,10 @@
  "greenhouse:securitize": {
   "fetchedAt": "2026-11-13T13:29:03.098107+00:00",
   "name": "Securitize"
+ },
+ "greenhouse:securityscorecard": {
+  "fetchedAt": "2026-11-26T16:33:53.192625+00:00",
+  "name": "SecurityScorecard"
  },
  "greenhouse:sedna": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
