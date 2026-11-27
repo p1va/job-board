@@ -5951,6 +5951,10 @@
   "fetchedAt": "2026-11-11T13:06:37.058817+00:00",
   "name": "BakerHicks"
  },
+ "greenhouse:banyansoftware": {
+  "fetchedAt": "2026-11-27T16:25:12.879243+00:00",
+  "name": "Banyan Software"
+ },
  "greenhouse:baringa": {
   "fetchedAt": "2026-11-09T11:36:40.531307+00:00",
   "name": "Baringa"
@@ -7048,6 +7052,10 @@
  "greenhouse:gradientai": {
   "fetchedAt": "2026-11-09T14:23:56.871595+00:00",
   "name": "Gradient AI"
+ },
+ "greenhouse:gradle": {
+  "fetchedAt": "2026-11-27T16:25:12.879243+00:00",
+  "name": "Develocity"
  },
  "greenhouse:grafanalabs": {
   "fetchedAt": "2026-11-01T10:46:34.899209+00:00",
